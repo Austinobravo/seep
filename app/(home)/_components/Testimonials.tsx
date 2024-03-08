@@ -6,8 +6,8 @@ const Testimonials = () => {
   return (
     <section className='px-10 py-16'>
         <div className='seep-text-color text-center space-y-2 pb-8'>
-            <h3 className='text-5xl font-semibold'>SEEP TESTIMONIALS</h3>
-            <blockquote className='opacity-90 text-3xl font-bold'>“A flow of student entrepreneurs into the nigerian economy”</blockquote>
+            <h3 className=' md:text-5xl text-4xl font-semibold'>SEEP TESTIMONIALS</h3>
+            <blockquote className='opacity-90 md:text-3xl text-2xl font-bold'>“A flow of student entrepreneurs into the nigerian economy”</blockquote>
             <div className='flex justify-center items-center text-lg'>
                 <Dot/>
                 <p>SEEP 2019 Theme</p>

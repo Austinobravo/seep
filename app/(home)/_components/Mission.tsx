@@ -24,7 +24,7 @@ const Mission = () => {
     <section className='px-10 py-16'>
         <div className='w-full bg-cover bg-right-top h-[600px] rounded-2xl text-white' style={{backgroundImage: `url(/images/mission_1.png)`}}>
             <div className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent h-[600px] rounded-2xl flex flex-col pl-10 justify-center space-y-5'>
-                <h1 className='text-4xl leading-relaxed md:w-[600px]'>Social Entrepreneurial Enhancement Support Center (SEE - Support Center)</h1>
+                <h1 className='md:text-4xl text-3xl leading-relaxed md:w-[600px]'>Social Entrepreneurial Enhancement Support Center (SEE - Support Center)</h1>
             </div>
         </div>
         <div className='py-3 mt-10'>
@@ -38,7 +38,7 @@ const Mission = () => {
         </div>
         <div className='w-full bg-cover bg-right-top h-[600px] rounded-2xl text-white' style={{backgroundImage: `url(/images/mission_2.png)`}}>
             <div className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent h-[600px] rounded-2xl flex flex-col pl-10 justify-center space-y-5'>
-                <h1 className='text-4xl leading-relaxed md:w-[600px]'>Student Entrepreneurial Empowerment Program (SEEP)</h1>
+                <h1 className='md:text-4xl text-3xl leading-relaxed md:w-[600px]'>Student Entrepreneurial Empowerment Program (SEEP)</h1>
             </div>
         </div>
         <div className='py-3 mt-10'>
