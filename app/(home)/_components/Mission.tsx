@@ -28,7 +28,7 @@ const Mission = () => {
             </div>
         </div>
         <div className='py-3 mt-10'>
-            {missionAndVision.splice(0,2).map((item, index) => (
+            {missionAndVision.slice(0,2).map((item, index) => (
                 <div key={index} className='seep-text-color space-y-4'>
                     <h3 className='hover:underline text-3xl'>{item.title}</h3>
                     <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
@@ -42,7 +42,7 @@ const Mission = () => {
             </div>
         </div>
         <div className='py-3 mt-10'>
-            {missionAndVision.splice(0,3).map((item, index) => (
+            {missionAndVision.slice(2).map((item, index) => (
                 <div key={index} className='seep-text-color space-y-4'>
                     <h3 className='hover:underline text-3xl'>{item.title}</h3>
                     <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
