@@ -52,9 +52,9 @@ const Footer = () => {
             <Image src={`/images/logo-white.png`} width={100} height={100} alt='logo'/> 
             <p>SEE Support Centre</p>
         </div>
-        <div className='flex md:flex-nowrap flex-wrap gap-x-16 w-fit md:mx-auto space-y-3'>
+        <div className='flex md:flex-nowrap flex-wrap gap-x-16 w-fit md:mx-auto '>
             {footerLinks.map((footerlink, index) => (
-                <ul key={index} className='space-y-4'>
+                <ul key={index} className='space-y-4 pb-7'>
                     {footerlink.map((eachLink, index) => (
                         <li key={index}>
                             <Link href={eachLink.link}>{eachLink.name}</Link>
