@@ -17,7 +17,7 @@ const navLinks = [
     },
     {
         name: 'Contact Us',
-        link: '/contact-us'
+        link: '/contact '
     },
 ]
 

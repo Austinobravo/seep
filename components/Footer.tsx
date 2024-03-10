@@ -6,7 +6,7 @@ const footerLinks = [
     [
         {
             name: 'About Us',
-            link: '/about-us'
+            link: '/about'
         },
         {
             name: 'Programs & Projects',
@@ -14,7 +14,7 @@ const footerLinks = [
         },
         {
             name: 'Support Us',
-            link: '/support-us'
+            link: '/support'
         },
         
     ],
