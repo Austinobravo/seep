@@ -13,7 +13,7 @@ const navLinks = [
     },
     {
         name: 'Programs & Projects',
-        link: '/about'
+        link: '/programs'
     },
     {
         name: 'Contact Us',
