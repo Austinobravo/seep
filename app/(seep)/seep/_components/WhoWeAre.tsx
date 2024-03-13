@@ -32,12 +32,12 @@ const WhoWeAre = () => {
         <div>
             {items.map((item, index) => (
                 <div key={index} className='flex flex-wrap md:flex-nowrap gap-5 pb-5  seep-text-color'>
-                    <div className='basis-1/2 space-y-5'>
-                        <h2 className='text-5xl'>{item.heading}</h2>
+                    <div className='md:basis-1/2 space-y-5'>
+                        <h2 className='md:text-5xl text-4xl'>{item.heading}</h2>
                         <p>{item.paragraph}</p>
                         <Button title={item.buttonText} icon={MoveRight} path={item.path}/>
                     </div>
-                    <div className='basis-1/2'>
+                    <div className='md:basis-1/2 w-full'>
                         <Image src={item.image} width={200} height={100} alt={item.heading} className='rounded-lg w-full'/>
                     </div>
 
