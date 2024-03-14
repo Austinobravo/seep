@@ -49,7 +49,9 @@ const Footer = () => {
   return (
     <section className='seep-bg-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6'>
         <div className='space-y-2'>
-            <Image src={`/images/logo-white.png`} width={100} height={100} alt='logo'/> 
+            <Link href={`/`}>
+                <Image src={`/images/logo-white.png`} width={100} height={100} alt='logo'/> 
+            </Link>
             <p>SEE Support Centre</p>
         </div>
         <div className='flex md:flex-nowrap flex-wrap gap-x-16 w-fit md:mx-auto '>

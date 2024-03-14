@@ -4,6 +4,10 @@ import React from 'react'
 
 const navLinks = [
     {
+        name: 'Home',
+        link: '/'
+    },
+    {
         name: 'About',
         link: '/about'
     },
@@ -23,7 +27,7 @@ const navLinks = [
 
 const DesktopNav = () => {
   return (
-    <div className='flex justify-between items-center w-full md:px-20  px-10 py-7'>
+    <nav className='flex justify-between items-center fixed bg-white w-full md:px-20  px-10 py-7'>
         <Link href='/'>
             <Image src={`/images/logo.png`} width={100} height={100} alt='logo'/>
         </Link>
@@ -39,7 +43,7 @@ const DesktopNav = () => {
 
             </ul>
         </div>
-    </div>
+    </nav>
   )
 }
 
