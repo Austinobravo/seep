@@ -49,7 +49,7 @@ const MobileNav = () => {
         <Link href={`/`}>
             <Image src={`/images/logo.png`} width={100} height={100} alt='logo'/>
         </Link>
-        <div onClick={()=>setIsMenuToggled(!isMenuToggled)}>
+        <div onClick={()=>setIsMenuToggled(!isMenuToggled)} className='cursor-pointer'>
           {isMenuToggled ?
             <X size={40}/>
           :
@@ -61,7 +61,7 @@ const MobileNav = () => {
         <ul className='bg-white h-screen flex flex-col items-center space-y-12 border-t border-black pt-5'>
           {navLinks.map((navLink, index) => (
             <li key={index} className={`${navLink.name === 'Contact Us' && "bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-1 px-4 rounded-full hover:!text-white hover:scale-105"} hover:text-[#0097FF] hover:font-bold text-2xl`}>
-              <Link href={navLink.link}>
+              <Link href={navLink.link} onClick={()=>setIsMenuToggled(!isMenuToggled)}>
                 {navLink.name}
               </Link>
             </li>

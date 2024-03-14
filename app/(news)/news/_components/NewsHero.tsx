@@ -8,6 +8,9 @@ const NewsHero = () => {
                 <h1 className='md:text-6xl text-3xl  leading-relaxed md:w-[600px]'>News and Events</h1>
             </div>
         </div>
+        <div className='py-10'>
+            <h2 className='seep-text-color leading-relaxed'>Your generosity will enable us to assists these students and young graduates in the rural community as well as the underserved areas, in turn help them discover and develop their potentials and interest in tech. We implore you to join us in providing every individual with the opportunity to learn and in tech. Together, we can make a lasting impact on the lives of many.</h2>
+        </div>
     </section>
   )
 }
