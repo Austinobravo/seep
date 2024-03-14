@@ -54,7 +54,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={satoshi.className}><Navbar/>{children}<Footer/></body>
+      <body className={satoshi.className}><Navbar/><div className="mt-24">{children}</div><Footer/></body>
     </html>
   );
 }

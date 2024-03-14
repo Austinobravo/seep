@@ -44,7 +44,7 @@ const MobileNav = () => {
 
   },[])
   return (
-    <nav className='fixed w-full overflow-y-hidden'>
+    <nav className='fixed top-0 w-full overflow-y-hidden'>
       <div className='flex px-10 items-center justify-between py-7 bg-white'>
         <Link href={`/`}>
             <Image src={`/images/logo.png`} width={100} height={100} alt='logo'/>
