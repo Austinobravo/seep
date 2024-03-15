@@ -29,7 +29,7 @@ const Drivers = () => {
         <div className='grid md:grid-cols-3 grid-cols-1 gap-16 w-full mx-auto'>
             {imagesAndText.map((item, index) => (
                 <div key={index} className='flex flex-col items-center justify-center space-y-3'>
-                    <Image src={`${item.image}`} width={50} height={100} alt={item.name}/>
+                    <Image src={`${item.image}`} width={0} height={100} alt={item.name}/>
                     <span className='text-2xl seep-text-color hover:underline font-bold'>{item.name}</span>
                 </div>
             ))}

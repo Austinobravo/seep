@@ -2,6 +2,7 @@ import { Dot } from 'lucide-react'
 import React from 'react'
 import Image from 'next/image'
 
+
 const TechToSchool = () => {
   return (
     <section className='md:px-20 px-10 py-16'>

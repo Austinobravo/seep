@@ -10,3 +10,12 @@
 .seep-bg-color{
   background-color: #0097FF;
 }
+
+.section{
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.fade-in{
+  opacity: 1;
+}

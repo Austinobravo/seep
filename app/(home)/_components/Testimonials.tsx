@@ -2,6 +2,7 @@ import { Dot } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
+
 const Testimonials = () => {
   return (
     <section className='md:px-20 px-10 py-16'>
