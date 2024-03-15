@@ -27,7 +27,7 @@ const navLinks = [
 
 const DesktopNav = () => {
   return (
-    <nav className='flex justify-between items-center fixed bg-white w-full md:px-20  px-10 py-7'>
+    <nav className='flex justify-between items-center fixed bg-white w-full md:px-20 z-20 px-10 py-7'>
         <Link href='/'>
             <Image src={`/images/logo.png`} width={100} height={100} alt='logo'/>
         </Link>
