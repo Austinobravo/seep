@@ -1,3 +1,4 @@
+import FadeInSection from '@/hooks/fadeIn'
 import React from 'react'
 
 
@@ -18,15 +19,17 @@ const Text = [
 const Counter = () => {
   return (
     <section className='py-16 '>
-        <div className='grid md:grid-cols-3 grid-cols-1 gap-16 w-full mx-auto'>
-            {Text.map((item, index) => (
-                <div key={index} className='flex flex-col items-center justify-center space-y-3'>
-                    <h2 className='text-[#FFA807] text-6xl'>{item.heading}</h2>
-                    <span className='text-lg seep-text-color hover:underline'>{item.paragraph}</span>
-                </div>
-            ))}
+        <FadeInSection direction={`up`}>
+            <div className='grid md:grid-cols-3 grid-cols-1 gap-16 w-full mx-auto'>
+                {Text.map((item, index) => (
+                    <div key={index} className='flex flex-col items-center justify-center space-y-3'>
+                        <h2 className='text-[#FFA807] text-6xl'>{item.heading}</h2>
+                        <span className='text-lg seep-text-color hover:underline'>{item.paragraph}</span>
+                    </div>
+                ))}
 
-        </div>
+            </div> 
+        </FadeInSection>
     </section>
   )
 }
