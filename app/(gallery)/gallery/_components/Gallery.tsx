@@ -27,12 +27,12 @@ const Gallery = () => {
                     <Image src={image.first} width={200} height={100} alt='image' className='w-full rounded-lg'/>
                 </FadeInSection>
                 <div className='flex md:flex-nowrap flex-wrap gap-5'>
-                <FadeInSection direction={`left`}>
-                    <Image src={image.second} width={200} height={100} alt='image' className='w-full rounded-lg'/>
-                </FadeInSection>
-                <FadeInSection direction={`right`}>
-                    <Image src={image.third} width={200} height={100} alt='image' className='w-full rounded-lg'/>
-                </FadeInSection>
+                    <FadeInSection direction={`left`}>
+                        <Image src={image.second} width={200} height={100} alt='image' className='w-full rounded-lg md:h-[28rem] h-full'/>
+                    </FadeInSection>
+                    <FadeInSection direction={`right`}>
+                        <Image src={image.third} width={200} height={100} alt='image' className='w-full rounded-lg md:h-[28rem] h-full'/>
+                    </FadeInSection>
                 </div>
 
             </div>

@@ -25,10 +25,10 @@ const Testimonials = () => {
             </FadeInSection>
             <div className='flex md:flex-nowrap flex-wrap gap-7'>
                 <FadeInSection direction={`left`}>
-                    <Image src={`/images/below_mission_2.png`} width={200} height={100} alt='below_mission_1.png' className='rounded-2xl w-full'/>
+                    <Image src={`/images/below_mission_2.png`} width={200} height={100} alt='below_mission_1.png' className='rounded-2xl w-full md:h-[28rem] h-full'/>
                 </FadeInSection>
                 <FadeInSection direction={`right`}>
-                    <Image src={`/images/below_mission_3.png`} width={200} height={100} alt='below_mission_1.png' className='rounded-2xl w-full'/>
+                    <Image src={`/images/below_mission_3.png`} width={200} height={100} alt='below_mission_1.png' className='rounded-2xl w-full md:h-[28rem] h-full'/>
                 </FadeInSection>
             </div>
         </div>
