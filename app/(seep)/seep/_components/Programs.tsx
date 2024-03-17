@@ -1,3 +1,4 @@
+import FadeInSection from '@/hooks/fadeIn'
 import Image from 'next/image'
 import React from 'react'
 const items = [
@@ -15,7 +16,10 @@ const items = [
 const Programs = () => {
   return (
     <section className='md:px-20 px-10 py-10'>
-        <h2 className='seep-text-color text-center text-4xl py-5 font-bold'>Our Programmes / Beneficiaries</h2>
+      <FadeInSection direction={`up`}>
+        <h2 className='seep-text-color text-center text-4xl py-5 font-bold'>Our Programmes / Beneficiaries</h2>    
+      </FadeInSection>
+      <FadeInSection direction={`up`}>
         <div>
           {items.map((item, index) => (
             <div key={index} className='seep-text-color space-y-2 pb-3'>
@@ -27,7 +31,8 @@ const Programs = () => {
               </div>
             </div>
           ))}
-        </div>
+        </div>        
+      </FadeInSection>
       
     </section>
   )
