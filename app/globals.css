@@ -19,3 +19,38 @@
 .fade-in{
   opacity: 1;
 }
+
+
+.fade-in-section {
+  transition: opacity 1s ease, transform 1s ease;
+}
+
+.fade-in-section.left {
+  opacity: 0;
+  transform: translateX(-20px);
+}
+
+.fade-in-section.right {
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+.fade-in-section.is-visible.left {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-in-section.is-visible.right {
+  opacity: 1;
+  transform: translateX(0);
+}
+.fade-in-section.up {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.fade-in-section.is-visible.up {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
