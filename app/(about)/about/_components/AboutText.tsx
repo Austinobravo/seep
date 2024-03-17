@@ -1,3 +1,4 @@
+import FadeInSection from '@/hooks/fadeIn'
 import React from 'react'
 
 const Text = [
@@ -30,25 +31,28 @@ const Benefits =[
 const AboutText = () => {
   return (
     <section className='md:px-20 px-10 py-16'>
-        <div>
-            {Text.map((item, index) => (
-                <div key={index} className='seep-text-color space-y-4'>
-                    <h3 className='hover:underline text-3xl'>{item.name}</h3>
-                    <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
-
-                </div>
-            ))}
-        </div>
-        <div className='seep-text-color space-y-4'>
-            <h3 className='hover:underline text-3xl'>Our Projected Benefits and Impact</h3>
-            <ol type='1'>
-                {Benefits.map((benefit, index) => (
-                    <li key={index} className='pb-5 text-base'>
-                        {index +1}. {benefit}
-                    </li>
+        <FadeInSection direction={`up`}>
+            <div>
+                {Text.map((item, index) => (
+                    <div key={index} className='seep-text-color space-y-4'>
+                        <h3 className='hover:underline text-3xl'>{item.name}</h3>
+                        <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
+                    </div>
                 ))}
-            </ol>
-        </div>
+            </div>   
+        </FadeInSection>
+        <FadeInSection direction={`up`}>
+            <div className='seep-text-color space-y-4'>
+                <h3 className='hover:underline text-3xl'>Our Projected Benefits and Impact</h3>
+                <ol type='1'>
+                    {Benefits.map((benefit, index) => (
+                        <li key={index} className='pb-5 text-base'>
+                            {index +1}. {benefit}
+                        </li>
+                    ))}
+                </ol>
+            </div>   
+        </FadeInSection>
 
     </section>
   )
