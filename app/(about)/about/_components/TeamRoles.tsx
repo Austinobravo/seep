@@ -37,6 +37,11 @@ const TeamRoles = () => {
   return (
     <section className='md:px-20 px-10 py-10'>
         <FadeInSection direction={`up`}>
+            <div className='seep-text-color text-center space-y-2 pb-8'>
+                <h3 className='opacity-90 text-3xl font-bold'>Team Members</h3>
+            </div>  
+        </FadeInSection>
+        <FadeInSection direction={`up`}>
             <div className='grid md:grid-cols-3 grid-cols-1 gap-10'>
                 {team.map((member, index) => (
                     <div key={index} className='seep-text-color'>

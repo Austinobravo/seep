@@ -1,6 +1,6 @@
 import React from 'react'
 import TeamHero from './_components/TeamHero'
-import TeamRoles from './_components/TeamRoles'
+import TeamRoles from '../../(about)/about/_components/TeamRoles'
 
 const page = () => {
   return (
