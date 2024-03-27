@@ -1,6 +1,7 @@
 import FadeInSection from '@/hooks/fadeIn'
 import Image from 'next/image'
 import React from 'react'
+
 const items = [
     {
         image: '/images/Frame 16.png',
@@ -13,11 +14,11 @@ const items = [
         paragraph: 'We reach out to different schools and partner with the schools to educate their students about the tech industry, the future industry, and different means which they could earn money for themselves.'
     },
 ]
-const Programs = () => {
+const ProgramsAndBeneficiary = () => {
   return (
     <section className='md:px-20 px-10 py-10'>
       <FadeInSection direction={`up`}>
-        <h2 className='seep-text-color text-center md:text-4xl text-2xl py-5 font-bold'>Our Programmes / Beneficiaries</h2>    
+        <h2 className='seep-text-color text-center md:text-4xl text-2xl md:py-10 py-5 font-bold'>Our Programmes / Beneficiaries</h2>    
       </FadeInSection>
       <FadeInSection direction={`up`}>
         <div>
@@ -38,4 +39,4 @@ const Programs = () => {
   )
 }
 
-export default Programs
+export default ProgramsAndBeneficiary

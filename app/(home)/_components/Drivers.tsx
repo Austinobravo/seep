@@ -54,7 +54,7 @@ const Drivers = () => {
                 ))}
 
             </div>
-            <div className="bg-white flex md:hidden items-center   py-5 px-10 justify-between">
+            <div className="bg-white flex md:hidden items-center h-[200px] py-5 px-10 justify-between">
                 <button onClick={previous} className="rounded-full border h-fit w-fit seep-bg-color text-[#ddd]">
                     <ChevronLeft size={40} />
                 </button>
