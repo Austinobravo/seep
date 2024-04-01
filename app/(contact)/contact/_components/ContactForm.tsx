@@ -8,9 +8,10 @@ const ContactForm = () => {
         alert("Calm down")
     }
   return (
-    <section className='md:px-20 px-10'>
+    <section >
         <FadeInSection direction={`up`}>
             <form onSubmit={submitForm} className='py-10 space-y-4'>
+                <h2 className='font-bold text-xl'>Leave a message for us here and will get back to us when we can.</h2>
                 <div>
                     <label htmlFor='name'></label>
                     <input type='text' id='name' name='name' placeholder='Name' className='border-2 px-2 py-3  rounded-lg w-full focus:border-[#0097FF] outline-none'/>
@@ -24,8 +25,8 @@ const ContactForm = () => {
                     <input type='number' id='phone_number' name='phone_number' placeholder='Your Phone Number' className='border-2 px-2 py-3 rounded-lg w-full focus:border-[#0097FF] outline-none'/>
                 </div>
                 <div>
-                    <label htmlFor='donation'></label>
-                    <input type='text' id='donation' name='donation' placeholder='Your Donation' className='border-2 px-2 py-3 rounded-lg w-full focus:border-[#0097FF] outline-none'/>
+                    <label htmlFor='message'></label>
+                    <textarea rows={10} cols={10} id='message' name='message' placeholder='Your Message' className='border-2 px-2 py-3 rounded-lg w-full focus:border-[#0097FF] outline-none'/>
                 </div>
                 <div className='pb-10'>
                     <button type='submit' className='bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-3 w-full rounded-lg '>Join Us</button>
