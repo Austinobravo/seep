@@ -29,7 +29,7 @@ const ContactForm = () => {
                     <textarea rows={10} cols={10} id='message' name='message' placeholder='Your Message' className='border-2 px-2 py-3 rounded-lg w-full focus:border-[#0097FF] outline-none'/>
                 </div>
                 <div className='pb-10'>
-                    <button type='submit' className='bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-3 w-full rounded-lg '>Join Us</button>
+                    <button type='submit' className='bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-3 w-full rounded-lg '>Send us a message</button>
                 </div>
 
             </form>       
