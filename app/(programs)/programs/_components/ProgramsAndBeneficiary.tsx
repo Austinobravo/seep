@@ -1,4 +1,6 @@
+import Button from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
+import { MoveRight } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 
@@ -28,7 +30,7 @@ const ProgramsAndBeneficiary = () => {
               <div className='py-5 space-y-2'>
                 <h3 className='font-bold md:text-3xl text-xl tracking-wider'>{item.heading}</h3>
                 <p className='md:text-lg font-thin md:w-[900px] w-full'>{item.paragraph}</p>
-
+                <Button title="Learn More" icon={MoveRight} path='/seep'/>
               </div>
             </div>
           ))}
