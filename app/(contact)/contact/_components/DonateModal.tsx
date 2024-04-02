@@ -25,7 +25,7 @@ const DonateModal = () => {
                             <Image src={`/images/logo.png`} width={100} height={100} alt='logo' className='w-fit'/>
                             <h2 className='seep-text-color text-3xl'>SEEP</h2>
                         </div>
-                        <p className='w-[500px] opacity-70 '>Your generosity will enable us to assists these students and young graduates in the rural community as well as the underserved areas, in turn help them discover and develop their potentials and interest in tech. We implore you to join us in providing every individual with the opportunity to learn and in tech. Together, we can make a lasting impact on the lives of many.</p>
+                        <p className='md:w-[500px] opacity-70 '>Your generosity will enable us to assists these students and young graduates in the rural community as well as the underserved areas, in turn help them discover and develop their potentials and interest in tech. We implore you to join us in providing every individual with the opportunity to learn and in tech. Together, we can make a lasting impact on the lives of many.</p>
                         <h3 className='seep-text-color text-2xl'>Donate</h3>
                         <form className='space-y-1' onSubmit={submitDonation}>
                             <div>
