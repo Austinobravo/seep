@@ -7,11 +7,11 @@ const page = () => {
   return (
     <div>
         <ContactHero/>
-        <div className='flex flex-wrap md:flex-nowrap gap-10 md:px-20 px-10'>
-          <div className='md:basis-1/2'>
+        <div className='flex flex-wrap md:flex-nowrap gap-10 md:px-20 px-10 '>
+          <div className='md:basis-1/2 w-full'>
           <ContactDetails/>
           </div>
-          <div className='md:basis-1/2'>
+          <div className='md:basis-1/2 w-full'>
           <ContactForm/>
           </div>
         </div>
