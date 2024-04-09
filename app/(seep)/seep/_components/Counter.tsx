@@ -1,11 +1,11 @@
 'use client'
 import FadeInSection from '@/hooks/fadeIn'
 import React from 'react'
-
+import CountUp from 'react-countup'
 
 const Text = [
     {
-        heading: '1,700',
+        heading: '1700',
         paragraph: 'Students Impacted'
     },
     {
@@ -43,7 +43,7 @@ const Counter = () => {
             <div className='grid md:grid-cols-3 grid-cols-1 gap-16 w-full mx-auto'>
                 {Text.map((item, index) => (
                     <div key={index} className='flex flex-col items-center justify-center space-y-3'>
-                        <h2 className='text-[#FFA807] text-6xl'>{counters[index]}</h2>
+                        <h2 className='text-[#FFA807] text-6xl'><CountUp start={0} end={parseInt(item.heading)} duration={10}/></h2>
                         <span className='text-lg seep-text-color hover:underline'>{item.paragraph}</span>
                     </div>
                 ))}

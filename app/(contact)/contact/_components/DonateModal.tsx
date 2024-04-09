@@ -15,12 +15,12 @@ const DonateModal = () => {
     <div>
         <Button title='Give to a helping hand' icon={HandHelping} path=''  onClick={()=> setIsDonateModalOpen(!isDonateModalOpen)}/> 
         {isDonateModalOpen && 
-            <div className='bg-black/50 fixed z-50 top-0 left-0 w-full h-full'>
+            <div className='bg-black/50 overflow-y-auto fixed z-50 top-0 left-0 w-full h-full'>
                 <div className='w-fit ml-auto p-4 cursor-pointer' onClick={()=> setIsDonateModalOpen(!isDonateModalOpen)}>
                     <X className='text-white' size={40}/>
                 </div>
                 <div className='flex justify-center items-center gap-10 w-fit mx-auto '>
-                    <div className=' space-y-3 rounded-se-2xl rounded-ss-2xl px-5 bg-white py-10' >
+                    <div className=' space-y-3 rounded-2xl px-5 bg-white py-10' >
                         <div className=' bg-white/80 rounded-2xl p-3 w-fit h-fit space-y-3 py-3'>
                             <Image src={`/images/logo.png`} width={100} height={100} alt='logo' className='w-fit'/>
                             <h2 className='seep-text-color text-3xl'>SEEP</h2>
@@ -44,7 +44,7 @@ const DonateModal = () => {
 
                 </div>
                 <div className='w-fit mx-auto py-2'>
-                    <p className='text-[#FFA807]'>Thank you for donating</p>
+                    <blockquote className='text-blue-600 bg-white rounded-md p-1'>"Blessed is the hand that giveth"</blockquote>
                 </div>
             </div>
         }
