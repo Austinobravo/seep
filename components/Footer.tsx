@@ -1,6 +1,7 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
+import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
 
 const footerLinks = [
     [
@@ -45,6 +46,25 @@ const footerLinks = [
 
     ]
 ]
+
+const socialLinks = [
+    {
+        href: 'https://facebook.com/seep',
+        icon: <Facebook/>,
+    },
+    {
+        href: '',
+        icon: <Twitter/>,
+    },
+    {
+        href: '',
+        icon: <Youtube/>,
+    },
+    {
+        href: '',
+        icon: <Instagram/>,
+    },
+]
 const Footer = () => {
   return (
     <section className='seep-bg-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6'>
@@ -64,6 +84,20 @@ const Footer = () => {
                     ))}
                 </ul>
             ))}
+
+        </div>
+        <div>
+            <ul className='flex md:flex-col flex-row gap-2'>
+                {socialLinks.map((link, index) => (
+                    <li key={index} className={`border rounded-lg p-1`}>
+                        <Link href={link.href} className={`${!link.href && 'text-white/50 cursor-not-allowed'} border rounded-lg p-1`}>
+                            {link.icon}
+                        </Link>
+                    </li>
+                ))}
+
+            </ul>
+
 
         </div>
     </section>

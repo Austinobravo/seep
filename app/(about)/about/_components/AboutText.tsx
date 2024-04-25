@@ -7,12 +7,12 @@ const Text = [
         paragraph: 'SEE- Support Center as a non-state actor is a social enterprise that tends to compliment the activities of the government to research on, develop ideas and create a business network of enterpreneurs who will futher create employment opportunities for Nigerians and other African countries in order to reduce unemployment rate ofa greater percetage by 2023 while leveraging and investing on Human Capacity Development, Research, Innovations, Science and Technology for a progressive and susutainable economy.'
     },
     {
-        name: 'Our Vision',
+        name: 'Our Mission',
         paragraph: 'Our mission is to provide a supporting platform to discover, nurture, and harness young potentials while leveraging Research, Innovation, Empowerment, Science and Technology for a productive, developed and sustainable Nigerian and Global Economy.'
     },
     {
-        name: 'Our Mission',
-        paragraph: 'We thread academics and enterpreneurship for a developed and sustainable Nigeria and Africa economy at large. We are committed to Screening, Recruiting, Training, Mentoring, Networking, Empowering and Supervising Students and young enterpreneurs in Nigeria.'
+        name: 'Our Vision',
+        paragraph: 'Our Vision is to be a leading social enterprise to spearhead the producing and nurturing of Young-Business leaders who will emerge outstanding Entrepreneurs in making global impact by creating a paradigm shift for a sustainable Socio-economic development in Nigeria and Africa at large by following the trends and future destination of global economy.'
     },
     
 ]
