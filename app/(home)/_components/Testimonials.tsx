@@ -23,15 +23,15 @@ const Testimonials = () => {
         <div className='space-y-5'>
             <FadeInSection direction={`up`}>
                 <div className='rounded-lg w-full'>
-                    <Image src={`/images/below_mission_1.png`} width={200} height={100} alt='below_mission_1.png' className='rounded-2xl w-full cursor-pointer' onClick={()=> {setCurrentImage(`/images/below_mission_1.png`), setIsModalOpen(!isModalOpen)}}/>
+                    <Image src={`/images/below_mission_1.png`} width={500} height={100} alt='below_mission_1.png' className='rounded-2xl w-full cursor-pointer' onClick={()=> {setCurrentImage(`/images/below_mission_1.png`), setIsModalOpen(!isModalOpen)}}/>
                 </div>
             </FadeInSection>
             <div className='flex md:flex-nowrap flex-wrap gap-7'>
                 <FadeInSection direction={`left`}>
-                    <Image src={`/images/below_mission_2.png`} width={200} height={100} alt='below_mission_1.png' className='rounded-2xl w-full md:h-[28rem] h-full cursor-pointer' onClick={()=> {setCurrentImage(`/images/below_mission_2.png`), setIsModalOpen(!isModalOpen)}}/>
+                    <Image src={`/images/below_mission_2.png`} width={500} height={100} alt='below_mission_1.png' className='rounded-2xl w-full md:h-[28rem] h-full cursor-pointer' onClick={()=> {setCurrentImage(`/images/below_mission_2.png`), setIsModalOpen(!isModalOpen)}}/>
                 </FadeInSection>
                 <FadeInSection direction={`right`}>
-                    <Image src={`/images/below_mission_3.png`} width={200} height={100} alt='below_mission_1.png' className='rounded-2xl w-full md:h-[28rem] h-full cursor-pointer' onClick={()=> {setCurrentImage(`/images/below_mission_3.png`), setIsModalOpen(!isModalOpen)}}/>
+                    <Image src={`/images/below_mission_3.png`} width={500} height={100} alt='below_mission_1.png' className='rounded-2xl w-full md:h-[28rem] h-full cursor-pointer' onClick={()=> {setCurrentImage(`/images/below_mission_3.png`), setIsModalOpen(!isModalOpen)}}/>
                 </FadeInSection>
             </div>
         </div>
@@ -41,7 +41,7 @@ const Testimonials = () => {
                             <X className='text-white' size={40}/>
                         </div>
                         <div className='flex justify-center items-center w-full'>
-                            <Image src={currentImage} width={200} height={100} alt='image' className='w-fit rounded-lg flex items-center justify-center md:h-[28rem] h-full'/>
+                            <Image src={currentImage} width={500} height={100} alt='image' className='w-fit rounded-lg flex items-center justify-center md:h-[28rem] h-full'/>
                         </div>
                     </div>
                 }   

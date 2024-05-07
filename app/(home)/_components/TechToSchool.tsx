@@ -19,13 +19,13 @@ const TechToSchool = () => {
         <div className='space-y-5'>
             <div className='rounded-lg w-full space-y-5'>
             <FadeInSection direction={`up`}>
-                <Image src={`/images/tech1.png`} width={200} height={100} alt='tech1.png' className='rounded-2xl w-full'/>
+                <Image src={`/images/tech1.png`} width={500} height={100} alt='tech1.png' className='rounded-2xl w-full'/>
             </FadeInSection>
             <FadeInSection direction={`up`}>
-                <Image src={`/images/tech2.png`} width={200} height={100} alt='tech1.png' className='rounded-2xl w-full'/>
+                <Image src={`/images/tech2.png`} width={500} height={100} alt='tech1.png' className='rounded-2xl w-full'/>
             </FadeInSection>
             <FadeInSection direction={`up`}>
-                <Image src={`/images/tech3.png`} width={200} height={100} alt='tech1.png' className='rounded-2xl w-full'/>
+                <Image src={`/images/tech3.png`} width={500} height={100} alt='tech1.png' className='rounded-2xl w-full'/>
             </FadeInSection>
             </div>
             
