@@ -82,7 +82,7 @@ const AboutText = () => {
                         {item.swap ?
                         <>
                             <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit'>{item.name}</h3>
-                            <div className='flex md:flex-nowrap flex-wrap'>
+                            <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2'>
                                 <FadeInSection direction={`right`}>
                                     <div  className='seep-text-color space-y-4 md:basis-1/2'>
                                         <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
@@ -99,7 +99,7 @@ const AboutText = () => {
                         :
                         <>
                             <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit mx-auto '>{item.name}</h3>
-                            <div className='flex md:flex-nowrap flex-wrap'>
+                            <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2'>
                                 <FadeInSection direction={`right`}>
                                     <div  className='md:basis-1/2'>
                                         <Image src={item.image} width={500} height={100} alt={item.name}/>
@@ -127,7 +127,7 @@ const AboutText = () => {
                     {Benefits.map((benefit, index) => (
                         <li key={index} className='pb-5 text-base flex'>
                             {!benefit.swap ?
-                            <div className='flex md:flex-nowrap flex-wrap items-center w-full'>
+                            <div className='flex md:flex-nowrap flex-wrap items-center w-full gap-4'>
                                 <FadeInSection direction={`right`}>
                                     <div className='md:basis-1/2 mx-auto'>
                                         <Image src={benefit.image} width={400} height={100} alt={benefit.name}/>
@@ -140,7 +140,7 @@ const AboutText = () => {
                                 </FadeInSection>
                             </div>
                             :
-                            <div className='flex md:flex-nowrap flex-wrap items-center w-full'>
+                            <div className='flex md:flex-nowrap flex-wrap items-center w-full flex-col-reverse md:flex-row gap-4'>
                                 <FadeInSection direction={`right`}>
                                     <p className='md:basis-1/2 flex mx-auto'>
                                         <Dot color='#0097FF' size={25}/> {benefit.name}

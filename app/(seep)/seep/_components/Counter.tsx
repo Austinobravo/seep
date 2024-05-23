@@ -13,7 +13,7 @@ const Text = [
         paragraph: 'Skills Learnt'
     },
     {
-        heading: '10',
+        heading: '5',
         paragraph: 'Schools Improved'
     },
 ]
