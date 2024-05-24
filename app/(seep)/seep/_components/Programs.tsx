@@ -5,12 +5,12 @@ const items = [
     {
         image: '/images/Frame 16.png',
         heading: 'SEEP ( Student Enterpreneurial Empowerment Program)',
-        paragraph: 'We aim at developing tech skills in young people in order to enable them posses enterpreneurial power and empower for the global economy.'
+        paragraph: 'The SEEP Project is a program of SEE-Support Center specially crafted for the academic environment to thread academics and entrepreneurship for a developed and sustainable Nigerian and Global economy. We are committed to Screening, Recruiting, Training, Mentoring, Networking, Empowering and Supervising Students and young entrepreneurs in Nigeria.'
     },
     {
         image: '/images/Frame 17.png',
         heading: 'Tech 2 School',
-        paragraph: 'We reach out to different schools and partner with the schools to educate their students about the tech industry, the future industry, and different means which they could earn money for themselves.'
+        paragraph: 'We reach out to different schools and partner with them to educate their students about the Tech, the Future industry, while providing them with mentorships, a community of like-minds and relevant resources to become self sufficient and relevant in the industry. We aim at developing tech skills in young people in order to enable them posses entrepreneurial power and empowerment for the Nigerian and global economy.'
     },
 ]
 const Programs = () => {

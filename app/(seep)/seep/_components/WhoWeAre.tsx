@@ -7,7 +7,7 @@ import React from 'react'
 const items = [
     {
         heading: 'Who we are',
-        paragraph: 'SEE-Support Center is a social enterprise that complements the government’s efforts to create employment opportunities for Nigerians.',
+        paragraph: 'SEEP is a program of SEE-Support Center crafted specially for the academic environment to thread academics and entrepreneurship for a developed and sustainable Nigeria and Global economy.',
         path: '/about',
         buttonText: 'Learn More',
         image: '/images/Frame 13.png'
