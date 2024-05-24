@@ -57,18 +57,21 @@ const MobileNav = () => {
           }
         </div>
       </div>
-      {isMenuToggled && 
-        <ul className='bg-white h-screen flex flex-col items-center space-y-12 border-t border-black pt-5'>
-          {navLinks.map((navLink, index) => (
-            <li key={index} className={`${navLink.name === 'Contact Us' && "bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-1 px-4 rounded-full hover:!text-white hover:scale-105"} hover:text-[#0097FF] hover:font-bold text-2xl`}>
-              <Link href={navLink.link} onClick={()=>setIsMenuToggled(!isMenuToggled)}>
-                {navLink.name}
-              </Link>
-            </li>
-          ))}
+      <div className={`transition-all duration-500 delay-150 ease-in-out ${isMenuToggled ? 'h-screen': '-translate-y-full'}`}>
+        {isMenuToggled && 
+          <ul className='bg-white h-screen flex flex-col items-center space-y-12 border-t border-black pt-5'>
+            {navLinks.map((navLink, index) => (
+              <li key={index} className={`${navLink.name === 'Contact Us' && "bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-1 px-4 rounded-full hover:!text-white hover:scale-105"} hover:text-[#0097FF] hover:font-bold text-2xl`}>
+                <Link href={navLink.link} onClick={()=>setIsMenuToggled(!isMenuToggled)}>
+                  {navLink.name}
+                </Link>
+              </li>
+            ))}
 
-        </ul>
-      }
+          </ul>
+        }
+
+      </div>
     </nav>
   )
 }
