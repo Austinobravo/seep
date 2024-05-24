@@ -14,7 +14,7 @@ const items = [
     },
     {
         heading: 'What we do',
-        paragraph: 'We aim at developing tech skills in young people in order to enable them posses enterpreneurial power and empower for the global economy.',
+        paragraph: 'We thread academics and entrepreneurship for a developed and sustainable Nigerian and Global economy. We are committed to Screening, Recruiting, Training, Mentoring, Networking, Empowering and Supervising Students and young entrepreneurs in Nigeria.',
         path: '/about',
         buttonText: 'Learn More',
         image: '/images/Frame 14.png'

@@ -27,14 +27,7 @@ const Mission = () => {
   return (
     <section className='md:px-20 px-10 py-16'>
         <FadeInSection direction={`up`}>
-            <div className='w-full bg-cover md:bg-right-top bg-center h-[600px] rounded-2xl text-white' style={{backgroundImage: `url(/images/mission_1.png)`}}>
-                <div  className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent h-[600px] rounded-2xl flex flex-col md:pl-10 pl-5 md:justify-center justify-end pb-16 space-y-5'>
-                    <h1 className='md:text-4xl text-3xl leading-relaxed md:w-[600px]'>Social Entrepreneurial Enhancement Support Center (SEE - Support Center)</h1>
-                </div>
-            </div>
-        </FadeInSection>
-        <FadeInSection direction={`up`}>
-            <div className='py-3 mt-10'>
+            <div className='py-3 '>
                 {missionAndVision.slice(0,2).map((item, index) => (
                     <div key={index} className='seep-text-color space-y-4'>
                         <h3 className='hover:underline text-3xl'>{item.title}</h3>
