@@ -1,3 +1,4 @@
+'use client'
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -49,11 +50,11 @@ const footerLinks = [
 
 const socialLinks = [
     {
-        href: 'https://facebook.com/seep',
+        href: 'https://www.facebook.com/profile.php?id=100064560137846&mibextid=ZbWKwL',
         icon: <Facebook/>,
     },
     {
-        href: '',
+        href: '', 
         icon: <Twitter/>,
     },
     {
@@ -87,10 +88,13 @@ const Footer = () => {
 
         </div>
         <div>
+            <Image src={`/images/seep_logo.png`} width={100} height={100} alt='seep_logo'/>
+        </div>
+        <div>
             <ul className='flex md:flex-col flex-row gap-2'>
                 {socialLinks.map((link, index) => (
                     <li key={index} className={`border rounded-lg p-1`}>
-                        <Link href={link.href} className={`${!link.href && 'text-white/50 cursor-not-allowed'}`}>
+                        <Link href={link.href} onClick={(event)=> {!link.href && event.preventDefault()}} className={`${!link.href && 'text-white/50 cursor-not-allowed'}`}>
                             {link.icon}
                         </Link>
                     </li>

@@ -81,15 +81,15 @@ const AboutText = () => {
                     <div key={index} className=''>
                         {item.swap ?
                         <>
-                            <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit'>{item.name}</h3>
-                            <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2'>
+                            <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit mx-auto'>{item.name}</h3>
+                            <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2 text-center md:text-justify'>
                                 <FadeInSection direction={`right`}>
                                     <div  className='seep-text-color space-y-4 md:basis-1/2'>
                                         <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
                                     </div>
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
-                                    <div className='md:basis-1/2'>
+                                    <div className='md:basis-1/2 mx-auto w-fit md:w-full'>
                                         <Image src={item.image} width={500} height={100} alt={item.name}/>
                                     </div>
                                 </FadeInSection>
@@ -101,12 +101,12 @@ const AboutText = () => {
                             <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit mx-auto '>{item.name}</h3>
                             <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2'>
                                 <FadeInSection direction={`right`}>
-                                    <div  className='md:basis-1/2'>
+                                    <div  className='md:basis-1/2 mx-auto w-fit md:w-full'>
                                         <Image src={item.image} width={500} height={100} alt={item.name}/>
                                     </div>   
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
-                                    <div className='seep-text-color space-y-4 md:basis-1/2'>
+                                    <div className='seep-text-color space-y-4 md:basis-1/2 text-center md:text-justify'>
                                         <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
                                     </div> 
                                 </FadeInSection>
@@ -123,18 +123,18 @@ const AboutText = () => {
         <FadeInSection direction={`up`}>
             <div className='seep-text-color space-y-4 '>
                 <h3 className='hover:underline text-3xl text-center py-16'>Our Projected Benefits and Impact</h3>
-                <ol >
+                <ol className=' text-center'>
                     {Benefits.map((benefit, index) => (
-                        <li key={index} className='pb-5 text-base flex'>
+                        <li key={index} className='pb-5 text-base flex '>
                             {!benefit.swap ?
                             <div className='flex md:flex-nowrap flex-wrap items-center w-full gap-4'>
                                 <FadeInSection direction={`right`}>
-                                    <div className='md:basis-1/2 mx-auto'>
+                                    <div className='md:basis-1/2 mx-auto w-fit md:w-full'>
                                         <Image src={benefit.image} width={400} height={100} alt={benefit.name}/>
                                     </div>
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
-                                    <p className='md:basis-1/2 flex mx-auto'>
+                                    <p className='md:basis-1/2 flex mx-auto w-fit md:w-full'>
                                         <Dot color='#0097FF' size={25}/> {benefit.name}
                                     </p>     
                                 </FadeInSection>
@@ -142,12 +142,12 @@ const AboutText = () => {
                             :
                             <div className='flex md:flex-nowrap flex-wrap items-center w-full flex-col-reverse md:flex-row gap-4'>
                                 <FadeInSection direction={`right`}>
-                                    <p className='md:basis-1/2 flex mx-auto'>
+                                    <p className='md:basis-1/2 flex mx-auto w-fit md:w-full'>
                                         <Dot color='#0097FF' size={25}/> {benefit.name}
                                     </p>
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
-                                    <div className='md:basis-1/2 mx-auto'>
+                                    <div className='md:basis-1/2 mx-auto w-fit md:w-full'>
                                         <Image src={benefit.image} width={400} height={100} alt={benefit.name}/>
                                     </div>   
                                 </FadeInSection>
