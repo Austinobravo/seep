@@ -8,21 +8,21 @@ const items = [
     {
         heading: 'Who we are',
         paragraph: 'SEE-Support Center is a social enterprise that complements the government’s efforts to create employment opportunities for Nigerians.',
-        path: '',
+        path: '/about',
         buttonText: 'Learn More',
         image: '/images/Frame 13.png'
     },
     {
         heading: 'What we do',
         paragraph: 'We aim at developing tech skills in young people in order to enable them posses enterpreneurial power and empower for the global economy.',
-        path: '',
+        path: '/about',
         buttonText: 'Learn More',
         image: '/images/Frame 14.png'
     },
     {
         heading: 'Get Involved',
         paragraph: 'Volunteering connects you to your community and the world, expands your network, boosts your social skills, and advances your career.',
-        path: '',
+        path: '/join',
         buttonText: 'Volunteer Now',
         image: '/images/Frame 15.png'
     },
