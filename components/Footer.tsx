@@ -94,7 +94,7 @@ const Footer = () => {
             <ul className='flex md:flex-col flex-row gap-2'>
                 {socialLinks.map((link, index) => (
                     <li key={index} className={`border rounded-lg p-1`}>
-                        <Link href={link.href} onClick={(event)=> {!link.href && event.preventDefault()}} className={`${!link.href && 'text-white/50 cursor-not-allowed'}`}>
+                        <Link href={link.href} target='_blank' onClick={(event)=> {!link.href && event.preventDefault()}} className={`${!link.href && 'text-white/50 cursor-not-allowed'}`}>
                             {link.icon}
                         </Link>
                     </li>
