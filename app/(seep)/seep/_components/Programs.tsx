@@ -26,7 +26,7 @@ const Programs = () => {
               <Image src={item.image} width={500} height={100} alt={item.heading} className='w-full rounded-lg'/>
               <div className='py-5 space-y-2'>
                 <h3 className='font-bold md:text-3xl text-xl tracking-wider'>{item.heading}</h3>
-                <p className='md:text-lg font-thin md:w-[900px] w-full'>{item.paragraph}</p>
+                <p className='md:text-lg font-thin w-full'>{item.paragraph}</p>
 
               </div>
             </div>

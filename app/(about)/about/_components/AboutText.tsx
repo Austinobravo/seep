@@ -7,7 +7,7 @@ const Text = [
 
     {
         name: 'Our Vision',
-        paragraph: 'Our Vision is to be a leading social enterprise to spearhead the producing and nurturing of Young-Business leaders who will emerge outstanding Entrepreneurs in making global impact by creating a paradigm shift for a sustainable Socio-economic development in Nigeria and Africa at large by following the trends and future destination of global economy.',
+        paragraph: 'Our Vision is to be a leading social enterprise that spearheads the producing and nurturing of Young-Business leaders who will emerge as outstanding Entrepreneurs in making significant global impact by creating a paradigm shift for a sustainable Socio-economic development in Nigeria and Africa at large while following the trends and future destination of the global economy.',
         image: '/images/about_vision.png',
         swap: true
     },
@@ -71,12 +71,12 @@ const AboutText = () => {
             <div>
                 <div className='seep-text-color space-y-4'>
                     <h3 className='text-3xl'>About</h3>
-                    <p className='leading-relaxed pb-5 text-lg'>SEE- Support Center as a non-state actor is a social enterprise that tends to compliment the activities of the government to research on, develop ideas and create a business network of enterpreneurs who will futher create employment opportunities for Nigerians and other African countries in order to reduce unemployment rate ofa greater percetage by 2023 while leveraging and investing on Human Capacity Development, Research, Innovations, Science and Technology for a progressive and susutainable economy.</p>
+                    <p className='leading-relaxed pb-5 text-lg'>SEE- Support Center as a non-state actor is a social enterprise registered with CAC as Enterprise and Innovation Initiative RC:7485124 that tends to compliment the activities of the government to; research on, develop ideas and create a business network of entrepreneurs who will further create employment opportunities for Nigerians and other Africans to significantly reduce unemployment rate by the year 2023. We are leveraging and investing on Human Capacity Development, Research, Innovations, Science and Technology for a progressive and sustainable economy.</p>
                 </div>
             </div>   
         </FadeInSection>
         <FadeInSection direction={`up`}>
-            <div>
+            <div className=''>
                 {Text.map((item, index) => (
                     <div key={index} className=''>
                         {item.swap ?
@@ -90,7 +90,7 @@ const AboutText = () => {
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
                                     <div className='md:basis-1/2 mx-auto w-fit md:w-full'>
-                                        <Image src={item.image} width={500} height={100} alt={item.name}/>
+                                        <Image src={item.image} width={500} height={100} alt={item.name} className='ml-auto'/>
                                     </div>
                                 </FadeInSection>
 
@@ -135,7 +135,7 @@ const AboutText = () => {
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
                                     <p className='md:basis-1/2 flex mx-auto w-fit md:w-full'>
-                                        <Dot color='#0097FF' size={25}/> {benefit.name}
+                                        <span className='flex ml-auto'><Dot color='#0097FF' size={25}/> {benefit.name}</span>
                                     </p>     
                                 </FadeInSection>
                             </div>
@@ -148,7 +148,7 @@ const AboutText = () => {
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
                                     <div className='md:basis-1/2 mx-auto w-fit md:w-full'>
-                                        <Image src={benefit.image} width={400} height={100} alt={benefit.name}/>
+                                        <Image src={benefit.image} width={400} height={100} alt={benefit.name} className='ml-auto'/>
                                     </div>   
                                 </FadeInSection>
                             </div>
