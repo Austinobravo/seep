@@ -24,7 +24,7 @@ const items = [
         paragraph: 'Volunteering connects you to your community and the world, expands your network, boosts your social skills, and advances your career.',
         path: '/join',
         buttonText: 'Volunteer Now',
-        image: '/images/Frame 15.png'
+        image: '/images/Frame 15.png',
     },
 ]
 const WhoWeAre = () => {
