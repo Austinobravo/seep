@@ -32,7 +32,7 @@ const WhoWeAre = () => {
     <section className='md:px-28 px-10'>
         <div>
             {items.map((item, index) => (
-                <div key={index} className='flex flex-wrap md:flex-nowrap gap-5 pb-5  seep-text-color'>
+                <div key={index} className='flex flex-wrap md:flex-nowrap gap-5 pb-5 seep-text-color'>
                     <FadeInSection direction={`left`}>
                         <div className='md:basis-1/2 space-y-5'>
                             <h2 className='md:text-5xl text-4xl'>{item.heading}</h2>
