@@ -1,3 +1,4 @@
+"use client"
 import FadeInSection from '@/hooks/fadeIn'
 import React from 'react'
 

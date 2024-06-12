@@ -1,11 +1,9 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import localFont from 'next/font/local'
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
 const satoshi = localFont({
   src:[
     {
@@ -57,7 +55,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={satoshi.className}><Navbar/><div className="mt-24">{children}</div><Footer/></body>
+      <body className={satoshi.className}><Navbar/><div className="mt-28">{children}</div><Footer/></body>
     </html>
   );
 }

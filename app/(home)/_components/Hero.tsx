@@ -1,7 +1,6 @@
 import Button from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
 import { MoveRight } from 'lucide-react'
-import Image from 'next/image'
 import React from 'react'
 
 const Hero = () => {
@@ -13,7 +12,6 @@ const Hero = () => {
                 <h1 className='md:text-4xl text-2xl  leading-relaxed md:w-[600px]'>Social Entrepreneurial Enhancement Support Center (SEE - Support Center)</h1>
                 <p className='leading-relaxed md:w-[600px]'>Creating a network of business opportunities and ideas, for a sustainable global economy.</p>
                 <Button title="Learn More" icon={MoveRight} path='/about'/>
-
             </div>
         </div>
       </FadeInSection>
