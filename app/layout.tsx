@@ -43,8 +43,11 @@ const satoshi = localFont({
 export const metadata: Metadata = {
   title: "Seep: A Tech Innovative",
   description: "Seep is a tech innovative initiative to empower young tech entrepreneurs",
+  verification:{
+    google: "NDo8OG5xL9YSSi4tQwDFF98bJOjX6Haa0vA17YTh8g8",
+  },
   other: {
-    "google-site-verification" : "NDo8OG5xL9YSSi4tQwDFF98bJOjX6Haa0vA17YTh8g8",
+    "google-site-verification" : ""
   }
 };
 
