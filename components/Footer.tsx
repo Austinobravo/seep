@@ -87,9 +87,9 @@ const Footer = () => {
             ))}
 
         </div>
-        <div>
+        <Link href={`/seep`}>
             <Image src={`/images/seep_logo.png`} width={100} height={100} alt='seep_logo'/>
-        </div>
+        </Link>
         <div>
             <ul className='flex md:flex-col flex-row gap-2'>
                 {socialLinks.map((link, index) => (

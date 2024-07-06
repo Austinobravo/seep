@@ -3,35 +3,26 @@ import Image from 'next/image'
 import React from 'react'
 const team = [
     {
-        image: '',
-        name: 'Name Name',
+        image: '/images/deborah.png',
+        name: 'Deborah Ekerebi',
         role: 'Role'
     },
     {
-        image: '',
-        name: 'Name Name',
+        image: '/images/olamilekan.png',
+        name: 'Olamilekan E.B',
         role: 'Role'
     },
     {
-        image: '',
-        name: 'Name Name',
+        image: '/images/victory.png',
+        name: 'Victory Edeke',
         role: 'Role'
     },
     {
-        image: '',
-        name: 'Name Name',
+        image: '/images/ohakam.png',
+        name: 'Ohakam D.C',
         role: 'Role'
     },
-    {
-        image: '',
-        name: 'Name Name',
-        role: 'Role'
-    },
-    {
-        image: '',
-        name: 'Name Name',
-        role: 'Role'
-    },
+
 ]
 const TeamRoles = () => {
   return (
@@ -42,15 +33,14 @@ const TeamRoles = () => {
             </div>  
         </FadeInSection>
         <FadeInSection direction={`up`}>
-            <div className='grid md:grid-cols-3 grid-cols-1 gap-10'>
+            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 '>
                 {team.map((member, index) => (
                     <div key={index} className='seep-text-color'>
-                        <div className='seep-bg-color rounded-2xl h-52'>
-                            <span/>
-                            {/* <Image src={member.image} width={100} height={100} alt={member.name}/> */}
+                        <div className='w-full'>
+                            <Image src={member.image} width={500} height={100} alt={member.name} className='w-fit rounded-2xl h-72 shadow-md'/>
                         </div>
-                        <div>
-                            <h3 className='text-2xl font-bold'>{member.name}</h3>
+                        <div className='py-5 space-y-1'>
+                            <h3 className='lg:text-3xl text-2xl font-bold '>{member.name}</h3>
                             <p>{member.role}</p>
                         </div>
 
