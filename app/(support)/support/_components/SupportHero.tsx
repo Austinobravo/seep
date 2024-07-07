@@ -28,7 +28,7 @@ const SupportHero = () => {
       <div className='mx-auto w-fit py-10'>
         <Button title='Support Us' icon={MoveRight} path='' onClick={()=> setIsModalOpen(!isModalOpen)}/>
       </div>
-      {!isModalOpen && 
+      {isModalOpen && 
             
             <div className='flex justify-center items-center w-full'>
             <div className='bg-white/30 overflow-y-auto backdrop-blur-xl fixed z-50 top-0 left-0 w-full h-full'>
