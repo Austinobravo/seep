@@ -16,7 +16,7 @@ const footerLinks = [
         },
         {
             name: 'Support Us',
-            link: '/support'
+            link: '/join'
         },
         
     ],
@@ -80,7 +80,7 @@ const Footer = () => {
                 <ul key={index} className='space-y-4 pb-7'>
                     {footerlink.map((eachLink, index) => (
                         <li key={index}>
-                            <Link href={eachLink.link}>{eachLink.name}</Link>
+                            <Link href={eachLink.link} onClick={(event)=> {eachLink.link === '/news' && event.preventDefault()}} className={`${eachLink.link === '/news' && 'opacity-70'}`}>{eachLink.name}</Link>
                         </li>
                     ))}
                 </ul>
