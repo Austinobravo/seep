@@ -1,7 +1,7 @@
 'use client'
 import Button from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
-import { Dot, X, ZoomIn } from 'lucide-react'
+import { ArrowRight, Dot, X, ZoomIn } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 const ImagesOf2019 = [
@@ -15,17 +15,27 @@ const ImagesOf2019 = [
         second: '/images/Frame 49.png',
         third: '/images/below_mission_2.png'
     },
+    {
+        first: '',
+        second: '/images/Frame 52.png',
+        third: '/images/SEEP_23 1.png'
+    },
 
 ]
 const ImagesOf2022 = [
 
     {
         first: '/images/Frame 16.png',
-        second: '/images/Frame 52.png',
-        third: '/images/Frame 53.png'
+        second: '/images/Frame 53.png ',
+        third: '/images/Tech2schools-43.png'
     },
     {
-        first: '/images/tech3.png',
+        first: '',
+        second: '/images/tech3.png',
+        third: '/images/tech2.png'
+    },
+    {
+        first: '/images/Tech2schools-65.png',
         second: '',
         third: ''
     },
@@ -66,7 +76,7 @@ const Gallery = () => {
                 </div>
             ))}
             <div className='ml-auto w-fit py-10'>
-                <Button title='View More' icon={ZoomIn} path=''/>
+                <Button title='' icon={ArrowRight} path=''/>
             </div>
         </div>
         <div>
@@ -100,11 +110,11 @@ const Gallery = () => {
             </div>
             ))}
         </div>
-        <FadeInSection direction={`up`}>
+        {/* <FadeInSection direction={`up`}>
             <Image src='/images/tech2.png' width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg pb-10'/>
-        </FadeInSection>
+        </FadeInSection> */}
         <div className='ml-auto w-fit py-10'>
-            <Button title='View More' icon={ZoomIn} path=''/>
+            <Button title='' icon={ArrowRight} path=''/>
       </div>
         <div>
             {isModalOpen && 

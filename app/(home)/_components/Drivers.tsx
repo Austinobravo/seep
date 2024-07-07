@@ -45,7 +45,7 @@ const Drivers = () => {
     <section className='py-16 '>
         <FadeInSection direction={`up`}>
             <h2 className='py-10 text-center text-4xl seep-text-color hover:underline font-bold'>Core Drivers</h2>
-            <div className='md:flex hidden  gap-14 justify-center items-center w-full mx-auto'>
+            <div className='lg:flex hidden  gap-14 justify-center items-center w-full mx-auto'>
                 {imagesAndText.map((item, index) => (
                     <div key={index} className='flex flex-col items-center justify-center space-y-3 cursor-pointer hover:bg-black/10 hover:rounded-lg p-2'>
                         <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
@@ -54,7 +54,7 @@ const Drivers = () => {
                 ))}
 
             </div>
-            <div className="bg-white flex md:hidden items-center h-[200px] py-5 px-10 justify-between">
+            <div className="bg-white flex lg:hidden items-center h-[200px] py-5 px-10 justify-between">
                 <button onClick={previous} className="rounded-full border h-fit w-fit seep-bg-color text-[#ddd]">
                     <ChevronLeft size={40} />
                 </button>

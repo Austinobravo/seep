@@ -5,10 +5,10 @@ import MobileNav from './MobileNav'
 const Navbar = () => {
   return (
     <section>
-        <nav className='md:flex hidden'>
+        <nav className='lg:flex hidden'>
             <DesktopNav/>
         </nav>
-        <nav className='md:hidden block'>
+        <nav className='lg:hidden block'>
             <MobileNav/>
         </nav>
     </section>
