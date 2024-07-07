@@ -31,7 +31,9 @@ const TestimonialSection = () => {
                         <Image src={`/images/comma.png`} width={100} height={100} alt='comma' />
                         <p>{testimonial.paragraph}</p>
                         <div className='flex gap-x-2 '>
-                            <div className='bg-[#B4E0FF] rounded-full p-6 w-fit h-fit'></div>
+                            <div className='bg-[#B4E0FF] rounded-full p-6 w-fit h-fit'>
+                                <Image src={`/images/avatar.webp`} width={50} height={50} alt='avatar'/>
+                            </div>
                             <div>
                                 <h2 className='seep-text-color text-2xl font-bold'>{testimonial.name}</h2>
                                 <span>{testimonial.role}</span>
