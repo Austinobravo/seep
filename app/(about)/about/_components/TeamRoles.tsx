@@ -35,7 +35,7 @@ const TeamRoles = () => {
         <FadeInSection direction={`up`}>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 '>
                 {team.map((member, index) => (
-                    <div key={index} className='seep-text-color'>
+                    <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full'>
                             <Image src={member.image} width={500} height={100} alt={member.name} className='w-fit rounded-2xl h-72 shadow-md'/>
                         </div>

@@ -63,12 +63,12 @@ const Gallery = () => {
                     <div className='flex md:flex-nowrap flex-wrap gap-5'>
                         <FadeInSection direction={`left`}>
                         {image.second && 
-                            <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
+                            <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover ' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
                             }
                         </FadeInSection>
                         <FadeInSection direction={`right`}>
                             {image.third && 
-                            <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
+                            <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
                             }
                         </FadeInSection>
                     </div>
@@ -97,12 +97,12 @@ const Gallery = () => {
                 <div className='flex md:flex-nowrap flex-wrap gap-5'>
                     <FadeInSection direction={`left`}>
                     {image.second && 
-                        <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
+                        <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
                         }
                     </FadeInSection>
                     <FadeInSection direction={`right`}>
                         {image.third && 
-                        <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
+                        <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
                         }
                     </FadeInSection>
                 </div>

@@ -8,7 +8,7 @@ const JoinHero = () => {
     <>
     <section className='md:px-20 px-10 space-y-10'>
       <FadeInSection direction={`up`}>
-        <div className='w-full bg-cover bg-no-repeat md:bg-right-top bg-center h-[600px] text-white' style={{backgroundImage: `url(/images/join.png)`}}>
+        <div className='w-full bg-cover bg-no-repeat md:bg-right-top bg-center h-[600px] text-white rounded-2xl' style={{backgroundImage: `url(/images/join.png)`}}>
             <div className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent h-[600px] rounded-2xl flex flex-col md:pl-10 pl-5 md:justify-center justify-end pb-16 space-y-5'>
                 <h1 className='md:text-6xl text-3xl  leading-relaxed md:w-[600px]'>Join Us.</h1>
             </div>
