@@ -52,5 +52,14 @@
   opacity: 1;
   transform: translateY(0);
 }
+.fade-in-section.down {
+  opacity: 0;
+  transform: translateY(-20px);
+}
+
+.fade-in-section.is-visible.down {
+  opacity: 1;
+  transform: translateY(0);
+}
 
 

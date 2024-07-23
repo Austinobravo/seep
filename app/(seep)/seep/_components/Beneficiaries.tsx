@@ -38,17 +38,17 @@ const Beneficiaries = () => {
             {/* ))} */}
             <div className='seep-bg-color bg-center bg-cover bg-no-repeat relative h-80 w-full rounded-lg' style={{backgroundImage : `url(${occasions[currentImageIndex].image})`}}>
               <div className='bg-gradient-to-t from-[#0097FF] h-80 via-transparent to-transparent'>
-                <div className='flex justify-between items-center pt-24 px-5'>
-                  <ChevronLeft color='white' size={45} onClick={DecrementIndex} className='cursor-pointer'/>
+                <div className='flex justify-between items-center pt-24 md:px-5 px-2'>
+                  <ChevronLeft color='white' size={45} onClick={DecrementIndex} className='cursor-pointer'/ >
                   <ChevronRight color='white' size={45} onClick={IncrementIndex} className='cursor-pointer'/>
                 </div>
-                <div className='bottom-10 absolute px-10 w-full'>
+                <div className='bottom-10 absolute md:px-10 px-3 w-full'>
                   <div>
                     <p className='text-white font-bold text-xl'>{occasions[currentImageIndex].title}</p>
                   </div>
                   <div className='flex justify-between items-center'>
-                    <Image src={`/images/seep_logo.png`} width={100} height={100} alt='seep logo'/>
-                    <Image src={`/images/logo.png`} width={100} height={100} alt='logo'/>
+                    <Image src={`/images/seep_logo.png`} width={100} height={100} alt='seep logo' className='md:w-28 w-20'/>
+                    <Image src={`/images/logo.png`} width={100} height={100} alt='logo' className='md:w-28 w-20'/>
                   </div>
 
                 </div>

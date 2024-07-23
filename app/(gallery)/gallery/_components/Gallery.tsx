@@ -18,7 +18,7 @@ const ImagesOf2019 = [
     {
         first: '',
         second: '/images/Frame 52.png',
-        third: '/images/SEEP_23 1.png'
+        third: '/images/SEEP_231.png'
     },
 
 ]

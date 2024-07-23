@@ -24,6 +24,13 @@ const Testimonials = [
 const TestimonialSection = () => {
   return (
     <section className='md:px-20 px-10 py-20'>
+        <FadeInSection direction={`down`}>
+            <div className='w-[90%] rounded-md mx-auto h-96 mb-7 bg-cover cursor-pointer bg-center flex justify-center items-center' style={{backgroundImage: `url(/images/SEEP_231.png)`}}>
+                <Image src={`/images/VideoIcon.png`} width={100} height={100} alt='Icon'/>
+            </div>
+
+
+        </FadeInSection>
         <FadeInSection direction={`up`}>
             <div className='text-[#33ACFF] space-y-10'>
                 {Testimonials.map((testimonial, index) => (
