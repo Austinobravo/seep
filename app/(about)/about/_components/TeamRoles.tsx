@@ -209,9 +209,9 @@ const TeamRoles = () => {
                     </div>
                 ))}
             </div> 
-            <div className='flex items-center ml-auto w-fit py-10 gap-x-4'>
+            <div className='flex items-center justify-between w-full py-10 '>
                 {currentImageIndex > 0 && 
-                    <div className='ml-auto w-fit' onClick={DecrementImages}>
+                    <div className='' onClick={DecrementImages}>
                         <Button title='' icon={ArrowLeft} path='' onClick={(e)=>e.preventDefault()}/>
                     </div>
                 }

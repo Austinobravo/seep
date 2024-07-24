@@ -1,9 +1,10 @@
 'use client'
 import Button from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
-import { ArrowRight, Dot, X, ZoomIn } from 'lucide-react'
+import { ArrowLeft, ArrowRight, Dot, X, ZoomIn } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+
 const ImagesOf2019 = [
     {
         first: '',
@@ -20,6 +21,28 @@ const ImagesOf2019 = [
         second: '/images/Frame 52.png',
         third: '/images/SEEP_231.png'
     },
+    {
+        first: '',
+        second: '/images/Frame 46.png',
+        third: '/images/Frame 47.png'
+    },
+    {
+        first: '/images/Frame 48.png',
+        second: '/images/Frame 49.png',
+        third: '/images/below_mission_2.png'
+    },
+    {
+        first: '',
+        second: '/images/Frame 52.png',
+        third: '/images/SEEP_231.png'
+    },
+    {
+        first: '',
+        second: '/images/Frame 52.png',
+        third: '/images/SEEP_231.png'
+    },
+    
+
 
 ]
 const ImagesOf2022 = [
@@ -39,10 +62,56 @@ const ImagesOf2022 = [
         second: '',
         third: ''
     },
+    {
+        first: '/images/Tech2schools-65.png',
+        second: '',
+        third: ''
+    },
 ]
 const Gallery = () => {
     const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
     const [currentImage, setCurrentImage] = React.useState<string>('')
+
+    
+    const [currentImageIndexof2019, setCurrentImageIndexof2019] = React.useState<number>(0)
+    const [currentImageEndIndexof2019, setCurrentImageEndIndexof2019] = React.useState<number>(3)
+
+    const IncrementImagesOf2019 = () => {
+        if(currentImageEndIndexof2019 < ImagesOf2019.length){
+            setCurrentImageIndexof2019(currentImageEndIndexof2019)
+            setCurrentImageEndIndexof2019((prev) => (ImagesOf2019.length) - prev < 3 ? prev + (ImagesOf2019.length ) - prev : prev + 3 )
+        }else{
+            return
+        }
+    }
+    const DecrementImagesOf2019 = () => {
+        if(currentImageIndexof2019 === 0){
+            return
+        }else{
+            setCurrentImageIndexof2019((prev) => prev - 3)
+            setCurrentImageEndIndexof2019(currentImageIndexof2019)
+        }
+    }
+
+    const [currentImageIndexof2022, setCurrentImageIndexof2022] = React.useState<number>(0)
+    const [currentImageEndIndexof2022, setCurrentImageEndIndexof2022] = React.useState<number>(3)
+
+    const IncrementImagesOf2022 = () => {
+        if(currentImageEndIndexof2022 < ImagesOf2022.length){
+            setCurrentImageIndexof2022(currentImageEndIndexof2022)
+            setCurrentImageEndIndexof2022((prev) => (ImagesOf2022.length) - prev < 3 ? prev + (ImagesOf2022.length ) - prev : prev + 3 )
+        }else{
+            return
+        }
+    }
+    const DecrementImagesOf2022 = () => {
+        if(currentImageIndexof2022 === 0){
+            return
+        }else{
+            setCurrentImageIndexof2022((prev) => prev - 3)
+            setCurrentImageEndIndexof2022(currentImageIndexof2022)
+        }
+    }
   return (
     <section className='md:px-20 px-10 '>
         <div>
@@ -53,7 +122,7 @@ const Gallery = () => {
                     <p>SEEP 2019 Theme</p>
                 </div>
             </div>
-            {ImagesOf2019.map((image, index)=> (
+            {ImagesOf2019.slice(currentImageIndexof2019, currentImageEndIndexof2019).map((image, index)=> (
                 <div key={index} className='space-y-5 py-5'>
                     <FadeInSection direction={`up`}>
                         {image.first && 
@@ -75,8 +144,18 @@ const Gallery = () => {
 
                 </div>
             ))}
-            <div className='ml-auto w-fit py-10'>
-                <Button title='' icon={ArrowRight} path=''/>
+            <div className='flex items-center justify-between w-full py-10 '>
+                {currentImageIndexof2019 > 0 && 
+                    <div className='' onClick={DecrementImagesOf2019}>
+                        <Button title='' icon={ArrowLeft} path='' onClick={(e)=>e.preventDefault()}/>
+                    </div>
+                }
+                {currentImageEndIndexof2019 < ImagesOf2019.length && 
+                    <div className='ml-auto w-fit ' onClick={IncrementImagesOf2019}>
+                        <Button title='' icon={ArrowRight} path='' onClick={(e)=>e.preventDefault()}/>
+                    </div>
+                }
+
             </div>
         </div>
         <div>
@@ -87,7 +166,7 @@ const Gallery = () => {
                     <p>SEEP 2022 Theme</p>
                 </div>
             </div>  
-            {ImagesOf2022.map((image, index)=> (
+            {ImagesOf2022.slice(currentImageIndexof2022, currentImageEndIndexof2022).map((image, index)=> (
                 <div key={index} className='space-y-5 py-5'>
                 <FadeInSection direction={`up`}>
                     {image.first && 
@@ -110,12 +189,19 @@ const Gallery = () => {
             </div>
             ))}
         </div>
-        {/* <FadeInSection direction={`up`}>
-            <Image src='/images/tech2.png' width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg pb-10'/>
-        </FadeInSection> */}
-        <div className='ml-auto w-fit py-10'>
-            <Button title='' icon={ArrowRight} path=''/>
-      </div>
+        <div className='flex items-center justify-between w-full py-10 '>
+                {currentImageIndexof2022 > 0 && 
+                    <div className='' onClick={DecrementImagesOf2022}>
+                        <Button title='' icon={ArrowLeft} path='' onClick={(e)=>e.preventDefault()}/>
+                    </div>
+                }
+                {currentImageEndIndexof2022 < ImagesOf2022.length && 
+                    <div className='ml-auto w-fit ' onClick={IncrementImagesOf2022}>
+                        <Button title='' icon={ArrowRight} path='' onClick={(e)=>e.preventDefault()}/>
+                    </div>
+                }
+
+            </div>
         <div>
             {isModalOpen && 
                 <div className='bg-black/50 fixed left-0 top-0 w-full h-full z-50'>
