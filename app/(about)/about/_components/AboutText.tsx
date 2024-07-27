@@ -82,7 +82,7 @@ const AboutText = () => {
                         {item.swap ?
                         <>
                             <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit mx-auto'>{item.name}</h3>
-                            <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2 text-center md:text-justify'>
+                            <div className='flex md:flex-nowrap flex-wrap flex-col-reverse md:flex-row gap-x-4 gap-y-2 text-center md:text-justify'>
                                 <FadeInSection direction={`right`}>
                                     <div  className='seep-text-color space-y-4 md:basis-1/2'>
                                         <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>

@@ -126,33 +126,33 @@ const Gallery = () => {
                 <div key={index} className='space-y-5 py-5'>
                     <FadeInSection direction={`up`}>
                         {image.first && 
-                            <Image src={image.first} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.first)}}/>
+                            <Image src={image.first} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-48 object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.first)}}/>
                         }
                     </FadeInSection>
                     <div className='flex md:flex-nowrap flex-wrap gap-5'>
                         <FadeInSection direction={`left`}>
                         {image.second && 
-                            <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover ' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
+                            <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-48 object-cover ' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
                             }
                         </FadeInSection>
                         <FadeInSection direction={`right`}>
                             {image.third && 
-                            <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
+                            <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-48 object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
                             }
                         </FadeInSection>
                     </div>
 
                 </div>
             ))}
-            <div className='flex items-center justify-between w-full py-10 '>
+            <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndexof2019 > 0 && 
-                    <div className='' onClick={DecrementImagesOf2019}>
-                        <Button title='' icon={ArrowLeft} path='' onClick={(e)=>e.preventDefault()}/>
+                    <div className='rounded-full bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2019}>
+                        <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndexof2019 < ImagesOf2019.length && 
-                    <div className='ml-auto w-fit ' onClick={IncrementImagesOf2019}>
-                        <Button title='' icon={ArrowRight} path='' onClick={(e)=>e.preventDefault()}/>
+                    <div className='ml-auto w-fit rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2019}>
+                        <ArrowRight/>
                     </div>
                 }
 
@@ -170,18 +170,18 @@ const Gallery = () => {
                 <div key={index} className='space-y-5 py-5'>
                 <FadeInSection direction={`up`}>
                     {image.first && 
-                        <Image src={image.first} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.first)}}/>
+                        <Image src={image.first} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-48 object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.first)}}/>
                     }
                 </FadeInSection>
                 <div className='flex md:flex-nowrap flex-wrap gap-5'>
                     <FadeInSection direction={`left`}>
                     {image.second && 
-                        <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
+                        <Image src={image.second} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-48 object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.second)}}/>
                         }
                     </FadeInSection>
                     <FadeInSection direction={`right`}>
                         {image.third && 
-                        <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-full md:object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
+                        <Image src={image.third} width={500} height={100} alt='image' className='w-full hover:cursor-zoom-in rounded-lg cursor-pointer md:h-[28rem] h-48 object-cover' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(image.third)}}/>
                         }
                     </FadeInSection>
                 </div>
@@ -189,15 +189,15 @@ const Gallery = () => {
             </div>
             ))}
         </div>
-        <div className='flex items-center justify-between w-full py-10 '>
+        <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndexof2022 > 0 && 
-                    <div className='' onClick={DecrementImagesOf2022}>
-                        <Button title='' icon={ArrowLeft} path='' onClick={(e)=>e.preventDefault()}/>
+                    <div className='rounded-full bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2022}>
+                        <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndexof2022 < ImagesOf2022.length && 
-                    <div className='ml-auto w-fit ' onClick={IncrementImagesOf2022}>
-                        <Button title='' icon={ArrowRight} path='' onClick={(e)=>e.preventDefault()}/>
+                    <div className='ml-auto w-fit rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2022}>
+                        <ArrowRight/>
                     </div>
                 }
 

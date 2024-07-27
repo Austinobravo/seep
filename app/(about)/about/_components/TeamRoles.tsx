@@ -209,15 +209,15 @@ const TeamRoles = () => {
                     </div>
                 ))}
             </div> 
-            <div className='flex items-center justify-between w-full py-10 '>
+            <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndex > 0 && 
-                    <div className='' onClick={DecrementImages}>
-                        <Button title='' icon={ArrowLeft} path='' onClick={(e)=>e.preventDefault()}/>
+                    <div className='rounded-full bg-amber-500 p-1  text-white' onClick={DecrementImages}>
+                        <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndex < team.length -1 && 
-                    <div className='ml-auto w-fit ' onClick={IncrementImages}>
-                        <Button title='' icon={ArrowRight} path='' onClick={(e)=>e.preventDefault()}/>
+                    <div className='ml-auto w-fit rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImages}>
+                        <ArrowRight/>
                     </div>
                 }
 
