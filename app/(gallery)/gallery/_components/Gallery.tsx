@@ -49,7 +49,7 @@ const ImagesOf2022 = [
 
     {
         first: '/images/Frame 16.png',
-        second: '/images/Frame 53.png ',
+        second: '/images/Frame53.png ',
         third: '/images/Tech2schools-43.png'
     },
     {
@@ -146,12 +146,12 @@ const Gallery = () => {
             ))}
             <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndexof2019 > 0 && 
-                    <div className='rounded-full bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2019}>
+                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2019}>
                         <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndexof2019 < ImagesOf2019.length && 
-                    <div className='ml-auto w-fit rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2019}>
+                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2019}>
                         <ArrowRight/>
                     </div>
                 }
@@ -191,12 +191,12 @@ const Gallery = () => {
         </div>
         <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndexof2022 > 0 && 
-                    <div className='rounded-full bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2022}>
+                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2022}>
                         <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndexof2022 < ImagesOf2022.length && 
-                    <div className='ml-auto w-fit rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2022}>
+                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2022}>
                         <ArrowRight/>
                     </div>
                 }

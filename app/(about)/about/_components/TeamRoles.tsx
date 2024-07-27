@@ -211,12 +211,12 @@ const TeamRoles = () => {
             </div> 
             <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndex > 0 && 
-                    <div className='rounded-full bg-amber-500 p-1  text-white' onClick={DecrementImages}>
+                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={DecrementImages}>
                         <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndex < team.length -1 && 
-                    <div className='ml-auto w-fit rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImages}>
+                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImages}>
                         <ArrowRight/>
                     </div>
                 }
