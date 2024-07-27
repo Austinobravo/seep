@@ -47,16 +47,16 @@ const Drivers = () => {
             <h2 className='py-10 text-center text-4xl seep-text-color font-bold'>Core Drivers</h2>
             <div className={`lg:flex gap-x-60 hidden basis-1/2 justify-center items-center w-full mx-auto`}>
                 {imagesAndText.slice(0,3).map((item, index) => (
-                    <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2'>
+                    <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2' title={item.name}>
                         <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
-                        <span className='text-2xl seep-text-color hover:underline font-bold'>{item.name}</span>
+                        <span className='text-2xl seep-text-color font-bold' >{item.name}</span>
                     </div>
                 ))}
 
             </div>
             <div className={`lg:flex gap-x-64 pt-10 hidden basis-1/2 justify-center items-center w-full mx-auto`}>
                 {imagesAndText.slice(3).map((item, index) => (
-                    <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2'>
+                    <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2' title={item.name}>
                         <Image src={`${item.image}`} width={50} height={100} alt={item.name}/>
                         <span className='text-2xl seep-text-color hover:underline font-bold'>{item.name}</span>
                     </div>

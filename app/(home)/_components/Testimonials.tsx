@@ -23,7 +23,7 @@ const Testimonials = () => {
         <div className='space-y-5'>
             <FadeInSection direction={`up`}>
                 <div className='rounded-lg w-full'>
-                    <Image src={`/images/below_mission_1.png`} width={500} height={100} alt='below_mission_1.png' className='rounded-2xl hover:cursor-zoom-in w-full cursor-pointer' onClick={()=> {setCurrentImage(`/images/below_mission_1.png`), setIsModalOpen(!isModalOpen)}}/>
+                    <Image src={`/images/below_mission_1.png`} width={500} height={100} alt='below_mission_1.png' className='rounded-2xl hover:cursor-zoom-in w-full cursor-pointer md:h-[28rem] h-48 object-cover' onClick={()=> {setCurrentImage(`/images/below_mission_1.png`), setIsModalOpen(!isModalOpen)}}/>
                 </div>
             </FadeInSection>
             <div className='flex md:flex-nowrap flex-wrap gap-7'>
