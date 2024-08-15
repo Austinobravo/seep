@@ -4,21 +4,24 @@ import React from 'react'
 const Testimonials = [
     {
         image: '',
-        name: 'Name Name',
+        name: 'Olivia Thomas',
         paragraph: 'Your generosity will enable us to assists these students and young graduates in the rural community as well as the underserved areas, in turn help them discover and develop their potentials and interest in tech.',
-        role: 'Role'
+        school: 'Government Technical Secondary School Uyo',
+        program: 'Tech to School Beneficiary'
     },
     {
         image: '',
-        name: 'Name Name',
+        name: 'John Bassey',
         paragraph: 'Your generosity will enable us to assists these students and young graduates in the rural community as well as the underserved areas, in turn help them discover and develop their potentials and interest in tech.',
-        role: 'Role'
+        school: 'Government Technical Secondary School Uyo',
+        program: 'Tech to School Beneficiary'
     },
     {
         image: '',
-        name: 'Name Name',
+        name: 'Onome Francis',
         paragraph: 'Your generosity will enable us to assists these students and young graduates in the rural community as well as the underserved areas, in turn help them discover and develop their potentials and interest in tech.',
-        role: 'Role'
+        school: 'Government Technical Secondary School Uyo',
+        program: 'Tech to School Beneficiary'
     },
 ]
 const TestimonialSection = () => {
@@ -43,7 +46,8 @@ const TestimonialSection = () => {
                             </div>
                             <div>
                                 <h2 className='seep-text-color text-2xl font-bold'>{testimonial.name}</h2>
-                                <span>{testimonial.role}</span>
+                                <p className='md:text-base text-sm mb-1'>{testimonial.school}</p>
+                                <p className='md:text-base text-sm'>{testimonial.program}</p>
                             </div>
                         </div>
 
