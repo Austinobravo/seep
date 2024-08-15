@@ -36,8 +36,8 @@ const Beneficiaries = () => {
             {/* {occasions.map((occasion, index) => ( */}
               
             {/* ))} */}
-            <div className='seep-bg-color  bg-cover bg-no-repeat bg-top relative h-80 w-full rounded-lg' style={{backgroundImage : `url(${occasions[currentImageIndex].image})`}}>
-              <div className='bg-gradient-to-t from-[#0097FF] h-80 via-transparent to-transparent'>
+            <div className=' bg-cover bg-no-repeat bg-top relative h-[26rem] w-full rounded-lg' style={{backgroundImage : `url(${occasions[currentImageIndex].image})`}}>
+              <div className='bg-gradient-to-t from-[#0097FF] h-[26rem] via-transparent to-transparent'>
                 <div className='flex justify-between items-center pt-24 md:px-5 px-2'>
                   <ChevronLeft color='white' size={45} onClick={DecrementIndex} className='cursor-pointer'/ >
                   <ChevronRight color='white' size={45} onClick={IncrementIndex} className='cursor-pointer'/>

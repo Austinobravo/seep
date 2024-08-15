@@ -196,14 +196,14 @@ const TeamRoles = () => {
         <FadeInSection direction={`up`}>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 '>
                 {team.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
-                    <div key={index} className='seep-text-color w-40 mx-auto'>
+                    <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
-                            <Image src={member.image} width={500} height={100} alt={member.name} className='w-fit rounded-2xl h-72 shadow-md flex items-center justify-center'/>
+                            <Image src={member.image} width={500} height={100} alt={member.name} className='w-fit mx-auto rounded-2xl h-72 shadow-md '/>
                             {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center bg-white p-2 text-amber-400 text-xs bottom-0 w-full'>{member.description}</span>}
                         </div> 
-                        <div className='py-5 space-y-1 break-all '>
+                        <div className='py-5 space-y-1 break-all text-center'>
                             <h3 className='lg:text-3xl text-2xl font-bold '>{member.name}</h3>
-                            <p className='!break-all  '>{member.role}</p>
+                            <p className=''>{member.role}</p>
                         </div>
 
                     </div>

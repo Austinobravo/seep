@@ -66,7 +66,7 @@ const Drivers = () => {
                 {imagesAndText.slice(3).map((item, index) => (
                     <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2' title={item.name} onMouseEnter={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}} onMouseLeave={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}}>
                         <Image src={`${item.image}`} width={50} height={100} alt={item.name}/>
-                        <span className='text-2xl seep-text-color hover:underline font-bold'>{item.name}</span>
+                        <span className='text-2xl seep-text-color font-bold'>{item.name}</span>
                         {isHovered && item.name === isCurrentHovered &&
                             <div className='absolute w-80 shadow-md rounded-md bg-white p-4 !-mt-40 flex items-center gap-5'>
                                 <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>

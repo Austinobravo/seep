@@ -98,7 +98,7 @@ const AboutText = () => {
                         </>
                         :
                         <>
-                            <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit mx-auto '>{item.name}</h3>
+                            <h3 className=' text-3xl py-12 seep-text-color w-fit mx-auto '>{item.name}</h3>
                             <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2'>
                                 <FadeInSection direction={`right`}>
                                     <div  className='md:basis-1/2 mx-auto w-fit md:w-full'>
@@ -122,7 +122,7 @@ const AboutText = () => {
         </FadeInSection>
         <FadeInSection direction={`up`}>
             <div className='seep-text-color space-y-4 '>
-                <h3 className='hover:underline text-3xl text-center py-16'>Our Projected Benefits and Impact</h3>
+                <h3 className=' text-3xl text-center py-16'>Our Projected Benefits and Impact</h3>
                 <ol className=' text-center'>
                     {Benefits.map((benefit, index) => (
                         <li key={index} className='pb-5 text-base flex '>

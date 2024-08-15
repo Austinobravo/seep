@@ -49,7 +49,7 @@ const ImagesOf2022 = [
 
     {
         first: '/images/Frame 16.png',
-        second: '/images/Frame53.png ',
+        second: '/images/frame53.png',
         third: '/images/Tech2schools-43.png'
     },
     {
