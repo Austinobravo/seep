@@ -42,22 +42,22 @@ const team = [
         description: 'An enthuisiatic Leader'
     },
     {
-        image: '/images/olamilekan.png',
-        name: 'Olamilekan E.B',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
+        image: '/images/yeneime.jpg',
+        name: 'Yeneime Etim ',
+        role: 'Digital marketer',
+        description: 'An enthuisiatic Leader and a Digital marketer'
     },
     {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
+        image: '/images/edikan.jpg',
+        name: 'Edikan Francis Otu',
+        role: 'Digital Teacher, Trained Leader, Writer & Speaker',
+        description: 'An enthuisiatic Leader and a Digital Teacher, Trained Leader, Writer & Speaker'
     },
     {
-        image: '/images/olamilekan.png',
-        name: 'Olamilekan E.B',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
+        image: '/images/joy.jpg',
+        name: 'Joy Oduo',
+        role: ' Digital Content Creator',
+        description: 'An enthuisiatic Leader and a Digital Content Creator'
     },
     {
         image: '/images/ohakam.png',
@@ -196,14 +196,14 @@ const TeamRoles = () => {
         <FadeInSection direction={`up`}>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 '>
                 {team.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
-                    <div key={index} className='seep-text-color w-fit mx-auto'>
+                    <div key={index} className='seep-text-color w-40 mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
-                            <Image src={member.image} width={500} height={100} alt={member.name} className='w-fit rounded-2xl h-72 shadow-md'/>
+                            <Image src={member.image} width={500} height={100} alt={member.name} className='w-fit rounded-2xl h-72 shadow-md flex items-center justify-center'/>
                             {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center bg-white p-2 text-amber-400 text-xs bottom-0 w-full'>{member.description}</span>}
                         </div> 
-                        <div className='py-5 space-y-1'>
+                        <div className='py-5 space-y-1 break-all '>
                             <h3 className='lg:text-3xl text-2xl font-bold '>{member.name}</h3>
-                            <p>{member.role}</p>
+                            <p className='!break-all  '>{member.role}</p>
                         </div>
 
                     </div>

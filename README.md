@@ -1,6 +1,6 @@
 ## Seep - A Tech Innovative Program
 
-This web app is currently hosted on  [http://localhost:3000](https://seesupportcenter.org) 
+This web app is currently hosted on  [here](https://seesupportcenter.org) 
 
 
 
