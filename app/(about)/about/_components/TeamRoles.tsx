@@ -114,48 +114,6 @@ const team = [
         description: 'An enthuisiatic Leader'
     },
     {
-        image: '/images/olamilekan.png',
-        name: 'Olamilekan E.B',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/olamilekan.png',
-        name: 'Olamilekan E.B',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/olamilekan.png',
-        name: 'Olamilekan E.B',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C Last',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
         image: '/images/ohakam.png',
         name: 'Ohakam D.C Last',
         role: 'Role',
@@ -170,9 +128,9 @@ const TeamRoles = () => {
     const [currentImageEndIndex, setCurrentImageEndIndex] = React.useState<number>(6)
 
     const IncrementImages = () => {
-        if(currentImageEndIndex < team.length -1){
+        if(currentImageEndIndex < team.length){
             setCurrentImageIndex(currentImageEndIndex)
-            setCurrentImageEndIndex((prev) => (team.length -1) - prev < 6 ? prev + (team.length -1) - prev : prev + 6 )
+            setCurrentImageEndIndex((prev) => (team.length) - prev < 6 ? prev + (team.length) - prev : prev + 6 )
         }else{
             return
         }
@@ -198,7 +156,7 @@ const TeamRoles = () => {
                 {team.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
                     <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
-                            <Image src={member.image} width={500} height={100} alt={member.name} className='w-fit mx-auto rounded-2xl h-72 shadow-md '/>
+                            <Image src={member.image} width={500} height={100} alt={member.name} className=' object-contain mx-auto rounded-md h-72 shadow-md '/>
                             {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center bg-white p-2 text-amber-400 text-xs bottom-0 w-full'>{member.description}</span>}
                         </div> 
                         <div className='py-5 space-y-1 break-all text-center'>
@@ -215,7 +173,7 @@ const TeamRoles = () => {
                         <ArrowLeft/>
                     </div>
                 }
-                {currentImageEndIndex < team.length -1 && 
+                {currentImageEndIndex < team.length  && 
                     <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImages}>
                         <ArrowRight/>
                     </div>
