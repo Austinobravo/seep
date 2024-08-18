@@ -23,7 +23,7 @@ const Beneficiaries = () => {
   const[currentImageIndex, setCurrentImageIndex] = React.useState<number>(0)
 
   const IncrementIndex = () => {
-    setCurrentImageIndex((prev) => occasions.length - 1 === prev ? 0 : prev + 1)
+    setCurrentImageIndex((next) => occasions.length - 1 === next ? 0 : next + 1)
   }
   const DecrementIndex = () => {
     setCurrentImageIndex((prev) => 0 === prev ? occasions.length -1 : prev - 1)

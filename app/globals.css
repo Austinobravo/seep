@@ -20,6 +20,16 @@
   opacity: 1;
 }
 
+.home-hero-image{
+  background-image: url('/images/hero.png'); 
+}
+
+@media screen and (max-width:480px) {
+  .home-hero-image{
+    background-image: url('/images/SEEP_70 1 (1).png');
+  }
+}
+
 
 .fade-in-section {
   transition: opacity 1s ease, transform 1s ease;
