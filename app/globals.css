@@ -20,13 +20,24 @@
   opacity: 1;
 }
 
+/* Hero images */
+
 .home-hero-image{
   background-image: url('/images/hero.png'); 
 }
 
 @media screen and (max-width:480px) {
   .home-hero-image{
-    background-image: url('/images/SEEP_70 1 (1).png');
+    background-image: url('/images/hero_small.png');
+  }
+}
+.about-hero-image{
+  background-image: url('/images/about.png'); 
+}
+
+@media screen and (max-width:480px) {
+  .about-hero-image{
+    background-image: url('/images/about_small.png');
   }
 }
 
