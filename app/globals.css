@@ -25,21 +25,26 @@
 .home-hero-image{
   background-image: url('/images/hero.png'); 
 }
+.about-hero-image{
+  background-image: url('/images/about.png'); 
+}
+
+.programs-hero-image{
+  background-image: url('/images/programs.png'); 
+}
 
 @media screen and (max-width:480px) {
   .home-hero-image{
     background-image: url('/images/hero_small.png');
   }
-}
-.about-hero-image{
-  background-image: url('/images/about.png'); 
-}
-
-@media screen and (max-width:480px) {
   .about-hero-image{
     background-image: url('/images/about_small.png');
   }
+  .programs-hero-image{
+    background-image: url('/images/programs_small.png');
+  }
 }
+
 
 
 .fade-in-section {
