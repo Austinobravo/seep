@@ -125,12 +125,12 @@ const TeamRoles = () => {
     const [isHovered, setIsHovered] = React.useState<boolean>(false)
     const [currentTeamMemberIndex, setCurrentTeamMemberIndex] = React.useState<number>(0)
     const [currentImageIndex, setCurrentImageIndex] = React.useState<number>(0)
-    const [currentImageEndIndex, setCurrentImageEndIndex] = React.useState<number>(6)
+    const [currentImageEndIndex, setCurrentImageEndIndex] = React.useState<number>(8)
 
     const IncrementImages = () => {
         if(currentImageEndIndex < team.length){
             setCurrentImageIndex(currentImageEndIndex)
-            setCurrentImageEndIndex((prev) => (team.length) - prev < 6 ? prev + (team.length) - prev : prev + 6 )
+            setCurrentImageEndIndex((prev) => (team.length) - prev < 8 ? prev + (team.length) - prev : prev + 8 )
         }else{
             return
         }
@@ -139,7 +139,7 @@ const TeamRoles = () => {
         if(currentImageIndex === 0){
             return
         }else{
-            setCurrentImageIndex((prev) => prev - 6)
+            setCurrentImageIndex((prev) => prev - 8)
             setCurrentImageEndIndex(currentImageIndex)
         }
     }
@@ -152,7 +152,7 @@ const TeamRoles = () => {
             </div>  
         </FadeInSection>
         <FadeInSection direction={`up`}>
-            <div className='grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-3 '>
+            <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 '>
                 {team.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
                     <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
@@ -160,8 +160,8 @@ const TeamRoles = () => {
                             {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center bg-white p-2 text-amber-400 text-xs bottom-0 w-full'>{member.description}</span>}
                         </div> 
                         <div className='py-5 space-y-1 break-all text-center'>
-                            <h3 className='lg:text-3xl text-2xl font-bold '>{member.name}</h3>
-                            <p className=''>{member.role}</p>
+                            <h3 className='lg:text-xl text-sm font-bold '>{member.name}</h3>
+                            <p className='text-sm'>{member.role}</p>
                         </div>
 
                     </div>
