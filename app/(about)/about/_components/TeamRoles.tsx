@@ -156,8 +156,8 @@ const TeamRoles = () => {
                 {team.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
                     <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
-                            <Image src={member.image} width={500} height={100} alt={member.name} className=' object-cover mx-auto rounded-md h-72 shadow-md '/>
-                            {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center bg-white p-2 text-amber-400 text-xs bottom-0 w-full'>{member.description}</span>}
+                            <Image src={member.image} width={500} height={100} alt={member.name} className=' object-cover mx-auto rounded-md h-72 shadow-md object-top'/>
+                            {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
                         </div> 
                         <div className='py-5 space-y-1 break-all text-center'>
                             <h3 className='lg:text-xl text-lg font-bold '>{member.name}</h3>

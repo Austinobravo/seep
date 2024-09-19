@@ -24,6 +24,7 @@
 
 .home-hero-image{
   background-image: url('/images/hero.png'); 
+  
 }
 .about-hero-image{
   background-image: url('/images/about.png'); 
@@ -42,6 +43,16 @@
   }
   .programs-hero-image{
     background-image: url('/images/programs_small.png');
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar{
+    display: none;
+  }
+  .no-scrollbar{
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }
 

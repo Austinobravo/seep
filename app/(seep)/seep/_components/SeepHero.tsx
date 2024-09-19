@@ -10,7 +10,7 @@ const SeepHero = () => {
   return (
     <section className='md:px-20 px-10'>
       <FadeInSection direction={`up`}>
-        <div className='lg:bg-contain bg-no-repeat w-full bg-cover md:bg-right-top bg-center md:h-[500px] h-[600px] rounded-2xl border text-white' style={{backgroundImage: `url(/images/seep_hero.png)`}}>
+        <div className='bg-cover bg-no-repeat w-full md:bg-top bg-center md:h-[500px] h-[600px] rounded-2xl border text-white' style={{backgroundImage: `url(/images/seep_hero.png)`}}>
             <div className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent md:h-[500px] h-[600px] rounded-2xl flex flex-col md:pl-10 pl-5 justify-center space-y-5'>
                 <Image src={`/images/seep_logo.png`} width={100} height={100} alt='seep_logo'/>
                 <h1 className='md:text-4xl text-2xl  leading-relaxed md:w-[600px]'>A Non-Profit program for Student Entrepreneurs.</h1>
