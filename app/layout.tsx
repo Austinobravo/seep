@@ -3,6 +3,7 @@ import localFont from 'next/font/local'
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import ScrollButton from "@/components/ScrollUp";
 
 const satoshi = localFont({
   src:[
@@ -55,7 +56,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={satoshi.className}><Navbar/><div className="mt-28">{children}</div><Footer/></body>
+      <body className={satoshi.className}><Navbar/><div className="mt-28">{children}</div><Footer/><ScrollButton/></body>
     </html>
   );
 }

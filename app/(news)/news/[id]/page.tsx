@@ -2,6 +2,7 @@ import FadeInSection from '@/hooks/fadeIn'
 import { ExternalLink, Eye, Heart } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import RelatedNews from '../_components/RelatedNews'
 
 const contents = [
     {
@@ -38,57 +39,57 @@ const NewsDetail = () => {
             </div>    
         </FadeInSection> */}
         <FadeInSection direction={`up`}>  
-            <Image src={`/images/discovertech.jpg`} width={500} height={500} alt='detail' className='rounded-2xl w-full h-[450px] object-cover'/>
+            <Image src={`/images/discovertech.jpg`} width={500} height={500} alt='detail' className='rounded-2xl w-full h-[450px] object-cover opacity-80'/>
         </FadeInSection> 
-        <h3 className='text-center seep-text-color text-3xl font-semibold'>Future Technology blog</h3>
-        <div>
-            <section>
+        <h3 className='text-center seep-text-color md:text-3xl text-2xl font-semibold'>Future Technology blog</h3>
+        <div className='flex gap-10 pt-10 md:flex-row flex-col-reverse'>
+            <section className='basis-3/4'>
                 {contents.map((content) => (
-                    <div key={content.heading} className='seep-text-color'>
-                        <h3 className='text-2xl'>{content.heading}</h3>
-                        <p className='opacity-70'>{content.content}</p>
+                    <div key={content.heading} className='seep-text-color space-y-3 pb-5'>
+                        <h3 className='md:text-3xl text-2xl'>{content.heading}</h3>
+                        <p className='opacity-70 md:text-base text-sm'>{content.content}</p>
                     </div>
                 ))}
 
             </section>
-            <aside>
-                <div>
-                    <div>
+            <aside className='basis-1/4 space-y-7'>
+                <div className='flex justify-between seep-text-color gap-3'>
+                    <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-4 items-center'>
                         <Heart/>
                         <span>24.5k</span>
                     </div>
-                    <div>
+                    <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-4 items-center'>
                         <Eye/>
                         <span>50k</span>
                     </div>
-                    <div>
+                    <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-4 items-center'>
                         <ExternalLink/>
                         <span>206</span>
                     </div>
                 </div>
-                <div>
+                <div className='grid grid-cols-2 seep-text-color gap-y-4 '>
                     <div>
-                        <h3>Publication Date</h3>
-                        <p>October 15, 2024</p>
+                        <h3 className='font-bold'>Publication Date</h3>
+                        <p className='opacity-70 pt-1'>October 15, 2024</p>
                     </div>
                     <div>
-                        <h3>Category</h3>
-                        <p>Artificial Intelligence</p>
+                        <h3 className='font-bold'>Category</h3>
+                        <p className='opacity-70 pt-1'>Artificial Intelligence</p>
                     </div>
                     <div>
-                        <h3>Reading Time</h3>
-                        <p>10 Min</p>
+                        <h3 className='font-bold'>Reading Time</h3>
+                        <p className='opacity-70 pt-1'>10 Min</p>
                     </div>
                     <div>
-                        <h3>Author Name</h3>
-                        <p>Emily Walker</p>
+                        <h3 className='font-bold'>Author Name</h3>
+                        <p className='opacity-70 pt-1'>Emily Walker</p>
                     </div>
                 </div>
-                <div>
-                    <h3>Table of Contents</h3>
-                    <ul>
+                <div className='space-y-3'>
+                    <h3 className='text-amber-500 font-semibold'>Table of Contents</h3>
+                    <ul className='bg-blue-100 rounded-lg p-7 space-y-3 seep-text-color text-sm'>
                         {contents.map((content) => (
-                            <li key={content.heading} className='marker:text-blue-500 list-disc'>
+                            <li key={content.heading} className='marker:text-blue-500 list-disc cursor-pointer'>
                                 {content.heading}
                             </li>
                         ))}
@@ -97,6 +98,7 @@ const NewsDetail = () => {
 
             </aside>
         </div>
+        <RelatedNews/>
 
     </section>
   )
