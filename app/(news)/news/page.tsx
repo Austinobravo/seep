@@ -1,6 +1,9 @@
 import React from 'react'
 import NewsHero from './_components/NewsHero'
 import Counter from '@/components/Counter'
+import NewsCategories from './_components/NewsCategories'
+import Discover from './_components/Discover'
+import Beneficiaries from '@/app/(seep)/seep/_components/Beneficiaries'
 
 const Text= [
   {
@@ -21,6 +24,9 @@ const page = () => {
     <div>
         <NewsHero/>
         <Counter Text={Text}/>
+        <NewsCategories/>
+        <Discover/>
+        <Beneficiaries/>
       
     </div>
   )
