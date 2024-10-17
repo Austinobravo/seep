@@ -1,8 +1,10 @@
+"use client"
 import FadeInSection from '@/hooks/fadeIn'
 import { ExternalLink, Eye, Heart } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
 import RelatedNews from '../_components/RelatedNews'
+import handleIdScroll from '@/hooks/handleIdScroll'
 
 const contents = [
     {
@@ -45,14 +47,14 @@ const NewsDetail = () => {
         <div className='flex gap-10 pt-10 md:flex-row flex-col-reverse'>
             <section className='basis-3/4'>
                 {contents.map((content) => (
-                    <div key={content.heading} className='seep-text-color space-y-3 pb-5'>
+                    <div key={content.heading} id={content.heading} className='seep-text-color space-y-3 pb-5'>
                         <h3 className='md:text-3xl text-2xl'>{content.heading}</h3>
-                        <p className='opacity-70 md:text-base text-sm'>{content.content}</p>
+                        <p className='opacity-70 md:text-base text-sm'>{content.content} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad accusantium facere id eveniet minima tempore, saepe rerum laborum nulla, laudantium voluptate, nobis accusamus ex cumque eum. Totam laborum nostrum quia?</p>
                     </div>
                 ))}
 
             </section>
-            <aside className='basis-1/4 space-y-7'>
+            <aside className='basis-1/4 space-y-7 md:sticky top-24 h-fit'>
                 <div className='flex justify-between seep-text-color gap-3'>
                     <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-4 items-center'>
                         <Heart/>
@@ -89,7 +91,7 @@ const NewsDetail = () => {
                     <h3 className='text-amber-500 font-semibold'>Table of Contents</h3>
                     <ul className='bg-blue-100 rounded-lg p-7 space-y-3 seep-text-color text-sm'>
                         {contents.map((content) => (
-                            <li key={content.heading} className='marker:text-blue-500 list-disc cursor-pointer'>
+                            <li key={content.heading} onClick={()=>handleIdScroll(content.heading)} className='marker:text-blue-500 list-disc cursor-pointer'>
                                 {content.heading}
                             </li>
                         ))}
