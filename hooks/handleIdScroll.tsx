@@ -15,7 +15,7 @@ const handleIdScroll = (id:string) => {
         }
 
     }else{
-        console.log("ID can not be reached", id)
+        // console.log("ID can not be reached", id)
         window.scrollTo({
             top: 0,
             behavior: "smooth"
