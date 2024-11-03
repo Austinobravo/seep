@@ -36,7 +36,7 @@ export async function POST (req:Request, res: Response){
     const slugged_title = slug(title)
     
     try{
-        await prisma.$transaction(async (newPrisma) => {
+        await prisma.$transaction(async (newPrisma:any) => {
             // Save the image file
             const buffer = Buffer.from(await file.arrayBuffer());
             await fs.writeFile(filePath, buffer as any);
