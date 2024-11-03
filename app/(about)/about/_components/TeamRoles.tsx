@@ -59,66 +59,7 @@ const team = [
         role: ' Digital Content Creator',
         description: 'An enthuisiatic Leader and a Digital Content Creator'
     },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/olamilekan.png',
-        name: 'Olamilekan E.B',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/victory.png',
-        name: 'Victory Edeke',
-        role: 'Project Lead',
-        description: 'An enthuisiatic Leader Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia dignissimos incidunt quod laboriosam eveniet rerum magnam at modi ad minima eaque facilis quos aperiam deleniti, sequi ut dolorem iusto obcaecati!'
-    },
-    {
-        image: '/images/avatar.webp',
-        name: 'Emmanuel Kingston',
-        role: 'Project Lead II',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/deborah.png',
-        name: 'Deborah Ekerebi',
-        role: 'Secretary',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/avatar.webp',
-        name: 'Saviour Bassey',
-        role: 'Logistics',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/olamilekan.png',
-        name: 'Olamilekan E.B',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
-    {
-        image: '/images/ohakam.png',
-        name: 'Ohakam D.C Last',
-        role: 'Role',
-        description: 'An enthuisiatic Leader'
-    },
+   
 
 ]
 const TeamRoles = () => {
@@ -157,7 +98,7 @@ const TeamRoles = () => {
                     <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
                             <Image src={member.image} width={500} height={100} alt={member.name} className=' object-cover mx-auto rounded-md h-72 shadow-md object-top'/>
-                            {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
+                            {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
                         </div> 
                         <div className='py-5 space-y-1 break-all text-center'>
                             <h3 className='lg:text-xl text-lg font-bold '>{member.name}</h3>

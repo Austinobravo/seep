@@ -27,6 +27,8 @@ import { Textarea } from "@/components/ui/textarea"
 import Image from "next/image"
 import React from "react"
 import axios from "axios"
+import { toast } from "sonner"
+import { Loader2 } from "lucide-react"
 
 const AcceptedImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
  
@@ -37,7 +39,11 @@ const formSchema = z.object({
   category: z.string().min(2, {
     message: "Title must be at least 2 characters.",
   }),
-  image: z.instanceof(FileList).refine((files) => files?.length > 0, {message: "Image is required"}).refine((files) => files?.[0]?.size <= 1024 * 1024 * 5, {message: "File max size is 5MB"}).refine((files) => AcceptedImageTypes.includes(files?.[0].type), {message: "Only jpg, png, webp, gif accepted"}), 
+  image: typeof window !== "undefined"
+  ?
+  z.instanceof(FileList).refine((files) => files?.length > 0, {message: "Image is required"}).refine((files) => files?.[0]?.size <= 1024 * 1024 * 5, {message: "File max size is 5MB"}).refine((files) => AcceptedImageTypes.includes(files?.[0].type), {message: "Only jpg, png, webp, gif accepted"})
+  :
+  z.any().refine((files) => files?.length > 0, {message: "Image is required"}).refine((files) => files?.[0]?.size <= 1024 * 1024 * 5, {message: "File max size is 5MB"}).refine((files) => AcceptedImageTypes.includes(files?.[0].type), {message: "Only jpg, png, webp, gif accepted"}), 
   contents: z.array(
       z.object(
         {
@@ -72,9 +78,6 @@ const AddNewsPage = () => {
  
   // 2. Define a submit handler.
   async function onSubmit (values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
     const formData = new FormData()
     formData.append('title', values.title)
     formData.append('category', values.category)
@@ -87,9 +90,11 @@ const AddNewsPage = () => {
           {"Content-Type": "multipart/form-data"}
         }
       )
-      console.log("data", response)
+      toast(`${response.data.message}`)
+      form.reset()
     }
-    catch(error){
+    catch(error:any){
+      toast(`${error.response.data.message}`)
       console.error("Error", error)
     }
   }
@@ -98,6 +103,8 @@ const AddNewsPage = () => {
     control: form.control,
     name: "contents"
   })
+
+  const isSubmitting = form.formState.isSubmitting
 
   // const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
   //   // @ts-ignore
@@ -234,7 +241,7 @@ const AddNewsPage = () => {
                 <button type="button" className="border w-full seep-bg-color text-white  shadow p-2 cursor-pointer " onClick={()=> append({heading: "", paragraph: ""})}>Add option</button>
               </div>
             </div>
-            <Button type="submit">Submit</Button>
+            <Button type="submit" className="disabled:cursor-not-allowed " disabled={isSubmitting}>{isSubmitting ? <span className="w-fit mx-auto"><Loader2 className="animate-spin"/></span> : "Submit"}</Button>
           </form>
         </Form>
       

@@ -16,7 +16,7 @@ const categories = [
     {
         heading: "Testimonials",
         shorten_desc: "Impact",
-        description: "Over 50 beneficials yearly"
+        description: "Over 50 beneficiaries yearly"
     },
 
 ]
