@@ -35,6 +35,8 @@ const ScrollButton = () => {
                 <ChevronUp color='white'/>
             </div>
         }
+        {/* ,source /home/benzkerp/nodevenv/seesupportcenter.org/20/bin/activate && 
+        https://www.namecheap.com/support/knowledgebase/article.aspx/1016/89/how-to-access-a-hosting-account-via-ssh/ */}
     </section>
   )
 }
