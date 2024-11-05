@@ -1,6 +1,7 @@
 'use client'
 import Button from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
+import handleIdScroll from '@/hooks/handleIdScroll'
 import { ArrowLeft, ArrowRight, Dot, X, ZoomIn } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
@@ -114,7 +115,7 @@ const Gallery = () => {
     }
   return (
     <section className='md:px-20 px-10 '>
-        <div>
+        <div id="seep_2019">
             <div className='seep-text-color text-center space-y-2 py-8'>
                 <blockquote className='opacity-90 md:text-3xl text-2xl font-bold'>“A flow of student entrepreneurs into the nigerian economy”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
@@ -146,19 +147,19 @@ const Gallery = () => {
             ))}
             <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndexof2019 > 0 && 
-                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2019}>
+                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={()=> {DecrementImagesOf2019(), handleIdScroll("seep_2019")}}>
                         <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndexof2019 < ImagesOf2019.length && 
-                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2019}>
+                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={()=> {IncrementImagesOf2019(), handleIdScroll("seep_2019")}}>
                         <ArrowRight/>
                     </div>
                 }
 
             </div>
         </div>
-        <div>
+        <div id='seep_2022'>
             <div className='seep-text-color text-center space-y-2 py-8'>
                 <blockquote className='opacity-90 text-3xl font-bold'>“Taking Tech to School”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
@@ -191,12 +192,12 @@ const Gallery = () => {
         </div>
         <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndexof2022 > 0 && 
-                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={DecrementImagesOf2022}>
+                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={()=> {DecrementImagesOf2022(), handleIdScroll("seep_2022")}}>
                         <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndexof2022 < ImagesOf2022.length && 
-                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImagesOf2022}>
+                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={()=> {IncrementImagesOf2022(), handleIdScroll("seep_2022")}}>
                         <ArrowRight/>
                     </div>
                 }

@@ -1,6 +1,7 @@
 'use client'
 import Button from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
+import handleIdScroll from '@/hooks/handleIdScroll'
 import { ArrowLeft, ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import React, { useEffect } from 'react'
@@ -86,7 +87,7 @@ const TeamRoles = () => {
     }
 
   return (
-    <section className='md:px-20 px-10 py-10'>
+    <section id='team' className='md:px-20 px-10 py-10'>
         <FadeInSection direction={`up`}>
             <div className='seep-text-color text-center space-y-2 pb-8'>
                 <h3 className='opacity-90 text-3xl font-bold'>Team Members</h3>
@@ -98,7 +99,7 @@ const TeamRoles = () => {
                     <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
                             <Image src={member.image} width={500} height={100} alt={member.name} className=' object-cover mx-auto rounded-md h-72 shadow-md object-top'/>
-                            {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
+                            {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in slide-in-from-bottom duration-500 bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
                         </div> 
                         <div className='py-5 space-y-1 break-all text-center'>
                             <h3 className='lg:text-xl text-lg font-bold '>{member.name}</h3>
@@ -110,12 +111,12 @@ const TeamRoles = () => {
             </div> 
             <div className='flex ml-auto items-center w-fit py-10 space-x-3 '>
                 {currentImageIndex > 0 && 
-                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={DecrementImages}>
+                    <div className='rounded-full cursor-pointer bg-amber-500 p-1  text-white' onClick={()=> {DecrementImages(), handleIdScroll("team")}}>
                         <ArrowLeft/>
                     </div>
                 }
                 {currentImageEndIndex < team.length  && 
-                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={IncrementImages}>
+                    <div className='ml-auto w-fit cursor-pointer rounded-full bg-amber-500 p-1  text-white' onClick={()=> {IncrementImages(), handleIdScroll("team")}}>
                         <ArrowRight/>
                     </div>
                 }
