@@ -31,7 +31,7 @@ const ContactDetails = () => {
             <div>
                 <h3 className='font-bold'>Location</h3>
                 <p className='seep-text-color'><span className='font-bold'>Head Office:</span> 13 Kenneth Nwaigwe Avenue, World Bank Estate Owerri, Imo State.</p>
-                <p className='seep-text-color'><span className='font-bold'>Uyo Office:</span> Uwem Lazarus Road, Osongoma Estate Extension Uyo, Akwa Ibom State.</p>
+                <p className='seep-text-color'><span className='font-bold'>Uyo Office:</span> Apostle Umana Building, Uwem Lazarus Road, Osongoma Estate Extension Uyo, Akwa Ibom State.</p>
             </div>
         </div>
         <div>

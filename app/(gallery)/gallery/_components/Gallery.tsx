@@ -120,7 +120,7 @@ const Gallery = () => {
                 <blockquote className='opacity-90 md:text-3xl text-2xl font-bold'>“A flow of student entrepreneurs into the nigerian economy”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
                     <Dot/>
-                    <p>SEEP 2019 Theme</p>
+                    <p>SEEP-innov8ion 2019</p>
                 </div>
             </div>
             {ImagesOf2019.slice(currentImageIndexof2019, currentImageEndIndexof2019).map((image, index)=> (
@@ -164,7 +164,7 @@ const Gallery = () => {
                 <blockquote className='opacity-90 text-3xl font-bold'>“Taking Tech to School”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
                     <Dot/>
-                    <p>SEEP 2022 Theme</p>
+                    <p>SEEP-Tech2School 2022</p>
                 </div>
             </div>  
             {ImagesOf2022.slice(currentImageIndexof2022, currentImageEndIndexof2022).map((image, index)=> (
