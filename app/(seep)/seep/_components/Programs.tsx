@@ -4,13 +4,13 @@ import React from 'react'
 const items = [
     {
         image: '/images/Frame 16.png',
-        heading: 'SEEP ( Student Enterpreneurial Empowerment Program)',
-        paragraph: 'The SEEP Project is a program of SEE-Support Center specially crafted for the academic environment to thread academics and entrepreneurship for a developed and sustainable Nigerian and Global economy. We are committed to Screening, Recruiting, Training, Mentoring, Networking, Empowering and Supervising Students and young entrepreneurs in Nigeria.'
+        heading: 'SEEP-Innov8ion',
+        paragraph: 'The SEEP-Innov8ion program is designed to run in tertiary institutions to support the innovative and creative ideas of student entrepreneurs. The program is committed to facilitating the birth and the nurture of innovative ideas in Nigerian tertiary institutions, making a profound impact on the global and Nigerian economy.'
     },
     {
         image: '/images/Frame 17.png',
-        heading: 'Tech 2 School',
-        paragraph: 'We reach out to different schools and partner with them to educate their students about the Tech, the Future industry, while providing them with mentorships, a community of like-minds and relevant resources to become self sufficient and relevant in the industry. We aim at developing tech skills in young people in order to enable them posses entrepreneurial power and empowerment for the Nigerian and global economy.'
+        heading: 'SEEP-Tech-2-School',
+        paragraph: 'We collaborate with secondary schools to introduce students to the tech industry and other emerging industries while providing mentorships, a community of like-minded people, and relevant resources to become self-sufficient and relevant in the industry. We aim to develop tech skills in young people and provide them with entrepreneurial opportunities, empowering them to solve social problems through innovation for the global and Nigerian economies.'
     },
 ]
 const Programs = () => {

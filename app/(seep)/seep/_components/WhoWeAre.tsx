@@ -7,14 +7,14 @@ import React from 'react'
 const items = [
     {
         heading: 'Who we are',
-        paragraph: 'SEEP is a program of SEE-Support Center crafted specially for the academic environment to thread academics and entrepreneurship for a developed and sustainable Nigeria and Global economy.',
+        paragraph: 'We are a team of talented and focused individuals who carry out programs and projects in the academic environment to foster a developed and sustainable global and Nigerian economy, by integrating academics and entrepreneurship.',
         path: '/about',
         buttonText: 'Learn More',
         image: '/images/Frame 13.png'
     },
     {
         heading: 'What we do',
-        paragraph: 'We thread academics and entrepreneurship for a developed and sustainable Nigerian and Global economy. We are committed to Screening, Recruiting, Training, Mentoring, Networking, Empowering and Supervising Students and young entrepreneurs in Nigeria.',
+        paragraph: 'We thread academics and entrepreneurship for a developed and sustainable global and Nigerian economy. We are committed to screening, recruiting, training, mentoring, networking, empowering and supervising students and young entrepreneurs in Nigeria. Our team of volunteers have launched two SEEP programs - “The SEEP-innov8ion” and “The SEEP-Tech-2-School” programs for tertiary institutions and secondary schools respectively.',
         path: '/about',
         buttonText: 'Learn More',
         image: '/images/Frame 14.png'
