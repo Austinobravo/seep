@@ -12,7 +12,7 @@ const TechToSchool = () => {
                 <blockquote className='opacity-90 text-3xl font-bold'>“Taking Tech to School”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
                     <Dot/>
-                    <p>SEEP 2022 Theme</p>
+                    <p>SEEP-Tech2School 2022</p>
                 </div>
             </div>  
         </FadeInSection>

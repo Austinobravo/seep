@@ -6,11 +6,11 @@ import React from 'react'
 const missionAndVision = [
     {
         title: 'Our Mission',
-        paragraph: 'Our mission is to provide a supporting platform to discover, nurture, and harness young potentials while leveraging Research, Innovation, Empowerment, Science and Technology for a productive, developed and sustainable Nigerian and Global Economy.'
+        paragraph: 'Our mission is to provide a supportive platform for discovering, nurturing, and harnessing young potential, leveraging research, innovation, empowerment, science, and technology to foster a productive, developed, and sustainable global and Nigerian economy.'
     },
     {
         title: 'Our Vision',
-        paragraph: 'Our Vision is to be a leading social enterprise to spearhead the producing and nurturing of Young-Business leaders who will emerge outstanding Entrepreneurs in making global impact by creating a paradigm shift for a sustainable Socio-economic development in Nigeria and Africa at large by following the trends and future destination of global economy.'
+        paragraph: 'Our Vision is to be a leading social enterprise that spearheads the production and nurturing of young business leaders who will emerge as outstanding Entrepreneurs in making significant global impacts by creating a paradigm shift towards sustainable socio-economic development in Africa and Nigeria while aligning with trends and future destinations of the global economy.'
     },
     {
         title: 'Our Mission',
@@ -41,7 +41,9 @@ const Mission = () => {
             <div className='w-full bg-cover md:bg-right-top bg-center h-[600px] rounded-2xl text-white' style={{backgroundImage: `url(/images/mission_2.png)`}}>
                 <div  className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent h-[600px] rounded-2xl flex flex-col md:pl-10 pl-5 md:justify-center justify-end pb-16 space-y-7'>
                     <h1 className='md:text-4xl text-3xl leading-relaxed md:w-[600px]'>Student Entrepreneurial Empowerment Program (SEEP)</h1>
-                    <p className=' md:w-[600px] md:text-base text-sm line-clamp-3 text-gray-200'>SEEP is an offshoot of the SEE-Support Center initiative designed to drive innovation and empowerment in the academic environment. The SEEP program is carefully crafted to thread academics and entrepreneurship for a developed and sustainable Nigerian, African and the Global economy. To create global impact, we are committed to Screening, Training, Mentoring, Networking, Empowering and Supervising Student Entrepreneurs in Nigeria.tThe SEEP program is driven in unity with the core drivers of the SEE-Support Center initiative. We are committed to creating a platform to birth and nurture innovative ideas that will greatly impact the global environment.</p>
+                    <p className=' md:w-[600px] md:text-base text-sm line-clamp-3 text-gray-200'>
+                        SEEP is an offshoot of the SEE-Support Center initiative, designed to drive innovation and empowerment in the academic environment. The SEEP program carefully integrates academics and entrepreneurship to foster a developed and sustainable Global, African, and Nigerian economy. We achieve this by screening, training, mentoring, networking, empowering, and supervising student entrepreneurs in Nigeria. 
+                        Aligning with the SEE-Support Center's core drivers, our mission is to create a platform that births and nurtures innovative ideas, making profound impacts on the global environment.</p>
                     <Button title='Learn More' icon={ArrowRight} path='/seep'/>
                 </div>
             </div>
