@@ -7,13 +7,13 @@ const Text = [
 
     {
         name: 'Our Vision',
-        paragraph: 'Our Vision is to be a leading social enterprise that spearheads the producing and nurturing of Young-Business leaders who will emerge as outstanding Entrepreneurs in making significant global impact by creating a paradigm shift for a sustainable Socio-economic development in Nigeria and Africa at large while following the trends and future destination of the global economy.',
+        paragraph: 'Our Vision is to be a leading social enterprise that spearheads the production and nurturing of young business leaders who will emerge as outstanding entrepreneurs in making significant global impacts by creating a paradigm shift towards sustainable socio-economic development in Africa and Nigeria while aligning with trends and future destinations of the global economy.',
         image: '/images/about_vision.png',
         swap: true
     },
     {
         name: 'Our Mission',
-        paragraph: 'Our mission is to provide a supporting platform to discover, nurture, and harness young potentials while leveraging Research, Innovation, Empowerment, Science and Technology for a productive, developed and sustainable Nigerian and Global Economy.',
+        paragraph: 'Our mission is to provide a supportive platform for discovering, nurturing, and harnessing young potential, leveraging research, innovation, empowerment, science, and technology to foster a productive, developed, and sustainable global and Nigerian economy.',
         image: '/images/about_mission.png',
         swap: false,
     },
@@ -22,7 +22,7 @@ const Text = [
 
 const Benefits =[
     {
-        name: 'A paradigm shift on the economy through leveraging business Networking, Research, Innovation, Empowerment, Science and Technology.  ',
+        name: 'A paradigm shift in the economy through leveraging business networking, research, innovation, empowerment, science and technology.',
         image: '/images/project1.png',
         swap: false
     },
@@ -71,7 +71,7 @@ const AboutText = () => {
             <div>
                 <div className='seep-text-color space-y-4'>
                     <h3 className='text-3xl'>About</h3>
-                    <p className='leading-relaxed pb-5 text-lg'>SEE- Support Center as a non-state actor is a social enterprise registered with CAC as Enterprise and Innovation Initiative RC:7485124 that tends to compliment the activities of the government to; research on, develop ideas and create a business network of entrepreneurs who will further create employment opportunities for Nigerians and other Africans to significantly reduce unemployment rate by the year 2023. We are leveraging and investing on Human Capacity Development, Research, Innovations, Science and Technology for a progressive and sustainable economy.</p>
+                    <p className='leading-relaxed pb-5 text-lg'>SEE- Support Center, as a non-state actor and a social enterprise is an arm of the Enterprise and Innovation Initiative (RC:7485124) that compliments the activities of the government to research, develop ideas and create a business network of entrepreneurs who will further create employment opportunities for Nigerians and other Africans to reduce unemployment rate by the year 2030 significantly. We leverage and invest in human capacity development, research, innovations, science and technology for a progressive and sustainable global and Nigerian economy.</p>
                 </div>
             </div>   
         </FadeInSection>

@@ -13,7 +13,7 @@ const team = [
         description: 'An enthuisiatic Leader Lorem ipsum dolor, sit amet consectetur adipisicing elit. Mollitia dignissimos incidunt quod laboriosam eveniet rerum magnam at modi ad minima eaque facilis quos aperiam deleniti, sequi ut dolorem iusto obcaecati!'
     },
     {
-        image: '/images/avatar.webp',
+        image: '/images/Emma.jpg',
         name: 'Emmanuel Kingston',
         role: 'Project Lead II',
         description: 'An enthuisiatic Leader'
@@ -25,7 +25,7 @@ const team = [
         description: 'An enthuisiatic Leader'
     },
     {
-        image: '/images/avatar.webp',
+        image: '/images/Saviour-Bassey.jpg',
         name: 'Saviour Bassey',
         role: 'Logistics',
         description: 'An enthuisiatic Leader'
@@ -98,7 +98,7 @@ const TeamRoles = () => {
                 {team.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
                     <div key={index} className='seep-text-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
-                            <Image src={member.image} width={500} height={100} alt={member.name} className=' object-cover mx-auto rounded-md h-72 shadow-md object-top'/>
+                            <Image src={member.image ? member.image : '/images/avatar.webp'} width={500} height={100} alt={member.name} className=' object-cover mx-auto rounded-md h-72 shadow-md object-top'/>
                             {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in slide-in-from-bottom duration-500 bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
                         </div> 
                         <div className='py-5 space-y-1 break-all text-center'>
