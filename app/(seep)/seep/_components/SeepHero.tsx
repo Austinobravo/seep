@@ -10,8 +10,8 @@ const SeepHero = () => {
   return (
     <section className='md:px-20 px-10'>
       <FadeInSection direction={`up`}>
-        <div className='bg-cover bg-no-repeat w-full md:bg-top bg-center h-[600px] rounded-2xl border text-white' style={{backgroundImage: `url(/images/seep_hero.png)`}}>
-            <div className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent h-[600px] rounded-2xl flex flex-col md:pl-10 pl-5 justify-center space-y-5'>
+        <div className='bg-cover bg-no-repeat w-full md:bg-top bg-center h-[670px] rounded-2xl border text-white' style={{backgroundImage: `url(/images/seep_hero.png)`}}>
+            <div className='bg-gradient-to-r from-[#0097FF] via-transparent to-transparent h-[670px] rounded-2xl flex flex-col md:pl-10 pl-5 justify-center space-y-5'>
                 <Image src={`/images/seep_logo.png`} width={100} height={100} alt='seep_logo'/>
                 <h1 className='md:text-4xl text-2xl  leading-relaxed md:w-[600px]'>A Non-Profit program for Student Entrepreneurs.</h1>
                 <p className={`md:w-[600px] md:text-base text-sm  text-gray-100  transition delay-150 duration-700 ease-in-out ${isViewed ? 'translate-y-4' : 'line-clamp-3 '}`}>

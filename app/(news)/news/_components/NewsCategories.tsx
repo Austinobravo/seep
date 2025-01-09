@@ -1,22 +1,26 @@
 import FadeInSection from '@/hooks/fadeIn'
 import { ArrowUpRight } from 'lucide-react'
+import Link from 'next/link'
 import React from 'react'
 
 const categories = [
     {
         heading: "Latest News",
         shorten_desc: "Stay current",
-        description: "Over 100 articles published monthly"
+        description: "Over 100 articles published monthly",
+        link: 'latest',
     },
     {
         heading: "Volunteers",
         shorten_desc: "Trusted insights",
-        description: "20+ volunteers on our team"
+        description: "20+ volunteers on our team",
+        link: 'join',
     },
     {
         heading: "Testimonials",
         shorten_desc: "Impact",
-        description: "Over 50 beneficiaries yearly"
+        description: "Over 50 beneficiaries yearly",
+        link: 'testimonials',
     },
 
 ]
@@ -27,7 +31,7 @@ const NewsCategories = () => {
         <FadeInSection direction={"up"}>
             <div className='grid md:grid-cols-3 grid-cols-1 gap-7'>
                 {categories.map((category) => (
-                    <div key={category.heading} className='bg-black/5 flex p-7 rounded-lg justify-between'>
+                    <Link href={`/news/${category.link}`} key={category.heading} className='bg-black/5 flex p-7 rounded-lg justify-between'>
                         <div className='seep-text-color'>
                             <h3 className='text-xl font-semibold'>{category.heading}</h3>
                             <span className='text-xs opacity-70'>{category.shorten_desc}</span>
@@ -40,7 +44,7 @@ const NewsCategories = () => {
                         </div>
 
 
-                    </div>
+                    </Link>
 
                 ))}
 
