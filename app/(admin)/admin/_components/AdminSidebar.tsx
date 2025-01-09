@@ -1,7 +1,7 @@
 "use client"
 import { useAdminNavigation } from '@/hooks/useAdminNavigation'
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { ChevronDown, ChevronUp, LogOut } from 'lucide-react'
+import { ChevronDown, ChevronUp, LogOut, PanelRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
@@ -10,6 +10,7 @@ const AdminSidebar = () => {
     const paths = useAdminNavigation()
     const [currentPath,  setCurrentPath] = React.useState<string>("")
     const [isCurrentPathToggled,  setIsCurrentPathToggled] = React.useState<boolean>(false)
+    const [isSidebarToggled,  setIsSidebarToggled] = React.useState<boolean>(false)
 
     const setCurrent = (value:string) => {
         setIsCurrentPathToggled(!isCurrentPathToggled)
@@ -17,7 +18,8 @@ const AdminSidebar = () => {
 
     }
   return (
-        <section className='space-y-3 py-4  bg-blue-100 h-screen pt-10 relative'>
+    <div className='flex'>
+        <section className={`sm:block ${isSidebarToggled ? '' : "hidden"} space-y-3 py-4  bg-blue-100 h-screen pt-10 relative`}>
             <div className='flex flex-col items-center justify-center pb-7'>
                 <Image src={`/images/avatar.webp`} width={500} height={500} alt='avatar' className='size-20'/>
                 <h3 className='pt-2 pb-1 font-semibold'>Nwankwo Joy - (Editor)</h3>
@@ -32,8 +34,8 @@ const AdminSidebar = () => {
                             <div key={path.name} className={`flex flex-col ${path.active && "seep-bg-color rounded-lg !text-white mx-2"} seep-text-color `}>
                                 <div className={`flex items-center gap-2 px-4`}>
                                     <Icon className={`${path.active && "text-white" } text-black size-6 `}/>
-                                    <Link href={path.href} className='flex items-center justify-between w-full' onClick={(event)=> {path.children && event.preventDefault(), setCurrent(path.name)}}>
-                                        <span className='py-1'>{path.name}</span>
+                                    <Link href={`/admin/${path.href}`} className='flex items-center justify-between w-full' onClick={(event)=> {path.children && event.preventDefault(), setCurrent(path.name)}}>
+                                        <span className='py-1 text-sm'>{path.name}</span>
                                         {path.children && path.children && 
                                             <div>
                                                 {isCurrentPathToggled && currentPath === path.name ?
@@ -74,6 +76,11 @@ const AdminSidebar = () => {
             </div>
 
         </section>
+
+        <section className='sm:hidden'>
+            <PanelRight onClick={() => setIsSidebarToggled(!isSidebarToggled)}/>
+        </section>
+    </div>
     
   )
 }
