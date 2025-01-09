@@ -32,7 +32,7 @@ const contents = [
 ]
 const RelatedNews = () => {
   return (
-    <section className='space-y-7 py-5 md:px-20 px-10'>
+    <section className='space-y-7 py-5 md:px-20 px-3'>
         <div className='bg-gray-100 shadow-md flex justify-between py-3 md:text-xl text-base px-2 seep-text-color rounded-lg'>
             <h3 className=''>Related News</h3>
             <Link href={``} className='flex'>View All News <ArrowUpRight className='text-amber-500 pl-1'/></Link>
@@ -46,18 +46,18 @@ const RelatedNews = () => {
                         <h3 className='font-bold'>{content.heading}</h3>
                         <p className='opacity-70'>{content.category}</p>
                     </div>
-                    <div className='flex justify-between seep-text-color gap-3 py-4 '>
-                        <div className='flex gap-1 bg-blue-200 text-sm rounded-full w-fit py-2 px-4 items-center'>
-                            <Heart/>
+                    <div className='flex justify-between seep-text-color gap-x-3 py-4 '>
+                        <div className='flex gap-1 bg-blue-200  rounded-full  w-fit h-9 px-1  text-sm items-center'>
+                            <Heart size={15}/>
                             <span>24.5k</span>
                         </div>
-                        <div className='flex gap-1 bg-blue-200 text-sm rounded-full py-2 px-4 items-center'>
-                            <ExternalLink/>
+                        <div className='flex gap-1 bg-blue-200 text-sm rounded-full w-fit h-9 px-1 items-center'>
+                            <ExternalLink size={15}/>
                             <span>60</span>
                         </div>
-                        <Link href={``} className='flex bg-blue-200 w-fit text-sm rounded-full px-4 py-2 items-center'>
+                        <Link href={``} className='flex bg-blue-200  text-sm rounded-full w-fit h-9 px-1 items-center'>
                             <span>Read More</span>
-                            <ArrowUpRight className='text-amber-500'/>
+                            <ArrowUpRight size={15} className='text-amber-500'/>
                         </Link>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 // import { faDashboard, faPodcast } from "@fortawesome/free-solid-svg-icons"
 import { usePathname } from "next/navigation"
-import {  House, Inbox, LayoutPanelTop, Lock, LucideIcon, NotebookPen, PanelsTopLeft, User, UserRoundPen} from 'lucide-react'
+import {  House, Inbox, Lock, LucideIcon, NotebookPen, PanelsTopLeft, User, UserRoundPen} from 'lucide-react'
 import React from "react"
 
 type navLinksTypes = ({

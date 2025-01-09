@@ -188,18 +188,18 @@ const RelatedNewsCard = () => {
                                 </div>
                                 <div className='flex justify-between'>
                                     <div className='flex justify-between seep-text-color gap-3'>
-                                        <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-3 items-center'>
+                                        <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
                                             <Heart/>
                                             <span>24.5k</span>
                                         </div>
 
-                                        <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-3 items-center'>
+                                        <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
                                             <ExternalLink/>
                                             <span>206</span>
                                         </div>
                                         
                                     </div>
-                                    <Link href={``} className='flex seep-text-color bg-blue-200 w-fit text-sm rounded-full px-3 py-2 items-center'>
+                                    <Link href={``} className='flex seep-text-color bg-blue-200 text-sm rounded-full w-fit h-9 px-1 items-center'>
                                         <span>Read More</span>
                                         <ArrowUpRight className=''/>
                                     </Link>
