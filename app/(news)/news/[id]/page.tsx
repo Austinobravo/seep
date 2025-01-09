@@ -36,7 +36,7 @@ const contents = [
 const NewsDetail = () => {
   return (
     <>
-    <section className='md:px-20 px-10 space-y-5'>
+    <section className='md:px-20 px-8 space-y-5'>
         {/* <FadeInSection direction={`up`}>
             <div className='w-full bg-cover md:bg-right-top bg-center  rounded-2xl text-white' style={{backgroundImage: `url(/images/discovertech.jpg)`}}>
             </div>    
@@ -57,15 +57,15 @@ const NewsDetail = () => {
             </section>
             <aside className='basis-1/4 space-y-7 md:sticky top-24 h-fit'>
                 <div className='flex justify-between seep-text-color gap-3'>
-                    <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-4 items-center'>
+                    <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
                         <Heart/>
                         <span>24.5k</span>
                     </div>
-                    <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-4 items-center'>
+                    <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
                         <Eye/>
                         <span>50k</span>
                     </div>
-                    <div className='flex gap-1 bg-blue-200 rounded-full py-2 px-4 items-center'>
+                    <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
                         <ExternalLink/>
                         <span>206</span>
                     </div>
