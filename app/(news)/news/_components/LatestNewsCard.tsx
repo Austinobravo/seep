@@ -10,7 +10,7 @@ const LatestNewsCard = () => {
         {[1,2,3,4].map((item) => (
             <div key={item} className='flex justify-between lg:flex-row flex-col-reverse gap-x-10 gap-y-7 p-4 border border-blue-500 shadow w-fit'>
                 <div className='basis-3/4 '>
-                    <div className='flex gap-5 items-center text-gray-600 sm:text-sm text-xs'>
+                    <div className='flex gap-5 items-center text-gray-600 sm:text-sm text-xs flex-wrap'>
                         <Image src={`/images/avatar.webp`} width={200} height={200} alt='' className='w-10 h-10 rounded-full'/>
                         <h3>Nwankwo Joy</h3>
                         <span>4 days ago</span>
@@ -20,7 +20,7 @@ const LatestNewsCard = () => {
                         <p className='text-gray-600 sm:text-base text-xs'>An intense way to learn about the process and practice your designs skills — My 1st hackathon Hackathons have been on my mind since I heard it was a good way to gain experience as a junior UX designer. As my portfolio...</p>
                     </div>
                     <div className='flex justify-between flex-wrap gap-4'>
-                        <div className='flex justify-between seep-text-color gap-3 '>
+                        <div className='flex justify-between seep-text-color flex-wrap gap-3 '>
                             <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-1 items-center'>
                                 <Heart/>
                                 <span>24.5k</span>
