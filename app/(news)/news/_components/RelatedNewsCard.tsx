@@ -186,8 +186,8 @@ const RelatedNewsCard = () => {
                                     <h4 className='font-semibold'>{cat.title}</h4>
                                     <h5 className='font-light opacity-80'>{category.name} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa accusamus in veniam voluptatem itaque, consectetur, quam totam eligendi fugit magnam ror....</h5>
                                 </div>
-                                <div className='flex justify-between'>
-                                    <div className='flex justify-between seep-text-color gap-3'>
+                                <div className='flex justify-between flex-wrap gap-y-3'>
+                                    <div className='flex justify-between seep-text-color gap-3 flex-wrap '>
                                         <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
                                             <Heart/>
                                             <span>24.5k</span>

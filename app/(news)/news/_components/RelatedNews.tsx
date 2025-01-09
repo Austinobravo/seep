@@ -46,7 +46,7 @@ const RelatedNews = () => {
                         <h3 className='font-bold'>{content.heading}</h3>
                         <p className='opacity-70'>{content.category}</p>
                     </div>
-                    <div className='flex justify-between seep-text-color gap-x-3 py-4 '>
+                    <div className='flex justify-between seep-text-color gap-3 py-4 flex-wrap'>
                         <div className='flex gap-1 bg-blue-200  rounded-full  w-fit h-9 px-1  text-sm items-center'>
                             <Heart size={15}/>
                             <span>24.5k</span>
