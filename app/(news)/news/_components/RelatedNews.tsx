@@ -32,13 +32,13 @@ const contents = [
 ]
 const RelatedNews = () => {
   return (
-    <section className='space-y-7 py-5'>
+    <section className='space-y-7 py-5 md:px-20 px-10'>
         <div className='bg-gray-100 shadow-md flex justify-between py-3 md:text-xl text-base px-2 seep-text-color rounded-lg'>
             <h3 className=''>Related News</h3>
             <Link href={``} className='flex'>View All News <ArrowUpRight className='text-amber-500 pl-1'/></Link>
         </div>
 
-        <div className='grid md:grid-cols-3 grid-cols-1 gap-7'>
+        <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
             {contents.map((content) => (
                 <div key={content.heading} className='shadow-2xl bg-gray-100 p-4 rounded-lg seep-text-color space-y-3'>
                     <Image src={content.image} width={500} height={500} alt={content.heading} className='object-cover h-40'/>

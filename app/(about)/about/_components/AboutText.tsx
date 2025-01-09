@@ -32,12 +32,12 @@ const Benefits =[
         swap: true
     },
     {
-        name: 'Economic sustenance, Revenue generation, Market Nigeria, Africa and the Global environment.',
+        name: 'Economic sustenance, revenue generation, market for Nigeria, Africa and the Global environment.',
         image: '/images/project3.png',
         swap: false
     },
     {
-        name: 'Emergence of Start-up.',
+        name: 'Emergence of Start-ups.',
         image: '/images/project4.png',
         swap: true
     },
@@ -47,12 +47,12 @@ const Benefits =[
         swap: false
     },
     {
-        name: 'Revenue generation through venture capitalism and royalties',
+        name: 'Revenue generation through venture capitalism and royalties.',
         image: '/images/project6.png',
         swap: true
     },
     {
-        name: 'Opportunity to earn while learning in the industry',
+        name: 'Opportunity to earn while learning in the industry.',
         image: '/images/project7.png',
         swap: false
     },

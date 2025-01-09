@@ -35,7 +35,8 @@ const contents = [
 ]
 const NewsDetail = () => {
   return (
-    <section className='md:px-16 px-8 space-y-5'>
+    <>
+    <section className='md:px-20 px-10 space-y-5'>
         {/* <FadeInSection direction={`up`}>
             <div className='w-full bg-cover md:bg-right-top bg-center  rounded-2xl text-white' style={{backgroundImage: `url(/images/discovertech.jpg)`}}>
             </div>    
@@ -100,9 +101,10 @@ const NewsDetail = () => {
 
             </aside>
         </div>
-        <RelatedNews/>
 
     </section>
+    <RelatedNews/>
+    </>
   )
 }
 
