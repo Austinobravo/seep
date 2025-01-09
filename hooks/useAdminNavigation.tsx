@@ -1,6 +1,6 @@
 // import { faDashboard, faPodcast } from "@fortawesome/free-solid-svg-icons"
 import { usePathname } from "next/navigation"
-import {  Inbox, LayoutPanelTop, Lock, LucideIcon, NotebookPen, User} from 'lucide-react'
+import {  House, Inbox, LayoutPanelTop, Lock, LucideIcon, NotebookPen, PanelsTopLeft, User, UserRoundPen} from 'lucide-react'
 import React from "react"
 
 type navLinksTypes = ({
@@ -26,15 +26,15 @@ export const useAdminNavigation = () => {
     const navLinks:navLinksTypes = React.useMemo(() => [
         {
             name: "Dashboard",
-            href: "/dashboard",
+            href: "",
             active: pathname === '/admin',
-            // icon: House
-            icon: User,
+            icon: House,
+            // icon: User,
             
         },
         {
             name: "Profile",
-            href: "/profile",
+            href: "profile",
             active: pathname.includes("/profile"),
             icon: User,
             
@@ -43,36 +43,35 @@ export const useAdminNavigation = () => {
             name: "Post",
             href: "/post",
             active: pathname.includes("/post"),
-            icon: LayoutPanelTop,
+            icon: PanelsTopLeft,
             
         },
         {
             name: "Categories",
-            href: "/categories",
-            active: pathname.includes("/categories"),
+            href: "category",
+            active: pathname.includes("/category"),
             icon: Inbox,
             
         },
         {
             name: "Privacy policy",
-            href: "/privacy-policy",
+            href: "privacy-policy",
             active: pathname.includes("/privacy-policy"),
             icon: Lock,
             
         },
         {
             name: "Terms & Conditions",
-            href: "/terms-and-conditions",
+            href: "terms-and-conditions",
             active: pathname.includes("/terms-and-conditions"),
             icon: NotebookPen,
             
         },
         {
             name: "Administrators",
-            href: "/admins",
+            href: "admins",
             active: pathname.includes("/admins"),
-            icon: NotebookPen,
-            // icon: UserRoundPen,
+            icon: UserRoundPen,
             
         },
         

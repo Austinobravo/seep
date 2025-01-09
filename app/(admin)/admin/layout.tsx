@@ -3,11 +3,11 @@ import AdminSidebar from './_components/AdminSidebar'
 
 const AdminLayout = ({children}: {children:React.ReactNode}) => {
   return (
-    <div className='flex -mt-28 h-screen'>
-        <aside className='w-52 sm:block hidden'>
+    <div className='flex -mt-28 h-screen gap-4'>
+        <aside className='w-60 '>
             <AdminSidebar/>
         </aside>
-        <div>
+        <div className='w-full'>
             {children}
         </div>
       
