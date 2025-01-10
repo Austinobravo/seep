@@ -56,7 +56,26 @@ html{
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
+
 }
+
+/* .PhoneInputCountry select{
+  width: 6rem;
+  height: 2rem;
+}
+.PhoneInputCountry img{
+  height: 2rem;
+}
+
+.PhoneInputCountry{
+  display: flex;
+  align-items: center;
+  margin: 0 2rem;
+}*/
+.PhoneInput input{
+  padding: 0.5rem 1rem;
+  outline: 0;
+} 
 
 
 
