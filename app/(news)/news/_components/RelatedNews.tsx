@@ -47,15 +47,15 @@ const RelatedNews = () => {
                         <p className='opacity-70'>{content.category}</p>
                     </div>
                     <div className='flex justify-between seep-text-color gap-3 py-4 flex-wrap'>
-                        <div className='flex gap-1 bg-blue-200  rounded-full  w-fit h-9 px-1  text-sm items-center'>
+                        <div className='flex gap-1 bg-blue-200  rounded-full  w-fit h-9 px-2 text-sm items-center'>
                             <Heart size={15}/>
                             <span>24.5k</span>
                         </div>
-                        <div className='flex gap-1 bg-blue-200 text-sm rounded-full w-fit h-9 px-1 items-center'>
+                        <div className='flex gap-1 bg-blue-200 text-sm rounded-full w-fit h-9 px-4 items-center'>
                             <ExternalLink size={15}/>
                             <span>60</span>
                         </div>
-                        <Link href={``} className='flex bg-blue-200  text-sm rounded-full w-fit h-9 px-1 items-center'>
+                        <Link href={``} className='flex bg-blue-200  text-sm rounded-full w-fit h-9 px-2 items-center'>
                             <span>Read More</span>
                             <ArrowUpRight size={15} className='text-amber-500'/>
                         </Link>

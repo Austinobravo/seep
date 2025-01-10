@@ -8,7 +8,7 @@ const LatestNewsCard = () => {
     <div className='md:px-20 px-10 space-y-10 py-10'>
         <span className='seep-text-color border py-2 px-4 font-semibold'>Latest News</span>
         {[1,2,3,4].map((item) => (
-            <div key={item} className='flex justify-between lg:flex-row flex-col-reverse gap-x-10 gap-y-7 p-4 border border-blue-500 shadow w-fit'>
+            <div key={item} className='flex justify-between lg:flex-row flex-col-reverse gap-x-10 gap-y-7 p-4 bg-gray-100 shadow-2xl rounded-md w-fit'>
                 <div className='basis-3/4 '>
                     <div className='flex gap-5 items-center text-gray-600 sm:text-sm text-xs flex-wrap'>
                         <Image src={`/images/avatar.webp`} width={200} height={200} alt='' className='w-10 h-10 rounded-full'/>
@@ -21,21 +21,21 @@ const LatestNewsCard = () => {
                     </div>
                     <div className='flex justify-between flex-wrap gap-4'>
                         <div className='flex justify-between seep-text-color flex-wrap gap-3 '>
-                            <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-1 items-center'>
+                            <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-2 items-center'>
                                 <Heart/>
                                 <span>24.5k</span>
                             </div>
-                            <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-1 items-center'>
+                            <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-2 items-center'>
                                 <Eye/>
                                 <span>50k</span>
                             </div>
-                            <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-1 items-center'>
+                            <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-2 items-center'>
                                 <ExternalLink/>
                                 <span>206</span>
                             </div>
                             
                         </div>
-                        <Link href={``} className='flex seep-text-color bg-blue-200 text-sm rounded-full text-sm w-fit h-9 px-1 items-center'>
+                        <Link href={``} className='flex seep-text-color bg-blue-200  rounded-full text-sm w-fit h-9 px-2 items-center'>
                             <span>Read More</span>
                             <ArrowUpRight className=''/>
                         </Link>
