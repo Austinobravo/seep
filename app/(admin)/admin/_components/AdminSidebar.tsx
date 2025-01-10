@@ -27,7 +27,7 @@ const AdminSidebar = () => {
             </div>
             <div>
                 <h4 className='pl-5 pb-2'>MENU</h4>
-                <div className='space-y-2'>
+                <div className='space-y-3'>
                     {paths.map((path) =>{
                         const Icon = path.icon
                         return (
