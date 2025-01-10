@@ -6,10 +6,10 @@ import React from 'react'
 const LatestNewsCard = () => {
   return (
     <div className='md:px-20 px-10 space-y-10 py-10'>
-        <span className='seep-text-color border py-2 px-4 font-semibold'>Latest News</span>
+        <span className='font-semibold seep-bg-color text-white px-4 py-2'>Latest News</span>
         {[1,2,3,4].map((item) => (
-            <div key={item} className='flex justify-between lg:flex-row flex-col-reverse gap-x-10 gap-y-7 p-4 bg-gray-100 shadow-2xl rounded-md w-fit'>
-                <div className='basis-2/4 flex justify-between  flex-col'>
+            <div key={item} className='flex justify-between lg:flex-row flex-col-reverse gap-x-10 gap-y-7 p-4 bg-gray-100 shadow-xl rounded-md w-fit'>
+                <div className='basis-3/4 flex justify-between  flex-col'>
                     <div className='flex gap-5 items-center text-gray-600 sm:text-sm text-xs flex-wrap'>
                         <Image src={`/images/avatar.webp`} width={200} height={200} alt='' className='w-10 h-10 rounded-full'/>
                         <h3>Nwankwo Joy</h3>

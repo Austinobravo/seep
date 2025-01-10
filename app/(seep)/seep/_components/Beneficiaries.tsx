@@ -29,6 +29,13 @@ const Beneficiaries = () => {
   const DecrementIndex = () => {
     setCurrentImageIndex((prev) => 0 === prev ? occasions.length -1 : prev - 1)
   }
+
+     React.useEffect(()=> {
+         const interval = setInterval(()=>{
+             return IncrementIndex()
+         },5000)
+         return ()=>clearInterval(interval)
+     }, [currentImageIndex])
   return (
     <section className='md:px-28 px-10 py-10 seep-text-color'>
       <FadeInSection direction={`up`}>
