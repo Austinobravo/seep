@@ -35,7 +35,7 @@ const RelatedNews = () => {
     <section className='space-y-7 py-5 md:px-20 px-3'>
         <div className='bg-gray-100 shadow-md flex justify-between py-3 md:text-xl text-base px-2 seep-text-color rounded-lg'>
             <h3 className=''>Related News</h3>
-            <Link href={``} className='flex'>View All News <ArrowUpRight className='text-amber-500 pl-1'/></Link>
+            <Link href={`/news/related`} className='flex'>View All News <ArrowUpRight className='text-amber-500 pl-1'/></Link>
         </div>
 
         <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
