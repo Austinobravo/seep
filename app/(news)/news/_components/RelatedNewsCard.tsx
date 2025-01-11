@@ -171,9 +171,9 @@ const RelatedNewsCard = () => {
         </div>
         <div className=''>
             {categories.map((category) => (
-                <div key={`${category.name}`} className='grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5'>
+                <div key={`${category.name}`} className={`category-content ${currentCategory === category.name ? 'active' : ''} grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 `}>
                     {currentCategory === category.name && category.content.map((cat, index) => (
-                        <div key={`${category.name}-${cat.title}-${index}`} className='border p-2 rounded-lg shadow'>
+                        <div key={`${category.name}-${cat.title}-${index}`} className='border p-2 rounded-lg shadow '>
                             <div style={{'backgroundImage': `url(${cat.image}`}} className='bg-center bg-cover h-40 w-full bg-no-repeat  items-end flex '>
                                 <div className='gap-2 text-white text-sm items-end flex bg-gradient-to-b from-transparent via-[#0097FF] to-[#0097FF] w-full p-2'>
                                     <Image src={`${cat.user_avatar}`} width={500} height={500} alt='detail' className='rounded-2xl w-10 h-10 shadow'/>

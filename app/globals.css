@@ -59,19 +59,6 @@ html{
 
 }
 
-/* .PhoneInputCountry select{
-  width: 6rem;
-  height: 2rem;
-}
-.PhoneInputCountry img{
-  height: 2rem;
-}
-
-.PhoneInputCountry{
-  display: flex;
-  align-items: center;
-  margin: 0 2rem;
-}*/
 .PhoneInput input{
   padding: 0.5rem 1rem;
   outline: 0;
@@ -119,6 +106,18 @@ html{
   opacity: 1;
   transform: translateY(0);
 }
+
+.category-content {
+  opacity: 0;
+  transform: scale(.5,.5);
+  transition: all 1s ease-in-out;
+}
+
+.category-content.active {
+  opacity: 1;
+  transform: scale(1,1);
+}
+
 
 @layer base {
   :root {
