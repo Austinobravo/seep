@@ -135,7 +135,7 @@ const NewsCategories = () => {
                 onMouseLeave={handleMouseUp}
 
                 style={{
-                    cursor: isDragging.current ? 'grabbing' : 'grab', // Change cursor based on drag state
+                    cursor: isDragging.current ? 'grabbing' : 'grab', 
                 }}
             >
                 {categories.map((category, index) => (
@@ -144,7 +144,7 @@ const NewsCategories = () => {
                         className="absolute w-80 sm:ml-44 md:ml-64 mx-auto"
                         style={getTransformStyle(index)}
                     >
-                        <div className="bg-gray-100 flex justify-between p-7 text-gray-100 h-40 mx-10 rounded-lg shadow-lg w-80">
+                        <div className="bg-gray-200 flex justify-between p-7 text-gray-100 h-44 mx-10 rounded-lg shadow-lg w-[17rem]">
                             <div className="text-gray-700">
                                 <h3 className="text-xl seep-text-color font-semibold">{category.heading}</h3>
                                 <span className="text-xs opacity-70">{category.shorten_desc}</span>
