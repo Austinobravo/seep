@@ -1,7 +1,7 @@
 "use client"
 
 import { TrendingUp } from "lucide-react"
-import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
 
 import {
   Card,
@@ -23,27 +23,40 @@ const chartData = [
   { month: "March", desktop: 237 },
   { month: "April", desktop: 73 },
   { month: "May", desktop: 209 },
-  { month: "June", desktop: 214 },
+  { month: "June", desktop: 240 },
+  { month: "August", desktop: 209 },
+  { month: "September", desktop: 14 },
+  { month: "October", desktop: 114 },
+  { month: "November", desktop: 224 },
+  { month: "December", desktop: 44 },
+  
 ]
 
 const chartConfig = {
   desktop: {
     label: "Desktop",
-    color: "hsl(var(--chart-1))",
+    // color: "hsl(var(--chart-1))",
+    color: "bg-gradient-to-b from-blue-500 to-black",
   },
 } satisfies ChartConfig
 
 export function DashboardBarChart() {
   return (
-    <Card>
+    <Card className="">
       <CardHeader>
-        <CardTitle>Bar Chart</CardTitle>
-        <CardDescription>January - June 2024</CardDescription>
+        <CardTitle className="">SITE VISITORS</CardTitle>
+        <CardDescription></CardDescription>
       </CardHeader>
       <CardContent>
         <ChartContainer config={chartConfig}>
           <BarChart accessibilityLayer data={chartData}>
             <CartesianGrid vertical={false} />
+            <YAxis
+                dataKey={`desktop`}
+                tickLine={false}
+                tickMargin={10}
+                axisLine={false}
+            />
             <XAxis
               dataKey="month"
               tickLine={false}
@@ -55,7 +68,8 @@ export function DashboardBarChart() {
               cursor={false}
               content={<ChartTooltipContent hideLabel />}
             />
-            <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} />
+            {/* <Bar dataKey="desktop" fill="var(--color-desktop)" radius={8} /> */}
+            <Bar dataKey="desktop" fill="#3b82f6" radius={10} />
           </BarChart>
         </ChartContainer>
       </CardContent>
@@ -64,7 +78,7 @@ export function DashboardBarChart() {
           Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
         </div>
         <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+          Showing total visitors for the 2024
         </div>
       </CardFooter>
     </Card>

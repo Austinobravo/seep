@@ -35,7 +35,7 @@ const LatestNewsCard = () => {
                             </div>
                             
                         </div>
-                        <Link href={``} className='flex seep-text-color bg-blue-200  rounded-full text-sm w-fit h-9 px-2 items-center'>
+                        <Link href={`/news/2`} className='flex seep-text-color bg-blue-200  rounded-full text-sm w-fit h-9 px-2 items-center'>
                             <span>Read More</span>
                             <ArrowUpRight className=''/>
                         </Link>
