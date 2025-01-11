@@ -55,7 +55,7 @@ const RelatedNews = () => {
                             <ExternalLink size={15}/>
                             <span>60</span>
                         </div>
-                        <Link href={``} className='flex bg-blue-200  text-sm rounded-full w-fit h-9 px-2 items-center'>
+                        <Link href={`/news/1`} className='flex bg-blue-200  text-sm rounded-full w-fit h-9 px-2 items-center'>
                             <span>Read More</span>
                             <ArrowUpRight size={15} className='text-amber-500'/>
                         </Link>

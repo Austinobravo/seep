@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { TrendingUp } from "lucide-react"
+import { Dot, TrendingUp } from "lucide-react"
 import { Label, Pie, PieChart } from "recharts"
 
 import {
@@ -114,11 +114,37 @@ export function DashboardPieChart() {
         </ChartContainer>
       </CardContent>
       <CardFooter className="flex-col gap-2 text-sm">
-        <div className="flex items-center gap-2 font-medium leading-none">
-          Trending up by 5.2% this month <TrendingUp className="h-4 w-4" />
-        </div>
-        <div className="leading-none text-muted-foreground">
-          Showing total visitors for the last 6 months
+        <div className="flex flex-wrap gap-3">
+            <div className="flex gap-1 items-center">
+                <div className="size-3 rounded-full" style={{background: `${chartConfig.chrome.color}`}}/>
+                <span>
+                    {chartConfig.chrome.label}
+                </span>
+            </div>
+            <div className="flex gap-1 items-center">
+                <div className="size-3 rounded-full" style={{background: `${chartConfig.edge.color}`}}/>
+                <span>
+                    {chartConfig.edge.label}
+                </span>
+            </div>
+            <div className="flex gap-1 items-center">
+                <div className="size-3 rounded-full" style={{background: `${chartConfig.safari.color}`}}/>
+                <span>
+                    {chartConfig.safari.label}
+                </span>
+            </div>
+            <div className="flex gap-1 items-center">
+                <div className="size-3 rounded-full" style={{background: `${chartConfig.firefox.color}`}}/>
+                <span>
+                    {chartConfig.firefox.label}
+                </span>
+            </div>
+            <div className="flex gap-1 items-center">
+                <div className="size-3 rounded-full" style={{background: `${chartConfig.other.color}`}}/>
+                <span>
+                    {chartConfig.other.label}
+                </span>
+            </div>
         </div>
       </CardFooter>
     </Card>
