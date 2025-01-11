@@ -20,7 +20,7 @@ const AdminSidebar = () => {
   return (
     <div className='flex'>
         <section className={`sm:block ${isSidebarToggled ? '' : "hidden"} space-y-3 py-4  bg-blue-100 !h-screen pt-10 relative`}>
-            <div className='flex flex-col items-center justify-center pb-7'>
+            <div className='flex flex-col items-center justify-center pb-7 text-center'>
                 <Image src={`/images/avatar.webp`} width={500} height={500} alt='avatar' className='size-20'/>
                 <h3 className='pt-2 pb-1 font-semibold'>Nwankwo Joy - (Editor)</h3>
                 <h4 className='text-sm'>Administrator</h4>
