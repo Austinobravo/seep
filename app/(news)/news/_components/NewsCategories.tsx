@@ -121,6 +121,10 @@ const NewsCategories = () => {
         };
     };
 
+    const handleCardClick = (index: number) => {
+        setCurrentIndex(index);
+      };
+
     return (
         <section className="relative max-w-screen-lg mx-auto">
             <h2 className="text-center seep-text-color text-2xl font-semibold pb-5">CATEGORIES</h2>
@@ -136,12 +140,13 @@ const NewsCategories = () => {
                 style={{
                     cursor: isDragging.current ? 'grabbing' : 'grab', 
                 }}
-            >
+                >
                 {categories.map((category, index) => (
                     <div
-                        key={category.heading}
-                        className="absolute w-80 sm:ml-44 md:ml-64 mx-auto"
-                        style={getTransformStyle(index)}
+                    key={category.heading}
+                    className="absolute w-80 sm:ml-44 md:ml-64 mx-auto"
+                    style={getTransformStyle(index)}
+                    onClick={() => handleCardClick(index)}
                     >
                         <div className="bg-gray-200 flex justify-between p-7 text-gray-100 h-44 mx-10 rounded-lg shadow-lg w-[17rem]">
                             <div className="text-gray-700">
