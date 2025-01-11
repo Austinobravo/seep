@@ -11,7 +11,7 @@ const contents= [
     percentage: '+6.08%',
     icon: TrendingUp,
     iconColor: '#000',
-    bgColor: '#ddd'
+    bgColor: 'bg-[#ddd]'
   },
   {
     title : 'Active Admin',
@@ -19,7 +19,7 @@ const contents= [
     percentage: '+6.08%',
     icon: TrendingUp,
     iconColor: '#14532d',
-    bgColor: '#D0FFE0'
+    bgColor: 'bg-[#D0FFE0]'
   },
   {
     title : 'Inactive Admin',
@@ -27,12 +27,12 @@ const contents= [
     percentage: '+6.08%',
     icon: TrendingDown,
     iconColor: '#7f1d1d',
-    bgColor: '#E6E6E6'
+    bgColor: 'bg-[#E6E6E6]'
   },
   {
     title : 'Blocked/Reported Admin',
     total: '2,318',
-    bgColor: '#FFD0D1'
+    bgColor: 'bg-[#FFD0D1]'
   },
 ]
 const AdminsPage = () => {

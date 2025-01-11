@@ -117,7 +117,7 @@ const NewsCategories = () => {
             opacity: offset === 0 ? 1 : 0.6,
             transformOrigin: 'center',
             scale: offset === 0 ? 1.3 : 1.1,
-            transition: 'transform , opacity 0.5s ease',
+            transition: 'transform, opacity 0.5s ease',
         };
     };
 
@@ -133,7 +133,6 @@ const NewsCategories = () => {
                 onMouseMove={handleMouseMove}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
-
                 style={{
                     cursor: isDragging.current ? 'grabbing' : 'grab', 
                 }}
