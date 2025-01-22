@@ -6,7 +6,7 @@ import React from 'react'
 const missionAndVision = [
     {
         title: 'Our Mission',
-        paragraph: 'Our mission is to provide a supportive platform for discovering, nurturing, and harnessing young potential, leveraging research, innovation, empowerment, science, and technology to foster a productive, developed, and sustainable global and Nigeria economy.'
+        paragraph: 'Our mission is to provide a supportive platform for discovering, nurturing, and harnessing young potential, leveraging research, innovation, empowerment, science, and technology to foster a productive, developed, and sustainable global and Nigerian economy.'
     },
     {
         title: 'Our Vision',
