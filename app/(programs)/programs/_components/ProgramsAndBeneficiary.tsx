@@ -8,12 +8,12 @@ const items = [
     {
         image: '/images/Frame 16.png',
         heading: 'SEEP ( Student Enterpreneurial Empowerment Program)',
-        paragraph: 'We aim at driving innovation and empowerment in the academic environment, by integrating academics and entrepreneurship to foster a developed and sustainable global and Nigerian economy.'
+        paragraph: 'We aim at driving innovation and empowerment in the academic environment, by integrating academics and entrepreneurship to foster a developed and sustainable global and Nigeria economy.'
     },
     {
         image: '/images/Frame 17.png',
         heading: 'SEEP-Tech-2-School',
-        paragraph: 'We collaborate with secondary schools to introduce students to the tech industry and other emerging industries while providing mentorships, a community of like-minded people, and relevant resources to become self-sufficient and relevant in the industry. We aim to develop tech skills in young people and provide them with entrepreneurial opportunities, empowering them to solve social problems through innovation for the global and Nigerian economies.'
+        paragraph: 'We collaborate with secondary schools to introduce students to the tech industry and other emerging industries while providing mentorships, a community of like-minded people, and relevant resources to become self-sufficient and relevant in the industry. We aim to develop tech skills in young people and provide them with entrepreneurial opportunities, empowering them to solve social problems through innovation for the global and Nigeria economies.'
     },
 ]
 const ProgramsAndBeneficiary = () => {
