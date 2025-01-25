@@ -5,6 +5,8 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollButton from "@/components/ScrollUp";
 import { Toaster } from "@/components/ui/sonner";
+import SessionClientProvider from "@/lib/clientSession";
+import { GeneralProvider } from "@/hooks/useContextHook";
 
 const satoshi = localFont({
   src:[
@@ -57,7 +59,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={satoshi.className}><Toaster/><Navbar/><div className="mt-28">{children}</div><Footer/><ScrollButton/></body>
+      <body className={satoshi.className}><GeneralProvider><SessionClientProvider><Toaster/><Navbar/><div className="mt-28">{children}</div><Footer/><ScrollButton/></SessionClientProvider></GeneralProvider></body>
     </html>
   );
 }

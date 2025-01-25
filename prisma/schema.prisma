@@ -14,11 +14,82 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model User {
+  id String @id @default(uuid())
+  username     String    @unique
+  email        String    @unique
+  password     String
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  roles        UserRole[]
+  category     Category[]
+
+
+}
+
+model Role {
+  id String @id @default(uuid())
+  name         String       @unique
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  users        UserRole[]
+  permissions  RolePermission[]
+
+
+}
+
+model Permission {
+  id String @id @default(uuid())
+  action       String       // Example: "POST_CREATE", "USER_DELETE"
+  description  String?
+  createdAt    DateTime     @default(now())
+  updatedAt    DateTime     @updatedAt
+  roles        RolePermission[]
+
+
+}
+
+model UserRole {
+  id String @id @default(uuid())
+  userId   String
+  roleId   String
+  user     User     @relation(fields: [userId], references: [id])
+  role     Role     @relation(fields: [roleId], references: [id])
+
+  @@unique([userId, roleId])
+}
+
+model RolePermission {
+  id String @id @default(uuid())
+  roleId       String
+  permissionId String
+  role         Role        @relation(fields: [roleId], references: [id])
+  permission   Permission  @relation(fields: [permissionId], references: [id])
+
+  @@unique([roleId, permissionId])
+}
+
+model Category{
+  id String @id @default(uuid())
+  name String @unique
+  slug String?
+  description String?
+
+  userId String
+  user User @relation(fields: [userId], references: [username], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  news News[]
+}
 model News{
   id String @id @default(uuid())
   title String
   image String
-  category String
+  categoryId String
+  category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
   slug String
   newsContent NewsContent[]
 

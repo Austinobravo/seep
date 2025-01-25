@@ -54,19 +54,34 @@ export const useAdminNavigation = () => {
             
         },
         {
-            name: "Privacy policy",
-            href: "privacy-policy",
-            active: pathname.includes("/privacy-policy"),
+            name: "Permissions",
+            href: "permissions",
+            active: pathname.includes("/permissions"),
             icon: Lock,
             
         },
         {
-            name: "Terms & Conditions",
-            href: "terms-and-conditions",
-            active: pathname.includes("/terms-and-conditions"),
+            name: "Others",
+            href: "others",
+            active: pathname.includes("/others"),
             icon: NotebookPen,
             
         },
+
+        // {
+        //     name: "Privacy policy",
+        //     href: "privacy-policy",
+        //     active: pathname.includes("/privacy-policy"),
+        //     icon: Lock,
+            
+        // },
+        // {
+        //     name: "Terms & Conditions",
+        //     href: "terms-and-conditions",
+        //     active: pathname.includes("/terms-and-conditions"),
+        //     icon: NotebookPen,
+            
+        // },
         {
             name: "Administrators",
             href: "admins",

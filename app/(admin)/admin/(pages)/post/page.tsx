@@ -2,11 +2,27 @@ import React from 'react'
 import AdminNav from '../_components/AdminNav'
 import { Edit, Trash2 } from 'lucide-react'
 import Image from 'next/image'
+import { Button } from '@/components/ui/button'
+import { CreatePost } from './_components/CreatePost'
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose
+} from "@/components/ui/dialog"
+
+
 
 const PostPage = () => {
   return (
     <div>
         <AdminNav title='Post' user='Joy'/>
+        <div className='py-3 ml-auto w-fit'>
+          <CreatePost/>
+        </div>
         <div className='grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 bg-blue-100 p-3 rounded-md'>
           {[1,2,3,4].map((item) => (
             <div  className='border p-2 rounded-lg shadow'>
@@ -36,7 +52,27 @@ const PostPage = () => {
                           </div>
                           <div className='flex ml-auto w-fit items-center gap-2'>
                             <Edit className='seep-text-color size-6 cursor-pointer'/>
-                            <Trash2 className='text-red-500 size-6 cursor-pointer'/>
+                            <Dialog>
+                                <DialogTrigger asChild>
+                                    <Trash2 className='text-red-500 size-6 cursor-pointer'/>
+                                </DialogTrigger>
+                                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                                <DialogHeader>
+                                    <DialogTitle>Delete this?</DialogTitle>
+                                    <DialogDescription>
+                                    This is a permanent action. Are you sure?
+                                    </DialogDescription>
+                                </DialogHeader>
+                                <div className='flex gap-5 w-fit ml-auto'>
+                                    <DialogClose>
+                                        Cancel
+                                    </DialogClose>
+                                    <Button type='button' variant={'destructive'} className='border-0'>Delete</Button>
+
+                                </div>
+                                </DialogContent>
+                                
+                            </Dialog>
                           </div>
                       </div>
 
