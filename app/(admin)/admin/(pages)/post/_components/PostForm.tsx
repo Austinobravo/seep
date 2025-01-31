@@ -29,43 +29,19 @@ import React from "react"
 import axios from "axios"
 import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
+import { modules } from "@/lib/globals"
+import ReactQuill from 'react-quill'
+import { newsFormSchema } from "@/lib/formSchema"
 
-const AcceptedImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
- 
-const formSchema = z.object({
-  title: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
-  category: z.string().min(2, {
-    message: "Title must be at least 2 characters.",
-  }),
-  image: typeof window !== "undefined"
-  ?
-  z.instanceof(FileList).refine((files) => files?.length > 0, {message: "Image is required"}).refine((files) => files?.[0]?.size <= 1024 * 1024 * 5, {message: "File max size is 5MB"}).refine((files) => AcceptedImageTypes.includes(files?.[0].type), {message: "Only jpg, png, webp, gif accepted"})
-  :
-  z.any().refine((files) => files?.length > 0, {message: "Image is required"}).refine((files) => files?.[0]?.size <= 1024 * 1024 * 5, {message: "File max size is 5MB"}).refine((files) => AcceptedImageTypes.includes(files?.[0].type), {message: "Only jpg, png, webp, gif accepted"}), 
-  contents: z.array(
-      z.object(
-        {
-        heading: z.string().min(2, {
-          message: "Heading must be at least 2 characters.",
-        }),
-        paragraph: z.string().min(2, {
-          message: "Paragraph must be at least 2 characters.",
-        }),
-        
-      }
-      )
-)
-})
- 
+
 const PostForm = () => {
   const [blogImage, setBlogImage] = React.useState< Blob | MediaSource | null>(null)
-   const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+   const form = useForm<z.infer<typeof newsFormSchema>>({
+    resolver: zodResolver(newsFormSchema),
     defaultValues: {
       title: "",
       category: "",
+      otherOptions: "",
       image: undefined,
       contents: [
         {
@@ -77,18 +53,20 @@ const PostForm = () => {
   })
  
   // 2. Define a submit handler.
-  async function onSubmit (values: z.infer<typeof formSchema>) {
+  async function onSubmit (values: z.infer<typeof newsFormSchema>) {
     const formData = new FormData()
     formData.append('title', values.title)
     formData.append('category', values.category)
     formData.append('image', values.image[0])
     formData.append('contents', JSON.stringify(values.contents))
+    formData.append('otherOptions', values.otherOptions)
+    
     try{
       const response = await axios.post('/api/news',formData,
-        {
-          headers:
-          {"Content-Type": "multipart/form-data"}
-        }
+        // {
+        //   headers:
+        //   {"Content-Type": "multipart/form-data"}
+        // }
       )
       toast(`${response.data.message}`)
       form.reset()
@@ -189,10 +167,11 @@ const PostForm = () => {
                 </FormItem>
               )}
             />
+            <hr/>
             <div>
               {fields.length ?
                 <>
-                  <h2 className="text-center font-medium text-2xl">Options Added</h2>
+                  <h2 className="text-center font-medium text-2xl">Add News heading and content</h2>
                   {fields.map((content, index) => (
                     <div key={content.id}>
                       <FormField
@@ -228,7 +207,7 @@ const PostForm = () => {
                         )}
                       />
                       <div className="flex justify-between my-4">
-                        <button type="button" className="border shadow p-2 cursor-pointer " onClick={()=> remove(index)}>Remove option</button>
+                        <button type="button" className="border w-full shadow p-2 cursor-pointer " onClick={()=> remove(index)}>Remove option</button>
                       </div>
     
                     </div>
@@ -237,11 +216,30 @@ const PostForm = () => {
                 :
                 <h2>No option selected</h2>
               }
+
               <div className="w-full">
                 <button type="button" className="border w-full seep-bg-color text-white  shadow p-2 cursor-pointer " onClick={()=> append({heading: "", paragraph: ""})}>Add option</button>
               </div>
             </div>
-            <Button type="submit" className="disabled:cursor-not-allowed " disabled={isSubmitting}>{isSubmitting ? <span className="w-fit mx-auto"><Loader2 className="animate-spin"/></span> : "Submit"}</Button>
+              <hr/>
+            <FormField
+              control={form.control}
+              name={`otherOptions`}
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-black">Choose to write a long news instead</FormLabel>
+                  <FormControl>
+                    <ReactQuill theme="snow" {...field} modules={modules} placeholder='Start writing...' className='bg-white'/>
+
+                  </FormControl>
+                  <FormDescription>
+                    Write a news without each own heading.
+                  </FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <Button type="submit" className="disabled:cursor-not-allowed w-full" disabled={isSubmitting}>{isSubmitting ? <span className="w-full mx-auto"><Loader2 className="animate-spin"/></span> : "Submit"}</Button>
           </form>
         </Form>
       

@@ -91,6 +91,7 @@ model News{
   category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
 
   slug String
+  otherOptions String? @db.Text
   newsContent NewsContent[]
 
   createdAt DateTime @default(now())
@@ -99,8 +100,9 @@ model News{
 
 model NewsContent {
   id String @id @default(uuid())
-  heading String
-  paragraph String
+  heading String?
+  paragraph String? @db.Text
+
 
   newsId String
   news News @relation(fields: [newsId], references: [id], onDelete: Cascade)

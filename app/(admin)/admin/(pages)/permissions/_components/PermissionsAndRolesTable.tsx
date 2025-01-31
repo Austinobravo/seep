@@ -155,7 +155,7 @@ export const columns: ColumnDef<CategoryType>[] = [
   },
 ]
 
-export default function CategoryTable({data}: {data: CategoryType[]}) {
+export default function PermissionsAndRolesTable({data}: {data: CategoryType[]}) {
 
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(

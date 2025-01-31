@@ -3,6 +3,7 @@ import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Facebook, Instagram, Twitter, Youtube } from 'lucide-react'
+import { usePathname } from 'next/navigation'
 
 const footerLinks = [
     [
@@ -67,8 +68,9 @@ const socialLinks = [
     },
 ]
 const Footer = () => {
+    const pathname = usePathname()
   return (
-    <section className={`seep-bg-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6`}>
+    <section className={`seep-bg-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6 ${pathname.includes('/admin') && 'hidden'}`}>
         <div className='space-y-2'>
             <Link href={`/`}>
                 <Image src={`/images/logo-white.png`} width={100} height={100} alt='logo'/> 

@@ -7,6 +7,7 @@ import ScrollButton from "@/components/ScrollUp";
 import { Toaster } from "@/components/ui/sonner";
 import SessionClientProvider from "@/lib/clientSession";
 import { GeneralProvider } from "@/hooks/useContextHook";
+import 'react-quill/dist/quill.snow.css';
 
 const satoshi = localFont({
   src:[
