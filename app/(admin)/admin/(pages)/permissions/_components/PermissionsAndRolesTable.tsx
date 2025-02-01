@@ -35,7 +35,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Link from "next/link"
-import { formatDate } from "@/lib/globals"
+import { formatDateToString } from "@/lib/globals"
 import {
     Dialog,
     DialogContent,
@@ -100,7 +100,7 @@ export const columns: ColumnDef<CategoryType>[] = [
     header: () => <div className="text-right">Created</div>,
     cell: ({ row }) => {
 
-      return <div className="text-right font-medium text-xs">Published at <span className="">{formatDate(row.getValue("createdAt"))}</span></div>
+      return <div className="text-right font-medium text-xs">Published at <span className="">{row.getValue("createdAt")}</span></div>
     },
   },
   {

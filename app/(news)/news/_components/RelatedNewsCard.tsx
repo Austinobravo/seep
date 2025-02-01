@@ -161,11 +161,11 @@ const categories = [
 ]
 const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
     const [currentCategory, setCurrentCategory] = React.useState<string>('innovation')
-    console.log("vv", categories)
   return (
     <div className='space-y-7 py-10 md:px-20 px-10'>
         <span className='font-semibold seep-bg-color text-white px-4 py-2'>Related News</span>
-
+        {categories.length >= 1 ?
+        <>
         <div className='flex flex-wrap items-center justify-center gap-x-7 gap-y-4'>
             {categories.map((category, index) => (
                 <button key={`${category.name}`} onClick={()=> setCurrentCategory(category.name)} type='button' className={`${currentCategory === category.name && 'seep-bg-color text-white border-0'} cursor-pointer py-1 px-5 rounded-md border-blue-500 border capitalize`}>{category.name}</button>
@@ -213,6 +213,13 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
                 </div>
             ))}
         </div>
+        </>
+        :
+        <figure className='mx-auto w-fit text-center'>
+            <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
+            <figcaption>No news yet.</figcaption>
+        </figure>
+        }
 
       
     </div>

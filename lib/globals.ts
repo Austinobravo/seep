@@ -84,6 +84,7 @@ export const createUniqueSlug = async (title: string) => {
 }
 
 export const formatDateToString = (date: any) => {
+    console.log('date', date)
     const formattedDate = formatDistanceToNow(parseISO(date), {addSuffix: true})
     return formattedDate
 }

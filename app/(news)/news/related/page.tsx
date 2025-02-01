@@ -6,7 +6,6 @@ import axios from 'axios'
 const RelatedNewsPage = async () => {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
   const categories:CategoryType[] = response.data
-  console.log("cat", categories)
   return (
     <div>
         <NewsHero/>

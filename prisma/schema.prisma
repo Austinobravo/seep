@@ -26,6 +26,8 @@ model User {
   roles        UserRole[]
   category     Category[]
   news         News[]
+  privacypolicy PrivacyPolicy[]
+  termsandconditions TermsAndConditions[]
 
 
 }
@@ -113,6 +115,30 @@ model NewsContent {
 
   newsId String
   news News @relation(fields: [newsId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+model PrivacyPolicy {
+  id String @id @default(uuid())
+  content String? @db.Text
+
+
+  userId String
+  user User @relation(fields: [userId], references: [username], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+model TermsAndConditions {
+  id String @id @default(uuid())
+  content String? @db.Text
+
+
+  userId String
+  user User @relation(fields: [userId], references: [username], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
