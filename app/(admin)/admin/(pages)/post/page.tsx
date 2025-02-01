@@ -13,19 +13,24 @@ import {
   DialogTrigger,
   DialogClose
 } from "@/components/ui/dialog"
+import axios from 'axios'
 
 
 
-const PostPage = () => {
+const PostPage = async () => {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+  const category = response.data
+  const postResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+  const posts:PostType[] = postResponse.data
   return (
     <div>
         <AdminNav title='Post' user='Joy'/>
         <div className='py-3 ml-auto w-fit'>
-          <CreatePost/>
+          <CreatePost category={category}/>
         </div>
         <div className='grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 bg-blue-100 p-3 rounded-md'>
-          {[1,2,3,4].map((item) => (
-            <div key={item} className='border p-2 rounded-lg shadow'>
+          {posts.map((item) => (
+            <div key={item.id} className='border p-2 rounded-lg shadow'>
                 <div style={{'backgroundImage': `url(/images/discovertech.jpg`}} className='bg-center bg-cover h-40 w-full bg-no-repeat  items-end flex '>
                     <div className='gap-2 text-white text-sm items-end flex bg-gradient-to-b from-transparent via-[#0097FF] to-[#0097FF] w-full p-2'>
                         <Image src={`/images/avatar.webp`} width={500} height={500} alt='detail' className='rounded-2xl w-10 h-10 shadow'/>

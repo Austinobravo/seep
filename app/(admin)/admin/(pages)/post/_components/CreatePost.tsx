@@ -2,7 +2,7 @@
 import * as React from "react"
 
 import { cn } from "@/lib/utils"
-import { useMediaQuery } from "@/hooks/use-media-query"
+import {useMediaQuery } from "@/hooks/use-media-query"
 import { Button } from "@/components/ui/button"
 import {
   Dialog,
@@ -26,7 +26,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import PostForm from "./PostForm"
 
-export function CreatePost() {
+export function CreatePost({category}: {category:CategoryType[]}) {
   const [open, setOpen] = React.useState(false)
   const isDesktop = useMediaQuery("(min-width: 768px)")
 
@@ -36,37 +36,37 @@ export function CreatePost() {
         <DialogTrigger asChild>
           <Button variant="outline" className="seep-bg-color text-white hover:text-black transition-all duration-500">Create Post</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto">
-          <DialogHeader>
-            {/* <DialogTitle>Add Post</DialogTitle> */}
-            {/* <DialogDescription>
-              Make changes to your profile here. Click save when you're done.
-            </DialogDescription> */}
+        <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
+          <DialogHeader className="!text-center">
+            <DialogTitle>Add News</DialogTitle>
+            <DialogDescription>
+            Make changes to your news here.
+            </DialogDescription>
           </DialogHeader>
-          <PostForm />
+          <PostForm  category={category}/>
         </DialogContent>
       </Dialog>
     )
   }
 
   return (
-    <Drawer open={open} onOpenChange={setOpen}>
+    <Drawer open={open} onOpenChange={setOpen} >
       <DrawerTrigger asChild>
         <Button variant="outline" className="seep-bg-color text-white hover:text-black transition-all duration-500">Create Post</Button>
       </DrawerTrigger>
-      <DrawerContent>
-        <DrawerHeader className="text-left">
-          <DrawerTitle>Edit profile</DrawerTitle>
+      <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
+        <div className="z-[51]">
+        <DrawerHeader className="!text-center">
+          <DrawerTitle>Add News</DrawerTitle>
           <DrawerDescription>
-            Make changes to your profile here. Click save when you're done.
+            Make changes to your news here.
           </DrawerDescription>
         </DrawerHeader>
-        <ProfileForm className="px-4" />
+        <PostForm category={category}/>
         <DrawerFooter className="pt-2">
-          <DrawerClose asChild>
-            <Button variant="outline">Cancel</Button>
-          </DrawerClose>
         </DrawerFooter>
+
+        </div>
       </DrawerContent>
     </Drawer>
   )

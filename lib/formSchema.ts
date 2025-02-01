@@ -7,6 +7,7 @@ export const LoginFormSchema = z.object({
   })
 
   const AcceptedImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/gif']
+  const MAX_FILE_SIZE = 1024 * 1024 * 5; //5MB
  
   export const newsFormSchema = z.object({
     title: z.string().min(2, {
@@ -17,10 +18,13 @@ export const LoginFormSchema = z.object({
     }).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     otherOptions: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     image: typeof window !== "undefined"
-    ?
-    z.instanceof(FileList).refine((files) => files?.length > 0, {message: "Image is required"}).refine((files) => files?.[0]?.size <= 1024 * 1024 * 5, {message: "File max size is 5MB"}).refine((files) => AcceptedImageTypes.includes(files?.[0].type), {message: "Only jpg, png, webp, gif accepted"})
-    :
-    z.any().refine((files) => files?.length > 0, {message: "Image is required"}).refine((files) => files?.[0]?.size <= 1024 * 1024 * 5, {message: "File max size is 5MB"}).refine((files) => AcceptedImageTypes.includes(files?.[0].type), {message: "Only jpg, png, webp, gif accepted"}), 
+    ? z.any({ message: "Required" })
+        .refine((files) => files && files.length > 0, { message: "Image is required" })
+        .refine((files) => files && files[0] && files[0].size <= MAX_FILE_SIZE, { message: "File max size is 5MB" })
+        .refine((files) => files && files[0] && AcceptedImageTypes.includes(files[0].type), { message: "Only jpg, png, webp, gif accepted" })
+    : z.instanceof(File,{message: "Image is required"})
+        .refine((files) => files && files.size <= MAX_FILE_SIZE, { message: "File max size is 5MB only" })
+        .refine((files) => files && AcceptedImageTypes.includes(files.type), { message: "Only jpg, png, webp, gif accepted only" }), 
     contents: z.array(
         z.object(
           {

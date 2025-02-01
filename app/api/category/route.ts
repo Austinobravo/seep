@@ -7,10 +7,11 @@ import { getCurrentUser } from "@/lib/serverSession";
 
 export async function GET(req:Request) {
     const user = await getCurrentUser()
+    console.log("user", user)
 
-    if(!user){
-        return NextResponse.json({message: "Unauthorized"}, {status: 403})
-    }
+    // if(!user){
+    //     return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    // }
 
 
     try{
@@ -94,13 +95,12 @@ export async function PATCH(req:Request, res: Response) {
     const description = data.description
     const id = data.id
 
-    console.log("data here", data)
     const category = await prisma.category.findFirst({
         where:{
             id
         }
     })
-    console.log("cata", category)
+
 
     if(!category){
         return NextResponse.json({message: "Category doesn't exist."}, {status: 400}) 
@@ -118,13 +118,11 @@ export async function PATCH(req:Request, res: Response) {
                 userId: user.username
             }
         })
-        console.log("values", data)
-        console.log("uodated", updatedCategory)
+
         return NextResponse.json({data: updatedCategory, message: "Updated"}, {status: 200})
         
     }
     catch(error){
-        console.log("error", error)
         return NextResponse.json(error)
     }
 

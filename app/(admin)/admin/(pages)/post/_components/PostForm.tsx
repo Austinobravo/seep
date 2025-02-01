@@ -27,14 +27,15 @@ import { Textarea } from "@/components/ui/textarea"
 import Image from "next/image"
 import React from "react"
 import axios from "axios"
-import { toast } from "sonner"
 import { Loader2 } from "lucide-react"
 import { modules } from "@/lib/globals"
 import ReactQuill from 'react-quill'
 import { newsFormSchema } from "@/lib/formSchema"
+import { useToast } from "@/hooks/use-toast"
 
 
-const PostForm = () => {
+const PostForm = ({category}: {category:CategoryType[]}) => {
+  const { toast } = useToast()
   const [blogImage, setBlogImage] = React.useState< Blob | MediaSource | null>(null)
    const form = useForm<z.infer<typeof newsFormSchema>>({
     resolver: zodResolver(newsFormSchema),
@@ -62,18 +63,20 @@ const PostForm = () => {
     formData.append('otherOptions', values.otherOptions)
     
     try{
-      const response = await axios.post('/api/news',formData,
-        // {
-        //   headers:
-        //   {"Content-Type": "multipart/form-data"}
-        // }
-      )
-      toast(`${response.data.message}`)
+      const response = await axios.post('/api/news',formData,)
+      console.log('res', response)
+      toast({
+        description: response.data.message,
+        variant: "success"
+    })
       form.reset()
     }
     catch(error:any){
-      toast(`${error.response.data.message}`)
       console.error("Error", error)
+      toast({
+        description: error.response.data.message,
+        variant: "success"
+    })
     }
   }
 
@@ -102,7 +105,7 @@ const PostForm = () => {
   // }
   return (
     <section>
-        <h1 className='text-center text-3xl font-medium my-4'>Add News Page</h1>
+        {/* <h1 className='text-center text-3xl font-medium my-4'>Add News Page</h1> */}
          {blogImage &&
          <>
           <Image src={URL.createObjectURL(blogImage)} width={500} height={500} alt={`content.heading`} className='object-cover h-40 mx-auto'/>
@@ -155,9 +158,9 @@ const PostForm = () => {
                         </SelectTrigger>
                         </FormControl>
                         <SelectContent>
-                        <SelectItem value="technology">Technology</SelectItem>
-                        <SelectItem value="education">Education</SelectItem>
-                        <SelectItem value="news">News</SelectItem>
+                          {category.map((cat) => (
+                            <SelectItem key={cat.id} value={cat.id}>{cat.name}</SelectItem>
+                          ))}
                         </SelectContent>
                     </Select>
                   <FormDescription>

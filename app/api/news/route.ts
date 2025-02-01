@@ -14,17 +14,17 @@ export async function POST (req:Request, res: Response){
     }
 
     const formData = await req.formData()
-    const file = formData.get('image'); // Access the file from the request
+    const file = formData.get('image') as any; // Access the file from the request
     const title = formData.get('title') as string;
-    const category = formData.get('category') as string;
+    const categoryId = formData.get('category') as string;
     const otherOptions = formData.get('otherOptions') as string;
     const contents = JSON.parse(formData.get('contents') as string) as Array<{heading: string; paragraph: string}>;
 
     const formDataToJson = {
         title: title,
         otherOptions: otherOptions,
-        file: file,
-        category: category,
+        image: file,
+        category: categoryId,
         contents: contents,
     }
 
@@ -33,16 +33,10 @@ export async function POST (req:Request, res: Response){
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
 
-
-    console.log("file", file)
-    console.log("title", title)
-    console.log("category", category)
-    console.log("content", contents)
-    console.log("other", otherOptions)
     if(!file || typeof file === "string"){
         return NextResponse.json({status:400, message: "Invalid file"})
     }
-    if(!title || !category || !contents){
+    if(!title || !categoryId || !contents){
         return NextResponse.json({status:400, message: "Invalid form"})
     }
     
@@ -55,7 +49,8 @@ export async function POST (req:Request, res: Response){
         fs.mkdirSync(uploadDir, {recursive: true})
     }
 
-    const slugged_title = createUniqueSlug(title)
+    const slugged_title = await createUniqueSlug(title)
+    console.log("slug", slugged_title)
     
     try{
         await prisma.$transaction(async (newPrisma:any) => {
@@ -73,7 +68,7 @@ export async function POST (req:Request, res: Response){
                     image: fileUrl,
                     slug: slugged_title,
                     title,
-                    category,
+                    categoryId,
                     otherOptions: otherOptions
                 }
             })
@@ -89,7 +84,9 @@ export async function POST (req:Request, res: Response){
                 
             }))
 
+            console.log('news', news)
         })
+
 
         return NextResponse.json({message: "Uploaded successfully" }, {status: 201});
     }
@@ -97,4 +94,32 @@ export async function POST (req:Request, res: Response){
         console.error("error", error)
         return NextResponse.json({message: "Internal Server Error" }, {status: 500})
     }
+}
+
+export async function GET(req:Request) {
+    const user = await getCurrentUser()
+    console.log("user", user)
+
+    // if(!user){
+    //     return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    // }
+
+
+    try{
+        const newsStats = await prisma.news.findMany({
+            orderBy:{
+                createdAt: "desc"
+            },
+            
+        })
+
+        return NextResponse.json(newsStats, {status: 200})
+
+    }
+    catch(error){
+        console.error('err',error)
+        return NextResponse.json(error)
+
+    }
+    
 }

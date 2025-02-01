@@ -55,16 +55,27 @@ import axios from "axios"
 import { useToast } from "@/hooks/use-toast"
 import { useAllContext } from "@/hooks/useContextHook"
 import CategoryForm from "./CategoryForm"
-
+// import { isDesktop } from "@/hooks/use-media-query"
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerFooter,
+  DrawerHeader,
+  DrawerTitle,
+  DrawerTrigger,
+} from "@/components/ui/drawer"
+import { useMediaQuery } from "@/hooks/use-media-query"
 
 
 
 export default function CategoryTable({data}: {data: CategoryType[]}) {
+  const isDesktop = useMediaQuery("(min-width: 768px)")
   const { toast } = useToast()
-   const { addCategory, category, clearCategories } = useAllContext()
-   const [singleCategory, setSingleCategory] = React.useState<CategoryType | undefined>(undefined)
-   const [open, setOpen] = React.useState<boolean>(false);
-
+  const { addCategory, category, clearCategories } = useAllContext()
+  const [singleCategory, setSingleCategory] = React.useState<CategoryType | undefined>(undefined)
+  const [open, setOpen] = React.useState<boolean>(false);
   const deleteCategory = async (id: string) => {
     try{
       const response = await axios.delete(`/api/category/${id}`,)
@@ -84,19 +95,6 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
       })
     }
   }
-
-  // const fetchCategory = async () => {
-  //   try {
-  //     const response = await axios.get(`/api/category/${id}`);
-  //     setSingleCategory(response.data);
-  //     setOpen(true); // Open dialog after fetching
-  //   } catch (error: any) {
-  //     toast({
-  //       description: error.response?.data?.message || "Error fetching category",
-  //       variant: "destructive",
-  //     });
-  //   }
-  // };
 
   const getSingleCategory = async (id: string) => {
     try{
@@ -223,10 +221,11 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
     
               </DropdownMenuContent>
             </DropdownMenu>
+            {isDesktop ?
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+              <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
               <DialogHeader>
                 <DialogTitle>Edit Category</DialogTitle>
                 <DialogDescription>Modify the category details below.</DialogDescription>
@@ -235,6 +234,24 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
               </DialogContent>
               
           </Dialog>
+            :
+            <Drawer open={open} onOpenChange={setOpen}>
+              <DrawerTrigger asChild>
+                
+              </DrawerTrigger>
+              <DrawerContent className="p-3">
+                <DrawerHeader className="">
+                  <DrawerTitle>Edit Category</DrawerTitle>
+                  <DrawerDescription>
+                  Modify the category details below.
+                  </DrawerDescription>
+                </DrawerHeader>
+                <CategoryForm data={singleCategory} setOpen={setOpen}/>
+                <DrawerFooter className="pt-2">
+                </DrawerFooter>
+              </DrawerContent>
+            </Drawer>
+            }
             </>
           )
         },

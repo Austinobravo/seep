@@ -28,8 +28,7 @@ interface Props{
 const CategoryForm = ({data, setOpen}: Props) => {
     const { toast } = useToast()
     const { addCategory, updateCategory } = useAllContext()
-    console.log('data', data)
-   
+
     const form = useForm<z.infer<typeof categoryFormSchema>>({
         resolver: zodResolver(categoryFormSchema),
         defaultValues: {
@@ -54,7 +53,7 @@ const CategoryForm = ({data, setOpen}: Props) => {
 
         if(data){
             try{
-                console.log("va;ue", values)
+             
                 const newData = {...values, id:data.id, userId: data.userId}
                 const res = await fetch(`/api/category`, {
                     method: "PATCH",
@@ -64,7 +63,7 @@ const CategoryForm = ({data, setOpen}: Props) => {
                     body: JSON.stringify(newData)
                 })
                 const resData = await res.json()
-                console.log("res;", resData)
+             
                 if(res.ok){
                     updateCategory(resData.data)
                     setOpen && setOpen(false)
