@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { ArrowUpRight, ExternalLink, Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -31,7 +32,9 @@ const contents = [
     },
 ]
 
-const LatestNews = () => {
+const LatestNews = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+    const blogContent:NewsType[] = response.data
   return (
     <section className='space-y-7 py-5 md:px-20 px-3'>
     <div className='bg-gray-100 shadow-md flex justify-between py-3 md:text-xl text-base px-2 seep-text-color rounded-lg'>
