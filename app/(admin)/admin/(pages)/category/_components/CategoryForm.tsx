@@ -53,7 +53,6 @@ const CategoryForm = ({data, setOpen}: Props) => {
 
         if(data){
             try{
-             
                 const newData = {...values, id:data.id, userId: data.userId}
                 const res = await fetch(`/api/category`, {
                     method: "PATCH",
@@ -107,6 +106,7 @@ const CategoryForm = ({data, setOpen}: Props) => {
                     body: JSON.stringify(values)
                 })
                 const data = await res.json()
+                console.log("values data", data)
                 if(res.ok){
                     addCategory(data.data)
                     form.reset()

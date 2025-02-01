@@ -35,7 +35,7 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import Link from "next/link"
-import { formatDate } from "@/lib/globals"
+import { formatDateToString } from "@/lib/globals"
 import {
     Dialog,
     DialogContent,
@@ -109,6 +109,7 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
       })
     }
   }
+  
    const columns: ColumnDef<CategoryType>[] = [
       {
         accessorKey: "name",
@@ -173,7 +174,7 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
         header: () => <div className="text-right">Created</div>,
         cell: ({ row }) => {
     
-          return <div className="text-right font-medium text-xs">Published at <span className="">{formatDate(row.getValue("createdAt"))}</span></div>
+          return <div className="text-right font-medium text-xs">Published at <span className="">{formatDateToString(row.getValue("createdAt"))}</span></div>
         },
       },
       {
@@ -239,9 +240,10 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
               <DrawerTrigger asChild>
                 
               </DrawerTrigger>
-              <DrawerContent className="p-3">
-                <DrawerHeader className="">
-                  <DrawerTitle>Edit Category</DrawerTitle>
+              <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
+                <div className="z-[51]">
+                <DrawerHeader className="!text-center">
+                <DrawerTitle>Edit Category</DrawerTitle>
                   <DrawerDescription>
                   Modify the category details below.
                   </DrawerDescription>
@@ -249,6 +251,8 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
                 <CategoryForm data={singleCategory} setOpen={setOpen}/>
                 <DrawerFooter className="pt-2">
                 </DrawerFooter>
+
+                </div>
               </DrawerContent>
             </Drawer>
             }

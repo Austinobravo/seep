@@ -53,12 +53,13 @@ export async function POST(req:Request, res: Response) {
     const sluggedtitle = data.slug ? slug(data.slug) : slug(data.name)
     const description = data.description ? data.description : ""
 
-    const category = await prisma.category.findFirst({
+    const category = await prisma.category.findUnique({
         where:{
             name: title
         }
     })
 
+    
     if(category){
         return NextResponse.json({message: "Identical category"}, {status: 400}) 
     }
@@ -77,6 +78,7 @@ export async function POST(req:Request, res: Response) {
 
     }
     catch(error){
+        console.error('err', error)
         return NextResponse.json(error)
     }
 

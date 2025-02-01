@@ -43,7 +43,7 @@ export function CreatePost({category}: {category:CategoryType[]}) {
             Make changes to your news here.
             </DialogDescription>
           </DialogHeader>
-          <PostForm  category={category}/>
+          <PostForm  category={category} setOpen={setOpen}/>
         </DialogContent>
       </Dialog>
     )
@@ -62,7 +62,7 @@ export function CreatePost({category}: {category:CategoryType[]}) {
             Make changes to your news here.
           </DrawerDescription>
         </DrawerHeader>
-        <PostForm category={category}/>
+        <PostForm category={category} setOpen={setOpen}/>
         <DrawerFooter className="pt-2">
         </DrawerFooter>
 

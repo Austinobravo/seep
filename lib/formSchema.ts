@@ -10,6 +10,7 @@ export const LoginFormSchema = z.object({
   const MAX_FILE_SIZE = 1024 * 1024 * 5; //5MB
  
   export const newsFormSchema = z.object({
+    id: z.string().optional(),
     title: z.string().min(2, {
       message: "Title must be at least 2 characters.",
     }).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
@@ -18,23 +19,23 @@ export const LoginFormSchema = z.object({
     }).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     otherOptions: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     image: typeof window !== "undefined"
-    ? z.any({ message: "Required" })
-        .refine((files) => files && files.length > 0, { message: "Image is required" })
-        .refine((files) => files && files[0] && files[0].size <= MAX_FILE_SIZE, { message: "File max size is 5MB" })
-        .refine((files) => files && files[0] && AcceptedImageTypes.includes(files[0].type), { message: "Only jpg, png, webp, gif accepted" })
+    ? z.any().optional()
     : z.instanceof(File,{message: "Image is required"})
-        .refine((files) => files && files.size <= MAX_FILE_SIZE, { message: "File max size is 5MB only" })
+        .refine((files) => files && files.size <= MAX_FILE_SIZE, { message: "File max size is very 5MB only" })
         .refine((files) => files && AcceptedImageTypes.includes(files.type), { message: "Only jpg, png, webp, gif accepted only" }), 
     contents: z.array(
         z.object(
           {
+          id: z.string().optional(),
           heading: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
           paragraph: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
           
         }
         )
   )
-  })
+  }).refine((data) => {return typeof window === "undefined" || data.id || (data.image && data.image.length > 0)}, {message: "Image is very  required", path: ["image"]})
+  .refine((data) => {return typeof window === "undefined" || data.id || (data.image && data.image[0] && data.image[0].size <= MAX_FILE_SIZE)}, {message: "File max size is 5MB", path: ["image"]})
+  .refine((data) => {return typeof window === "undefined" || data.id || (data.image && data.image[0] && AcceptedImageTypes.includes(data.image[0].type))}, {message: "Only jpg, png, webp, gif accepted", path: ["image"]})
 
   export const categoryFormSchema = z.object({
     name: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),

@@ -25,6 +25,7 @@ model User {
   updatedAt    DateTime  @updatedAt
   roles        UserRole[]
   category     Category[]
+  news         News[]
 
 
 }
@@ -91,6 +92,10 @@ model News{
   image String
   categoryId String
   category Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  userId String
+  user User @relation(fields: [userId], references: [username], onDelete: Cascade)
+
 
   slug String
   otherOptions String? @db.Text

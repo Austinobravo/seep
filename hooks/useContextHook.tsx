@@ -7,9 +7,9 @@ interface CategoryContextType {
     clearCategories: () => void
     clearPost: () => void
     updateCategory: (category: CategoryType) => void
-    updatePost: (post: PostType) => void
-    addPost: (post: PostType) => void
-    post: PostType[]
+    updatePost: (post: NewsType) => void
+    addPost: (post: NewsType) => void
+    post: NewsType[]
 }
 const GeneralContext = createContext<CategoryContextType | undefined>(undefined);
 
@@ -17,7 +17,7 @@ type Props = PropsWithChildren<{}>
 
 export const GeneralProvider = ({children}: Props) => {
     const [category, setCategory] = React.useState<CategoryType[]>([])
-    const [post, setPost] = React.useState<PostType[]>([])
+    const [post, setPost] = React.useState<NewsType[]>([])
 
     const addCategory = (category: CategoryType) => {
         setCategory(prev => [...prev, category])
@@ -25,10 +25,10 @@ export const GeneralProvider = ({children}: Props) => {
     const updateCategory = (updatedCategory: CategoryType) => {
         setCategory(prev => prev.map((cat) => cat.id === updatedCategory.id ? updatedCategory : cat))
     }
-    const addPost = (post: PostType) => {
+    const addPost = (post: NewsType) => {
         setPost(prev => [...prev, post])
     }
-    const updatePost = (updatedPost: PostType) => {
+    const updatePost = (updatedPost: NewsType) => {
         setPost(prev => prev.map((post) => post.id === updatedPost.id ? updatedPost : post))
     }
     const clearCategories = () => {

@@ -1,6 +1,7 @@
 import bcrypt from 'bcryptjs'
 import slug from 'slug';
 import prisma from '@/prisma/prisma'
+import { formatDistanceToNow, parseISO } from 'date-fns';
 
 const toolbarOptions = [
     // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
@@ -82,8 +83,7 @@ export const createUniqueSlug = async (title: string) => {
     return slugged_title
 }
 
-export const formatDate = (date: number) => {
-    const language = "en-US"
-    const options:Intl.DateTimeFormatOptions = {weekday:"short",day: "2-digit", month: "short", year: "numeric", hour: "numeric", minute:"numeric"}
-    return new Date(date).toLocaleDateString(language, options )
+export const formatDateToString = (date: any) => {
+    const formattedDate = formatDistanceToNow(parseISO(date), {addSuffix: true})
+    return formattedDate
 }
