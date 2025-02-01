@@ -46,117 +46,200 @@ import {
     DialogClose
   } from "@/components/ui/dialog"
 
+  import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip"
+import axios from "axios"
+import { useToast } from "@/hooks/use-toast"
+import { useAllContext } from "@/hooks/useContextHook"
+import CategoryForm from "./CategoryForm"
 
-export const columns: ColumnDef<CategoryType>[] = [
-  {
-    accessorKey: "name",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Name
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => (
-      <Link href={`/category/${row.original.slug}`} className="capitalize text-[#003366] hover:underline">{row.getValue("name")} </Link>
-    ),
-  },
-  {
-    accessorKey: "userId",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Author
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="capitalize text-xs">{row.getValue("userId")}</div>,
-  },
-  {
-    accessorKey: "description",
-    header: ({ column }) => {
-      return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Description
-          <ArrowUpDown className="ml-2 h-4 w-4" />
-        </Button>
-      )
-    },
-    cell: ({ row }) => <div className="capitalize truncate">{row.getValue("description")}</div>,
-  },
-  {
-    accessorKey: "createdAt",
-    header: () => <div className="text-right">Created</div>,
-    cell: ({ row }) => {
 
-      return <div className="text-right font-medium text-xs">Published at <span className="">{formatDate(row.getValue("createdAt"))}</span></div>
-    },
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const post = row.original
 
-      return (
-        <DropdownMenu >
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(post.id)}
-            >
-              Edit Category
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View Category</DropdownMenuItem>
-            <Dialog>
-                <DialogTrigger asChild>
-                        <DropdownMenuItem onSelect={(event) => event.preventDefault()}>Delete Category</DropdownMenuItem>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
-                <DialogHeader>
-                    <DialogTitle>Delete this?</DialogTitle>
-                    <DialogDescription>
-                    This is a permanent action. Are you sure?
-                    </DialogDescription>
-                </DialogHeader>
-                <div className='flex gap-5 w-fit ml-auto'>
-                    <DialogClose>
-                        Cancel
-                    </DialogClose>
-                    <Button type='button' variant={'destructive'} className='border-0'>Delete</Button>
-
-                </div>
-                </DialogContent>
-                
-            </Dialog>
-
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
-  },
-]
 
 export default function CategoryTable({data}: {data: CategoryType[]}) {
+  const { toast } = useToast()
+   const { addCategory, category, clearCategories } = useAllContext()
+   const [singleCategory, setSingleCategory] = React.useState<CategoryType | undefined>(undefined)
+   const [open, setOpen] = React.useState<boolean>(false);
 
+  const deleteCategory = async (id: string) => {
+    try{
+      const response = await axios.delete(`/api/category/${id}`,)
+      toast({
+        description: response.data.message,
+        variant: "success"
+      })
+      
+      const updatedCategories = category.filter((item) => item.id !== id)
+      clearCategories();
+      updatedCategories.forEach((category: CategoryType) => addCategory(category));
+  
+    }catch(error:any){
+        toast({
+          description: error.response.data.message,
+          variant: "destructive"
+      })
+    }
+  }
+
+  // const fetchCategory = async () => {
+  //   try {
+  //     const response = await axios.get(`/api/category/${id}`);
+  //     setSingleCategory(response.data);
+  //     setOpen(true); // Open dialog after fetching
+  //   } catch (error: any) {
+  //     toast({
+  //       description: error.response?.data?.message || "Error fetching category",
+  //       variant: "destructive",
+  //     });
+  //   }
+  // };
+
+  const getSingleCategory = async (id: string) => {
+    try{
+      const response = await axios.get(`/api/category/${id}`,)
+      setSingleCategory(response.data)
+      setOpen(true); 
+      
+    }catch(error:any){
+        toast({
+          description: error.response.data.message,
+          variant: "destructive"
+      })
+    }
+  }
+   const columns: ColumnDef<CategoryType>[] = [
+      {
+        accessorKey: "name",
+        header: ({ column }) => {
+          return (
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              Name
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          )
+        },
+        cell: ({ row }) => (
+          <Link href={`/category/${row.original.slug}`} className="capitalize text-[#003366] hover:underline">{row.getValue("name")} </Link>
+        ),
+      },
+      {
+        accessorKey: "userId",
+        header: ({ column }) => {
+          return (
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              Author
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          )
+        },
+        cell: ({ row }) => <div className="capitalize text-xs">{row.getValue("userId")}</div>,
+      },
+      {
+        accessorKey: "description",
+        header: ({ column }) => {
+          return (
+            <Button
+              variant="ghost"
+              onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+            >
+              Description
+              <ArrowUpDown className="ml-2 h-4 w-4" />
+            </Button>
+          )
+        },
+        cell: ({ row }) => 
+          <Tooltip delayDuration={0}>
+            <TooltipTrigger>
+              <div className="capitalize truncate">
+                {(row.getValue("description") as unknown as string)?.slice(0, 14)}...
+              </div>
+            </TooltipTrigger>
+            <TooltipContent>
+              {row.getValue("description")}
+            </TooltipContent>
+          </Tooltip>
+    
+      },
+      {
+        accessorKey: "createdAt",
+        header: () => <div className="text-right">Created</div>,
+        cell: ({ row }) => {
+    
+          return <div className="text-right font-medium text-xs">Published at <span className="">{formatDate(row.getValue("createdAt"))}</span></div>
+        },
+      },
+      {
+        id: "actions",
+        enableHiding: false,
+        cell: ({ row }) => {
+          const id = row.original.id
+    
+          return (
+            <>
+            <DropdownMenu >
+              <DropdownMenuTrigger asChild>
+                <Button variant="ghost" className="h-8 w-8 p-0">
+                  <span className="sr-only">Open menu</span>
+                  <MoreHorizontal className="h-4 w-4" />
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                  <DropdownMenuItem onSelect={(event) => event.preventDefault()} onClick={() =>  getSingleCategory(id)}>Edit Category</DropdownMenuItem>
+                
+                
+                <DropdownMenuSeparator />
+                <Dialog>
+                    <DialogTrigger asChild>
+                            <DropdownMenuItem onSelect={(event) => event.preventDefault()}>Delete Category</DropdownMenuItem>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                    <DialogHeader>
+                        <DialogTitle>Delete this?</DialogTitle>
+                        <DialogDescription>
+                        This is a permanent action. Are you sure?
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className='flex gap-5 w-fit ml-auto'>
+                        <DialogClose>
+                            Cancel
+                        </DialogClose>
+                        <Button type='button' variant={'destructive'} onClick={() => deleteCategory(id)} className='border-0'>Delete</Button>
+    
+                    </div>
+                    </DialogContent>
+                    
+                </Dialog>
+    
+              </DropdownMenuContent>
+            </DropdownMenu>
+            <Dialog open={open} onOpenChange={setOpen}>
+              <DialogTrigger asChild>
+              </DialogTrigger>
+              <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>Edit Category</DialogTitle>
+                <DialogDescription>Modify the category details below.</DialogDescription>
+              </DialogHeader>
+                <CategoryForm data={singleCategory} setOpen={setOpen}/>
+              </DialogContent>
+              
+          </Dialog>
+            </>
+          )
+        },
+      },
+    ]
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

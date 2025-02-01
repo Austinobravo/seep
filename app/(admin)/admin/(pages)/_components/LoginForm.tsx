@@ -53,12 +53,13 @@ const LoginForm = () => {
           redirect: false
         }
       )
-
-      if (data?.error) return  toast({
-        description: data.error,
-        variant: "destructive"
-    })
-
+      if (data?.error){
+        toast({
+          description: data.error,
+          variant: "destructive"
+      })
+  
+      }
     if(data?.url){
         toast({
           description: "Login successful.",
@@ -71,6 +72,7 @@ const LoginForm = () => {
 
 
     }catch(error: any){
+      console.log( 'client error', error)
       toast({
         description: error,
         variant: "destructive"

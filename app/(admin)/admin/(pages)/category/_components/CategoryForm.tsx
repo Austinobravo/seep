@@ -17,20 +17,21 @@ import { Button } from '@/components/ui/button'
 import { Textarea } from '@/components/ui/textarea'
 import { useToast } from '@/hooks/use-toast'
 import { useAllContext } from '@/hooks/useContextHook'
-
-const formSchema = z.object({
-    name: z.string().min(1, {message: "This field is mandatory"}),
-    slug: z.string(),
-    description: z.string()
-})
+import { categoryFormSchema } from '@/lib/formSchema'
 
 
-const CategoryForm = () => {
+interface Props{
+    data?: CategoryType | undefined
+    setOpen?: ((arg0: boolean) => void ) | undefined
+}
+
+const CategoryForm = ({data, setOpen}: Props) => {
     const { toast } = useToast()
-    const { addCategory } = useAllContext()
+    const { addCategory, updateCategory } = useAllContext()
+    console.log('data', data)
    
-    const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+    const form = useForm<z.infer<typeof categoryFormSchema>>({
+        resolver: zodResolver(categoryFormSchema),
         defaultValues: {
             name: "",
             slug: "",
@@ -39,50 +40,107 @@ const CategoryForm = () => {
     })
     const isSubmitting = form.formState.isSubmitting
 
-    const onSubmit = async (values:  z.infer< typeof formSchema>) => {
+    React.useEffect(() => {
+        if (data) {
+          form.reset({
+            name: data.name || "",
+            slug: data.slug || "",
+            description: data.description || "",
+          });
+        }
+      }, [data, form]);
 
-        try{
-            const res = await fetch("/api/category", {
-                method: "POST",
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(values)
-            })
-            const data = await res.json()
-            if(res.ok){
-                console.log("data", data)
-                addCategory(data.data)
-                form.reset()
-                toast({
-                    description: data.message,
-                    variant: "success"
+    const onSubmit = async (values:  z.infer< typeof categoryFormSchema>) => {
+
+        if(data){
+            try{
+                console.log("va;ue", values)
+                const newData = {...values, id:data.id, userId: data.userId}
+                const res = await fetch(`/api/category`, {
+                    method: "PATCH",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(newData)
                 })
-            }else{
-                console.log("data", data)
+                const resData = await res.json()
+                console.log("res;", resData)
+                if(res.ok){
+                    updateCategory(resData.data)
+                    setOpen && setOpen(false)
+                    toast({
+                        description: resData.message,
+                        variant: "success"
+                    })
+                }else{
+                    toast({
+                        description: resData.message,
+                        variant: "destructive"
+                    })
+    
+                }
+                
+            }
+            catch(error: any){
+                if(error.message === "Network error"){
+                    toast({
+                        description: "Network disconnected. Please check your network and try again.",
+                        variant: "destructive"
+                    })
+    
+                }
                 toast({
-                    description: data.message,
+                    description: error.message,
                     variant: "destructive"
                 })
-
+    
+    
             }
-            
-        }
-        catch(error: any){
-            if(error.message === "Network error"){
+
+
+        }else{
+            try{
+                const res = await fetch("/api/category", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(values)
+                })
+                const data = await res.json()
+                if(res.ok){
+                    addCategory(data.data)
+                    form.reset()
+                    toast({
+                        description: data.message,
+                        variant: "success"
+                    })
+                }else{
+                    toast({
+                        description: data.message,
+                        variant: "destructive"
+                    })
+    
+                }
+                
+            }
+            catch(error: any){
+                if(error.message === "Network error"){
+                    toast({
+                        description: "Network disconnected. Please check your network and try again.",
+                        variant: "destructive"
+                    })
+    
+                }
                 toast({
-                    description: "Network disconnected. Please check your network and try again.",
+                    description: error.message,
                     variant: "destructive"
                 })
-
+    
+    
             }
-            toast({
-                description: error.message,
-                variant: "destructive"
-            })
-
-
         }
+
     }
   return (
     <div>
@@ -129,12 +187,12 @@ const CategoryForm = () => {
                                 <Textarea placeholder='A brief about the technology...' {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0' />
                             </FormControl>
                             <span className='text-xs'>The description of the category.</span>
-                            <FormMessage className='text-amber-300 before:content-["*"] pt-1'/>
+                            <FormMessage className='text-amber-300 before:content-["*"] pt-1'/> 
                         </FormItem>
 
                     )}
                 />
-                <Button type='submit' variant={"secondary"} className='font-bold shadow-none bg-blue-700 text-white hover:text-white hover:bg-blue-600 px-6' disabled={isSubmitting}>{isSubmitting ? "Adding..." : "Add New Category"}</Button>
+                <Button type='submit' variant={"secondary"} className='font-bold shadow-none bg-blue-700 text-white hover:text-white hover:bg-blue-600 px-6' disabled={isSubmitting}>{isSubmitting ? "Adding..." : data ? "Edit Category" : "Add New Category" }</Button>
             </form>
         </Form>
     </div>

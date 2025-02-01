@@ -4,10 +4,11 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ScrollButton from "@/components/ScrollUp";
-import { Toaster } from "@/components/ui/sonner";
+import { Toaster } from "@/components/ui/toaster";
 import SessionClientProvider from "@/lib/clientSession";
 import { GeneralProvider } from "@/hooks/useContextHook";
 import 'react-quill/dist/quill.snow.css';
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const satoshi = localFont({
   src:[
@@ -60,7 +61,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={satoshi.className}><GeneralProvider><SessionClientProvider><Toaster/><Navbar/><div className="mt-28">{children}</div><Footer/><ScrollButton/></SessionClientProvider></GeneralProvider></body>
+      <body className={satoshi.className}><GeneralProvider><SessionClientProvider><TooltipProvider><Toaster/><Navbar/><div className="mt-28">{children}</div><Footer/><ScrollButton/></TooltipProvider></SessionClientProvider></GeneralProvider></body>
     </html>
   );
 }

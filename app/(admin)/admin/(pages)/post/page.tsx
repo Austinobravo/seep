@@ -25,7 +25,7 @@ const PostPage = () => {
         </div>
         <div className='grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 bg-blue-100 p-3 rounded-md'>
           {[1,2,3,4].map((item) => (
-            <div  className='border p-2 rounded-lg shadow'>
+            <div key={item} className='border p-2 rounded-lg shadow'>
                 <div style={{'backgroundImage': `url(/images/discovertech.jpg`}} className='bg-center bg-cover h-40 w-full bg-no-repeat  items-end flex '>
                     <div className='gap-2 text-white text-sm items-end flex bg-gradient-to-b from-transparent via-[#0097FF] to-[#0097FF] w-full p-2'>
                         <Image src={`/images/avatar.webp`} width={500} height={500} alt='detail' className='rounded-2xl w-10 h-10 shadow'/>

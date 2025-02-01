@@ -9,7 +9,7 @@ const AdminLayout = async ({children}: {children:React.ReactNode}) => {
   return (
     <div className='flex -mt-28'>
         <aside className='sm:w-60 !h-screen bg-blue-100'>
-            <AdminSidebar/>
+            <AdminSidebar user={user}/>
         </aside>
         <div className='w-full h-screen overflow-y-auto pb-10 mx-4 no-scrollbar'>
             {children}

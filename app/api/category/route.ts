@@ -1,5 +1,5 @@
 
-import { NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/prisma/prisma"
 import slug from 'slug';
 import { getCurrentUser } from "@/lib/serverSession";
@@ -7,7 +7,7 @@ import { getCurrentUser } from "@/lib/serverSession";
 
 export async function GET(req:Request) {
     const user = await getCurrentUser()
-    console.log('user in cat', user)
+
     if(!user){
         return NextResponse.json({message: "Unauthorized"}, {status: 403})
     }
@@ -80,4 +80,55 @@ export async function POST(req:Request, res: Response) {
     }
 
 }
+export async function PATCH(req:Request, res: Response) {
+    
+    const user = await getCurrentUser()
+
+    if(!user){
+        return NextResponse.json({message: "Unauthorized"}, {status: 403})
+    }
+
+    const data = await req.json()
+    const title = data.name
+    const sluggedtitle = data.slug
+    const description = data.description
+    const id = data.id
+
+    console.log("data here", data)
+    const category = await prisma.category.findFirst({
+        where:{
+            id
+        }
+    })
+    console.log("cata", category)
+
+    if(!category){
+        return NextResponse.json({message: "Category doesn't exist."}, {status: 400}) 
+    }
+
+    try{
+        const updatedCategory = await prisma.category.update({
+            where:{
+                id
+            },
+            data:{
+                name: title,
+                slug: sluggedtitle,
+                description: description,
+                userId: user.username
+            }
+        })
+        console.log("values", data)
+        console.log("uodated", updatedCategory)
+        return NextResponse.json({data: updatedCategory, message: "Updated"}, {status: 200})
+        
+    }
+    catch(error){
+        console.log("error", error)
+        return NextResponse.json(error)
+    }
+
+}
+
+
 

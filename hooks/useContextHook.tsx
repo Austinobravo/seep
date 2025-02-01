@@ -6,6 +6,7 @@ interface CategoryContextType {
     addCategory: (category: CategoryType) => void
     clearCategories: () => void
     clearPost: () => void
+    updateCategory: (category: CategoryType) => void
     updatePost: (post: PostType) => void
     addPost: (post: PostType) => void
     post: PostType[]
@@ -20,6 +21,9 @@ export const GeneralProvider = ({children}: Props) => {
 
     const addCategory = (category: CategoryType) => {
         setCategory(prev => [...prev, category])
+    }
+    const updateCategory = (updatedCategory: CategoryType) => {
+        setCategory(prev => prev.map((cat) => cat.id === updatedCategory.id ? updatedCategory : cat))
     }
     const addPost = (post: PostType) => {
         setPost(prev => [...prev, post])
@@ -36,7 +40,7 @@ export const GeneralProvider = ({children}: Props) => {
     
 
     return(
-        <GeneralContext.Provider value={{category, addCategory, clearCategories, updatePost, post, clearPost, addPost}}>
+        <GeneralContext.Provider value={{category, addCategory, clearCategories, updatePost, post, clearPost, addPost, updateCategory}}>
             {children}
         </GeneralContext.Provider>
     )

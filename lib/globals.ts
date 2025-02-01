@@ -1,4 +1,3 @@
-
 import bcrypt from 'bcryptjs'
 import slug from 'slug';
 import prisma from '@/prisma/prisma'

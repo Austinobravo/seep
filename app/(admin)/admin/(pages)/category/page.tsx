@@ -1,32 +1,10 @@
+"use client"
 import React from 'react'
-import AdminNav from '../_components/AdminNav'
 import CategoryForm from './_components/CategoryForm'
 import CategoryTable from './_components/CategoryTable'
 import { useAllContext } from '@/hooks/useContextHook'
 
-const data = [
-  {
-    id: "string",
-    name: "string",
-    slug: "string",
-    description: "string",
-
-    userId: "string",
-
-    createdAt: "",
-  },
-  {
-    id: "string",
-    name: "string",
-    slug: "string",
-    description: "string",
-
-    userId: "string",
-
-    createdAt: "",
-  },
-]
-const CategoryPage = async () => {
+const CategoryPage = () => {
   const {category, addCategory, clearCategories} = useAllContext()
    
     React.useEffect(() => {
@@ -41,9 +19,6 @@ const CategoryPage = async () => {
       }, []);
 
   return (
-    <section>
-        <AdminNav title='Category' user='Joy'/>
-
         <div>
             <div>
                 <h2 className='text-2xl py-4'>Categories</h2>
@@ -55,7 +30,6 @@ const CategoryPage = async () => {
             </div>
           
         </div>
-    </section>
   )
 }
 

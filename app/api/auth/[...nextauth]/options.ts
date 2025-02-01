@@ -21,19 +21,18 @@ export const options:NextAuthOptions = {
             },
             async authorize(credentials){
                 if (!credentials?.username || !credentials.password) throw new Error('Invalid credentials')
-
                 if(credentials.username.trim().length <= 1 || credentials.password.trim().length <= 1) throw new Error('Invalid credentials')
-
-                if (credentials.username.match(/\p{Emoji}/gu) || credentials.password.match(/\p{Emoji}/gu)) throw new Error('Invalid credentials')
-
+                        
+                if (credentials.username.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu) || credentials.password.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu)) throw new Error('Invalid credentials')
+                    
                 const user = await prisma.user.findUnique({
                     where:{
-                        username: credentials.username.trim(), 
-                    },
+                username: credentials.username.trim(), 
+                },
                     
                 })
-
-                if (!user) throw new Error("Invalid user credentials")
+ 
+                if (!user) throw new Error("Invalid credentials")
 
                 const isCorrectPassword = await comparePassword(credentials.password, user.password.trim())
                 if(!isCorrectPassword) throw new Error("Invalid credentials")

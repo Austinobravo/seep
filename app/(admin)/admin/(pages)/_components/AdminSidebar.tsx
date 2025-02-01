@@ -8,12 +8,18 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
-const AdminSidebar = () => {
+type UserProps = {
+    username: string;
+    id: string;
+    firstName: string;
+    lastName: string;
+} | undefined
+
+const AdminSidebar = ({user}: {user:UserProps}) => {
     const paths = useAdminNavigation()
     const [currentPath,  setCurrentPath] = React.useState<string>("")
     const [isCurrentPathToggled,  setIsCurrentPathToggled] = React.useState<boolean>(false)
     const [isSidebarToggled,  setIsSidebarToggled] = React.useState<boolean>(false)
-    const {data:session} = useSession()
 
 
     const router = useRouter()
@@ -32,7 +38,7 @@ const AdminSidebar = () => {
         <section className={`sm:block ${isSidebarToggled ? '' : "hidden"} space-y-3 py-4  bg-blue-100 !h-screen pt-10 relative`}>
             <div className='flex flex-col items-center justify-center pb-7 text-center'>
                 <Image src={`/images/avatar.webp`} width={500} height={500} alt='avatar' className='size-20'/>
-                <h3 className='pt-2 pb-1 font-semibold'>{session?.user?.lastName} {session?.user?.firstName} </h3>
+                <h3 className='pt-2 pb-1 font-semibold'>{user?.lastName} {user?.firstName} </h3>
                 <h4 className='text-sm'>Administrator</h4>
             </div>
             <div>
