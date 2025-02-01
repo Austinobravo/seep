@@ -97,7 +97,7 @@ model News{
   user User @relation(fields: [userId], references: [username], onDelete: Cascade)
 
 
-  slug String
+  slug String @unique
   otherOptions String? @db.Text
   newsContent NewsContent[]
 

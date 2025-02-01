@@ -7,6 +7,7 @@ type NewsType ={
     slug: string
     user: UserType
     userId: string
+    category: CategoryType
     newsContent: NewsContentType[]
     
     createdAt: string
@@ -24,6 +25,7 @@ type CategoryType ={
     name: string
     slug: string
     description: string
+    news: NewsType[]
 
     userId: string
 

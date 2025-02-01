@@ -6,22 +6,34 @@ import { getCurrentUser } from "@/lib/serverSession"
 export async function GET(req:NextRequest, {params}: {params: {id: string}}){
     const user = getCurrentUser()
     const {id} = params
-    if(!user){
-        return NextResponse.json({message: "Invalid user"}, {status: 401})
-    }
+    // if(!user){
+    //     return NextResponse.json({message: "Invalid user"}, {status: 401})
+    // }
 
     
     
     try{
         const news = await prisma.news.findUnique({
             where: {
-                id
+                slug: id
             },
             include:{
-                newsContent: true
+                newsContent: true,
+                user:{
+                    select:{
+                        firstName: true,
+                        lastName: true,
+                        username: true
+                    }
+                },
+                category:{
+                    select:{
+                        name: true
+                    }
+                }
             }
         })
-        console.log("news, news", news)
+        console.log("nes", news)
         if(!news){
             return NextResponse.json({message: "This news doesn't exist."}, {status: 400})
         }

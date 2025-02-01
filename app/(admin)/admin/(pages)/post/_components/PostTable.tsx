@@ -112,7 +112,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                                 
                             </div>
                             <div className='flex ml-auto w-fit items-center gap-2'>
-                                <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => getSingleNews(post.id)}/>
+                                <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => getSingleNews(post.slug)}/>
                                 <Dialog>
                                     <DialogTrigger asChild>
                                         <Trash2 className='text-red-500 size-6 cursor-pointer'/>
@@ -128,7 +128,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                                         <DialogClose>
                                             Cancel
                                         </DialogClose>
-                                        <Button type='button' variant={'destructive'} onClick={()=>deleteNews(post.id)}  className='border-0'>Delete</Button>
+                                        <Button type='button' variant={'destructive'} onClick={()=>deleteNews(post.slug)}  className='border-0'>Delete</Button>
 
                                     </div>
                                     </DialogContent>

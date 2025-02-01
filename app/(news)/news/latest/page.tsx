@@ -8,7 +8,7 @@ const LatestNewsPage = () => {
     <div>
         <NewsHero/>
         <LatestNewsCard />
-        <RelatedNews/>
+        {/* <RelatedNews/> */}
       
     </div>
   )

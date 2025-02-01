@@ -181,7 +181,7 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-          const id = row.original.id
+          const id = row.original.slug
     
           return (
             <>

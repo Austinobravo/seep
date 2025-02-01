@@ -141,6 +141,11 @@ export async function GET(req:Request) {
                         heading: true,
                         paragraph: true
                     }
+                },
+                category: {
+                    select: {
+                        name: true
+                    }
                 }
             }
             

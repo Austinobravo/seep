@@ -1,4 +1,5 @@
 'use client'
+import { formatDateToString } from '@/lib/globals'
 import { ArrowUpRight, ExternalLink, Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -158,27 +159,28 @@ const categories = [
         ]
     },
 ]
-const RelatedNewsCard = () => {
-    const [currentCategory, setCurrentCategory] = React.useState<string>('Impact')
+const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
+    const [currentCategory, setCurrentCategory] = React.useState<string>('innovation')
+    console.log("vv", categories)
   return (
     <div className='space-y-7 py-10 md:px-20 px-10'>
         <span className='font-semibold seep-bg-color text-white px-4 py-2'>Related News</span>
 
         <div className='flex flex-wrap items-center justify-center gap-x-7 gap-y-4'>
             {categories.map((category, index) => (
-                <button key={`${category.name}`} onClick={()=> setCurrentCategory(category.name)} type='button' className={`${currentCategory === category.name && 'seep-bg-color text-white border-0'} cursor-pointer py-1 px-5 rounded-md border-blue-500 border`}>{category.name}</button>
+                <button key={`${category.name}`} onClick={()=> setCurrentCategory(category.name)} type='button' className={`${currentCategory === category.name && 'seep-bg-color text-white border-0'} cursor-pointer py-1 px-5 rounded-md border-blue-500 border capitalize`}>{category.name}</button>
             ))}
         </div>
         <div className=''>
             {categories.map((category) => (
                 <div key={`${category.name}`} className={`category-content ${currentCategory === category.name ? 'active' : ''} grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 `}>
-                    {currentCategory === category.name && category.content.map((cat, index) => (
+                    {currentCategory === category.name && category.news.map((cat, index) => (
                         <div key={`${category.name}-${cat.title}-${index}`} className='border p-2 rounded-lg shadow '>
                             <div style={{'backgroundImage': `url(${cat.image}`}} className='bg-center bg-cover h-40 w-full bg-no-repeat  items-end flex '>
                                 <div className='gap-2 text-white text-sm items-end flex bg-gradient-to-b from-transparent via-[#0097FF] to-[#0097FF] w-full p-2'>
-                                    <Image src={`${cat.user_avatar}`} width={500} height={500} alt='detail' className='rounded-2xl w-10 h-10 shadow'/>
-                                    <h3 className='font-semibold'>{cat.user_name}</h3>
-                                    <span className='text-xs'>{cat.published_date}</span> 
+                                    <Image src={`/images/avatar.webp`} width={500} height={500} alt='detail' className='rounded-2xl w-10 h-10 shadow'/>
+                                    <h3 className='font-semibold capitalize'>{cat.userId}</h3>
+                                    <span className='text-xs'>{formatDateToString(cat.createdAt)}</span> 
                                 </div>
                             </div>
                             <div>
@@ -199,7 +201,7 @@ const RelatedNewsCard = () => {
                                         </div>
                                         
                                     </div>
-                                    <Link href={`/news/1`} className='flex seep-text-color bg-blue-200 text-sm rounded-full w-fit h-9 px-2 items-center'>
+                                    <Link href={`/news/${cat.slug}`} className='flex seep-text-color bg-blue-200 text-sm rounded-full w-fit h-9 px-2 items-center'>
                                         <span>Read More</span>
                                         <ArrowUpRight className=''/>
                                     </Link>

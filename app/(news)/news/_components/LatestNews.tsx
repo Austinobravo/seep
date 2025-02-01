@@ -34,8 +34,10 @@ const contents = [
 
 const LatestNews = async () => {
     const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-    const blogContent:NewsType[] = response.data
+    const contents:NewsType[] = response.data
   return (
+    <>
+    {contents.length >=1 &&
     <section className='space-y-7 py-5 md:px-20 px-3'>
     <div className='bg-gray-100 shadow-md flex justify-between py-3 md:text-xl text-base px-2 seep-text-color rounded-lg'>
         <h3 className=''>Latest News</h3>
@@ -43,12 +45,12 @@ const LatestNews = async () => {
     </div>
 
     <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
-        {contents.map((content) => (
-            <div key={content.heading} className='shadow-2xl bg-gray-100 p-4 rounded-lg seep-text-color space-y-3'>
-                <Image src={content.image} width={500} height={500} alt={content.heading} className='object-cover h-40'/>
+        {contents.slice(0,3).map((content) => (
+            <div key={content.title} className='shadow-2xl bg-gray-100 p-4 rounded-lg seep-text-color space-y-3'>
+                <Image src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
                 <div>
-                    <h3 className='font-bold'>{content.heading}</h3>
-                    <p className='opacity-70'>{content.category}</p>
+                    <h3 className='font-bold'>{content.title}</h3>
+                    <p className='opacity-70'>{content.category.name}</p>
                 </div>
                 <div className='flex justify-between seep-text-color gap-3 py-4 flex-wrap'>
                     <div className='flex gap-1 bg-blue-200  rounded-full  w-fit h-9 px-2 text-sm items-center'>
@@ -59,7 +61,7 @@ const LatestNews = async () => {
                         <ExternalLink size={15}/>
                         <span>60</span>
                     </div>
-                    <Link href={`/news/2`} className='flex bg-blue-200  text-sm rounded-full w-fit h-9 px-2 items-center'>
+                    <Link href={`/news/${content.slug}`} className='flex bg-blue-200  text-sm rounded-full w-fit h-9 px-2 items-center'>
                         <span>Read More</span>
                         <ArrowUpRight size={15} className='text-amber-500'/>
                     </Link>
@@ -68,7 +70,9 @@ const LatestNews = async () => {
         ))}
     </div>
   
-</section>
+    </section>
+    }
+    </>
   )
 }
 

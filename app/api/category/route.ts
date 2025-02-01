@@ -7,7 +7,6 @@ import { getCurrentUser } from "@/lib/serverSession";
 
 export async function GET(req:Request) {
     const user = await getCurrentUser()
-    console.log("user", user)
 
     // if(!user){
     //     return NextResponse.json({message: "Unauthorized"}, {status: 401})
@@ -21,7 +20,8 @@ export async function GET(req:Request) {
                     select: {
                         news: true
                     }
-                }
+                },
+                news: true
             }
         })
 
