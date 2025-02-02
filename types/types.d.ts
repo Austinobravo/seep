@@ -20,6 +20,12 @@ type NewsContentType = {
     news: NewsType
   
 }
+type PrivacyType = {
+    id: string
+    content: string
+    type: string
+  
+}
 type CategoryType ={
     id: string
     name: string
