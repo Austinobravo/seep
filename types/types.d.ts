@@ -39,6 +39,33 @@ type CategoryType ={
 
 
 }
+type TestimonialType ={
+    id: string
+    individual_name: string
+    individual_image: string
+    content: string
+    school: string
+    program:string
+
+    userId: string
+
+    createdAt: string
+
+
+}
+type CategoryType ={
+    id: string
+    name: string
+    slug: string
+    description: string
+    news: NewsType[]
+
+    userId: string
+
+    createdAt: string
+
+
+}
 
 type UserType = {
     username : string

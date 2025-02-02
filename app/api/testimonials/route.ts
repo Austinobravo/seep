@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/prisma/prisma"
 import slug from 'slug';
 import { getCurrentUser } from "@/lib/serverSession";
-import { privacyAndTermsFormSchema } from "@/lib/formSchema";
+import { testimonialFormSchema } from "@/lib/formSchema";
 
 
 export async function GET(req:Request) {
@@ -42,8 +42,7 @@ export async function POST(req:Request, res: Response) {
     const data = await req.json()
     const content = data.content
 
-
-    const parsedForm = await privacyAndTermsFormSchema.safeParseAsync(data)
+    const parsedForm = await testimonialFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
@@ -88,10 +87,10 @@ export async function PATCH(req:Request, res: Response) {
     const content = data.content
     const id = data.id
 
-    const parsedForm = await privacyAndTermsFormSchema.safeParseAsync(data)
-    if(!parsedForm.success){
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
-    }
+    const parsedForm = await testimonialFormSchema.safeParseAsync(data)
+        if(!parsedForm.success){
+            return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+        }
 
     const existingTerms = await prisma.termsAndConditions.findUnique({
         where:{

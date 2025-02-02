@@ -5,7 +5,7 @@ import { Edit, Trash2 } from 'lucide-react'
 const TermsAndConditionsPage = () => {
   return (
     <div>
-        <AdminNav title='Terms and Conditions' user=''/>
+        <AdminNav title='Terms and Conditions'/>
         <div className='bg-blue-100 rounded-lg p-3 text-sm shadow'>
             Lorem ipsum dolor sit amet consectetur. Turpis auctor tincidunt ullamcorper aliquam vitae sed ultricies erat. Vestibulum cum curabitur praesent urna. Potenti feugiat maecenas quisque convallis eu imperdiet. Ac porttitor risus pulvinar id erat. Leo sit nulla ac magnis. Vel magna tincidunt in nibh felis viverra elit vel. Velit aliquam leo risus amet proin eu fermentum sapien. Et urna eget neque etiam morbi sed ut felis. Sed amet potenti feugiat mauris dictum tellus elit luctus at. Tortor sagittis id viverra vel tincidunt lorem eget sem a. Nibh urna risus velit congue nec eleifend enim. Varius viverra varius sagittis arcu. Etiam sit hendrerit adipiscing gravida.
             Pellentesque convallis mi risus interdum. Ac non vestibulum nibh fermentum mattis. Condimentum dolor amet ac fringilla arcu. Sollicitudin risus lacus vulputate sollicitudin neque eget eget eu. Tristique feugiat semper duis ultricies vulputate. Facilisi luctus amet eget lectus at. Parturient dignissim sollicitudin magna sit tortor massa. Egestas aliquam augue sollicitudin ultrices non pellentesque ut ligula. Varius gravida viverra tellus ultricies amet nibh tellus et. Augue feugiat vitae dui nunc sapien viverra elementum orci. Velit rhoncus neque ut fermentum. Molestie ut diam morbi cursus. Eros purus egestas mi consequat rutrum sit fames. Risus lectus in lorem pharetra elit pretium sit. Convallis egestas tempus magna lobortis egestas nibh at risus non.

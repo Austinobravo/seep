@@ -272,7 +272,6 @@ export async function PATCH(req:Request, res: Response) {
 
             return updatedNews
         })
-        console.log("update", updatedNews)
 
         return NextResponse.json({data: updatedNews, message: "Updated"}, {status: 200})
         

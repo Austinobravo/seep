@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/prisma/prisma"
 import slug from 'slug';
 import { getCurrentUser } from "@/lib/serverSession";
+import { categoryFormSchema } from "@/lib/formSchema";
 
 
 export async function GET(req:Request) {
@@ -53,6 +54,11 @@ export async function POST(req:Request, res: Response) {
     const sluggedtitle = data.slug ? slug(data.slug) : slug(data.name)
     const description = data.description ? data.description : ""
 
+    const parsedForm = await categoryFormSchema.safeParseAsync(data)
+    if(!parsedForm.success){
+        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+    }
+
     const category = await prisma.category.findUnique({
         where:{
             name: title
@@ -97,6 +103,10 @@ export async function PATCH(req:Request, res: Response) {
     const description = data.description
     const id = data.id
 
+    const parsedForm = await categoryFormSchema.safeParseAsync(data)
+    if(!parsedForm.success){
+        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+    }
     const category = await prisma.category.findFirst({
         where:{
             id

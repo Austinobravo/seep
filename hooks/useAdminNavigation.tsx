@@ -1,6 +1,6 @@
 // import { faDashboard, faPodcast } from "@fortawesome/free-solid-svg-icons"
 import { usePathname } from "next/navigation"
-import {  House, Inbox, Lock, LucideIcon, NotebookPen, PanelsTopLeft, User, UserRoundPen} from 'lucide-react'
+import {  PencilRuler, House, Inbox, Lock, LucideIcon, NotebookPen, PanelsTopLeft, User, UserRoundPen} from 'lucide-react'
 import React from "react"
 
 type navLinksTypes = ({
@@ -65,6 +65,13 @@ export const useAdminNavigation = () => {
             href: "others",
             active: pathname.includes("/others"),
             icon: NotebookPen,
+            
+        },
+        {
+            name: "Testimonials",
+            href: "testimonials",
+            active: pathname.includes("/testimonials"),
+            icon: PencilRuler,
             
         },
 
