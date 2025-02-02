@@ -9,17 +9,17 @@ export async function GET(req:NextRequest, {params}: {params: {id: string}}){
         return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
     try{
-        const terms = await prisma.termsAndConditions.findUnique({
+        const testimonial = await prisma.testimonials.findUnique({
             where: {
                 id
             }
         })
     
-        if(!terms){
-            return NextResponse.json({message: "This terms doesn't exist."}, {status: 400})
+        if(!testimonial){
+            return NextResponse.json({message: "This testimonial doesn't exist."}, {status: 400})
         }
 
-        return NextResponse.json(terms, {status: 200})
+        return NextResponse.json(testimonial, {status: 200})
 
     }catch(error){
         console.log("error", error)
@@ -34,19 +34,19 @@ export async function DELETE(req:NextRequest, {params}: {params: {id: string}}){
         return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
-    const terms = await prisma.termsAndConditions.findUnique({
+    const testimonial = await prisma.testimonials.findUnique({
         where: {
             id
         }
     })
 
-    if(!terms){
-        return NextResponse.json({message: "This terms doesn't exist."}, {status: 400})
+    if(!testimonial){
+        return NextResponse.json({message: "This testimonial doesn't exist."}, {status: 400})
     }
 
 
     try{
-        const deletedterms = await prisma.termsAndConditions.delete({
+        const deletedtestimonial = await prisma.testimonials.delete({
             where: {
                 id
             }

@@ -140,11 +140,11 @@ const TestimonialForm = ({data, setOpen}: Props) => {
                     name='individual_name'
                     render={({field}) => (
                         <FormItem className='!space-y-0'>
-                            <FormLabel className='text-black'>Name</FormLabel>
+                            <FormLabel className='text-black font-semibold'>Individual Name</FormLabel>
                             <FormControl>
-                                <Input placeholder='Technology...'  {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0 focus:ring-1' />
+                                <Input placeholder='Nnaemeka Bassey...'  {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0 focus:ring-1' />
                             </FormControl>
-                            <span className='text-xs'>This is the name of the category</span>
+                            <span className='text-xs'>This is the name of the individual</span>
                             <FormMessage className='text-red-500 before:content-["*"] pt-1 text-xs'/>
                         </FormItem>
 
@@ -155,12 +155,12 @@ const TestimonialForm = ({data, setOpen}: Props) => {
                     name='school'
                     render={({field}) => (
                         <FormItem className='!space-y-0'>
-                            <FormLabel>Slug</FormLabel>
+                            <FormLabel  className='text-black font-semibold'>School</FormLabel>
                             <FormControl>
-                                <Input placeholder='technology...' {...field} className='!bg-whit focus-visible:!ring-offset-0 focus-visible:!ring-0' />
+                                <Input placeholder='Government Technnical College...' {...field} className='!bg-whit focus-visible:!ring-offset-0 focus-visible:!ring-0' />
                             </FormControl>
-                            <span className='text-xs leading-tight'>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</span>
-                            <FormMessage className='text-amber-300 before:content-["*"] pt-1'/>
+                            <span className='text-xs leading-tight'>This is the school of the individual.</span>
+                            <FormMessage className='text-red-500 before:content-["*"] pt-1'/>
                         </FormItem>
 
                     )}
@@ -170,12 +170,12 @@ const TestimonialForm = ({data, setOpen}: Props) => {
                     name='program'
                     render={({field}) => (
                         <FormItem className='!space-y-0'>
-                            <FormLabel>Slug</FormLabel>
+                            <FormLabel  className='text-black font-semibold'>Program</FormLabel>
                             <FormControl>
-                                <Input placeholder='technology...' {...field} className='!bg-whit focus-visible:!ring-offset-0 focus-visible:!ring-0' />
+                                <Input placeholder='Tech to School Program...' {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0' />
                             </FormControl>
-                            <span className='text-xs leading-tight'>The “slug” is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens.</span>
-                            <FormMessage className='text-amber-300 before:content-["*"] pt-1'/>
+                            <span className='text-xs leading-tight'>This is the name of the program.</span>
+                            <FormMessage className='text-red-500 before:content-["*"] pt-1'/>
                         </FormItem>
 
                     )}
@@ -185,17 +185,17 @@ const TestimonialForm = ({data, setOpen}: Props) => {
                     name='content'
                     render={({field}) => (
                         <FormItem className='!space-y-0'>
-                            <FormLabel>Description</FormLabel>
+                            <FormLabel  className='text-black font-semibold'>Testimonial</FormLabel>
                             <FormControl>
-                                <Textarea placeholder='A brief about the technology...' {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0' />
+                                <Textarea placeholder='I will love to thank the seep program...' {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0' />
                             </FormControl>
-                            <span className='text-xs'>The description of the category.</span>
-                            <FormMessage className='text-amber-300 before:content-["*"] pt-1'/> 
+                            <span className='text-xs'>The testimonial.</span>
+                            <FormMessage className='text-red-500 before:content-["*"] pt-1'/> 
                         </FormItem>
 
                     )}
                 />
-                <Button type='submit' variant={"secondary"} className='font-bold shadow-none bg-blue-700 text-white hover:text-white hover:bg-blue-600 px-6' disabled={isSubmitting}>{isSubmitting ? "Adding..." : data ? "Edit Category" : "Add New Category" }</Button>
+                <Button type='submit' variant={"secondary"} className='font-bold shadow-none bg-blue-700 text-white hover:text-white hover:bg-blue-600 px-6 w-full' disabled={isSubmitting}>{isSubmitting ? "Adding..." : data ? "Edit Testimonial" : "Add New Testimonial" }</Button>
             </form>
         </Form>
   )

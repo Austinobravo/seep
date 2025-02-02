@@ -61,7 +61,7 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
 
     const fetchTestimonial = async (id: string) => {
         try{
-          const response = await axios.get(`/api/news/${id}`,)
+          const response = await axios.get(`/api/testimonials/${id}`,)
           setSingleTestimonial(response.data)
           setOpen(true); 
           
@@ -78,7 +78,7 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
                 <CardHeader>
                     <div className='flex items-center justify-between'>
                             <div>
-                                <CardTitle className="">Nnaemeka Joseph</CardTitle>
+                                <CardTitle className="">{testimonial.individual_name}</CardTitle>
                                 <CardDescription></CardDescription>
                             </div>
                             <div className='bg-[#B4E0FF] rounded-full p-1 size-10'>
@@ -88,15 +88,16 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
 
                 </CardHeader>
             <CardContent>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus, quod laborum dolor ratione ducimus iste fugiat autem, ipsam earum atque ab amet enim blanditiis nulla aliquam in obcaecati corrupti magni!
+                {testimonial.content}
             
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
-                <div className="flex gap-2 font-medium leading-none">
-                <Building className='seep-text-color'/>Government Technical Secondary School Uyo 
+                <div className="flex gap-2 items-center font-medium leading-none">
+                <Building className='seep-text-color'/>
+                <span>{testimonial.school}</span>
                 </div>
                 <div className="leading-none text-muted-foreground">
-                    Tech to School Beneficiary
+                    {testimonial.program}
                 </div>
                 <div className='flex ml-auto w-fit items-center gap-2'>
                         <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => fetchTestimonial(testimonial.id)}/>
@@ -127,8 +128,8 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
                             </DialogTrigger>
                             <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
                             <DialogHeader>
-                                <DialogTitle>Edit News</DialogTitle>
-                                <DialogDescription>Modify the news details below.</DialogDescription>
+                                <DialogTitle>Edit Testimonial</DialogTitle>
+                                <DialogDescription>Modify the testimonial details below.</DialogDescription>
                             </DialogHeader>
                                 <TestimonialForm data={singleTestimonial} setOpen={setOpen}/>
                             </DialogContent>
@@ -142,9 +143,9 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
                             <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
                                 <div className="z-[51]">
                                 <DrawerHeader className="!text-center">
-                                <DrawerTitle>Add News</DrawerTitle>
+                                <DrawerTitle>Edit Testimonial</DrawerTitle>
                                 <DrawerDescription>
-                                    Make changes to your news here.
+                                    Modify the testimonial details below.
                                 </DrawerDescription>
                                 </DrawerHeader>
                                 <TestimonialForm data={singleTestimonial} setOpen={setOpen}/>

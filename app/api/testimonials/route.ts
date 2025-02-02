@@ -1,7 +1,7 @@
 
 import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/prisma/prisma"
-import slug from 'slug';
+
 import { getCurrentUser } from "@/lib/serverSession";
 import { testimonialFormSchema } from "@/lib/formSchema";
 
@@ -15,13 +15,13 @@ export async function GET(req:Request) {
 
 
     try{
-        const terms = await prisma.termsAndConditions.findFirst({
+        const testimonials = await prisma.testimonials.findMany({
             orderBy:{
                 createdAt: "desc"
             }
         })
 
-        return NextResponse.json(terms, {status: 200})
+        return NextResponse.json(testimonials, {status: 200})
 
     }
     catch(error){
@@ -41,32 +41,30 @@ export async function POST(req:Request, res: Response) {
 
     const data = await req.json()
     const content = data.content
+    const individual_image = data.individual_image
+    const individual_name = data.individual_name
+    const school = data.school
+    const program = data.program
 
     const parsedForm = await testimonialFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
 
-    const totalTerms = await prisma.termsAndConditions.findMany({
-        orderBy:{
-            createdAt: "asc"
-        }
-    })
-
-    
-    if(totalTerms.length >= 1){
-        return NextResponse.json({message: "Terms already exist, Edit instead."}, {status: 400}) 
-    }
 
     try{
-        const newTerms = await prisma.termsAndConditions.create({
+        const newTestimonial = await prisma.testimonials.create({
             data:{
                 content,
+                individual_image,
+                individual_name,
+                school,
+                program,
                 userId: user.username
             }
         })
 
-        return NextResponse.json({data: newTerms, message: "Created"}, {status: 201})
+        return NextResponse.json({data: newTestimonial, message: "Created"}, {status: 201})
 
     }
     catch(error){
@@ -86,34 +84,44 @@ export async function PATCH(req:Request, res: Response) {
     const data = await req.json()
     const content = data.content
     const id = data.id
+    const individual_image = data.individual_image
+    const individual_name = data.individual_name
+    const school = data.school
+    const program = data.program
+
 
     const parsedForm = await testimonialFormSchema.safeParseAsync(data)
         if(!parsedForm.success){
             return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
         }
 
-    const existingTerms = await prisma.termsAndConditions.findUnique({
+    const existingTestimonial = await prisma.testimonials.findUnique({
         where:{
             id
         }
     })
 
 
-    if(!existingTerms){
-        return NextResponse.json({message: "Terms doesn't exist."}, {status: 400}) 
+    if(!existingTestimonial){
+        return NextResponse.json({message: "Testimonial doesn't exist."}, {status: 400}) 
     }
 
     try{
-        const updatedTerms = await prisma.termsAndConditions.update({
+        const updatedTestimonial = await prisma.testimonials.update({
             where:{
                 id
             },
             data:{
-                content: content
+                content: content,
+                individual_image : individual_image,
+                individual_name : individual_name,
+                school : school,
+                program : program,
+                
             }
         })
 
-        return NextResponse.json({data: updatedTerms, message: "Updated"}, {status: 200})
+        return NextResponse.json({data: updatedTestimonial, message: "Updated"}, {status: 200})
         
     }
     catch(error){
