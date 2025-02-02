@@ -39,7 +39,7 @@ const PrivacyAndTermsForm = ({data, setOpen, type}: Props) => {
     const { toast } = useToast()
 
      async function onSubmit (values: z.infer<typeof privacyAndTermsFormSchema>) {
-        console.log("values", values)
+
         if(data){
             if(data.type === "privacy"){
                 try{

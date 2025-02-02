@@ -27,6 +27,7 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { useToast } from '@/hooks/use-toast'
 import axios from 'axios'
 import PrivacyAndTermsForm from './PrivacyAndTermsForm'
+import Image from 'next/image'
 
 const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -109,75 +110,82 @@ const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
                         </Drawer>
                         }
 
-    </div>
-    <div className='bg-blue-100 rounded-lg p-3 text-sm shadow space-y-10'>
-        <p className='line-clamp-6'>
-            <span>
-                {termsData.content}
-            </span>
-        </p>
-
-        <div className='flex ml-auto w-fit items-center gap-2'>
-        <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => fetchTerms(termsData.id)}/>
-        <Dialog>
-            <DialogTrigger asChild>
-                <Trash2 className='text-red-500 size-6 cursor-pointer'/>
-            </DialogTrigger>
-            <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
-            <DialogHeader>
-                <DialogTitle>Delete this?</DialogTitle>
-                <DialogDescription>
-                This is a permanent action. Are you sure?
-                </DialogDescription>
-            </DialogHeader>
-            <div className='flex gap-5 w-fit ml-auto'>
-                <DialogClose>
-                    Cancel
-                </DialogClose>
-                <Button type='button' variant={'destructive'} onClick={() => deleteTerms(termsData.id)} className='border-0'>Delete</Button>
-
-            </div>
-            </DialogContent>
-            
-        </Dialog>
-        {isDesktop ?
-                    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                        <DialogTrigger asChild>
-                        
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-3xl max-h-[550px] overflow-y-auto no-scrollbar">
-                        <DialogHeader>
-                            <DialogTitle>Edit Terms and Conditions</DialogTitle>
-                            <DialogDescription>Modify the content of this terms.</DialogDescription>
-                        </DialogHeader>
-                            <PrivacyAndTermsForm data={data}/>
-                        </DialogContent>
-                        
-                    </Dialog>
-                        :
-                        <Drawer open={isOpen} onOpenChange={setIsOpen}>
-                        <DrawerTrigger asChild>
-                        
-                        </DrawerTrigger>
-                        <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
-                            <div className="z-[51]">
-                            <DrawerHeader className="!text-center">
-                            <DrawerTitle>Edit Terms and Conditions</DrawerTitle>
-                            <DrawerDescription>
-                            Modify the content of this terms.
-                            </DrawerDescription>
-                            </DrawerHeader>
-                            <PrivacyAndTermsForm data={data}/>
-                            <DrawerFooter className="pt-2">
-                            </DrawerFooter>
-
-                            </div>
-                        </DrawerContent>
-                        </Drawer>
-                        }
-                   
         </div>
-    </div>
+        {termsData ?
+        <div className='bg-blue-100 rounded-lg p-3 text-sm shadow space-y-10'>
+            <p className='line-clamp-6'>
+                <span>
+                    {termsData?.content}
+                </span>
+            </p>
+
+            <div className='flex ml-auto w-fit items-center gap-2'>
+            <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => fetchTerms(termsData.id)}/>
+            <Dialog>
+                <DialogTrigger asChild>
+                    <Trash2 className='text-red-500 size-6 cursor-pointer'/>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                <DialogHeader>
+                    <DialogTitle>Delete this?</DialogTitle>
+                    <DialogDescription>
+                    This is a permanent action. Are you sure?
+                    </DialogDescription>
+                </DialogHeader>
+                <div className='flex gap-5 w-fit ml-auto'>
+                    <DialogClose>
+                        Cancel
+                    </DialogClose>
+                    <Button type='button' variant={'destructive'} onClick={() => deleteTerms(termsData.id)} className='border-0'>Delete</Button>
+
+                </div>
+                </DialogContent>
+                
+            </Dialog>
+            {isDesktop ?
+                        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                            <DialogTrigger asChild>
+                            
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-3xl max-h-[550px] overflow-y-auto no-scrollbar">
+                            <DialogHeader>
+                                <DialogTitle>Edit Terms and Conditions</DialogTitle>
+                                <DialogDescription>Modify the content of this terms.</DialogDescription>
+                            </DialogHeader>
+                                <PrivacyAndTermsForm data={data}/>
+                            </DialogContent>
+                            
+                        </Dialog>
+                            :
+                            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+                            <DrawerTrigger asChild>
+                            
+                            </DrawerTrigger>
+                            <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
+                                <div className="z-[51]">
+                                <DrawerHeader className="!text-center">
+                                <DrawerTitle>Edit Terms and Conditions</DrawerTitle>
+                                <DrawerDescription>
+                                Modify the content of this terms.
+                                </DrawerDescription>
+                                </DrawerHeader>
+                                <PrivacyAndTermsForm data={data}/>
+                                <DrawerFooter className="pt-2">
+                                </DrawerFooter>
+
+                                </div>
+                            </DrawerContent>
+                            </Drawer>
+                            }
+                      
+            </div>
+        </div>
+        :
+        <figure className='mx-auto w-fit text-center'>
+            <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
+            <figcaption>No terms yet.</figcaption>
+        </figure>
+          }
 </div>
   )
 }

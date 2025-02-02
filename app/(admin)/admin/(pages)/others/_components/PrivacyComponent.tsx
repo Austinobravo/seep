@@ -27,6 +27,7 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import { useToast } from '@/hooks/use-toast'
 import axios from 'axios'
 import PrivacyAndTermsForm from './PrivacyAndTermsForm'
+import Image from 'next/image'
 
 const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
@@ -110,76 +111,82 @@ const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
                    
 
                 </div>
+                    {privacyData ?
+                    <div className='bg-blue-100 rounded-lg p-3 text-sm shadow space-y-10'>
+                        <p className='line-clamp-6'>
+                            <span dangerouslySetInnerHTML={{__html: privacyData.content}}>
 
-                <div className='bg-blue-100 rounded-lg p-3 text-sm shadow space-y-10'>
-                    <p className='line-clamp-6'>
-                        <span>
-                            {privacyData.content}
-
-                        </span>
-                    </p>
-                    <div className='flex ml-auto w-fit items-center gap-2'>
-                    <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => fetchPrivacy(privacyData.id)}/>
-                    <Dialog>
-                        <DialogTrigger asChild>
-                            <Trash2 className='text-red-500 size-6 cursor-pointer'/>
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
-                        <DialogHeader>
-                            <DialogTitle>Delete this?</DialogTitle>
-                            <DialogDescription>
-                            This is a permanent action. Are you sure?
-                            </DialogDescription>
-                        </DialogHeader>
-                        <div className='flex gap-5 w-fit ml-auto'>
-                            <DialogClose>
-                                Cancel
-                            </DialogClose>
-                            <Button type='button' variant={'destructive'} onClick={() => deletePrivacy(privacyData.id)} className='border-0'>Delete</Button>
-
-                        </div>
-                        </DialogContent>
-                        
-                    </Dialog>
-                    {isDesktop ?
-                    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-                        <DialogTrigger asChild>
-                        
-                        </DialogTrigger>
-                        <DialogContent className="sm:max-w-3xl max-h-[550px] overflow-y-auto no-scrollbar">
-                        <DialogHeader>
-                            <DialogTitle>Edit Privacy policy</DialogTitle>
-                            <DialogDescription>Modify the content of this policy.</DialogDescription>
-                        </DialogHeader>
-                            <PrivacyAndTermsForm data={data} setOpen={setIsOpen}/>
-                        </DialogContent>
-                        
-                    </Dialog>
-                        :
-                        <Drawer open={isOpen} onOpenChange={setIsOpen}>
-                        <DrawerTrigger asChild>
-                        
-                        </DrawerTrigger>
-                        <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
-                            <div className="z-[51]">
-                            <DrawerHeader className="!text-center">
-                            <DrawerTitle>Edit Privacy policy</DrawerTitle>
-                            <DrawerDescription>
-                            Modify the content of this policy.
-                            </DrawerDescription>
-                            </DrawerHeader>
-                            <PrivacyAndTermsForm data={data} setOpen={setIsOpen}/>
-                            <DrawerFooter className="pt-2">
-                            </DrawerFooter>
+                            </span>
+                        </p>
+                        <div className='flex ml-auto w-fit items-center gap-2'>
+                        <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => fetchPrivacy(privacyData.id)}/>
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                <Trash2 className='text-red-500 size-6 cursor-pointer'/>
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                            <DialogHeader>
+                                <DialogTitle>Delete this?</DialogTitle>
+                                <DialogDescription>
+                                This is a permanent action. Are you sure?
+                                </DialogDescription>
+                            </DialogHeader>
+                            <div className='flex gap-5 w-fit ml-auto'>
+                                <DialogClose>
+                                    Cancel
+                                </DialogClose>
+                                <Button type='button' variant={'destructive'} onClick={() => deletePrivacy(privacyData.id)} className='border-0'>Delete</Button>
 
                             </div>
-                        </DrawerContent>
-                        </Drawer>
-                        }
-                   
+                            </DialogContent>
+                            
+                        </Dialog>
+                        {isDesktop ?
+                        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                            <DialogTrigger asChild>
+                            
+                            </DialogTrigger>
+                            <DialogContent className="sm:max-w-3xl max-h-[550px] overflow-y-auto no-scrollbar">
+                            <DialogHeader>
+                                <DialogTitle>Edit Privacy policy</DialogTitle>
+                                <DialogDescription>Modify the content of this policy.</DialogDescription>
+                            </DialogHeader>
+                                <PrivacyAndTermsForm data={data} setOpen={setIsOpen}/>
+                            </DialogContent>
+                            
+                        </Dialog>
+                            :
+                            <Drawer open={isOpen} onOpenChange={setIsOpen}>
+                            <DrawerTrigger asChild>
+                            
+                            </DrawerTrigger>
+                            <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
+                                <div className="z-[51]">
+                                <DrawerHeader className="!text-center">
+                                <DrawerTitle>Edit Privacy policy</DrawerTitle>
+                                <DrawerDescription>
+                                Modify the content of this policy.
+                                </DrawerDescription>
+                                </DrawerHeader>
+                                <PrivacyAndTermsForm data={data} setOpen={setIsOpen}/>
+                                <DrawerFooter className="pt-2">
+                                </DrawerFooter>
 
+                                </div>
+                            </DrawerContent>
+                            </Drawer>
+                            }
+                    
+
+                        </div>
                     </div>
-                </div>
+                    :
+                    <figure className='mx-auto w-fit text-center'>
+                        <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
+                        <figcaption>No policy yet.</figcaption>
+                    </figure>
+                    }
+                    
             </div>
   )
 }

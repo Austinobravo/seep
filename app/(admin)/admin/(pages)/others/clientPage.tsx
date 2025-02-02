@@ -13,8 +13,8 @@ const PrivacyClientPage = ({privacyData, termsData}: Props) => {
     
   return (
     <section >
-        <div className='flex gap-10 md:flex-nowrap flex-wrap'>
-            <PrivacyComponent privacyData={privacyData}/>
+        <div className='grid gap-10 md:grid-cols-2 grid-cols-1'>
+            <PrivacyComponent privacyData={privacyData}/> 
             <TermsComponent termsData={termsData}/>
 
         </div>
