@@ -34,7 +34,7 @@ const Counter = ({Text}: {Text:TextProps}) => {
                 {Text.map((item, index) => (
                     <div key={index} className='flex flex-col items-center justify-center space-y-3'>
                         <h2 className='text-[#FFA807] text-6xl'><CountUp start={0} end={parseInt(item.heading)} duration={10}/></h2>
-                        <span className='text-lg seep-text-color hover:underline'>{item.paragraph}</span>
+                        <span className='text-lg text-seep-color hover:underline'>{item.paragraph}</span>
                     </div>
                 ))}
 

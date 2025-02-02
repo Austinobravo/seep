@@ -16,7 +16,7 @@ const JoinHero = () => {
       </FadeInSection>
       <FadeInSection direction={`up`}>
         <div>
-            <h2 className='seep-text-color leading-relaxed'>Volunteering allows you to impact and connect with your community and the rest of the world. Your dedicated time to our project will help you expand your network, boost your social skills, and advance in your career.</h2>
+            <h2 className='text-seep-color leading-relaxed'>Volunteering allows you to impact and connect with your community and the rest of the world. Your dedicated time to our project will help you expand your network, boost your social skills, and advance in your career.</h2>
         </div>     
       </FadeInSection>
         <JoinForm/> 

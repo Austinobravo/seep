@@ -11,7 +11,7 @@ const Testimonials = () => {
   return (
     <section className='md:px-20 px-10 py-16'>
         <FadeInSection direction={`up`}>
-            <div className='seep-text-color text-center space-y-2 pb-8'>
+            <div className='text-seep-color text-center space-y-2 pb-8'>
                 <h3 className=' md:text-5xl text-4xl font-semibold'>SEEP TESTIMONIALS</h3>
                 <blockquote className='opacity-90 md:text-3xl text-2xl font-bold'>“A flow of student entrepreneurs into the Nigeria economy”</blockquote>
                 <div className='flex justify-center items-center text-lg'>

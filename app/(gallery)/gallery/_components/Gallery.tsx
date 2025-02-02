@@ -116,7 +116,7 @@ const Gallery = () => {
   return (
     <section className='md:px-20 px-10 '>
         <div id="seep_2019">
-            <div className='seep-text-color text-center space-y-2 py-8'>
+            <div className='text-seep-color text-center space-y-2 py-8'>
                 <blockquote className='opacity-90 md:text-3xl text-2xl font-bold'>“A flow of student entrepreneurs into the nigerian economy”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
                     <Dot/>
@@ -160,7 +160,7 @@ const Gallery = () => {
             </div>
         </div>
         <div id='seep_2022'>
-            <div className='seep-text-color text-center space-y-2 py-8'>
+            <div className='text-seep-color text-center space-y-2 py-8'>
                 <blockquote className='opacity-90 text-3xl font-bold'>“Taking Tech to School”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
                     <Dot/>

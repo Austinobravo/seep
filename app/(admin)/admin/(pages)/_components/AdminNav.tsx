@@ -14,7 +14,7 @@ const AdminNav = async ({title} : Props) => {
         <div className='flex items-center w-full lg:basis-2/4 gap-x-4'>
             <Image src={`/images/logo.png`} width={500} height={500} alt='Logo' className='size-20 object-contain'/>
             <div className=''>
-                <h3 className='text-3xl seep-text-color font-semibold'>{title}</h3>
+                <h3 className='text-3xl text-seep-color font-semibold'>{title}</h3>
                 <h4>Hi {user ? user.firstName : 'Chief'}, Welcome back!</h4>
             </div>
         </div>

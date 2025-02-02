@@ -238,7 +238,7 @@ const AddNewsPage = () => {
                 <h2>No option selected</h2>
               }
               <div className="w-full">
-                <button type="button" className="border w-full seep-bg-color text-white  shadow p-2 cursor-pointer " onClick={()=> append({heading: "", paragraph: ""})}>Add option</button>
+                <button type="button" className="border w-full bg-seep-color text-white  shadow p-2 cursor-pointer " onClick={()=> append({heading: "", paragraph: ""})}>Add option</button>
               </div>
             </div>
             <Button type="submit" className="disabled:cursor-not-allowed " disabled={isSubmitting}>{isSubmitting ? <span className="w-fit mx-auto"><Loader2 className="animate-spin"/></span> : "Submit"}</Button>

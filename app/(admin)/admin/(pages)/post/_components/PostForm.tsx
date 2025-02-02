@@ -306,7 +306,7 @@ const PostForm = ({category,news, setOpen}: Props) => {
               }
 
               <div className="w-full">
-                <button type="button" className="border w-full seep-bg-color text-white  shadow p-2 cursor-pointer " onClick={()=> append({heading: "", paragraph: ""})}>Add option</button>
+                <button type="button" className="border w-full bg-seep-color text-white  shadow p-2 cursor-pointer " onClick={()=> append({heading: "", paragraph: ""})}>Add option</button>
               </div>
             </div>
               <hr/>

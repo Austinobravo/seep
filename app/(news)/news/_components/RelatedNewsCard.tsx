@@ -163,12 +163,12 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
     const [currentCategory, setCurrentCategory] = React.useState<string>('innovation')
   return (
     <div className='space-y-7 py-10 md:px-20 px-10'>
-        <span className='font-semibold seep-bg-color text-white px-4 py-2'>Related News</span>
+        <span className='font-semibold bg-seep-color text-white px-4 py-2'>Related News</span>
         {categories.length >= 1 ?
         <>
         <div className='flex flex-wrap items-center justify-center gap-x-7 gap-y-4'>
             {categories.map((category, index) => (
-                <button key={`${category.name}`} onClick={()=> setCurrentCategory(category.name)} type='button' className={`${currentCategory === category.name && 'seep-bg-color text-white border-0'} cursor-pointer py-1 px-5 rounded-md border-blue-500 border capitalize`}>{category.name}</button>
+                <button key={`${category.name}`} onClick={()=> setCurrentCategory(category.name)} type='button' className={`${currentCategory === category.name && 'bg-seep-color text-white border-0'} cursor-pointer py-1 px-5 rounded-md border-blue-500 border capitalize`}>{category.name}</button>
             ))}
         </div>
         <div className=''>
@@ -189,7 +189,7 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
                                     <h5 className='font-light opacity-80'>{category.name} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa accusamus in veniam voluptatem itaque, consectetur, quam totam eligendi fugit magnam ror....</h5>
                                 </div>
                                 <div className='flex justify-between flex-wrap gap-y-3'>
-                                    <div className='flex justify-between seep-text-color gap-3 flex-wrap '>
+                                    <div className='flex justify-between text-seep-color gap-3 flex-wrap '>
                                         <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-2 items-center'>
                                             <Heart/>
                                             <span>24.5k</span>
@@ -201,7 +201,7 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
                                         </div>
                                         
                                     </div>
-                                    <Link href={`/news/${cat.slug}`} className='flex seep-text-color bg-blue-200 text-sm rounded-full w-fit h-9 px-2 items-center'>
+                                    <Link href={`/news/${cat.slug}`} className='flex text-seep-color bg-blue-200 text-sm rounded-full w-fit h-9 px-2 items-center'>
                                         <span>Read More</span>
                                         <ArrowUpRight className=''/>
                                     </Link>

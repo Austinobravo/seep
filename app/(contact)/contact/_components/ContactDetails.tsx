@@ -8,30 +8,30 @@ const ContactDetails = () => {
   return (
     <section className='py-10 space-y-4'>
         <h2 className='font-bold text-xl'>Frequently Asked Questions</h2>
-        <p className='text-lg seep-text-color'>Reach out to us with your frequently asked question</p>
+        <p className='text-lg text-seep-color'>Reach out to us with your frequently asked question</p>
         <div className='flex items-start gap-x-3'>
             <Mail className='w-5 h-5'/>
             <div>
                 <h3 className='font-bold'>Email</h3>
-                <p className='seep-text-color'><Link href={`mailto:info.seesc.official@gmail.com`}>info.seesc.official@gmail.com</Link></p>
-                <p className='seep-text-color'><Link href={`mailto:seepng.info@gmail.com`}>seepng.info@gmail.com</Link></p>
+                <p className='text-seep-color'><Link href={`mailto:info.seesc.official@gmail.com`}>info.seesc.official@gmail.com</Link></p>
+                <p className='text-seep-color'><Link href={`mailto:seepng.info@gmail.com`}>seepng.info@gmail.com</Link></p>
             </div>
         </div>
         <div className='flex items-start gap-x-3'>
             <Phone className='w-5 h-5'/>
             <div>
                 <h3 className='font-bold'>Phone</h3>
-                <p className='seep-text-color'><Link href={`tel:+234 806 375 0853`}><span className='font-bold'>WhatsApp:</span>+234 806 375 0853</Link></p>
-                <p className='seep-text-color'><Link href={`tel:+234 906 504 5721`}><span className='font-bold'>Calls:</span>+234 906 504 5721</Link></p>
-                <p className='seep-text-color'><Link href={`tel:+234 913 100 3892`}><span className='font-bold'>Calls:</span>+234 913 100 3892</Link></p>
+                <p className='text-seep-color'><Link href={`tel:+234 806 375 0853`}><span className='font-bold'>WhatsApp:</span>+234 806 375 0853</Link></p>
+                <p className='text-seep-color'><Link href={`tel:+234 906 504 5721`}><span className='font-bold'>Calls:</span>+234 906 504 5721</Link></p>
+                <p className='text-seep-color'><Link href={`tel:+234 913 100 3892`}><span className='font-bold'>Calls:</span>+234 913 100 3892</Link></p>
             </div>
         </div>
         <div className='flex items-start gap-x-3'>
             <MapPin className='w-5 h-5'/>
             <div>
                 <h3 className='font-bold'>Location</h3>
-                <p className='seep-text-color'><span className='font-bold'>Head Office:</span> 13 Kenneth Nwaigwe Avenue, World Bank Estate Owerri, Imo State.</p>
-                <p className='seep-text-color'><span className='font-bold'>Uyo Office:</span> Apostle Umana Building, Uwem Lazarus Road, Osongoma Estate Extension Uyo, Akwa Ibom State.</p>
+                <p className='text-seep-color'><span className='font-bold'>Head Office:</span> 13 Kenneth Nwaigwe Avenue, World Bank Estate Owerri, Imo State.</p>
+                <p className='text-seep-color'><span className='font-bold'>Uyo Office:</span> Apostle Umana Building, Uwem Lazarus Road, Osongoma Estate Extension Uyo, Akwa Ibom State.</p>
             </div>
         </div>
         <div>

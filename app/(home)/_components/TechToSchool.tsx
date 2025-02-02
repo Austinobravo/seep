@@ -8,7 +8,7 @@ const TechToSchool = () => {
   return (
     <section className='md:px-20 px-10 py-16'>
         <FadeInSection direction={`up`}>
-            <div className='seep-text-color text-center space-y-2 pb-8'>
+            <div className='text-seep-color text-center space-y-2 pb-8'>
                 <blockquote className='opacity-90 text-3xl font-bold'>“Taking Tech to School”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
                     <Dot/>

@@ -42,20 +42,20 @@ const RelatedNews = async ({news}: newsProps) => {
     <>
     {relatedNews.length >= 1 &&
     <section className='space-y-7 py-5 md:px-20 px-3'>
-        <div className='bg-gray-100 shadow-md flex justify-between py-3 md:text-xl text-base px-2 seep-text-color rounded-lg'>
+        <div className='bg-gray-100 shadow-md flex justify-between py-3 md:text-xl text-base px-2 text-seep-color rounded-lg'>
             <h3 className=''>Related News</h3>
             <Link href={`/news/related`} className='flex'>View All News <ArrowUpRight className='text-amber-500 pl-1'/></Link>
         </div>
 
         <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
             {relatedNews.slice(0,3).map((content) => (
-                <div key={content.id} className='shadow-2xl bg-gray-100 p-4 rounded-lg seep-text-color space-y-3'>
+                <div key={content.id} className='shadow-2xl bg-gray-100 p-4 rounded-lg text-seep-color space-y-3'>
                     <Image src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
                     <div>
                         <h3 className='font-bold'>{content.title}</h3>
                         <p className='opacity-70'>{content.category.name}</p>
                     </div>
-                    <div className='flex justify-between seep-text-color gap-3 py-4 flex-wrap'>
+                    <div className='flex justify-between text-seep-color gap-3 py-4 flex-wrap'>
                         <div className='flex gap-1 bg-blue-200  rounded-full  w-fit h-9 px-2 text-sm items-center'>
                             <Heart size={15}/>
                             <span>24.5k</span>

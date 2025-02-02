@@ -36,60 +36,69 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { Switch } from "@/components/ui/switch"
+import Link from "next/link"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+  DialogClose
+} from "@/components/ui/dialog"
+// const data: TableDataType[] = [
+//   {
+//     id: "m5gr84i9",
+//     admin_id: "Nwankwo Joy",
+//     phone: "+19444949494",
+//     email: "joy@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Active"
+//   },
+//   {
+//     id: "3u1reuv4",
+//     admin_id: "Gift Happiness",
+//     phone: "+19444949494",
+//     email: "Gift@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Active"
+//   },
+//   {
+//     id: "derv1ws0",
+//     admin_id: "Simon Sinek",
+//     phone: "+19444949494",
+//     email: "simon@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Inactive"
+//   },
+//   {
+//     id: "5kma53ae",
+//     admin_id: "Steven Doe",
+//     phone: "+19444949494",
+//     email: "steve@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     admin_id: "Carmichael",
+//     phone: "+19444949494",
+//     email: "michael@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Inactive"
+//   },
+// ]
 
-const data: TableDataType[] = [
-  {
-    id: "m5gr84i9",
-    admin_id: "Nwankwo Joy",
-    phone: "+19444949494",
-    email: "joy@yahoo.com",
-    joined_date: "30/8/2024",
-    status: "Active"
-  },
-  {
-    id: "3u1reuv4",
-    admin_id: "Gift Happiness",
-    phone: "+19444949494",
-    email: "Gift@yahoo.com",
-    joined_date: "30/8/2024",
-    status: "Active"
-  },
-  {
-    id: "derv1ws0",
-    admin_id: "Simon Sinek",
-    phone: "+19444949494",
-    email: "simon@yahoo.com",
-    joined_date: "30/8/2024",
-    status: "Inactive"
-  },
-  {
-    id: "5kma53ae",
-    admin_id: "Steven Doe",
-    phone: "+19444949494",
-    email: "steve@yahoo.com",
-    joined_date: "30/8/2024",
-    status: "Active"
-  },
-  {
-    id: "bhqecj4p",
-    admin_id: "Carmichael",
-    phone: "+19444949494",
-    email: "michael@yahoo.com",
-    joined_date: "30/8/2024",
-    status: "Inactive"
-  },
-]
+// export type TableDataType = {
+//   id: string
+//   admin_id: string
+//   phone: string
+//   email: string
+//   joined_date: string
+//   status: 'Active' | 'Inactive'
+// }
 
-export type TableDataType = {
-  id: string
-  admin_id: string
-  phone: string
-  email: string
-  joined_date: string
-  status: 'Active' | 'Inactive'
-}
-
-export const columns: ColumnDef<TableDataType>[] = [
+export const columns: ColumnDef<UserType>[] = [
   {
     id: "number",
     header: "User NO",
@@ -98,10 +107,10 @@ export const columns: ColumnDef<TableDataType>[] = [
     ),
   },
   {
-    accessorKey: "admin_id",
+    accessorKey: "username",
     header: "Admin ID",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("admin_id")}</div>
+      <Link href={`/admin/admins/${row.original.id}`} className="capitalize text-seep-color hover:underline-offset-4 hover:underline">{row.getValue("username")}</Link>
     ),
   },
   {
@@ -119,29 +128,29 @@ export const columns: ColumnDef<TableDataType>[] = [
     ),
   },
   {
-    accessorKey: "joined_date",
+    accessorKey: "createdAt",
     header: "Joined Date",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("joined_date")}</div>
+      <div className="capitalize">{new Date(row.getValue("createdAt")).toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"} )}</div>
     ),
   },
   {
-    accessorKey: "status",
+    accessorKey: "isActive",
     header: "Status",
     cell: ({ row }) => {
-        const isActive = row.getValue("status") === "Active"
+        const isActive = row.original.isActive
     return (
       <div className={`capitalize border rounded-full p-2 flex items-center justify-evenly gap-1`}>
         <span className={`${isActive ? 'bg-green-500' : 'bg-red-500'} p-1.5 rounded-full`}></span>
-        <p>{row.getValue("status")}</p>
+        <p>{isActive ? "Active" : "Inactive"}</p>
         </div>
     )},
   },
   {
-    accessorKey: "status",
+    accessorKey: "isBlocked",
     header: "Block User",
     cell: ({ row }) => {
-        const isActive = row.getValue("status") === "Active"
+        const isActive = row.original.isBlocked
     return (
       <Switch checked={isActive} onCheckedChange={()=> isActive ? confirm('Do you want to unblock this user?') : confirm('Do you want to block this user?')}/>
     )},
@@ -150,6 +159,7 @@ export const columns: ColumnDef<TableDataType>[] = [
     id: "actions",
     enableHiding: false,
     cell: ({ row }) => {
+      const id = row.original.id
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -160,13 +170,30 @@ export const columns: ColumnDef<TableDataType>[] = [
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
             <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => confirm('Do you want to delete this user?')}
-              className="flex gap-2 seep-bg-color hover:!bg-blue-500 p-1 !text-white cursor-pointer"
-            >
-            <Trash2/>
-            <span>Delete Admin</span> 
-            </DropdownMenuItem>
+            <Dialog>
+                <DialogTrigger asChild>
+                    <DropdownMenuItem onSelect={(event)=> event.preventDefault()} className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer">
+                    <Trash2/>
+                    <span>Delete Admin</span> 
+                    </DropdownMenuItem>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                <DialogHeader>
+                    <DialogTitle>Delete this?</DialogTitle>
+                    <DialogDescription>
+                    This is a permanent action. Are you sure?
+                    </DialogDescription>
+                </DialogHeader>
+                <div className='flex gap-5 w-fit ml-auto'>
+                    <DialogClose>
+                        Cancel
+                    </DialogClose>
+                    <Button type='button' variant={'destructive'} onClick={() => {}} className='border-0'>Delete</Button>
+
+                </div>
+                </DialogContent>
+                
+            </Dialog>
             <DropdownMenuSeparator />
           </DropdownMenuContent>
         </DropdownMenu>
@@ -175,7 +202,7 @@ export const columns: ColumnDef<TableDataType>[] = [
   },
 ]
 
-export function AdminTable() {
+export function AdminTable({data}: {data: UserType[]}) {
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

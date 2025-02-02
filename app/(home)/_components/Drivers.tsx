@@ -46,16 +46,16 @@ const Drivers = () => {
   return (
     <section className='py-16 '>
         <FadeInSection direction={`up`}>
-            <h2 className='py-10 text-center text-4xl seep-text-color font-bold'>Core Drivers</h2>
+            <h2 className='py-10 text-center text-4xl text-seep-color font-bold'>Core Drivers</h2>
             <div className={`lg:flex gap-x-60 hidden basis-1/2 justify-center items-center w-full mx-auto`}>
                 {imagesAndText.slice(0,3).map((item, index) => (
                     <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2 relative' title={item.name} onMouseEnter={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}} onMouseLeave={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}}>
                         <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
-                        <span className='text-2xl seep-text-color font-bold' >{item.name}</span>
+                        <span className='text-2xl text-seep-color font-bold' >{item.name}</span>
                         {isHovered && item.name === isCurrentHovered &&
                             <div className='absolute w-80 shadow-md rounded-md bg-white p-4 !-mt-40 flex items-center gap-5'>
                                 <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
-                                <span className='text-2xl seep-text-color font-bold' >{item.name}</span>
+                                <span className='text-2xl text-seep-color font-bold' >{item.name}</span>
                             </div>
                         }
                     </div>
@@ -66,11 +66,11 @@ const Drivers = () => {
                 {imagesAndText.slice(3).map((item, index) => (
                     <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2' title={item.name} onMouseEnter={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}} onMouseLeave={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}}>
                         <Image src={`${item.image}`} width={50} height={100} alt={item.name}/>
-                        <span className='text-2xl seep-text-color font-bold'>{item.name}</span>
+                        <span className='text-2xl text-seep-color font-bold'>{item.name}</span>
                         {isHovered && item.name === isCurrentHovered &&
                             <div className='absolute w-80 shadow-md rounded-md bg-white p-4 !-mt-40 flex items-center gap-5'>
                                 <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
-                                <span className='text-2xl seep-text-color font-bold' >{item.name}</span>
+                                <span className='text-2xl text-seep-color font-bold' >{item.name}</span>
                             </div>
                         }
                     </div>
@@ -78,16 +78,16 @@ const Drivers = () => {
 
             </div>
             <div className="bg-white flex lg:hidden items-center h-[200px] py-5 px-10 justify-between">
-                <button onClick={previous} className="rounded-full border h-fit w-fit seep-bg-color text-[#ddd]">
+                <button onClick={previous} className="rounded-full border h-fit w-fit bg-seep-color text-[#ddd]">
                     <ChevronLeft size={40} />
                 </button>
                 {imagesAndText.map((item, index) => (
                 <div key={index} className={index === current ? "flex flex-col items-center" : "hidden"}>
                     <Image src={item.image} width={80} height={100} alt={`${item.name}`} />
-                    <span className='text-2xl seep-text-color hover:underline font-bold'>{item.name}</span>
+                    <span className='text-2xl text-seep-color hover:underline font-bold'>{item.name}</span>
                 </div>
                 ))}
-                <button onClick={next} className="rounded-full border h-fit w-fit seep-bg-color  text-[#ddd]">
+                <button onClick={next} className="rounded-full border h-fit w-fit bg-seep-color  text-[#ddd]">
                     <ChevronRight size={40} />
                 </button>
             </div>

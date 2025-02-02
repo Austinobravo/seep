@@ -89,14 +89,14 @@ const TeamRoles = () => {
   return (
     <section id='team' className='md:px-20 px-10 py-10'>
         <FadeInSection direction={`up`}>
-            <div className='seep-text-color text-center space-y-2 pb-8'>
+            <div className='text-seep-color text-center space-y-2 pb-8'>
                 <h3 className='opacity-90 text-3xl font-bold'>Team Members</h3>
             </div>  
         </FadeInSection>
         <FadeInSection direction={`up`}>
             <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 '>
                 {team.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
-                    <div key={index} className='seep-text-color w-fit mx-auto'>
+                    <div key={index} className='text-seep-color w-fit mx-auto'>
                         <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
                             <Image src={member.image ? member.image : '/images/avatar.webp'} width={500} height={100} alt={member.name} className=' object-cover mx-auto rounded-md h-72 shadow-md object-top'/>
                             {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in slide-in-from-bottom duration-500 bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}

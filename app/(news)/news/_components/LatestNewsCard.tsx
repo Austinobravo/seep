@@ -12,7 +12,7 @@ const LatestNewsCard = async () => {
     <>
      {contents.length >=1 ?
         <div className='md:px-20 px-10 space-y-10 py-10'>
-            <span className='font-semibold seep-bg-color text-white px-4 py-2'>Latest News</span>
+            <span className='font-semibold bg-seep-color text-white px-4 py-2'>Latest News</span>
             {contents.slice(0,5).map((content) => (
                 <div key={content.id} className='flex justify-between lg:flex-row flex-col-reverse gap-x-10 gap-y-7 p-4 bg-gray-100 shadow-xl rounded-md w-fit'>
                     <div className='basis-3/4 flex justify-between  flex-col'>
@@ -26,7 +26,7 @@ const LatestNewsCard = async () => {
                             <p className='text-gray-600 sm:text-base text-xs'>{content.newsContent[0]?.paragraph ? content.newsContent[0]?.paragraph : <span dangerouslySetInnerHTML={{__html: content?.otherOptions}}/>}</p>
                         </div>
                         <div className='flex justify-between flex-wrap gap-4 items-end'>
-                            <div className='flex justify-between seep-text-color flex-wrap gap-3 '>
+                            <div className='flex justify-between text-seep-color flex-wrap gap-3 '>
                                 <div className='flex gap-1 bg-blue-200 rounded-full text-sm w-fit h-9 px-2 items-center'>
                                     <Heart/>
                                     <span>24.5k</span>
@@ -41,7 +41,7 @@ const LatestNewsCard = async () => {
                                 </div>
                                 
                             </div>
-                            <Link href={`/news/${content.slug}`} className='flex seep-text-color bg-blue-200  rounded-full text-sm w-fit h-9 px-2 items-center'>
+                            <Link href={`/news/${content.slug}`} className='flex text-seep-color bg-blue-200  rounded-full text-sm w-fit h-9 px-2 items-center'>
                                 <span>Read More</span>
                                 <ArrowUpRight className=''/>
                             </Link>

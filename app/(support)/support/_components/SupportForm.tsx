@@ -26,10 +26,10 @@ const SupportForm = () => {
                         <div className='md:w-[500px] space-y-3 rounded-2xl px-5 shadow-md bg-white py-10' >
                             <div className=' flex justify-center flex-col items-center space-y-3 py-3'>
                                 <Image src={`/images/logo.png`} width={500} height={100} alt='logo' className='w-36'/>
-                                <h2 className='seep-text-color text-sm'><span className='font-bold'>SEE</span>-SUPPORT CENTRE</h2>
+                                <h2 className='text-seep-color text-sm'><span className='font-bold'>SEE</span>-SUPPORT CENTRE</h2>
                             </div>
-                            <h3 className='seep-text-color text-3xl py-2 text-center font-bold'>Donation</h3>
-                            <p className='seep-text-color opacity-70 text-sm text-justify '>Your generosity will enable us to assist these students and young graduates in rural and urban communities, helping them discover and develop their potentials and interest in tech. We invite you to join us in providing everyone with the opportunity to learn through technology. Together, we can make a lasting impact on the lives of many.</p>
+                            <h3 className='text-seep-color text-3xl py-2 text-center font-bold'>Donation</h3>
+                            <p className='text-seep-color opacity-70 text-sm text-justify '>Your generosity will enable us to assist these students and young graduates in rural and urban communities, helping them discover and develop their potentials and interest in tech. We invite you to join us in providing everyone with the opportunity to learn through technology. Together, we can make a lasting impact on the lives of many.</p>
                             <form className='space-y-3' onSubmit={submitDonation}>
                                 <div>
                                     <label htmlFor='email' className='font-bold opacity-60'>Email Address</label>

@@ -68,11 +68,17 @@ type CategoryType ={
 }
 
 type UserType = {
+    id: string
     username : string
     email : string
     password: string
     firstName: string
     lastName: string
+    phone: string
+    bio: string
+    image: string
+    isActive: boolean
+    isBlocked: boolean
 
     category:     CategoryType
     news:        NewsType

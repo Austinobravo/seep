@@ -27,9 +27,8 @@ export const useAdminNavigation = () => {
         {
             name: "Dashboard",
             href: "",
-            active: pathname === '/admin',
+            active: pathname.includes("/dashboard"),
             icon: House,
-            // icon: User,
             
         },
         {

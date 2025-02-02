@@ -119,7 +119,7 @@ const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
                             </span>
                         </p>
                         <div className='flex ml-auto w-fit items-center gap-2'>
-                        <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => fetchPrivacy(privacyData.id)}/>
+                        <Edit className='text-seep-color size-6 cursor-pointer' onClick={() => fetchPrivacy(privacyData.id)}/>
                         <Dialog>
                             <DialogTrigger asChild>
                                 <Trash2 className='text-red-500 size-6 cursor-pointer'/>

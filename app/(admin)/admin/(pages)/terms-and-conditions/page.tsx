@@ -20,7 +20,7 @@ const TermsAndConditionsPage = () => {
             Lorem amet pharetra sollicitudin montes neque magna porttitor turpis. Quisque turpis mattis nulla morbi. Et vitae magna nibh elit. Quis etiam tristique risus non.
 
             <div className='flex ml-auto w-fit items-center gap-2'>
-              <Edit className='seep-text-color size-6 cursor-pointer'/>
+              <Edit className='text-seep-color size-6 cursor-pointer'/>
               <Trash2 className='text-red-500 size-6 cursor-pointer'/>
             </div>
         </div>

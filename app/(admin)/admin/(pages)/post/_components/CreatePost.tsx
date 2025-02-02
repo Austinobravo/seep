@@ -34,7 +34,7 @@ export function CreatePost({category}: {category:CategoryType[]}) {
     return (
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogTrigger asChild>
-          <Button variant="outline" className="seep-bg-color text-white hover:text-black transition-all duration-500">Create Post</Button>
+          <Button variant="outline" className="bg-seep-color text-white hover:text-black transition-all duration-500">Create Post</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
           <DialogHeader className="!text-center">
@@ -52,7 +52,7 @@ export function CreatePost({category}: {category:CategoryType[]}) {
   return (
     <Drawer open={open} onOpenChange={setOpen} >
       <DrawerTrigger asChild>
-        <Button variant="outline" className="seep-bg-color text-white hover:text-black transition-all duration-500">Create Post</Button>
+        <Button variant="outline" className="bg-seep-color text-white hover:text-black transition-all duration-500">Create Post</Button>
       </DrawerTrigger>
       <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
         <div className="z-[51]">

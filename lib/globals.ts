@@ -3,6 +3,9 @@ import slug from 'slug';
 import prisma from '@/prisma/prisma'
 import { formatDistanceToNow, parseISO } from 'date-fns';
 
+export const emailRegex = /^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/ 
+export const phoneRegex = /^(\+\d{1,2}\s?)?\(?\d{3}\)?[\s.-]?\d{3}[\s.-]?\d{4}$/
+
 const toolbarOptions = [
     // [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
     [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
@@ -84,7 +87,6 @@ export const createUniqueSlug = async (title: string) => {
 }
 
 export const formatDateToString = (date: any) => {
-    console.log('date', date)
     const formattedDate = formatDistanceToNow(parseISO(date), {addSuffix: true})
     return formattedDate
 }

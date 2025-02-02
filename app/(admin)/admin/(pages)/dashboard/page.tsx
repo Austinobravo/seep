@@ -81,12 +81,12 @@ const DashboardPage = async() => {
         <DashboardBarChart/>
         <div className='flex gap-4 md:flex-nowrap flex-wrap'>
           <Table>
-            <TableHeader className='border rounded-lg seep-text-color '>
+            <TableHeader className='border rounded-lg text-seep-color '>
               <TableRow >
-                <TableHead className="w-[400px] max-w-xs seep-text-color font-bold">Article Title</TableHead>
-                <TableHead className='seep-text-color font-bold'>Post Date</TableHead>
-                <TableHead className='seep-text-color font-bold'>Categories</TableHead>
-                <TableHead className="text-right seep-text-color font-bold">Comment</TableHead>
+                <TableHead className="w-[400px] max-w-xs text-seep-color font-bold">Article Title</TableHead>
+                <TableHead className='text-seep-color font-bold'>Post Date</TableHead>
+                <TableHead className='text-seep-color font-bold'>Categories</TableHead>
+                <TableHead className="text-right text-seep-color font-bold">Comment</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -94,11 +94,11 @@ const DashboardPage = async() => {
                 <TableRow key={item.title}>
                   <TableCell className="font-medium flex gap-4 md:flex-nowrap flex-wrap">
                     <Image src={item.image} width={300} height={400} alt={item.title} className='size-16 object-cover rounded-md'/>
-                    <span className='seep-text-color'>{item.title}</span>
+                    <span className='text-seep-color'>{item.title}</span>
                   </TableCell>
                   <TableCell>{item.post_date}</TableCell>
                   <TableCell >
-                    <span className='seep-bg-color text-white px-4 py-2 rounded-xl w-fit'>{item.category}</span>
+                    <span className='bg-seep-color text-white px-4 py-2 rounded-xl w-fit'>{item.category}</span>
                     </TableCell>
                   <TableCell className="text-right">{item.comment} comments</TableCell>
                 </TableRow>

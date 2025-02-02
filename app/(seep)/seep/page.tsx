@@ -30,7 +30,7 @@ const page = () => {
         <Programs/>
         <Beneficiaries/>
         <FadeInSection direction={`up`}>
-          <div className='py-10 space-y-3 seep-text-color md:px-20 p-x10 '>
+          <div className='py-10 space-y-3 text-seep-color md:px-20 p-x10 '>
               <h2 className=' text-center text-4xl py-5 font-bold'>Donate and Partner with Us</h2>
               <p>Your generosity will enable us to assist these students and young graduates in rural and urban communities, helping them discover and develop their potential and interest in tech. We invite you to join us in providing everyone with the opportunity to learn through technology. Together, we can make a lasting impact on the lives of many.</p>
           </div> 

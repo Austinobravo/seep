@@ -70,7 +70,7 @@ const socialLinks = [
 const Footer = () => {
     const pathname = usePathname()
   return (
-    <section className={`seep-bg-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6 ${pathname.includes('/admin') && 'hidden'}`}>
+    <section className={`bg-seep-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6 ${pathname.includes('/admin') && 'hidden'}`}>
         <div className='space-y-2'>
             <Link href={`/`}>
                 <Image src={`/images/logo-white.png`} width={100} height={100} alt='logo'/> 

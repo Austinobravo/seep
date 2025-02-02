@@ -69,7 +69,7 @@ const AboutText = () => {
     <section className='md:px-20 px-10 py-16'>
         <FadeInSection direction={`up`}>
             <div>
-                <div className='seep-text-color space-y-4'>
+                <div className='text-seep-color space-y-4'>
                     <h3 className='text-3xl'>About</h3>
                     <p className='leading-relaxed pb-5 text-lg'>SEE- Support Center, as a non-state actor and a social enterprise is an arm of the Enterprise and Innovation Initiative (RC:7485124) that compliments the activities of the government to research, develop ideas and create a business network of entrepreneurs who will further create employment opportunities for Nigerians and other Africans to reduce unemployment rate by the year 2030 significantly. We leverage and invest in human capacity development, research, innovations, science and technology for a progressive and sustainable global and Nigerian economy.</p>
                 </div>
@@ -81,10 +81,10 @@ const AboutText = () => {
                     <div key={index} className=''>
                         {item.swap ?
                         <>
-                            <h3 className='hover:underline text-3xl py-12 seep-text-color w-fit mx-auto'>{item.name}</h3>
+                            <h3 className='hover:underline text-3xl py-12 text-seep-color w-fit mx-auto'>{item.name}</h3>
                             <div className='flex md:flex-nowrap flex-wrap flex-col-reverse md:flex-row gap-x-4 gap-y-2 text-center md:text-justify'>
                                 <FadeInSection direction={`right`}>
-                                    <div  className='seep-text-color space-y-4 md:basis-1/2'>
+                                    <div  className='text-seep-color space-y-4 md:basis-1/2'>
                                         <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
                                     </div>
                                 </FadeInSection>
@@ -98,7 +98,7 @@ const AboutText = () => {
                         </>
                         :
                         <>
-                            <h3 className=' text-3xl py-12 seep-text-color w-fit mx-auto '>{item.name}</h3>
+                            <h3 className=' text-3xl py-12 text-seep-color w-fit mx-auto '>{item.name}</h3>
                             <div className='flex md:flex-nowrap flex-wrap gap-x-4 gap-y-2'>
                                 <FadeInSection direction={`right`}>
                                     <div  className='md:basis-1/2 mx-auto w-fit md:w-full'>
@@ -106,7 +106,7 @@ const AboutText = () => {
                                     </div>   
                                 </FadeInSection>
                                 <FadeInSection direction={`left`}>
-                                    <div className='seep-text-color space-y-4 md:basis-1/2 text-center md:text-justify'>
+                                    <div className='text-seep-color space-y-4 md:basis-1/2 text-center md:text-justify'>
                                         <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
                                     </div> 
                                 </FadeInSection>
@@ -121,7 +121,7 @@ const AboutText = () => {
             </div>   
         </FadeInSection>
         <FadeInSection direction={`up`}>
-            <div className='seep-text-color space-y-4 '>
+            <div className='text-seep-color space-y-4 '>
                 <h3 className=' text-3xl text-center py-16'>Our Projected Benefits and Impact</h3>
                 <ol className=' text-center'>
                     {Benefits.map((benefit, index) => (

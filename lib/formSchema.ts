@@ -1,5 +1,6 @@
 import { z } from "zod";
-import { validateForEmptySpaces } from "./globals";
+import { emailRegex, validateForEmptySpaces } from "./globals";
+
 
 export const LoginFormSchema = z.object({
     username: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
@@ -33,7 +34,7 @@ export const LoginFormSchema = z.object({
         }
         )
   )
-  }).refine((data) => {return typeof window === "undefined" || data.id || (data.image && data.image.length > 0)}, {message: "Image is very  required", path: ["image"]})
+  }).refine((data) => {return typeof window === "undefined" || data.id || (data.image && data.image.length > 0)}, {message: "Image is required", path: ["image"]})
   .refine((data) => {return typeof window === "undefined" || data.id || (data.image && data.image[0] && data.image[0].size <= MAX_FILE_SIZE)}, {message: "File max size is 5MB", path: ["image"]})
   .refine((data) => {return typeof window === "undefined" || data.id || (data.image && data.image[0] && AcceptedImageTypes.includes(data.image[0].type))}, {message: "Only jpg, png, webp, gif accepted", path: ["image"]})
 
@@ -52,4 +53,29 @@ export const LoginFormSchema = z.object({
     school: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     program: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     })
+
+  export const userFormSchema = z.object({
+      id: z.string().optional(),
+      username: z.string().min(2, {
+        message: "Username is required.",
+      }).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      email: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}).refine((data) => !data || emailRegex.test(data), {message: "Invalid email"}),
+      phone: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      bio: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      firstName: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      lastName: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      password: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      new_password: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      confirm_password: z.string().refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+      image: z.union([
+        z.string().optional(), // Allow an empty value (optional)
+        z.instanceof(File, { message: "Invalid file type" })
+          .refine((file) => file.size <= MAX_FILE_SIZE, { message: "File max size is 5MB" })
+          .refine((file) => AcceptedImageTypes.includes(file.type), { message: "Only jpg, png, webp, gif are accepted" })
+      ])
+    })
+    .refine((data) => 
+      {return !data.new_password || data.new_password === data.confirm_password},
+      {message: "Passwords don't match", path: ["confirm_password"]}
+    )
 

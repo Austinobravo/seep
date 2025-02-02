@@ -93,14 +93,14 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
             </CardContent>
             <CardFooter className="flex-col items-start gap-2 text-sm">
                 <div className="flex gap-2 items-center font-medium leading-none">
-                <Building className='seep-text-color'/>
+                <Building className='text-seep-color'/>
                 <span>{testimonial.school}</span>
                 </div>
                 <div className="leading-none text-muted-foreground">
                     {testimonial.program}
                 </div>
                 <div className='flex ml-auto w-fit items-center gap-2'>
-                        <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => fetchTestimonial(testimonial.id)}/>
+                        <Edit className='text-seep-color size-6 cursor-pointer' onClick={() => fetchTestimonial(testimonial.id)}/>
                         <Dialog>
                             <DialogTrigger asChild>
                                 <Trash2 className='text-red-500 size-6 cursor-pointer'/>

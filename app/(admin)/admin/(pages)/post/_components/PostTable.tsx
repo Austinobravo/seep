@@ -100,7 +100,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                             </div>
                         </div>
                         <div className='flex justify-between flex-wrap gap-y-3 '>
-                            <div className='flex  justify-between seep-text-color gap-3 flex-wrap '>
+                            <div className='flex  justify-between text-seep-color gap-3 flex-wrap '>
                                 <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-2 items-center'>
                                     <span>24.5k</span>
                                 </div>
@@ -112,7 +112,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                                 
                             </div>
                             <div className='flex ml-auto w-fit items-center gap-2'>
-                                <Edit className='seep-text-color size-6 cursor-pointer' onClick={() => getSingleNews(post.slug)}/>
+                                <Edit className='text-seep-color size-6 cursor-pointer' onClick={() => getSingleNews(post.slug)}/>
                                 <Dialog>
                                     <DialogTrigger asChild>
                                         <Trash2 className='text-red-500 size-6 cursor-pointer'/>

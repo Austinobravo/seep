@@ -49,7 +49,7 @@ const TestimonialSection = () => {
                                 <Image src={`/images/avatar.webp`} width={50} height={50} alt='avatar'/>
                             </div>
                             <div>
-                                <h2 className='seep-text-color text-2xl font-bold'>{testimonial.name}</h2>
+                                <h2 className='text-seep-color text-2xl font-bold'>{testimonial.name}</h2>
                                 <p className='md:text-base text-sm mb-1'>{testimonial.school}</p>
                                 <p className='md:text-base text-sm'>{testimonial.program}</p>
                             </div>

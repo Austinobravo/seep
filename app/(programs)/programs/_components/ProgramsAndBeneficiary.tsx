@@ -20,12 +20,12 @@ const ProgramsAndBeneficiary = () => {
   return (
     <section className='md:px-20 px-10 py-10'>
       <FadeInSection direction={`up`}>
-        <h2 className='seep-text-color text-center md:text-4xl text-2xl md:py-10 py-5 font-bold'>Our Programmes / Beneficiaries</h2>    
+        <h2 className='text-seep-color text-center md:text-4xl text-2xl md:py-10 py-5 font-bold'>Our Programmes / Beneficiaries</h2>    
       </FadeInSection>
       <FadeInSection direction={`up`}>
         <div>
           {items.map((item, index) => (
-            <div key={index} className='seep-text-color space-y-2 pb-3'>
+            <div key={index} className='text-seep-color space-y-2 pb-3'>
               <Image src={item.image} width={500} height={100} alt={item.heading} className='w-full rounded-lg md:h-[28rem] h-48 object-cover'/>
               <div className='py-5 space-y-2'>
                 <h3 className='font-bold md:text-3xl text-xl tracking-wider'>{item.heading}</h3>

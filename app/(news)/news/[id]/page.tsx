@@ -54,12 +54,12 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
         <FadeInSection direction={`up`}>  
             <Image src={`${encodeURI(news.image)}`} width={500} height={500} alt='detail' className='rounded-2xl w-full h-[450px] object-cover opacity-80'/>
         </FadeInSection> 
-        <h3 className='text-center seep-text-color md:text-3xl text-2xl font-semibold'>{news.title}</h3>
+        <h3 className='text-center text-seep-color md:text-3xl text-2xl font-semibold'>{news.title}</h3>
         <div className='flex gap-10 pt-10 md:flex-row flex-col-reverse'>
                 {news.newsContent.length >= 1 ?
                     <section className='basis-3/4'>
                         {news.newsContent.map((content) => (
-                            <div key={content.heading} id={content.heading} className='seep-text-color space-y-3 pb-5'>
+                            <div key={content.heading} id={content.heading} className='text-seep-color space-y-3 pb-5'>
                                 <h3 className='md:text-3xl text-2xl'>{content.heading}</h3>
                                 <p className='opacity-70 md:text-base text-sm'>{content.paragraph} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ad accusantium facere id eveniet minima tempore, saepe rerum laborum nulla, laudantium voluptate, nobis accusamus ex cumque eum. Totam laborum nostrum quia?</p>
                             </div>
@@ -70,7 +70,7 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
                 <section  dangerouslySetInnerHTML={{__html: news.otherOptions}}/>
                 }
             <aside className='basis-1/4 space-y-7 md:sticky top-24 h-fit'>
-                <div className='flex justify-between seep-text-color gap-3'>
+                <div className='flex justify-between text-seep-color gap-3'>
                     <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
                         <Heart/>
                         <span>24.5k</span>
@@ -84,7 +84,7 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
                         <span>206</span>
                     </div>
                 </div>
-                <div className='grid grid-cols-2 seep-text-color gap-y-4 '>
+                <div className='grid grid-cols-2 text-seep-color gap-y-4 '>
                     <div>
                         <h3 className='font-bold'>Publication Date</h3>
                         <p className='opacity-70 pt-1'>{new Date(news.createdAt).toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"} )}</p>

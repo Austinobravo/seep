@@ -37,7 +37,7 @@ const Beneficiaries = () => {
          return ()=>clearInterval(interval)
      }, [currentImageIndex])
   return (
-    <section className='md:px-28 px-10 py-10 seep-text-color'>
+    <section className='md:px-28 px-10 py-10 text-seep-color'>
       <FadeInSection direction={`up`}>
         <div>
             <h2 className=' text-center text-4xl  py-5 font-bold'>Meet Our Beneficiaries</h2>

@@ -5,7 +5,7 @@ import React from 'react'
 interface AdminCardProps {
     bgColor?: string
     title: string
-    total: string
+    total: string | number
     percentage?: string
     icon?: LucideIcon 
     iconColor?: string

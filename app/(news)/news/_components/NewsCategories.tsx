@@ -127,7 +127,7 @@ const NewsCategories = () => {
 
     return (
         <section className="relative max-w-screen-lg mx-auto">
-            <h2 className="text-center seep-text-color text-2xl font-semibold pb-5">CATEGORIES</h2>
+            <h2 className="text-center text-seep-color text-2xl font-semibold pb-5">CATEGORIES</h2>
             <div
                 ref={containerRef}
                 className="relative flex h-80 overflow-hidden shadow rounded-md pt-10"
@@ -150,9 +150,9 @@ const NewsCategories = () => {
                     >
                         <div className="bg-gray-200 flex justify-between p-7 text-gray-100 h-44 mx-10 rounded-lg shadow-lg w-[17rem]">
                             <div className="text-gray-700">
-                                <h3 className="text-xl seep-text-color font-semibold">{category.heading}</h3>
+                                <h3 className="text-xl text-seep-color font-semibold">{category.heading}</h3>
                                 <span className="text-xs opacity-70">{category.shorten_desc}</span>
-                                <p className="text-sm seep-text-color opacity-70 pt-7">{category.description}</p>
+                                <p className="text-sm text-seep-color opacity-70 pt-7">{category.description}</p>
                             </div>
                             <div>
                                 <div className="rounded-full cursor-pointer bg-amber-500 p-1 text-white">
@@ -165,18 +165,18 @@ const NewsCategories = () => {
                 <div className="!relative w-72 mx-auto flex justify-center items-center">
                     <button
                         onClick={() => navigate('prev')}
-                        className="absolute left-2 bottom-0 transform -translate-y-1/2 hover:bg-gray-200 seep-text-color font-bold p-2 rounded-full z-10"
+                        className="absolute left-2 bottom-0 transform -translate-y-1/2 hover:bg-gray-200 text-seep-color font-bold p-2 rounded-full z-10"
                     >
                         <ChevronLeft />
                     </button>
                     <button className="!relative top-24 flex gap-1 z-10">
                         {categories.map((_, index) => (
-                            <div key={index} className={`seep-bg-color pt-1 px-3 ${index === currentIndex && '!bg-amber-500'}`}></div>
+                            <div key={index} className={`bg-seep-color pt-1 px-3 ${index === currentIndex && '!bg-amber-500'}`}></div>
                         ))}
                     </button>
                     <button
                         onClick={() => navigate('next')}
-                        className="absolute right-2 transform -translate-y-1/2 bottom-0 hover:bg-gray-200 seep-text-color font-bold p-2 rounded-full z-10"
+                        className="absolute right-2 transform -translate-y-1/2 bottom-0 hover:bg-gray-200 text-seep-color font-bold p-2 rounded-full z-10"
                     >
                         <ChevronRight />
                     </button>

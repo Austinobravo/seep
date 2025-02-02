@@ -7,19 +7,25 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogClose
+  } from "@/components/ui/dialog"
+import { Button } from '@/components/ui/button'
+import { useToast } from '@/hooks/use-toast'
 
-type UserProps = {
-    username: string;
-    id: string;
-    firstName: string;
-    lastName: string;
-} | undefined
 
-const AdminSidebar = ({user}: {user:UserProps}) => {
+const AdminSidebar = ({user}: {user:UserType}) => {
     const paths = useAdminNavigation()
     const [currentPath,  setCurrentPath] = React.useState<string>("")
     const [isCurrentPathToggled,  setIsCurrentPathToggled] = React.useState<boolean>(false)
     const [isSidebarToggled,  setIsSidebarToggled] = React.useState<boolean>(false)
+    const { toast } = useToast()
 
 
     const router = useRouter()
@@ -31,13 +37,17 @@ const AdminSidebar = ({user}: {user:UserProps}) => {
     }
     const logOut = async () => {
         const SignOut = await signOut({redirect:false})
+        toast({
+            description: "We'll miss you. Come back shortly",
+            variant: "default"
+        })
         if(SignOut.url) return router.push("/admin")
     }
   return (
     <div className='flex'>
         <section className={`sm:block ${isSidebarToggled ? '' : "hidden"} space-y-3 py-4 bg-blue-100 !h-screen pt-10 relative`}>
             <div className='flex flex-col items-center justify-center pb-7 text-center'>
-                <Image src={`/images/avatar.webp`} width={500} height={500} alt='avatar' className='size-20'/>
+                <Image src={`${user.image ? encodeURI(user.image) : "/images/avatar.webp"}`} width={500} height={500} alt='avatar' className='size-20 rounded-full ob'/>
                 <h3 className='pt-2 pb-1 font-semibold'>{user?.lastName} {user?.firstName} </h3>
                 <h4 className='text-sm'>Administrator</h4>
             </div>
@@ -47,7 +57,7 @@ const AdminSidebar = ({user}: {user:UserProps}) => {
                     {paths.map((path) =>{
                         const Icon = path.icon
                         return (
-                            <div key={path.name} className={`flex flex-col ${path.active && "seep-bg-color rounded-lg !text-white mx-2"} seep-text-color `}>
+                            <div key={path.name} className={`flex flex-col ${path.active && "bg-seep-color hover:bg-seep-color/80  !text-white mx-2"} rounded-lg text-seep-color hover:bg-gray-50`}>
                                 <div className={`flex items-center gap-2 px-4`}>
                                     <Icon className={`${path.active && "text-white" } text-black size-6 `}/>
                                     <Link href={`/admin/${path.href}`} className='flex items-center justify-between w-full' onClick={(event)=> {path.children && event.preventDefault(), setCurrent(path.name)}}>
@@ -83,13 +93,35 @@ const AdminSidebar = ({user}: {user:UserProps}) => {
 
             </div>
 
-            <div className='absolute bottom-4 pl-5'>
-                <button type='button' className='flex seep-text-color mx-auto cursor-pointer' onClick={logOut}>
-                    <LogOut/>
-                    <span>Log Out</span>
-                </button>
+                <Dialog>
+                        <DialogTrigger asChild>
+                        <div className='pt-20 pb-5 pl-5'>
+                            <button type='button' className='flex text-seep-color gap-x-2 cursor-pointer hover:bg-gray-50 px-4 py-2 rounded-md' >
+                                <LogOut className=''/>
+                                <span>Log Out</span>
+                            </button>
 
-            </div>
+                        </div>
+                        </DialogTrigger>
+                        <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                        <DialogHeader>
+                            <DialogTitle>Log Out</DialogTitle>
+                            <DialogDescription>
+                            Are you sure?.
+                            </DialogDescription>
+                        </DialogHeader>
+                        <div className='flex gap-5 w-fit ml-auto'>
+                            <DialogClose>
+                                Cancel
+                            </DialogClose>
+                            <Button type='button' variant={'destructive'} onClick={logOut} className='border-0'>Log out</Button>
+        
+                        </div>
+                        </DialogContent>
+                        
+                    </Dialog>
+
+            
 
         </section>
 
