@@ -16,18 +16,28 @@ export async function GET(req:NextRequest, {params}: {params: {id: string}}){
             },
             omit:{
                 password: true
+            },
+            include:{
+                roles:{
+                    select:{
+                        role:{
+                            select:{
+                                name: true
+                            }
+                        }
+                    }
+                }
             }
         })
-        
+
         if(!uniqueUser){
             return NextResponse.json({message: "This user doesn't exist."}, {status: 400})
         }
 
-        console.log("user found", user)
         return NextResponse.json(uniqueUser, {status: 200})
         
     }catch(error){
-        console.log("error", error)
+        console.log("error here", error)
         return NextResponse.json({message: "Internal Server error"}, {status: 500})
     }
 

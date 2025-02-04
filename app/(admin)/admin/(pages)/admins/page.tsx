@@ -8,7 +8,6 @@ import axios from 'axios'
 const AdminsPage = async () => {
   const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`)
   const usersData:UserType[] = response.data
-  console.log("user", usersData)
   const contents= [
     {
       title : 'Total Admin',

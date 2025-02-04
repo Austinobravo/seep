@@ -107,12 +107,12 @@ export async function PATCH(req:Request, res: Response) {
     if(!parsedForm.success){
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
+
     const category = await prisma.category.findFirst({
         where:{
             id
         }
     })
-
 
     if(!category){
         return NextResponse.json({message: "Category doesn't exist."}, {status: 400}) 

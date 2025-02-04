@@ -34,7 +34,7 @@ const Discover = async () => {
                     <FadeInSection direction="up">
                     <div className='bg-[#cceaff] flex md:flex-row flex-col-reverse md:px-16 px-8 justify-between md:gap-10 gap-5 items-center py-5'>
                             <div className='text-seep-color space-y-2'>
-                                <Link href={`/news/id`}>
+                                <Link href={`/news/${content.slug}`}>
                                     <h3 className='md:text-2xl text-lg font-semibold'>{content.title}</h3> 
                                 </Link>
                                 <p className='line-clamp-2'>

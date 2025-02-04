@@ -75,7 +75,7 @@ const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
                     {isDesktop ?
                     <Dialog>
                         <DialogTrigger asChild>
-                        <Button type='button'>Create privacy policy</Button>
+                            {!privacyData && <Button type='button'>Create privacy policy</Button>}
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-3xl max-h-[550px] overflow-y-auto no-scrollbar">
                         <DialogHeader>
@@ -89,7 +89,7 @@ const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
                         :
                         <Drawer>
                         <DrawerTrigger asChild>
-                        <Button type='button'>Create privacy policy</Button>
+                            {!privacyData && <Button type='button'>Create privacy policy</Button>}
                             
                         </DrawerTrigger>
                         <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">

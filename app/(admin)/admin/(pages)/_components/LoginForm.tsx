@@ -43,8 +43,6 @@ const LoginForm = () => {
 
 
   const onSubmit = async (values: z.infer<typeof LoginFormSchema>) => {
-    console.log("values", values)
-
     try{
       const data = await signIn("credentials", 
         {

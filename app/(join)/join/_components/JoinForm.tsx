@@ -1,8 +1,17 @@
 "use client"
-import Button from '@/components/Button'
+import Button as BTN from '@/components/Button'
 import { MoveRight, X } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+    DialogClose
+  } from "@/components/ui/dialog"
 
 const JoinForm = () => {
     const [isModalOpen, setIsModalOpen] = React.useState<boolean>(false)
@@ -12,10 +21,34 @@ const JoinForm = () => {
   }
   return (
     <section >
+      <Dialog>
+      <DialogTrigger asChild>
               <div className='mx-auto w-fit py-10'>
-        <Button title='Join Us' icon={MoveRight} path='' onClick={()=> setIsModalOpen(!isModalOpen)}/>
+                <BTN title='Join Us' icon={MoveRight} path='' onClick={()=> setIsModalOpen(!isModalOpen)}/>
+            </div>
+      </DialogTrigger>
+      <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+      <DialogHeader>
+          <DialogTitle>
+            <div className=' flex justify-center flex-col items-center space-y-3 py-3'>
+                <Image src={`/images/logo.png`} width={500} height={100} alt='logo' className='w-36'/>
+                <h2 className='text-seep-color text-sm'><span className='font-bold'>SEE</span>-SUPPORT CENTRE</h2>
+            </div>
+          </DialogTitle>
+          <DialogDescription>
+                <h3 className='text-seep-color text-3xl py-2 text-center font-bold'>Join Us</h3>
+                <p className='text-seep-color opacity-70 text-sm text-justify '>Your generosity will enable us to assists these students and young graduates in the rural community as well as the underserved areas, in turn help them discover and develop their potentials and interest in tech. We implore you to join us in providing every individual with the opportunity to learn and in tech. Together, we can make a lasting impact on the lives of many.</p>
+          </DialogDescription>
+      </DialogHeader>
+      <div className='flex gap-5 w-fit ml-auto'>
+          <DialogClose>
+              Cancel
+          </DialogClose>
+
       </div>
-      {isModalOpen && 
+      </DialogContent>
+      
+  </Dialog>
             <div className='flex justify-center items-center w-full'>
             <div className='bg-white/50 overflow-y-auto backdrop-blur-xl fixed z-50 top-0 left-0 w-full h-full'>
             <div className='w-fit ml-auto p-4 cursor-pointer' onClick={()=> setIsModalOpen(!isModalOpen)}>

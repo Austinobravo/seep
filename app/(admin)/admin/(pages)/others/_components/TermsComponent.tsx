@@ -76,7 +76,7 @@ const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
         {isDesktop ?
                     <Dialog>
                         <DialogTrigger asChild>
-                        <Button type='button'>Create T & C's</Button>
+                          {!termsData && <Button type='button'>Create T & C's</Button>}
                         </DialogTrigger>
                         <DialogContent className="sm:max-w-3xl max-h-[550px] overflow-y-auto no-scrollbar">
                         <DialogHeader>
@@ -90,7 +90,7 @@ const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
                         :
                         <Drawer>
                         <DrawerTrigger asChild>
-                        <Button type='button'>Create T & C's</Button>
+                          {!termsData && <Button type='button'>Create T & C's</Button>}
                             
                         </DrawerTrigger>
                         <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">

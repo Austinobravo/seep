@@ -171,10 +171,12 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
                 <button key={`${category.name}`} onClick={()=> setCurrentCategory(category.name)} type='button' className={`${currentCategory === category.name && 'bg-seep-color text-white border-0'} cursor-pointer py-1 px-5 rounded-md border-blue-500 border capitalize`}>{category.name}</button>
             ))}
         </div>
-        <div className=''>
+        <div className=' '>
             {categories.map((category) => (
-                <div key={`${category.name}`} className={`category-content ${currentCategory === category.name ? 'active' : ''} grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 `}>
-                    {currentCategory === category.name && category.news.map((cat, index) => (
+                category.news.length >= 1 ? 
+                <div key={`${category.name}`} className={`category-content ${currentCategory === category.name  ? 'active' : ''} ${ category.news.length >= 1 ? 'grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 ' : 'items-center flex border justify-center'}`}>
+                    {currentCategory === category.name && 
+                     category.news.map((cat, index) => (
                         <div key={`${category.name}-${cat.title}-${index}`} className='border p-2 rounded-lg shadow '>
                             <div style={{'backgroundImage': `url(${cat.image}`}} className='bg-center bg-cover h-40 w-full bg-no-repeat  items-end flex '>
                                 <div className='gap-2 text-white text-sm items-end flex bg-gradient-to-b from-transparent via-[#0097FF] to-[#0097FF] w-full p-2'>
@@ -209,8 +211,16 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
 
                             </div>
                         </div>
-                    ))}
+                    ))
+                    }
                 </div>
+                    :
+                <figure className='mx-auto w-fit text-center'>
+                    <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
+                    <figcaption>No news yet.</figcaption>
+                </figure>
+
+                // <div key={`${category.name}`} className={`category-content ${currentCategory === category.name  ? 'active' : ''} ${ category.news.length >= 1 ? 'grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 ' : 'items-start flex border justify-start'}`}>
             ))}
         </div>
         </>

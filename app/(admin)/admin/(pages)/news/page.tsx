@@ -26,7 +26,7 @@ const PostPage = async () => {
 
   return (
     <div>
-        <AdminNav title='Post' user='Joy'/>
+        <AdminNav title='News' user='Joy'/>
         <div className='py-3 ml-auto w-fit'>
           <CreatePost category={category}/>
         </div>

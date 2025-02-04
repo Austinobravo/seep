@@ -36,7 +36,11 @@ const contents = [
 const NewsDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
     const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news/${id}`)
+    if(response.status !== 200){
+        return
+    }
     const news:NewsType = response.data
+
 
      const calculateReadingTime = (text: string, wordPerMinute:number = 200): number => {
         const words = text.trim().split(/\s+/).length

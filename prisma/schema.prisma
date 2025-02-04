@@ -31,9 +31,12 @@ model User {
   roles        UserRole[]
   category     Category[]
   news         News[]
+  gallery         GalleryImage[]
+  galleryCategory GalleryCategory[]
   privacypolicy PrivacyPolicy[]
   termsandconditions TermsAndConditions[]
   testimonials Testimonials[]
+  teamMember  TeamMember[]
 
 
 }
@@ -159,6 +162,74 @@ model Testimonials {
   program String
 
 
+  userId String
+  user User @relation(fields: [userId], references: [username], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+model Contact {
+  id String @id @default(uuid())
+  name String 
+  email String
+  phone String?
+  message String @db.Text
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+model Join {
+  id String @id @default(uuid())
+  firstName String 
+  lastName String 
+  email String
+  phone String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+model GalleryImage {
+  id String @id @default(uuid())
+  image String 
+  description String
+
+  
+  userId String
+  user User @relation(fields: [userId], references: [username], onDelete: Cascade)
+
+  galleryCategoryId String
+  gallery GalleryCategory @relation(fields: [galleryCategoryId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+model GalleryCategory {
+  id String @id @default(uuid())
+  title String 
+  subtitle String
+
+
+  galleryImage GalleryImage[]
+  userId String
+  user User @relation(fields: [userId], references: [username], onDelete: Cascade)
+
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+}
+
+model TeamMember {
+  id String @id @default(uuid())
+  image String 
+  description String @db.Text
+  name String
+
+  
   userId String
   user User @relation(fields: [userId], references: [username], onDelete: Cascade)
 

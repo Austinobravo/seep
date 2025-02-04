@@ -49,13 +49,14 @@ export async function GET(req:NextRequest, {params}: {params: {id: string}}){
 export async function DELETE(req:NextRequest, {params}: {params: {id: string}}){
     const user = getCurrentUser()
     const {id} = params
+    console.log('id', id)
     if(!user){
         return NextResponse.json({message: "Invalid user"}, {status: 401})
     }
 
     const news = await prisma.news.findUnique({
         where: {
-            id
+            slug: id
         }
     })
     console.log('news', news)
@@ -68,7 +69,7 @@ export async function DELETE(req:NextRequest, {params}: {params: {id: string}}){
     try{
         const deletedNews = await prisma.news.delete({
             where: {
-                id
+                slug: id
             }
         })
         return NextResponse.json({message: "Deleted Successfully"}, {status: 200})

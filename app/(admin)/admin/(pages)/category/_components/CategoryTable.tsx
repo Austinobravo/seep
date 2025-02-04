@@ -99,6 +99,7 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
   const getSingleCategory = async (id: string) => {
     try{
       const response = await axios.get(`/api/category/${id}`,)
+      console.log("cat", response.data)
       setSingleCategory(response.data)
       setOpen(true); 
       
@@ -181,7 +182,7 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
         id: "actions",
         enableHiding: false,
         cell: ({ row }) => {
-          const id = row.original.slug
+          const id = row.original.id
     
           return (
             <>

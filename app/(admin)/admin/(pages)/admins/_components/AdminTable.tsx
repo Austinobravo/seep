@@ -46,6 +46,8 @@ import {
   DialogTrigger,
   DialogClose
 } from "@/components/ui/dialog"
+import { useToast } from "@/hooks/use-toast"
+import axios from "axios"
 // const data: TableDataType[] = [
 //   {
 //     id: "m5gr84i9",
@@ -98,88 +100,95 @@ import {
 //   status: 'Active' | 'Inactive'
 // }
 
-export const columns: ColumnDef<UserType>[] = [
-  {
-    id: "number",
-    header: "User NO",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.index + 1}</div>
-    ),
-  },
-  {
-    accessorKey: "username",
-    header: "Admin ID",
-    cell: ({ row }) => (
-      <Link href={`/admin/admins/${row.original.id}`} className="capitalize text-seep-color hover:underline-offset-4 hover:underline">{row.getValue("username")}</Link>
-    ),
-  },
-  {
-    accessorKey: "phone",
-    header: "Phone",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("phone")}</div>
-    ),
-  },
-  {
-    accessorKey: "email",
-    header: "Emails",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("email")}</div>
-    ),
-  },
-  {
-    accessorKey: "createdAt",
-    header: "Joined Date",
-    cell: ({ row }) => (
-      <div className="capitalize">{new Date(row.getValue("createdAt")).toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"} )}</div>
-    ),
-  },
-  {
-    accessorKey: "isActive",
-    header: "Status",
-    cell: ({ row }) => {
-        const isActive = row.original.isActive
-    return (
-      <div className={`capitalize border rounded-full p-2 flex items-center justify-evenly gap-1`}>
-        <span className={`${isActive ? 'bg-green-500' : 'bg-red-500'} p-1.5 rounded-full`}></span>
-        <p>{isActive ? "Active" : "Inactive"}</p>
-        </div>
-    )},
-  },
-  {
-    accessorKey: "isBlocked",
-    header: "Block User",
-    cell: ({ row }) => {
-        const isActive = row.original.isBlocked
-    return (
-      <Switch checked={isActive} onCheckedChange={()=> isActive ? confirm('Do you want to unblock this user?') : confirm('Do you want to block this user?')}/>
-    )},
-  },
-  {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const id = row.original.id
+
+export function AdminTable({data}: {data: UserType[]}) {
+  const [isBlockedDialogOpen, setIsBlockedDialogOpen] = React.useState<boolean>(false)
+  const [BlockedDialogText, setBlockedDialogText] = React.useState<string>("")
+  const { toast } = useToast()
+  const handleNavigating = (text: string) => {
+    setBlockedDialogText(text)
+    setIsBlockedDialogOpen(!isBlockedDialogOpen)
+  }
+
+  const handleBlockUser = async (id: string) => {
+    try{
+      const response = await axios.patch('/api/superuser/users/', JSON.stringify(id))
+      if(response.status === 200){
+        toast({description: response.data.message, variant: "success"})
+        setIsBlockedDialogOpen(!isBlockedDialogOpen)
+
+      }
+
+    }catch(error:any){
+      console.error("Error here", error)
+      toast({description: error.response.data.message, variant: "destructive"})
+      
+
+    }
+    
+  }
+  const columns: ColumnDef<UserType>[] = [
+    {
+      id: "number",
+      header: "User NO",
+      cell: ({ row }) => (
+        <div className="capitalize">{row.index + 1}</div>
+      ),
+    },
+    {
+      accessorKey: "username",
+      header: "Admin ID",
+      cell: ({ row }) => (
+        <Link href={`/admin/admins/${row.original.id}`} className="capitalize text-seep-color hover:underline-offset-4 hover:underline">{row.getValue("username")}</Link>
+      ),
+    },
+    {
+      accessorKey: "phone",
+      header: "Phone",
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("phone")}</div>
+      ),
+    },
+    {
+      accessorKey: "email",
+      header: "Emails",
+      cell: ({ row }) => (
+        <div className="">{row.getValue("email")}</div>
+      ),
+    },
+    {
+      accessorKey: "createdAt",
+      header: "Joined Date",
+      cell: ({ row }) => (
+        <div className="capitalize">{new Date(row.getValue("createdAt")).toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"} )}</div>
+      ),
+    },
+    {
+      accessorKey: "isActive",
+      header: "Status",
+      cell: ({ row }) => {
+          const isActive = row.original.isActive
       return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal size={20}/>
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <Dialog>
+        <div className={`capitalize border rounded-full p-2 flex items-center justify-evenly gap-1`}>
+          <span className={`${isActive ? 'bg-green-500' : 'bg-red-500'} p-1.5 rounded-full`}></span>
+          <p>{isActive ? "Active" : "Inactive"}</p>
+          </div>
+      )},
+    },
+    {
+      accessorKey: "isBlocked",
+      header: "Block User",
+      cell: ({ row }) => {
+          const isActive = row.original.isBlocked
+      return (
+        <>
+        <Switch checked={isActive} onCheckedChange={()=> isActive ? handleNavigating('Do you want to unblock this user?') : handleNavigating('Do you want to block this user?')}/>
+        <Dialog open={isBlockedDialogOpen} onOpenChange={setIsBlockedDialogOpen}>
                 <DialogTrigger asChild>
-                    <DropdownMenuItem onSelect={(event)=> event.preventDefault()} className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer">
-                    <Trash2/>
-                    <span>Delete Admin</span> 
-                    </DropdownMenuItem>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
                 <DialogHeader>
-                    <DialogTitle>Delete this?</DialogTitle>
+                    <DialogTitle>{BlockedDialogText}</DialogTitle>
                     <DialogDescription>
                     This is a permanent action. Are you sure?
                     </DialogDescription>
@@ -188,21 +197,61 @@ export const columns: ColumnDef<UserType>[] = [
                     <DialogClose>
                         Cancel
                     </DialogClose>
-                    <Button type='button' variant={'destructive'} onClick={() => {}} className='border-0'>Delete</Button>
+                    <Button type='button' variant={isActive ? 'default' : 'destructive'} onClick={() => handleBlockUser(row.original.id)} className='border-0'>Proceed</Button>
 
                 </div>
                 </DialogContent>
                 
             </Dialog>
-            <DropdownMenuSeparator />
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
+        </>
+      )},
     },
-  },
-]
-
-export function AdminTable({data}: {data: UserType[]}) {
+    {
+      id: "actions",
+      enableHiding: false,
+      cell: ({ row }) => {
+        const id = row.original.id
+        return (
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="ghost" className="h-8 w-8 p-0">
+                <span className="sr-only">Open menu</span>
+                <MoreHorizontal size={20}/>
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              <DropdownMenuLabel>Actions</DropdownMenuLabel>
+              <Dialog>
+                  <DialogTrigger asChild>
+                      <DropdownMenuItem onSelect={(event)=> event.preventDefault()} className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer">
+                      <Trash2/>
+                      <span>Delete Admin</span> 
+                      </DropdownMenuItem>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                  <DialogHeader>
+                      <DialogTitle>Delete this?</DialogTitle>
+                      <DialogDescription>
+                      This is a permanent action. Are you sure?
+                      </DialogDescription>
+                  </DialogHeader>
+                  <div className='flex gap-5 w-fit ml-auto'>
+                      <DialogClose>
+                          Cancel
+                      </DialogClose>
+                      <Button type='button' variant={'destructive'} onClick={() => {}} className='border-0'>Delete</Button>
+  
+                  </div>
+                  </DialogContent>
+                  
+              </Dialog>
+              <DropdownMenuSeparator />
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )
+      },
+    },
+  ]
   const [sorting, setSorting] = React.useState<SortingState>([])
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []

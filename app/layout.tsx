@@ -8,6 +8,8 @@ import { Toaster } from "@/components/ui/toaster";
 import SessionClientProvider from "@/lib/clientSession";
 import { GeneralProvider } from "@/hooks/useContextHook";
 import 'react-quill/dist/quill.snow.css';
+import "react-phone-number-input/style.css"
+
 import { TooltipProvider } from "@/components/ui/tooltip";
 
 const satoshi = localFont({

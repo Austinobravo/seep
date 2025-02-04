@@ -15,8 +15,9 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/components/ui/tabs"
+import ProfileForm from "../../_components/ProfileForm"
 
-export function AdminTabs() {
+export function AdminTabs({userData}: {userData:UserType}) {
   return (
     <Tabs defaultValue="account" className="">
       <TabsList className="grid w-full grid-cols-3">
@@ -33,22 +34,8 @@ export function AdminTabs() {
             </CardDescription>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="space-y-1">
-              <Label htmlFor="username">Username</Label>
-              <Input id="username" defaultValue="@peduarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="name">First Name</Label>
-              <Input id="firstName" defaultValue="Pedro " />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="name">Last Name</Label>
-              <Input id="lastName" defaultValue="Duarte" />
-            </div>
-            <div className="space-y-1">
-              <Label htmlFor="name">Email</Label>
-              <Input id="email" defaultValue="Pedro@Duarte.com" />
-            </div>
+            <ProfileForm data={userData}/>
+
           </CardContent>
           <CardFooter>
             <Button>Save changes</Button>

@@ -4,6 +4,7 @@ import prisma from "@/prisma/prisma"
 import slug from 'slug';
 import { getCurrentUser } from "@/lib/serverSession";
 import { privacyAndTermsFormSchema } from "@/lib/formSchema";
+import { revalidatePath } from "next/cache";
 
 
 export async function GET(req:Request) {
@@ -38,7 +39,7 @@ export async function POST(req:Request, res: Response) {
     const user = await getCurrentUser()
 
     if(!user){
-        return NextResponse.json({message: "Unauthorized"}, {status: 403})
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
     const data = await req.json()
@@ -67,6 +68,9 @@ export async function POST(req:Request, res: Response) {
                 userId: user.username
             }
         })
+        console.log("in")
+        revalidatePath('/admin/others')
+        console.log("out")
 
         return NextResponse.json({data: newPolicy, message: "Created"}, {status: 201})
 
@@ -82,7 +86,7 @@ export async function PATCH(req:Request, res: Response) {
     const user = await getCurrentUser()
 
     if(!user){
-        return NextResponse.json({message: "Unauthorized"}, {status: 403})
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
     const data = await req.json()

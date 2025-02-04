@@ -48,10 +48,10 @@ const AdminSidebar = ({user}: {user:UserType}) => {
         <section className={`sm:block ${isSidebarToggled ? '' : "hidden"} space-y-3 py-4 bg-blue-100 !h-screen pt-10 relative`}>
             <div className='flex flex-col items-center justify-center pb-7 text-center'>
                 <Image src={`${user.image ? encodeURI(user.image) : "/images/avatar.webp"}`} width={500} height={500} alt='avatar' className='size-20 rounded-full ob'/>
-                <h3 className='pt-2 pb-1 font-semibold'>{user?.lastName} {user?.firstName} </h3>
+                <h3 className='pt-2 pb-1 font-semibold'>{user?.firstName} {user?.lastName} </h3>
                 <h4 className='text-sm'>Administrator</h4>
             </div>
-            <div>
+            <div className='pb-20'>
                 <h4 className='pl-5 pb-2'>MENU</h4>
                 <div className='space-y-3'>
                     {paths.map((path) =>{
@@ -95,7 +95,7 @@ const AdminSidebar = ({user}: {user:UserType}) => {
 
                 <Dialog>
                         <DialogTrigger asChild>
-                        <div className='pt-20 pb-5 pl-5'>
+                        <div className='mt-20 pb-5 pl-5'>
                             <button type='button' className='flex text-seep-color gap-x-2 cursor-pointer hover:bg-gray-50 px-4 py-2 rounded-md' >
                                 <LogOut className=''/>
                                 <span>Log Out</span>

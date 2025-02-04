@@ -1,6 +1,6 @@
 // import { faDashboard, faPodcast } from "@fortawesome/free-solid-svg-icons"
 import { usePathname } from "next/navigation"
-import {  PencilRuler, House, Inbox, Lock, LucideIcon, NotebookPen, PanelsTopLeft, User, UserRoundPen} from 'lucide-react'
+import {  PencilRuler, House, Inbox, Lock, LucideIcon, NotebookPen, PanelsTopLeft, User, UserRoundPen, Image, Contact, UserCircle} from 'lucide-react'
 import React from "react"
 
 type navLinksTypes = ({
@@ -26,7 +26,7 @@ export const useAdminNavigation = () => {
     const navLinks:navLinksTypes = React.useMemo(() => [
         {
             name: "Dashboard",
-            href: "",
+            href: "dashboard",
             active: pathname.includes("/dashboard"),
             icon: House,
             
@@ -39,9 +39,9 @@ export const useAdminNavigation = () => {
             
         },
         {
-            name: "Post",
-            href: "/post",
-            active: pathname.includes("/post"),
+            name: "News",
+            href: "/news",
+            active: pathname.includes("/news"),
             icon: PanelsTopLeft,
             
         },
@@ -67,10 +67,31 @@ export const useAdminNavigation = () => {
             
         },
         {
+            name: "Gallery",
+            href: "gallery",
+            active: pathname.includes("/gallery"),
+            icon: Image,
+            
+        },
+        {
+            name: "Team Members",
+            href: "team-members",
+            active: pathname.includes("/team-member"),
+            icon: UserCircle,
+            
+        },
+        {
             name: "Testimonials",
             href: "testimonials",
             active: pathname.includes("/testimonials"),
             icon: PencilRuler,
+            
+        },
+        {
+            name: "Contact",
+            href: "contact",
+            active: pathname.includes("/contact"),
+            icon: Contact,
             
         },
 

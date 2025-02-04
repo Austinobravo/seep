@@ -117,7 +117,7 @@ const Gallery = () => {
     <section className='md:px-20 px-10 '>
         <div id="seep_2019">
             <div className='text-seep-color text-center space-y-2 py-8'>
-                <blockquote className='opacity-90 md:text-3xl text-2xl font-bold'>“A flow of student entrepreneurs into the nigerian economy”</blockquote>
+                <blockquote className='opacity-90 md:text-3xl text-2xl font-bold'>“A flow of student entrepreneurs into the Nigeria economy”</blockquote>
                 <div className='flex justify-center items-center text-lg'>
                     <Dot/>
                     <p>SEEP-innov8ion 2019</p>

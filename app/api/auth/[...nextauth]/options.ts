@@ -62,20 +62,43 @@ export const options:NextAuthOptions = {
                     username: token.username as string,
                     firstName: token.firstName as string,
                     lastName: token.lastName as string,
+                    role: token.role as string,
                     
                 }
             }
         },
         async jwt ({token, user}) {
             if(user){
+                const uniqueUser = await prisma.user.findUnique({
+                    where: {
+                        id: user.id
+                    },
+                    omit:{
+                        password: true
+                    },
+                    include:{
+                        roles:{
+                            select:{
+                                role:{
+                                    select:{
+                                        name: true
+                                    }
+                                }
+                            }
+                        }
+                    }
+                })
+                
                 return {
                     ...token,
                     id: user.id,
                     username: (user as any).username,
                     firstName: (user as any).firstName,
                     lastName: (user as any).lastName,
+                    role: uniqueUser?.roles[0]?.role?.name || null as any,
                 }
             }
+            
             return token
             
         },
