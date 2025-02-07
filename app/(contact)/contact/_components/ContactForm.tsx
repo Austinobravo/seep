@@ -111,7 +111,7 @@ const ContactForm = () => {
                 <FormItem>
                   <FormLabel className="text-black"></FormLabel>
                   <FormControl>
-                  <PhoneInput  defaultCountry={'NG'} placeholder="Phone..." {...field} className="!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0 focus:ring-1 border-2 px-2 placeholder:text-sm rounded-lg w-full focus:border-[#0097FF] outline-none"/>
+                  <PhoneInput  defaultCountry={'NG'} style={{"fontSize": "0.9rem"}} placeholder="Phone..." {...field} className="!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0 focus:ring-1 border-2 px-2 rounded-lg w-full focus:border-[#0097FF] outline-none"/>
 
                   </FormControl>
                   
@@ -126,7 +126,7 @@ const ContactForm = () => {
                 <FormItem>
                   <FormLabel className="text-black"></FormLabel>
                   <FormControl>
-                  <Textarea placeholder='Message...'  {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0 focus:ring-1 border-2 px-2 py-5  rounded-lg w-full focus:border-[#0097FF] outline-none' />
+                  <Textarea placeholder='Message...' rows={7}  {...field} className='!bg-white focus-visible:!ring-offset-0 focus-visible:!ring-0 focus:ring-1 border-2 px-2  rounded-lg w-full focus:border-[#0097FF] outline-none' />
 
                   </FormControl>
                   

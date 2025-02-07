@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { emailRegex, validateForEmptySpaces } from "./globals";
+import { isUserEmailExisting } from "./helpers";
 
 
 export const LoginFormSchema = z.object({
@@ -61,9 +62,14 @@ export const LoginFormSchema = z.object({
     })
   export const joinFormSchema = z.object({
     firstName: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
-    email: z.string().email().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+    email: z.string().email().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}).refine((value) => !isUserEmailExisting(value), {message: "You already sent us an mail."}),
     phone: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     lastName: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+    })
+  export const supportFormSchema = z.object({
+    email: z.string().email().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
+    amount: z.number().min(2, {message: "This field is mandatory"}),
+    remark: z.string().min(1, {message: "This field is mandatory"}).refine((value) => !value || validateForEmptySpaces(value), {message: "No empty spaces"}).refine((value) => !value.match(/(\p{Emoji_Presentation}|\p{Extended_Pictographic})/gu), {message: "No emoji's alllowed."}),
     })
 
   export const userFormSchema = z.object({

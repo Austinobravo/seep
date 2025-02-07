@@ -1,4 +1,4 @@
-import Button from '@/components/Button'
+import LinkButton from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
 import { MoveRight } from 'lucide-react'
 import React from 'react'
@@ -11,7 +11,7 @@ const Hero = () => {
             <div className='md:bg-gradient-to-r from-[#0097FF] via-transparent to-transparent md:h-[500px] h-[600px] rounded-2xl flex flex-col md:pl-10 pl-5 justify-center space-y-5'>
                 <h1 className='md:text-4xl text-2xl  leading-relaxed md:w-[600px]'>Social Entrepreneurial Enhancement Support Center (SEE - Support Center)</h1>
                 <p className='leading-relaxed md:w-[600px]'>Creating a network of business opportunities and ideas, for a sustainable global economy.</p>
-                <Button title="Learn More" icon={MoveRight} path='/about'/>
+                <LinkButton title="Learn More" icon={MoveRight} path='/about'/>
             </div>
         </div>
       </FadeInSection>

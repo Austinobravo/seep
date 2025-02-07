@@ -1,4 +1,5 @@
 import FadeInSection from '@/hooks/fadeIn'
+import axios from 'axios'
 import Image from 'next/image'
 import React from 'react'
 const Testimonials = [
@@ -24,7 +25,9 @@ const Testimonials = [
         program: 'Tech to School Beneficiary'
     },
 ]
-const TestimonialSection = () => {
+const TestimonialSection = async () => {
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonials`)
+    const Testimonials:TestimonialType[] = response.data
   return (
     <section className='md:px-20 px-10 py-20'>
         <FadeInSection direction={`down`}>
@@ -39,17 +42,18 @@ const TestimonialSection = () => {
 
         </FadeInSection>
         <FadeInSection direction={`up`}>
+            {Testimonials.length >= 1 ?
             <div className='text-[#33ACFF] space-y-10'>
                 {Testimonials.map((testimonial, index) => (
-                    <div key={index} className='rounded-lg border space-y-5 border-[#0097FF] py-7 px-10'>
+                    <div key={`${testimonial.individual_name}-${index}`} className='rounded-lg border space-y-5 border-[#0097FF] py-7 px-10'>
                         <Image src={`/images/comma.png`} width={100} height={100} alt='comma' />
-                        <p>{testimonial.paragraph}</p>
+                        <p>{testimonial.content}</p>
                         <div className='flex gap-x-2 '>
                             <div className='bg-[#B4E0FF] rounded-full p-6 w-fit h-fit'>
                                 <Image src={`/images/avatar.webp`} width={50} height={50} alt='avatar'/>
                             </div>
                             <div>
-                                <h2 className='text-seep-color text-2xl font-bold'>{testimonial.name}</h2>
+                                <h2 className='text-seep-color text-2xl font-bold'>{testimonial.individual_name}</h2>
                                 <p className='md:text-base text-sm mb-1'>{testimonial.school}</p>
                                 <p className='md:text-base text-sm'>{testimonial.program}</p>
                             </div>
@@ -60,6 +64,12 @@ const TestimonialSection = () => {
                 ))}
 
             </div>  
+            :
+             <figure className='mx-auto w-fit text-center'>
+                <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No Testimonial Image" className='aspect-ratio'/>
+                <figcaption>No Testimonials yet.</figcaption>
+            </figure>
+            }
         </FadeInSection>
 
       

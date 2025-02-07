@@ -1,6 +1,5 @@
 'use client'
-import DonateModal from '@/app/(contact)/contact/_components/DonateModal'
-import Button from '@/components/Button'
+
 import FadeInSection from '@/hooks/fadeIn'
 import { ChevronLeft, ChevronRight, MoveRight } from 'lucide-react'
 import Image from 'next/image'

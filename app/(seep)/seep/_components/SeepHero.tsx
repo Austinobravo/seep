@@ -1,5 +1,5 @@
 'use client'
-import Button from '@/components/Button'
+import LinkButton from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
 import { MoveLeft, MoveRight } from 'lucide-react'
 import Image from 'next/image'
@@ -19,7 +19,7 @@ const SeepHero = () => {
                   Aligning with the SEE-Support Center's core drivers, our mission is to create a platform that births and nurtures innovative ideas, making profound impacts on the global and Nigerian socio-economic environment.
                   Our team has launched two SEEP programs - “The SEEP-innov8ion” and “The SEEP-Tech-2-School” programs for tertiary institutions and secondary schools respectively.
                 </p>
-                <Button title={`${isViewed ? 'Finished reading' : 'Read More'}`} icon={isViewed ? MoveLeft : MoveRight} path='' onClick={(event) =>{event.preventDefault(), setIsViewed(!isViewed)}}/>
+                <LinkButton title={`${isViewed ? 'Finished reading' : 'Read More'}`} icon={isViewed ? MoveLeft : MoveRight} path='' onClick={(event) =>{event.preventDefault(), setIsViewed(!isViewed)}}/>
 
             </div>
         </div>     

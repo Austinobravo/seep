@@ -1,4 +1,4 @@
-import Button from '@/components/Button'
+import LinkButton from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
 import { ArrowRight } from 'lucide-react'
 import React from 'react'
@@ -44,7 +44,7 @@ const Mission = () => {
                     <p className=' md:w-[600px] md:text-base text-sm line-clamp-3 text-gray-200'>
                         SEEP is an offshoot of the SEE-Support Center initiative, designed to drive innovation and empowerment in the academic environment. The SEEP program carefully integrates academics and entrepreneurship to foster a developed and sustainable Global, African, and Nigerian economy. We achieve this by screening, training, mentoring, networking, empowering, and supervising student entrepreneurs in Nigeria. 
                         Aligning with the SEE-Support Center's core drivers, our mission is to create a platform that births and nurtures innovative ideas, making profound impacts on the global environment.</p>
-                    <Button title='Learn More' icon={ArrowRight} path='/seep'/>
+                    <LinkButton title='Learn More' icon={ArrowRight} path='/seep'/>
                 </div>
             </div>
         </FadeInSection>

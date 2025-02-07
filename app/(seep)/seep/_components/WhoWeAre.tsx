@@ -1,4 +1,4 @@
-import Button from '@/components/Button'
+import LinkButton from '@/components/Button'
 import FadeInSection from '@/hooks/fadeIn'
 import { MoveRight } from 'lucide-react'
 import Image from 'next/image'
@@ -37,7 +37,7 @@ const WhoWeAre = () => {
                         <div className='md:basis-1/2 space-y-5'>
                             <h2 className='md:text-5xl text-4xl'>{item.heading}</h2>
                             <p>{item.paragraph}</p>
-                            <Button title={item.buttonText} icon={MoveRight} path={item.path}/>
+                            <LinkButton title={item.buttonText} icon={MoveRight} path={item.path}/>
                         </div>
                     </FadeInSection>
                     <FadeInSection direction={`right`}>

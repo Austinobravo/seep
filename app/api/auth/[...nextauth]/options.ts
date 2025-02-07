@@ -37,6 +37,10 @@ export const options:NextAuthOptions = {
                 const isCorrectPassword = await comparePassword(credentials.password, user.password.trim())
                 if(!isCorrectPassword) throw new Error("Invalid credentials")
 
+                if(user.isBlocked){
+                    throw new Error("This account is blocked. Contact admin for more info.")
+                }
+
                 const { password, ...UserWithoutPassword } = user 
                 return UserWithoutPassword
             }

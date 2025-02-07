@@ -1,5 +1,5 @@
 'use client'
-import Button from '@/components/Button'
+
 import FadeInSection from '@/hooks/fadeIn'
 import handleIdScroll from '@/hooks/handleIdScroll'
 import { ArrowLeft, ArrowRight } from 'lucide-react'

@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server"
 import prisma from "@/prisma/prisma"
 import slug from 'slug';
 import { getCurrentUser } from "@/lib/serverSession";
-import { contactFormSchema, privacyAndTermsFormSchema } from "@/lib/formSchema";
+import { contactFormSchema, joinFormSchema, privacyAndTermsFormSchema } from "@/lib/formSchema";
 import { revalidatePath } from "next/cache";
 
 
@@ -16,7 +16,7 @@ export async function GET(req:Request) {
 
 
     try{
-        const contact = await prisma.contact.findMany({
+        const contact = await prisma.join.findMany({
             orderBy:{
                 createdAt: "desc"
             }
@@ -41,29 +41,40 @@ export async function POST(req:Request, res: Response) {
     // }
 
     const data = await req.json()
-    const name = data.name 
+    const firstName = data.firstName 
     const email = data.email 
     const phone = data.phone 
-    const message = data.message 
+    const lastName = data.lastName 
 
 
-    const parsedForm = await contactFormSchema.safeParseAsync(data)
+    const parsedForm = await joinFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
+    
+    const isEmailExisting = await prisma.join.findFirst({
+        where:{
+            email
+        }
+    })
+    if(isEmailExisting){
+        return NextResponse.json({message: "You already sent us a mail. We will get back to you shortly."}, {status: 400})
+
+    }
+
+
 
     try{
-
-        await prisma.contact.create({
+        await prisma.join.create({
             data:{
-                name,
+                firstName,
                 email,
                 phone,
-                message
+                lastName
             }
         })
 
-        return NextResponse.json({message: "We got your message."}, {status: 201})
+        return NextResponse.json({message: "We got your message and will reply shortly."}, {status: 201})
 
     }
     catch(error){

@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal, Trash2 } from "lucide-react"
+import { ArrowUpDown, ChevronDown, Eye, MoreHorizontal, Trash2 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Checkbox } from "@/components/ui/checkbox"
@@ -48,8 +48,60 @@ import {
 } from "@/components/ui/dialog"
 import { useToast } from "@/hooks/use-toast"
 import axios from "axios"
+// const data: TableDataType[] = [
+//   {
+//     id: "m5gr84i9",
+//     admin_id: "Nwankwo Joy",
+//     phone: "+19444949494",
+//     email: "joy@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Active"
+//   },
+//   {
+//     id: "3u1reuv4",
+//     admin_id: "Gift Happiness",
+//     phone: "+19444949494",
+//     email: "Gift@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Active"
+//   },
+//   {
+//     id: "derv1ws0",
+//     admin_id: "Simon Sinek",
+//     phone: "+19444949494",
+//     email: "simon@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Inactive"
+//   },
+//   {
+//     id: "5kma53ae",
+//     admin_id: "Steven Doe",
+//     phone: "+19444949494",
+//     email: "steve@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Active"
+//   },
+//   {
+//     id: "bhqecj4p",
+//     admin_id: "Carmichael",
+//     phone: "+19444949494",
+//     email: "michael@yahoo.com",
+//     joined_date: "30/8/2024",
+//     status: "Inactive"
+//   },
+// ]
 
-export function AdminTable({data}: {data: UserType[]}) {
+// export type TableDataType = {
+//   id: string
+//   admin_id: string
+//   phone: string
+//   email: string
+//   joined_date: string
+//   status: 'Active' | 'Inactive'
+// }
+
+
+export function ContactTable({data}: {data: ContactUsType[]}) {
   const [isBlockedDialogOpen, setIsBlockedDialogOpen] = React.useState<boolean>(false)
   const [BlockedDialogText, setBlockedDialogText] = React.useState<string>("")
   const { toast } = useToast()
@@ -75,7 +127,7 @@ export function AdminTable({data}: {data: UserType[]}) {
     }
     
   }
-  const columns: ColumnDef<UserType>[] = [
+  const columns: ColumnDef<ContactUsType>[] = [
     {
       id: "number",
       header: "User NO",
@@ -84,10 +136,10 @@ export function AdminTable({data}: {data: UserType[]}) {
       ),
     },
     {
-      accessorKey: "username",
-      header: "Admin ID",
+      accessorKey: "name",
+      header: "Name",
       cell: ({ row }) => (
-        <Link href={`/admin/admins/${row.original.id}`} className="capitalize text-seep-color hover:underline-offset-4 hover:underline">{row.getValue("username")}</Link>
+        <div className="capitalize text-seep-color hover:underline-offset-4 hover:underline">{row.getValue("name")}</div>
       ),
     },
     {
@@ -106,59 +158,17 @@ export function AdminTable({data}: {data: UserType[]}) {
     },
     {
       accessorKey: "createdAt",
-      header: "Joined Date",
+      header: "Date",
       cell: ({ row }) => (
         <div className="capitalize">{new Date(row.getValue("createdAt")).toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"} )}</div>
       ),
     },
-    {
-      accessorKey: "isActive",
-      header: "Status",
-      cell: ({ row }) => {
-          const isActive = row.original.isActive
-      return (
-        <div className={`capitalize border rounded-full p-2 flex items-center justify-evenly gap-1`}>
-          <span className={`${isActive ? 'bg-green-500' : 'bg-red-500'} p-1.5 rounded-full`}></span>
-          <p>{isActive ? "Active" : "Inactive"}</p>
-          </div>
-      )},
-    },
-    {
-      accessorKey: "isBlocked",
-      header: "Block User",
-      cell: ({ row }) => {
-          const isActive = row.original.isBlocked
-      return (
-        <>
-        <Switch checked={isActive} onCheckedChange={()=> isActive ? handleNavigating('Do you want to unblock this user?') : handleNavigating('Do you want to block this user?')}/>
-        <Dialog open={isBlockedDialogOpen} onOpenChange={setIsBlockedDialogOpen}>
-                <DialogTrigger asChild>
-                </DialogTrigger>
-                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
-                <DialogHeader>
-                    <DialogTitle>{BlockedDialogText}</DialogTitle>
-                    <DialogDescription>
-                    This is a permanent action. Are you sure?
-                    </DialogDescription>
-                </DialogHeader>
-                <div className='flex gap-5 w-fit ml-auto'>
-                    <DialogClose>
-                        Cancel
-                    </DialogClose>
-                    <Button type='button' variant={isActive ? 'default' : 'destructive'} onClick={() => handleBlockUser(row.original.id)} className='border-0'>Proceed</Button>
-
-                </div>
-                </DialogContent>
-                
-            </Dialog>
-        </>
-      )},
-    },
+    
     {
       id: "actions",
       enableHiding: false,
       cell: ({ row }) => {
-        const id = row.original.id
+        const user = row.original
         return (
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -172,23 +182,21 @@ export function AdminTable({data}: {data: UserType[]}) {
               <Dialog>
                   <DialogTrigger asChild>
                       <DropdownMenuItem onSelect={(event)=> event.preventDefault()} className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer">
-                      <Trash2/>
-                      <span>Delete Admin</span> 
+                      <Eye/>
+                      <span>View details</span> 
                       </DropdownMenuItem>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
                   <DialogHeader>
-                      <DialogTitle>Delete this?</DialogTitle>
-                      <DialogDescription>
-                      This is a permanent action. Are you sure?
+                      <DialogTitle></DialogTitle>
+                      <DialogDescription className="space-y-2">
+                        <p><span className="font-semibold text-seep-color">Name: </span> {user.name}</p>
+                        <p><span className="font-semibold text-seep-color">Email: </span> {user.email}</p>
+                        <p><span className="font-semibold text-seep-color">Phone: </span> {user.phone}</p>
                       </DialogDescription>
                   </DialogHeader>
-                  <div className='flex gap-5 w-fit ml-auto'>
-                      <DialogClose>
-                          Cancel
-                      </DialogClose>
-                      <Button type='button' variant={'destructive'} onClick={() => {}} className='border-0'>Delete</Button>
-  
+                  <div className='whitespace-pre-wrap'>
+                      {user.message}
                   </div>
                   </DialogContent>
                   
