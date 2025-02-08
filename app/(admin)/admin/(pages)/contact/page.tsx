@@ -9,7 +9,6 @@ const page = async () => {
   const joinData:JoinUsType[] = joinResponse.data
   const contactResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`)
   const contactData:ContactUsType[] = contactResponse.data
-  console.log("contact", contactData)
   return (
     <section>
       <AdminNav title='Contact '/>

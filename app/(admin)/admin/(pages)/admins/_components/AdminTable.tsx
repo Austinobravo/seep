@@ -48,22 +48,49 @@ import {
 } from "@/components/ui/dialog"
 import { useToast } from "@/hooks/use-toast"
 import axios from "axios"
+import ProfileForm from "../../_components/ProfileForm"
 
 export function AdminTable({data}: {data: UserType[]}) {
   const [isBlockedDialogOpen, setIsBlockedDialogOpen] = React.useState<boolean>(false)
   const [BlockedDialogText, setBlockedDialogText] = React.useState<string>("")
+  const [isSuperuserDialogOpen, setIsSuperuserDialogOpen] = React.useState<boolean>(false)
+  const [SuperuserDialogText, setSuperuserDialogText] = React.useState<string>("")
+  const [selectedUserId, setSelectedUserId] = React.useState<string>("");
   const { toast } = useToast()
   const handleNavigating = (text: string) => {
     setBlockedDialogText(text)
     setIsBlockedDialogOpen(!isBlockedDialogOpen)
   }
+  const handleSuperuserNavigating = (text: string) => {
+    setSuperuserDialogText(text)
+    setIsSuperuserDialogOpen(!isSuperuserDialogOpen)
+  }
 
   const handleBlockUser = async (id: string) => {
     try{
+    console.log("id", id)
+
       const response = await axios.patch('/api/superuser/users/', JSON.stringify(id))
       if(response.status === 200){
         toast({description: response.data.message, variant: "success"})
         setIsBlockedDialogOpen(!isBlockedDialogOpen)
+
+      }
+
+    }catch(error:any){
+      console.error("Error here", error)
+      toast({description: error.response.data.message, variant: "destructive"})
+      
+
+    }
+    
+  }
+  const handleMakeSuperUser = async (id: string) => {
+    try{
+      const response = await axios.patch('/api/superuser/users/edit', JSON.stringify(id))
+      if(response.status === 200){
+        toast({description: response.data.message, variant: "success"})
+        setIsSuperuserDialogOpen(!isSuperuserDialogOpen)
 
       }
 
@@ -128,9 +155,10 @@ export function AdminTable({data}: {data: UserType[]}) {
       header: "Block User",
       cell: ({ row }) => {
           const isActive = row.original.isBlocked
+          const id = row.original.id
       return (
         <>
-        <Switch checked={isActive} onCheckedChange={()=> isActive ? handleNavigating('Do you want to unblock this user?') : handleNavigating('Do you want to block this user?')}/>
+        <Switch checked={isActive} onCheckedChange={()=> isActive ? (setSelectedUserId(id),handleNavigating('Do you want to unblock this user?')) : (setSelectedUserId(id),handleNavigating('Do you want to block this user?'))}/>
         <Dialog open={isBlockedDialogOpen} onOpenChange={setIsBlockedDialogOpen}>
                 <DialogTrigger asChild>
                 </DialogTrigger>
@@ -145,7 +173,40 @@ export function AdminTable({data}: {data: UserType[]}) {
                     <DialogClose>
                         Cancel
                     </DialogClose>
-                    <Button type='button' variant={isActive ? 'default' : 'destructive'} onClick={() => handleBlockUser(row.original.id)} className='border-0'>Proceed</Button>
+                    <Button type='button' variant={isActive ? 'default' : 'destructive'} onClick={() => handleBlockUser(selectedUserId)} className='border-0'>Proceed</Button>
+
+                </div>
+                </DialogContent>
+                
+            </Dialog>
+        </>
+      )},
+    },
+    {
+      accessorKey: "role",
+      header: "SuperUser",
+      cell: ({ row }) => {
+          const isSuperuser = row.original.role === "superuser"
+          const id = row.original.id
+
+      return (
+        <>
+        <Switch checked={isSuperuser} onCheckedChange={()=> isSuperuser ? (setSelectedUserId(id),handleSuperuserNavigating('Do you want to make this user an admin?')) : (setSelectedUserId(id),handleSuperuserNavigating('Do you want to make this user a superuser?'))}/>
+        <Dialog open={isSuperuserDialogOpen} onOpenChange={setIsSuperuserDialogOpen}>
+                <DialogTrigger asChild>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
+                <DialogHeader>
+                    <DialogTitle>{SuperuserDialogText}</DialogTitle>
+                    <DialogDescription>
+                    This is a permanent action. Are you sure?
+                    </DialogDescription>
+                </DialogHeader>
+                <div className='flex gap-5 w-fit ml-auto'>
+                    <DialogClose>
+                        Cancel
+                    </DialogClose>
+                    <Button type='button' variant={isSuperuser ? 'default' : 'destructive'} onClick={() => handleMakeSuperUser(selectedUserId)} className='border-0'>Proceed</Button>
 
                 </div>
                 </DialogContent>
@@ -238,6 +299,22 @@ export function AdminTable({data}: {data: UserType[]}) {
           }
           className="max-w-sm"
         />
+         <Dialog>
+                  <DialogTrigger asChild>
+                    <Button type="button">Create User</Button>
+                  </DialogTrigger>
+                  <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto">
+                  <DialogHeader>
+                      <DialogTitle></DialogTitle>
+                      <DialogDescription>
+                      </DialogDescription>
+                  </DialogHeader>
+                  <div className=''>
+                      <ProfileForm type="create"/>
+                  </div>
+                  </DialogContent>
+                  
+              </Dialog>
         <DropdownMenu >
           <DropdownMenuTrigger asChild className="">
             <Button variant="outline" className="md:ml-auto">
@@ -264,6 +341,7 @@ export function AdminTable({data}: {data: UserType[]}) {
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+
       </div>
       <div className="rounded-md border">
         <Table>

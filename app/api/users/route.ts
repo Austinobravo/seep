@@ -9,114 +9,6 @@ import { newsFormSchema, userFormSchema } from "@/lib/formSchema"
 import { comparePassword, createUniqueSlug } from "@/lib/globals"
 
 
-export async function POST (req:Request, res: Response){
-    const user = await getCurrentUser()
-    if(!user){
-        return NextResponse.json({message: "Unauthorized"}, {status: 403})
-    }
-
-    const formData = await req.formData()
-    const file = formData.get('image') as any; // Access the file from the request
-    const title = formData.get('title') as string;
-    const categoryId = formData.get('category') as string;
-    const otherOptions = formData.get('otherOptions') as string;
-    const contents = JSON.parse(formData.get('contents') as string) as Array<{heading: string; paragraph: string}>;
-
-    const formDataToJson = {
-        title: title,
-        otherOptions: otherOptions,
-        image: file,
-        category: categoryId,
-        contents: contents,
-    }
-
-    const parsedForm = await newsFormSchema.safeParseAsync(formDataToJson)
-    if(!parsedForm.success){
-        console.log("err", parsedForm.error)
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
-    }
-
-    if(!file || typeof file === "string"){
-        return NextResponse.json({status:400, message: "Invalid file"})
-    }
-    if(!title || !categoryId || !contents){
-        return NextResponse.json({status:400, message: "Invalid form"})
-    }
-    
-    if(!Array.isArray(contents)){
-        return NextResponse.json({status:400, message: "Invalid content type"})
-    }
-    
-    const uploadDir = path.join(process.cwd(), 'public/images/news')
-    if(!fs.existsSync(uploadDir)){
-        fs.mkdirSync(uploadDir, {recursive: true})
-    }
-
-    const slugged_title = await createUniqueSlug(title)
-
-    
-    try{
-        const newPost = await prisma.$transaction(async (newPrisma:any) => {
-            // Save the image file
-            const fileName = `${file.name}`;
-            const filePath = path.join(uploadDir, fileName)
-            const fileBuffer = new Uint8Array(await file.arrayBuffer())
-            fs.writeFileSync(filePath, fileBuffer)
-
-            
-            const fileUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/images/news/${fileName}`;
-
-            const news = await newPrisma.news.create({
-                data: {
-                    image: fileUrl,
-                    slug: slugged_title,
-                    title,
-                    categoryId,
-                    otherOptions: otherOptions,
-                    userId: user.username
-                },
-                include: {
-                    user:{
-                        select:{
-                            firstName: true,
-                            lastName: true,
-                            username: true
-                        }
-                    },
-                    newsContent: {
-                        select: {
-                            heading: true,
-                            paragraph: true
-                        }
-                    }
-                }
-            })
-            
-            await Promise.all(contents.map(async (content)=> {
-                await newPrisma.newsContent.create({
-                    data: {
-                        heading: content.heading,
-                        paragraph: content.paragraph,
-                        newsId: news.id,
-                    }
-                })
-                
-            }))
-
-            return news
-
-        })
-        console.log("new", newPost)
-
-
-        return NextResponse.json({data: newPost, message: "Uploaded successfully" }, {status: 201});
-    }
-    catch(error){
-        console.error("error", error)
-        return NextResponse.json({message: "Internal Server Error" }, {status: 500})
-    }
-}
-
 export async function GET(req:Request) {
     const user = await getCurrentUser()
 
@@ -133,13 +25,25 @@ export async function GET(req:Request) {
             omit:{
                 password: true
             },
-            include: {
-                
+            include:{
+                roles:{
+                    select:{
+                        role:{
+                            select:{
+                                name: true
+                            }
+                        }
+                    }
+                }
             }
             
         })
-
-        return NextResponse.json(userStats, {status: 200})
+        const formattedUsers = userStats.map((user) => ({
+            ...user,
+            role:  user.roles[0].role.name,
+            roles: null
+        }))
+        return NextResponse.json(formattedUsers, {status: 200})
 
     }
     catch(error){
@@ -183,7 +87,6 @@ export async function PATCH(req:Request, res: Response) {
         email : email,
         phone : phone,
     }
-    console.log("data", formDataToJson)
 
     const parsedForm = await userFormSchema.safeParseAsync(formDataToJson)
     if(!parsedForm.success){

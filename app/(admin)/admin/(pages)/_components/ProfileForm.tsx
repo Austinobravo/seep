@@ -42,21 +42,22 @@ import { userFormSchema } from "@/lib/formSchema"
 import { useToast } from "@/hooks/use-toast"
 interface Props{
     countryCode?: any
-    data: UserType
+    data?: UserType
+    type?: string
 }
-const ProfileForm = ({countryCode, data}: Props) => {
+const ProfileForm = ({countryCode, data, type}: Props) => {
     const { toast } = useToast()
     const [profileImage, setProfileImage] = React.useState<string>( "")
     const form = useForm<z.infer<typeof userFormSchema>>({
         resolver: zodResolver(userFormSchema),
         defaultValues: {
-          username: data.username || "",
-          firstName: data.firstName || "",
-          lastName: data.lastName || "",
-          phone: data.phone || "",
-          image: data.image || "",
-          email: data.email || "",
-          bio: data.bio || "",
+          username: data?.username || "",
+          firstName: data?.firstName || "",
+          lastName: data?.lastName || "",
+          phone: data?.phone || "",
+          image: data?.image || "",
+          email: data?.email || "",
+          bio: data?.bio || "",
           password: "",
           new_password: "",
           confirm_password: ""
@@ -79,23 +80,49 @@ const ProfileForm = ({countryCode, data}: Props) => {
             formData.append('confirm_password', values.confirm_password)
             formData.append("image", values.image as any)
             
-            try{
-            const response = await axios.patch('/api/users',formData,)
-            if(response.status === 200){
-                toast({
-                    description: response.data.message,
-                    variant: "success"
-                })
-            
-                form.reset()
-            }
-            }
-            catch(error:any){
-                toast({
-                    description: error.response.data.message,
-                    variant: "destructive"
-                })
-            console.error("Error", error)
+            if(type === "create"){
+              if(!values.new_password){
+                return form.setError("new_password", {message: "Can not be empty."})
+              }
+              try{
+              const response = await axios.post('/api/superuser/users',formData,)
+              if(response.status === 201){
+                  toast({
+                      description: response.data.message,
+                      variant: "success"
+                  })
+              
+                  form.reset()
+              }
+              }
+              catch(error:any){
+                  toast({
+                      description: error.response.data.message,
+                      variant: "destructive"
+                  })
+              console.error("Error", error)
+              }
+
+            }else{
+              try{
+              const response = await axios.patch('/api/users',formData,)
+              if(response.status === 200){
+                  toast({
+                      description: response.data.message,
+                      variant: "success"
+                  })
+              
+                  form.reset()
+              }
+              }
+              catch(error:any){
+                  toast({
+                      description: error.response.data.message,
+                      variant: "destructive"
+                  })
+              console.error("Error", error)
+              }
+
             }
       }
 
@@ -265,7 +292,7 @@ const ProfileForm = ({countryCode, data}: Props) => {
             <div className='bg-blue-100 p-3 rounded-lg '>
                 <Form {...form}>
             <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 p-4 max-w-xl">
-            
+                {type !== "create" &&
                 <FormField
                 control={form.control}
                 name="password"
@@ -279,6 +306,7 @@ const ProfileForm = ({countryCode, data}: Props) => {
                     </FormItem>
                 )}
                 />
+                }
                 <FormField
                 control={form.control}
                 name="new_password"

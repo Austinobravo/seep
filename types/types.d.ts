@@ -79,6 +79,7 @@ type UserType = {
     image: string
     isActive: boolean
     isBlocked: boolean
+    role: string
 
     category:     CategoryType
     news:        NewsType
@@ -105,7 +106,26 @@ type ContactUsType = {
 
 }
 
+type GalleryCategoryType = {
+        id: string
+        title: string
+        subtitle: string
+        userId: string
+        galleryImage: GalleryImageType[]
+        createdAt: string
+
+}
+type GalleryImageType = {
+        id: string
+        image: string
+        description: string
+        userId: string
+
+        createdAt: string
+
+}
+
 declare module 'react-quill'{
     const ReactQuill: any
     export default ReactQuill
-}
+}      

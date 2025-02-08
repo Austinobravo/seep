@@ -43,7 +43,7 @@ model User {
 
 model Role {
   id String @id @default(uuid())
-  name         String       @unique
+  name         String       @unique @default("user")
   createdAt    DateTime     @default(now())
   updatedAt    DateTime     @updatedAt
   users        UserRole[]
@@ -194,7 +194,7 @@ model Join {
 model GalleryImage {
   id String @id @default(uuid())
   image String 
-  description String
+  description String?
 
   
   userId String
@@ -209,7 +209,7 @@ model GalleryImage {
 }
 model GalleryCategory {
   id String @id @default(uuid())
-  title String 
+  title String @unique
   subtitle String
 
 
