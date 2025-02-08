@@ -6,6 +6,7 @@ import { redirect } from 'next/navigation'
 const AdminLayout = async ({children}: {children:React.ReactNode}) => {
   const user = await getCurrentUser()
   if(!user) return redirect('/admin')
+  
   return (
     <div className='flex -mt-28'>
         <aside className='sm:w-60 !h-screen bg-blue-100 overflow-auto no-scrollbar'>

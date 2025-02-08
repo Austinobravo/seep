@@ -5,7 +5,7 @@ import { ChevronDown, ChevronUp, LogOut, PanelRight } from 'lucide-react'
 import { signOut, useSession } from 'next-auth/react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useRouter } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import React from 'react'
 import {
     Dialog,
@@ -21,14 +21,19 @@ import { useToast } from '@/hooks/use-toast'
 
 
 const AdminSidebar = ({user}: {user:UserType}) => {
-    const paths = useAdminNavigation()
+    const paths = useAdminNavigation(user.role)
     const [currentPath,  setCurrentPath] = React.useState<string>("")
     const [isCurrentPathToggled,  setIsCurrentPathToggled] = React.useState<boolean>(false)
     const [isSidebarToggled,  setIsSidebarToggled] = React.useState<boolean>(false)
     const { toast } = useToast()
-
-
     const router = useRouter()
+
+    const pathname  = usePathname()
+    if(pathname.includes("/admins") && user.role !== "superuser"){
+         router.push("/admin")
+    }
+
+
 
     const setCurrent = (value:string) => {
         setIsCurrentPathToggled(!isCurrentPathToggled)

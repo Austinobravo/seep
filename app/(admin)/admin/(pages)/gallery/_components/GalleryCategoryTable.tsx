@@ -76,25 +76,24 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
   const { addCategory, category, clearCategories } = useAllContext()
   const [singleCategory, setSingleCategory] = React.useState<GalleryCategoryType | undefined>(undefined)
   const [open, setOpen] = React.useState<boolean>(false);
-//   const deleteCategory = async (id: string) => {
-//     try{
-//       const response = await axios.delete(`/api/category/${id}`,)
-//       toast({
-//         description: response.data.message,
-//         variant: "success"
-//       })
+  const [selectedId, setSelectedId] = React.useState<string>("");
+
+  const deleteCategory = async (id: string) => {
+    try{
+      const response = await axios.delete(`/api/galleryCategory/${id}`,)
+      toast({
+        description: response.data.message,
+        variant: "success"
+      })
       
-//       const updatedCategories = category.filter((item) => item.id !== id)
-//       clearCategories();
-//       updatedCategories.forEach((category: GalleryCategoryType) => addCategory(category));
-  
-//     }catch(error:any){
-//         toast({
-//           description: error.response.data.message,
-//           variant: "destructive"
-//       })
-//     }
-//   }
+
+    }catch(error:any){
+        toast({
+          description: error.response.data.message,
+          variant: "destructive"
+      })
+    }
+  }
 
 //   const getSingleCategory = async (id: string) => {
 //     try{
@@ -199,9 +198,9 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
                 
                 
                 <DropdownMenuSeparator />
-                {/* <Dialog>
+                <Dialog>
                     <DialogTrigger asChild>
-                            <DropdownMenuItem onSelect={(event) => event.preventDefault()}>Delete Category</DropdownMenuItem>
+                            <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer" onSelect={(event) => {event.preventDefault(), setSelectedId(id)}}>Delete Category</DropdownMenuItem>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
                     <DialogHeader>
@@ -214,12 +213,12 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type='button' variant={'destructive'} onClick={() => deleteCategory(id)} className='border-0'>Delete</Button>
+                        <Button type='button' variant={'destructive'} onClick={() => deleteCategory(selectedId)} className='border-0'>Delete</Button>
     
                     </div>
                     </DialogContent>
                     
-                </Dialog> */}
+                </Dialog>
     
               </DropdownMenuContent>
             </DropdownMenu>

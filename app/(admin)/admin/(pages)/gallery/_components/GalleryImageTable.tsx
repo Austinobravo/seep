@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, Eye, MoreHorizontal } from "lucide-react"
+import { ArrowUpDown, Eye, MoreHorizontal, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -75,33 +75,29 @@ import { encode } from "punycode"
 export default function GalleryImageTable({data}: {data: GalleryCategoryType[]}) {
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const { toast } = useToast()
-  const { addCategory, category, clearCategories } = useAllContext()
   const [singleCategory, setSingleCategory] = React.useState<GalleryCategoryType | undefined>(undefined)
   const [open, setOpen] = React.useState<boolean>(false);
-//   const deleteCategory = async (id: string) => {
-//     try{
-//       const response = await axios.delete(`/api/category/${id}`,)
-//       toast({
-//         description: response.data.message,
-//         variant: "success"
-//       })
+  const [selectedId, setSelectedId] = React.useState<string>("");
+  const deleteCategoryImage = async (id: string) => {
+
+    try{
+      const response = await axios.delete(`/api/gallery/${id}`,)
+      toast({
+        description: response.data.message,
+        variant: "success"
+      })
       
-//       const updatedCategories = category.filter((item) => item.id !== id)
-//       clearCategories();
-//       updatedCategories.forEach((category: GalleryCategoryType) => addCategory(category));
-  
-//     }catch(error:any){
-//         toast({
-//           description: error.response.data.message,
-//           variant: "destructive"
-//       })
-//     }
-//   }
+    }catch(error:any){
+        toast({
+          description: error.response.data.message,
+          variant: "destructive"
+      })
+    }
+  }
 
   const getSingleCategory = async (id: string) => {
     try{
       const response = await axios.get(`/api/galleryCategory/${id}`,)
-      console.log("cat", response.data)
       setSingleCategory(response.data)
       setOpen(true); 
       
@@ -227,14 +223,41 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                 </DialogTrigger>
-                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
+                <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
                 <DialogHeader>
                     <DialogTitle>Images</DialogTitle>
                     <DialogDescription>Modify the category details below.</DialogDescription>
-                </DialogHeader>
+                </DialogHeader >
+                <div className="flex gap-5 flex-wrap">
                     {singleCategory?.galleryImage.map((item, index) => (
-                        <Image key={`${item.image}-${index}`} src={`${encodeURI(item.image)}`} width={500} height={200} alt={item.description} className="size-20"/>
+                        <div key={`${item.image}-${index}`} >
+                          <Dialog >
+                              <DialogTrigger asChild>
+                                  <X className="w-fit ml-auto cursor-pointer border text-red-500 p-1 rounded-md hover:bg-slate-200" onClick={()=> setSelectedId(item.id)}/>
+                              </DialogTrigger>
+                              <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
+                              <DialogHeader>
+                                <DialogTitle>Delete this?</DialogTitle>
+                                <DialogDescription>
+                                This is a permanent action. Are you sure?
+                                </DialogDescription>
+                                </DialogHeader>
+                                <div className='flex gap-5 w-fit ml-auto'>
+                                    <DialogClose>
+                                        Cancel
+                                    </DialogClose>
+                                    <Button type='button' variant={'destructive'} onClick={() => deleteCategoryImage(selectedId)} className='border-0'>Delete</Button>
+                
+                                </div>
+                              </DialogContent>
+                              
+                          </Dialog>
+                            <Image src={`${encodeURI(item.image)}`} width={500} height={200} alt={item.description} className="size-32 object-cover"/>
+
+                        </div>
                     ))}
+
+                </div>
                 </DialogContent>
                 
             </Dialog>

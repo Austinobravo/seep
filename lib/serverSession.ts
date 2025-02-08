@@ -7,5 +7,5 @@ export const UserSession = () => {
 }
 export const getCurrentUser = async () => {
     const session = await UserSession()
-    return session?.user
+    return session?.user as UserType
 }

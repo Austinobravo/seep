@@ -20,10 +20,12 @@ type navLinksTypes = ({
     children?: undefined;
 })[]
 
-export const useAdminNavigation = () => {
+export const useAdminNavigation = (userRole: string) => {
     
     const pathname = usePathname()
-    const navLinks:navLinksTypes = React.useMemo(() => [
+    const navLinks:navLinksTypes = React.useMemo(() => {
+        const links = 
+        [
         {
             name: "Dashboard",
             href: "dashboard",
@@ -94,7 +96,7 @@ export const useAdminNavigation = () => {
             icon: Contact,
             
         },
-
+    
         // {
         //     name: "Privacy policy",
         //     href: "privacy-policy",
@@ -109,14 +111,7 @@ export const useAdminNavigation = () => {
         //     icon: NotebookPen,
             
         // },
-        {
-            name: "Administrators",
-            href: "admins",
-            active: pathname.includes("/admins"),
-            icon: UserRoundPen,
-            
-        },
-        
+       
         // {
         //     name: "Post",
         //     href: "/post",
@@ -139,7 +134,23 @@ export const useAdminNavigation = () => {
         // },
         
         
-    ], [pathname])
+    ]
+
+    if(userRole === "superuser"){
+        links.push(
+            {
+                name: "Administrators",
+                href: "admins",
+                active: pathname.includes("/admins"),
+                icon: UserRoundPen,
+                
+            },
+            
+        )
+    }
+    return links
+}
+, [pathname, userRole])
     return navLinks
 }
 

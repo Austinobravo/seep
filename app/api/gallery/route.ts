@@ -4,6 +4,7 @@ import { getCurrentUser } from "@/lib/serverSession";
 import { galleryCategoryFormSchema, galleryImageFormSchema } from "@/lib/formSchema";
 import path from "path"
 import fs from 'fs'
+import { v4 as uuidv4 } from "uuid"; 
 
 export async function GET(req:Request) {
     const user = await getCurrentUser()
@@ -67,19 +68,23 @@ export async function POST(req:Request, res: Response) {
                  newImages = images.map(async (file) => {
                     if(file instanceof File){
                         const uploadDir = path.join(process.cwd(), 'public/images/gallery')
-                        if(!fs.existsSync(uploadDir)){
-                            fs.mkdirSync(uploadDir, {recursive: true})
+                        if (!fs.existsSync(uploadDir)) {
+                            fs.mkdirSync(uploadDir, { recursive: true });
                         }
-                
+                    
+                        // Generate a unique filename using UUID
+                        const fileExt = path.extname(file.name); // Get file extension
+                        const baseName = path.basename(file.name, fileExt); // Get filename without extension
+                        const uniqueFileName = `${baseName}-${uuidv4()}${fileExt}`; // Append UUID to filename
+                    
                         // Save the image file
-                        const fileName = `${file.name}`;
-                        const filePath = path.join(uploadDir, fileName)
-                        const fileBuffer = new Uint8Array(await file.arrayBuffer())
-                        fs.writeFileSync(filePath, fileBuffer)
-                
-                        
-                        const imageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/images/news/${fileName}`;
-    
+                        const filePath = path.join(uploadDir, uniqueFileName);
+                        const fileBuffer = new Uint8Array(await file.arrayBuffer());
+                        fs.writeFileSync(filePath, fileBuffer);
+
+                        // Construct the public URL for accessing the image
+                        const imageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/images/gallery/${uniqueFileName}`;
+
                          const newImage = await prisma.galleryImage.create({
                             data:{
                                 description:  description,
