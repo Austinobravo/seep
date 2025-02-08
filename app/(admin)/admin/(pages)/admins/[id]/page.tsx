@@ -7,7 +7,6 @@ const AdminDetailsPage = async ({params}: {params:{id: string}}) => {
   console.log("paras", params)
   const userResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users/${params?.id}`)
   const userData:UserType = userResponse.data
-  console.log("user", userData)
   return (
     <div>
         <AdminNav title='Admin'/>

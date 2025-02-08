@@ -6,6 +6,14 @@ export const isUserEmailExisting = async (email: string) => {
             email
         }
     })
-    console.log("user", user)
+
+    return user
+}
+export const isUserEmailExistingInUserModel = async (email: string) => {
+    const user = await prisma.user.findUnique({
+        where:{
+            email
+        }
+    })
     return user
 }

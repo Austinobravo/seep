@@ -6,6 +6,8 @@ import { userFormSchema } from "@/lib/formSchema";
 import { hashedPassword } from "@/lib/globals";
 import path from "path";
 import fs from "fs"
+import { v4 as uuidv4 } from "uuid"; 
+
 
 export async function PATCH(req:NextRequest, res:Response){
     
@@ -24,8 +26,6 @@ export async function PATCH(req:NextRequest, res:Response){
     if(!existingUser){
         return NextResponse.json({message: "This user doesn't exist"}, {status: 404})
     }
-    console.log("exist", existingUser)
-    console.log("id", id)
 
     try{
         const updatedUser = await prisma.user.update({
@@ -114,14 +114,15 @@ export async function POST(req:Request, res: Response) {
         }
     })
 
+
     if(existingUser){
         return NextResponse.json({message: "Username or email exists."}, {status: 400})
     }
-    
-    
+
     if(password !== confirm_password){
         return NextResponse.json({message: "Password don't match."}, {status: 400})
     }
+
 
       
     
@@ -130,18 +131,23 @@ export async function POST(req:Request, res: Response) {
 
             if(file instanceof File){
                 const uploadDir = path.join(process.cwd(), 'public/images/user')
-                if(!fs.existsSync(uploadDir)){
-                    fs.mkdirSync(uploadDir, {recursive: true})
+                if (!fs.existsSync(uploadDir)) {
+                    fs.mkdirSync(uploadDir, { recursive: true });
                 }
-        
+            
+                // Generate a unique filename using UUID
+                const fileExt = path.extname(file.name); // Get file extension
+                const baseName = path.basename(file.name, fileExt); // Get filename without extension
+                const uniqueFileName = `${baseName}-${uuidv4()}${fileExt}`; // Append UUID to filename
+            
                 // Save the image file
-                const fileName = `${file.name}`;
-                const filePath = path.join(uploadDir, fileName)
-                const fileBuffer = new Uint8Array(await file.arrayBuffer())
-                fs.writeFileSync(filePath, fileBuffer)
-        
-                
-                 file = `${process.env.NEXT_PUBLIC_BASE_URL}/images/user/${fileName}`;
+                const filePath = path.join(uploadDir, uniqueFileName);
+                const fileBuffer = new Uint8Array(await file.arrayBuffer());
+                fs.writeFileSync(filePath, fileBuffer);
+
+                // Construct the public URL for accessing the image
+                 file = `${process.env.NEXT_PUBLIC_BASE_URL}/images/user/${uniqueFileName}`;
+
                 }
                 
             const  new_password = await hashedPassword(password)

@@ -68,9 +68,9 @@ const PaymentGateway = () => {
     const isSubmitting = form.formState.isSubmitting
   return (
     <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 max-w-xl mx-auto my-4">
+        <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5 max-w-xl w-full mx-auto my-4">
           
-        <h2 className='font-bold text-xl'>Leave a message for us here and we will get back to you.</h2>
+        <h2 className='font-bold text-xl'>Please fill the form.</h2>
 
           <FormField
             control={form.control}

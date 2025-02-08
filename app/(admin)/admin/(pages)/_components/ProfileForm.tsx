@@ -78,8 +78,8 @@ const ProfileForm = ({countryCode, data, type}: Props) => {
             formData.append('password', values.password)
             formData.append('new_password', values.new_password)
             formData.append('confirm_password', values.confirm_password)
-            formData.append("image", values.image as any)
-            
+            formData.append("image", values.image[0])
+
             if(type === "create"){
               if(!values.new_password){
                 return form.setError("new_password", {message: "Can not be empty."})

@@ -15,60 +15,67 @@ import {
 import Image from 'next/image'
 import { DashboardPieChart } from '../_components/DashboardPieChart'
 import { DashboardBarChart } from '../_components/DashboardBarChart'
-import { getCurrentUser } from '@/lib/serverSession'
- 
-const contents = [
-  {
-    icon: StickyNote,
-    title: '248',
-    text: 'Posts',
-    iconColor: '#00AEB8'
-  },
-  {
-    icon: Send,
-    title: '18.38k',
-    text: 'Shares',
-    iconColor: '#0097FF'
-  },
-  {
-    icon: Heart,
-    title: '248.5k',
-    text: 'Likes',
-    iconColor: '#CA3132'
-  },
-  {
-    icon: Goal,
-    title: '248k',
-    text: 'Views',
-    iconColor: '#FF8700'
-  },
-]
 
-const data = [
-  {
-    title: "Entrepreneurship and startups",
-    post_date: "16 Nov 2021",
-    category: "Innovations",
-    comment: "136",
-    image: '/images/tech1.png'
-  },
-  {
-    title: "Giants Unveil Cutting-Edge AI Innovation",
-    post_date: "16 Nov 2021",
-    category: "Technology",
-    comment: "136",
-    image: '/images/Ai.png'
-  },
-  {
-    title: "Tech 2 school",
-    post_date: "16 Nov 2021",
-    category: "Impact",
-    comment: "136",
-    image: '/images/tech2.png'
-  },
+import axios from 'axios'
+import { formatDateToString } from '@/lib/globals'
+
  
-]
+
+
+// const data = [
+//   {
+//     title: "Entrepreneurship and startups",
+//     post_date: "16 Nov 2021",
+//     category: "Innovations",
+//     comment: "136",
+//     image: '/images/tech1.png'
+//   },
+//   {
+//     title: "Giants Unveil Cutting-Edge AI Innovation",
+//     post_date: "16 Nov 2021",
+//     category: "Technology",
+//     comment: "136",
+//     image: '/images/Ai.png'
+//   },
+//   {
+//     title: "Tech 2 school",
+//     post_date: "16 Nov 2021",
+//     category: "Impact",
+//     comment: "136",
+//     image: '/images/tech2.png'
+//   },
+ 
+// ]
 const DashboardPage = async() => {
+  const newsResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+  const news:NewsType[] = newsResponse.data
+
+  const contents = [
+    {
+      icon: StickyNote,
+      title: news.length,
+      text: 'News',
+      iconColor: '#00AEB8'
+    },
+    {
+      icon: Send,
+      title: 0,
+      text: 'Shares',
+      iconColor: '#0097FF'
+    },
+    {
+      icon: Heart,
+      title: 0,
+      text: 'Likes',
+      iconColor: '#CA3132'
+    },
+    {
+      icon: Goal,
+      title: 0,
+      text: 'Views',
+      iconColor: '#FF8700'
+    },
+  ]
     
   return (
     <div className='space-y-7'>
@@ -86,23 +93,30 @@ const DashboardPage = async() => {
                 <TableHead className="w-[400px] max-w-xs text-seep-color font-bold">Article Title</TableHead>
                 <TableHead className='text-seep-color font-bold'>Post Date</TableHead>
                 <TableHead className='text-seep-color font-bold'>Categories</TableHead>
-                <TableHead className="text-right text-seep-color font-bold">Comment</TableHead>
+                <TableHead className="text-right text-seep-color font-bold">Publisher</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
-              {data.map((item) => (
-                <TableRow key={item.title}>
-                  <TableCell className="font-medium flex gap-4 md:flex-nowrap flex-wrap">
-                    <Image src={item.image} width={300} height={400} alt={item.title} className='size-16 object-cover rounded-md'/>
-                    <span className='text-seep-color'>{item.title}</span>
-                  </TableCell>
-                  <TableCell>{item.post_date}</TableCell>
-                  <TableCell >
-                    <span className='bg-seep-color text-white px-4 py-2 rounded-xl w-fit'>{item.category}</span>
-                    </TableCell>
-                  <TableCell className="text-right">{item.comment} comments</TableCell>
-                </TableRow>
-              ))}
+              {news.length >= 1 ?
+                    news.slice(0,3).map((item) => (
+                      <TableRow key={item.title}>
+                        <TableCell className="font-medium flex gap-4 md:flex-nowrap flex-wrap">
+                          <Image src={item.image} width={300} height={400} alt={item.title} className='size-16 object-cover rounded-md'/>
+                          <span className='text-seep-color'>{item.title}</span>
+                        </TableCell>
+                        <TableCell>{formatDateToString(item.createdAt)}</TableCell>
+                        <TableCell >
+                          <span className='bg-seep-color text-white px-4 py-2 rounded-xl w-fit capitalize'>{item.category.name}</span>
+                          </TableCell>
+                        <TableCell className="text-right capitalize">{item.userId}</TableCell>
+                      </TableRow>
+                    ))
+              :
+               <figure className='mx-auto w-fit text-center'>
+                    <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
+                    <figcaption>No news yet.</figcaption>
+                </figure>
+              }
             </TableBody>
           </Table>
           <DashboardPieChart/>

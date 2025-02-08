@@ -4,7 +4,7 @@ import React from 'react'
 interface cardPropsType{
     icon: LucideIcon
     iconColor: string
-    total: string
+    total: string | number
     text: string
 }
 const DashboardCard = ({icon:Icon,iconColor, total, text}: cardPropsType) => {

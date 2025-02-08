@@ -35,8 +35,11 @@ import { Loader2 } from "lucide-react"
 import { useToast } from '@/hooks/use-toast'
 import { Input } from '@/components/ui/input'
 import { joinFormSchema } from '@/lib/formSchema'
+import { signOut } from 'next-auth/react'
+
 
 const JoinForm = () => {
+
 
     const form = useForm<z.infer<typeof joinFormSchema>>({
         resolver: zodResolver(joinFormSchema),
@@ -49,6 +52,7 @@ const JoinForm = () => {
         },
       })
     const { toast } = useToast()
+
 
     
     const onSubmit = async (values: z.infer<typeof joinFormSchema>)=>{
@@ -84,7 +88,7 @@ const JoinForm = () => {
       <DialogTrigger asChild >
            <div className='mx-auto w-fit py-10'>
                 <button type='button' className='bg-[#FFA807] py-2 px-4 text-white space-x-3 w-fit items-center flex rounded-full'>
-                    <span>Join Us</span>
+                    <span >Join Us</span>
                     <MoveRight/> 
                 </button>
             </div>
