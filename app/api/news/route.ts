@@ -30,7 +30,7 @@ export async function POST (req:Request, res: Response){
 
     const parsedForm = await newsFormSchema.safeParseAsync(formDataToJson)
     if(!parsedForm.success){
-        console.log("err", parsedForm.error)
+    
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
 
@@ -104,8 +104,6 @@ export async function POST (req:Request, res: Response){
             return news
 
         })
-        console.log("new", newPost)
-
 
         return NextResponse.json({data: newPost, message: "Uploaded successfully" }, {status: 201});
     }
@@ -198,7 +196,6 @@ export async function PATCH(req:Request, res: Response) {
         }
     })
 
-    console.log("contents", contents)
 
     if(!news){
         return NextResponse.json({message: "News doesn't exist."}, {status: 400}) 

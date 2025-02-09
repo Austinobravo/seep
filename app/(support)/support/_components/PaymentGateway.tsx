@@ -32,7 +32,7 @@ const PaymentGateway = () => {
         resolver: zodResolver(supportFormSchema),
         defaultValues: {
           email: "",
-          amount: 10000,
+          amount: 10000 as any,
           remark: "",
 
         },

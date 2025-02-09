@@ -22,8 +22,6 @@ export async function GET(req:Request) {
             }
         })
 
-        console.log("po", policy)
-
         return NextResponse.json(policy, {status: 200})
 
     }
@@ -68,9 +66,9 @@ export async function POST(req:Request, res: Response) {
                 userId: user.username
             }
         })
-        console.log("in")
+  
         revalidatePath('/admin/others')
-        console.log("out")
+  
 
         return NextResponse.json({data: newPolicy, message: "Created"}, {status: 201})
 

@@ -225,7 +225,7 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
                 <DialogHeader>
-                    <DialogTitle>Images</DialogTitle>
+                    <DialogTitle>{singleCategory?.galleryImage.length} {singleCategory!.galleryImage!.length <= 1 ? "Image" : "Images"}</DialogTitle>
                     <DialogDescription>Modify the category details below.</DialogDescription>
                 </DialogHeader >
                 <div className="flex gap-5 flex-wrap">

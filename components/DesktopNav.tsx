@@ -37,7 +37,7 @@ const DesktopNav = () => {
         <div>
             <ul className='flex space-x-10 items-center'>
                 {navLinks.map((navLink, index) => (
-                    <li key={index} className={`${navLink.name === 'Contact Us' && "bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-1 px-4 rounded-full hover:!text-white hover:scale-105"} ${pathname === navLink.link && 'text-[#0097FF] font-bold'} hover:text-[#0097FF] hover:font-bold`}>
+                    <li key={index} className={`transition-all duration-500 ease-in-out ${navLink.name === 'Contact Us' && "bg-gradient-to-r from-[#0097FF] to-[#CCEAFF] text-white py-1 px-4 rounded-full hover:!text-white hover:scale-105"} ${pathname === navLink.link && 'text-[#0097FF] font-bold'} hover:text-[#0097FF] hover:font-bold`}>
                         <Link href={navLink.link}>
                             {navLink.name}
                         </Link>

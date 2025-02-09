@@ -90,7 +90,7 @@ export async function PATCH(req:Request, res: Response) {
 
     const parsedForm = await userFormSchema.safeParseAsync(formDataToJson)
     if(!parsedForm.success){
-        console.log("parsed err", parsedForm.error)
+        
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
     

@@ -51,7 +51,7 @@ const PermissionsForm = () => {
             })
             const data = await res.json()
             if(res.ok){
-                console.log("data", data)
+               
                 addCategory(data.data)
                 form.reset()
                 toast({
@@ -59,7 +59,7 @@ const PermissionsForm = () => {
                     variant: "success"
                 })
             }else{
-                console.log("data", data)
+                
                 toast({
                     description: data.message,
                     variant: "destructive"

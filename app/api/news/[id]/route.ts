@@ -33,7 +33,7 @@ export async function GET(req:NextRequest, {params}: {params: {id: string}}){
                 }
             }
         })
-        console.log("nes", news)
+      
         if(!news){
             return NextResponse.json({message: "This news doesn't exist."}, {status: 400})
         }
@@ -49,7 +49,7 @@ export async function GET(req:NextRequest, {params}: {params: {id: string}}){
 export async function DELETE(req:NextRequest, {params}: {params: {id: string}}){
     const user = getCurrentUser()
     const {id} = params
-    console.log('id', id)
+    
     if(!user){
         return NextResponse.json({message: "Invalid user"}, {status: 401})
     }
@@ -59,7 +59,7 @@ export async function DELETE(req:NextRequest, {params}: {params: {id: string}}){
             slug: id
         }
     })
-    console.log('news', news)
+    
 
     if(!news){
         return NextResponse.json({message: "This news doesn't exist."}, {status: 400})

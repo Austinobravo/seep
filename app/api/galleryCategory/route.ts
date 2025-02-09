@@ -20,7 +20,8 @@ export async function GET(req:Request) {
                     select: {
                         galleryImage: true
                     }
-                }
+                },
+                galleryImage: true
             }
         })
 

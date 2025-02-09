@@ -70,7 +70,7 @@ const LoginForm = () => {
 
 
     }catch(error: any){
-      console.log( 'client error', error)
+      
       toast({
         description: error,
         variant: "destructive"

@@ -47,7 +47,7 @@ const RolesForm = () => {
             })
             const data = await res.json()
             if(res.ok){
-                console.log("data", data)
+                
                 addCategory(data.data)
                 form.reset()
                 toast({
@@ -55,7 +55,7 @@ const RolesForm = () => {
                     variant: "success"
                 })
             }else{
-                console.log("data", data)
+                
                 toast({
                     description: data.message,
                     variant: "destructive"

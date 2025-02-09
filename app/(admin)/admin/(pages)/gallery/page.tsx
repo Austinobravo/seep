@@ -9,7 +9,7 @@ import GalleryImageTable from './_components/GalleryImageTable'
 const GalleryPage = async () => {
   const categoryResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/galleryCategory`)
   const category:GalleryCategoryType[] = categoryResponse.data
-  console.log("imafe", category)
+
   // const galleryResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/gallery`)
   // const gallery:GalleryImageType[] = galleryResponse.data
   return (

@@ -46,11 +46,6 @@ export async function POST(req:Request, res: Response) {
     const description = formData.get('description') as string
     const driveImages = formData.getAll('driveImages') as string[]
 
-    console.log("images", images.forEach((image) => console.log(image)))
-    console.log("categoryId", categoryId)
-    console.log("description", description)
-    console.log("driveImages", driveImages)
-
     const data = {
         description: description,
         categoryId: categoryId,

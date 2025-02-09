@@ -68,8 +68,7 @@ export function AdminTable({data}: {data: UserType[]}) {
 
   const handleBlockUser = async (id: string) => {
     try{
-    console.log("id", id)
-
+ 
       const response = await axios.patch('/api/superuser/users/', JSON.stringify(id))
       if(response.status === 200){
         toast({description: response.data.message, variant: "success"})

@@ -2,7 +2,7 @@ import Image from 'next/image'
 import React from 'react'
 
 const GalleryImage = ({data}: {data: GalleryCategoryType[] }) => {
-    console.log("data", data)
+    
   return (
     <>
     {/* {data?.galleryImage.map((item, index) => (
