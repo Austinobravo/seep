@@ -36,8 +36,15 @@ interface newsProps{
     news: NewsType
 }
 const RelatedNews = async ({news}: newsProps) => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-    const relatedNews:NewsType[] = response.data.filter((content: NewsType) => content.category.id === news.category.id && content.id !== news.id )
+    let relatedNews:NewsType[] = []
+
+    try{
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+      relatedNews = response.data.filter((content: NewsType) => content.category.id === news.category.id && content.id !== news.id )
+  
+    }catch(error){
+      console.error("Error fetching News", error)
+    }
   return (
     <>
     {relatedNews.length >= 1 &&

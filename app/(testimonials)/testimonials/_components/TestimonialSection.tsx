@@ -25,9 +25,9 @@ const Testimonials = [
         program: 'Tech to School Beneficiary'
     },
 ]
-const TestimonialSection = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonials`)
-    const Testimonials:TestimonialType[] = response.data
+const TestimonialSection = ({testimonials}: {testimonials: TestimonialType[]}) => {
+    // const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonials`)
+    // const Testimonials:TestimonialType[] = response.data
   return (
     <section className='md:px-20 px-10 py-20'>
         <FadeInSection direction={`down`}>
@@ -42,9 +42,9 @@ const TestimonialSection = async () => {
 
         </FadeInSection>
         <FadeInSection direction={`up`}>
-            {Testimonials.length >= 1 ?
+            {testimonials.length >= 1 ?
             <div className='text-[#33ACFF] space-y-10'>
-                {Testimonials.map((testimonial, index) => (
+                {testimonials.map((testimonial, index) => (
                     <div key={`${testimonial.individual_name}-${index}`} className='rounded-lg border space-y-5 border-[#0097FF] py-7 px-10'>
                         <Image src={`/images/comma.png`} width={100} height={100} alt='comma' />
                         <p>{testimonial.content}</p>

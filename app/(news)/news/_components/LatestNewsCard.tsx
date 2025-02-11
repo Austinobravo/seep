@@ -6,8 +6,16 @@ import Link from 'next/link'
 import React from 'react'
 
 const LatestNewsCard = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-    const contents:NewsType[] = response.data
+    
+    let contents:NewsType[] = []
+
+    try{
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+      contents  = response.data
+  
+    }catch(error){
+      console.error("Error fetching News", error)
+    }
   return (
     <>
      {contents.length >=1 ?

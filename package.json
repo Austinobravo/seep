@@ -63,7 +63,7 @@
     "@types/react-dom": "^18",
     "@types/react-slick": "^0.23.13",
     "@types/slug": "^5.0.9",
-    "autoprefixer": "^10.0.1",
+    "autoprefixer": "^10.4.20",
     "postcss": "^8",
     "tailwindcss": "^3.3.0",
     "ts-node": "^10.9.2",

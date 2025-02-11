@@ -5,10 +5,17 @@ import { JoinTable } from './_component/JoinTable'
 import { ContactTable } from './_component/ContactTable'
 
 const page = async () => {
-  const joinResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/join`)
-  const joinData:JoinUsType[] = joinResponse.data
-  const contactResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`)
-  const contactData:ContactUsType[] = contactResponse.data
+  let joinData:JoinUsType[] = []
+  let contactData:ContactUsType[] = []
+  try{
+    const joinResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/join`)
+    joinData = joinResponse.data
+    const contactResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`)
+    contactData = contactResponse.data
+
+  }catch(error){
+    console.error("Error in the Contact page", error)
+  }
   return (
     <section>
       <AdminNav title='Contact '/>

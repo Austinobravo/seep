@@ -22,8 +22,15 @@ import React from 'react'
 //     },
 // ]
 const Discover = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-    const blogContent:NewsType[] = response.data
+    let blogContent:NewsType[] = []
+
+    try{
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+      blogContent = response.data
+  
+    }catch(error){
+      console.error("Error fetching News", error)
+    }
   return (
     <section className='pt-20 pb-5 space-y-7'>
         <h3 className='bg-seep-color w-fit py-1 leading-10 tracking-wider px-7 rounded-tr-full rounded-br-full text-white text-lg '>Discover</h3>

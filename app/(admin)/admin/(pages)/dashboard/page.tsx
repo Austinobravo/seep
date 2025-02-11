@@ -47,8 +47,14 @@ import { formatDateToString } from '@/lib/globals'
  
 // ]
 const DashboardPage = async() => {
-  const newsResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-  const news:NewsType[] = newsResponse.data
+  let news:NewsType[] = []
+  try{
+    const newsResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+    news = newsResponse.data
+
+  }catch(error){
+    console.error("Error in the dashboard", error)
+  }
 
   const contents = [
     {

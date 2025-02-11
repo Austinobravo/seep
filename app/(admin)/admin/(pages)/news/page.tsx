@@ -19,10 +19,17 @@ import PostTable from './_components/PostTable'
 
 
 const PostPage = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
-  const category:CategoryType[] = response.data
-  const postResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-  const posts:NewsType[] = postResponse.data
+  let category:CategoryType[] = []
+  let posts:NewsType[] = []
+  try{
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+    category = response.data
+    const postResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+    posts = postResponse.data
+
+  }catch(error){
+    console.error("Error in the gallery", error)
+  }
 
   return (
     <div>

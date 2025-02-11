@@ -4,13 +4,20 @@ import Gallery from './_components/Gallery'
 import axios from 'axios'
 
 const page = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/galleryCategory`)
-  const galleryCategory:GalleryCategoryType[] = response.data
+  let galleryCategory:GalleryCategoryType[] = []
+
+  try{
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/galleryCategory`)
+    galleryCategory = response.data
+
+  }catch(error){
+    console.error("Error fetching relatedNews", error)
+  }
   
   return (
     <div>
         <GalleryHero/>
-        <Gallery/>
+        <Gallery data={galleryCategory}/>
       
     </div>
   )

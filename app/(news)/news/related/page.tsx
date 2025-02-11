@@ -4,8 +4,15 @@ import RelatedNewsCard from '../_components/RelatedNewsCard'
 import axios from 'axios'
 
 const RelatedNewsPage = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
-  const categories:CategoryType[] = response.data
+  let categories:CategoryType[] = []
+
+  try{
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+    categories = response.data
+
+  }catch(error){
+    console.error("Error fetching relatedNews", error)
+  }
   return (
     <div>
         <NewsHero/>

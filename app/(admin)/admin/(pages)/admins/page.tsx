@@ -6,8 +6,15 @@ import { AdminTable } from './_components/AdminTable'
 import axios from 'axios'
 
 const AdminsPage = async () => {
-  const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`)
-  const usersData:UserType[] = response.data
+  let usersData:UserType[] = []
+  try{
+    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`)
+    usersData = response.data
+
+  }catch(error){
+    console.error("Error in the Admins page", error)
+  }
+
   const contents= [
     {
       title : 'Total Admin',

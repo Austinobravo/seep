@@ -71,7 +71,7 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
 
                     </section>
                 :
-                <section  dangerouslySetInnerHTML={{__html: news.otherOptions}}/>
+                <section className="whitespace-pre-wrap"  dangerouslySetInnerHTML={{__html: news.otherOptions}}/>
                 }
             <aside className='basis-1/4 space-y-7 md:sticky top-24 h-fit'>
                 <div className='flex justify-between text-seep-color gap-3'>

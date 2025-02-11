@@ -7,8 +7,15 @@ import Image from 'next/image'
 import { CreateTestimonial } from './_components/CreateTestimonial'
 
 const TestimonialPage = async () => {
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonials`)
-    const Testimonials:TestimonialType[] = response.data
+    let Testimonials:TestimonialType[] = []
+    try{
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonials`)
+        Testimonials = response.data
+  
+  
+    }catch(error){
+      console.error("Error in the gallery", error)
+    }
 
   return (
     <section>
