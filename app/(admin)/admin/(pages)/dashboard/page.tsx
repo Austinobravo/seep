@@ -18,38 +18,14 @@ import { DashboardBarChart } from '../_components/DashboardBarChart'
 
 import axios from 'axios'
 import { formatDateToString } from '@/lib/globals'
-
+import { BASE_URL } from "@/lib/globals";
  
+export const dynamic = 'force-dynamic'
 
-
-// const data = [
-//   {
-//     title: "Entrepreneurship and startups",
-//     post_date: "16 Nov 2021",
-//     category: "Innovations",
-//     comment: "136",
-//     image: '/images/tech1.png'
-//   },
-//   {
-//     title: "Giants Unveil Cutting-Edge AI Innovation",
-//     post_date: "16 Nov 2021",
-//     category: "Technology",
-//     comment: "136",
-//     image: '/images/Ai.png'
-//   },
-//   {
-//     title: "Tech 2 school",
-//     post_date: "16 Nov 2021",
-//     category: "Impact",
-//     comment: "136",
-//     image: '/images/tech2.png'
-//   },
- 
-// ]
 const DashboardPage = async() => {
   let news:NewsType[] = []
   try{
-    const newsResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+    const newsResponse = await axios.get(`${BASE_URL}/api/news`)
     news = newsResponse.data
 
   }catch(error){

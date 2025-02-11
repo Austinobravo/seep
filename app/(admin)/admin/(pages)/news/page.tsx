@@ -15,16 +15,17 @@ import {
 } from "@/components/ui/dialog"
 import axios from 'axios'
 import PostTable from './_components/PostTable'
+import { BASE_URL } from "@/lib/globals";
 
-
+export const dynamic = 'force-dynamic'
 
 const PostPage = async () => {
   let category:CategoryType[] = []
   let posts:NewsType[] = []
   try{
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/category`)
+    const response = await axios.get(`${BASE_URL}/api/category`)
     category = response.data
-    const postResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+    const postResponse = await axios.get(`${BASE_URL}/api/news`)
     posts = postResponse.data
 
   }catch(error){

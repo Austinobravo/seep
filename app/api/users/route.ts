@@ -7,7 +7,7 @@ import fs from 'fs'
 import { getCurrentUser } from "@/lib/serverSession"
 import { newsFormSchema, userFormSchema } from "@/lib/formSchema"
 import { comparePassword, createUniqueSlug } from "@/lib/globals"
-
+import { BASE_URL } from "@/lib/globals";
 
 export async function GET(req:Request) {
     const user = await getCurrentUser()
@@ -159,7 +159,7 @@ export async function PATCH(req:Request, res: Response) {
                 fs.writeFileSync(filePath, fileBuffer)
         
                 
-                 file = `${process.env.NEXT_PUBLIC_BASE_URL}/images/user/${fileName}`;
+                 file = `${BASE_URL}/images/user/${fileName}`;
             }
             
     

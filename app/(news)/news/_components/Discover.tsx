@@ -3,34 +3,11 @@ import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { BASE_URL } from "@/lib/globals";
 
-// const blogContent = [
-//     {
-//         title: "Future Technology Blog",
-//         description: "Stay informed with our blog section dedicated to future technology",
-//         image: "/images/discovertech.jpg"
-//     },
-//     {
-//         title: "Future Technology Blog",
-//         description: "Stay informed with our blog section dedicated to future technology",
-//         image: "/images/discovertech.jpg"
-//     },
-//     {
-//         title: "Future Technology Blog",
-//         description: "Stay informed with our blog section dedicated to future technology",
-//         image: "/images/discovertech.jpg"
-//     },
-// ]
-const Discover = async () => {
-    let blogContent:NewsType[] = []
 
-    try{
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-      blogContent = response.data
-  
-    }catch(error){
-      console.error("Error fetching News", error)
-    }
+const Discover = async ({blogContent}: {blogContent:NewsType[]}) => {
+   
   return (
     <section className='pt-20 pb-5 space-y-7'>
         <h3 className='bg-seep-color w-fit py-1 leading-10 tracking-wider px-7 rounded-tr-full rounded-br-full text-white text-lg '>Discover</h3>

@@ -3,14 +3,17 @@ import AdminNav from '../_components/AdminNav'
 import axios from 'axios'
 import { JoinTable } from './_component/JoinTable'
 import { ContactTable } from './_component/ContactTable'
+import { BASE_URL } from "@/lib/globals";
+
+export const dynamic = 'force-dynamic'
 
 const page = async () => {
   let joinData:JoinUsType[] = []
   let contactData:ContactUsType[] = []
   try{
-    const joinResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/join`)
+    const joinResponse = await axios.get(`${BASE_URL}/api/join`)
     joinData = joinResponse.data
-    const contactResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/contact`)
+    const contactResponse = await axios.get(`${BASE_URL}/api/contact`)
     contactData = contactResponse.data
 
   }catch(error){

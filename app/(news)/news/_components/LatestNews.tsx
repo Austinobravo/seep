@@ -3,44 +3,46 @@ import { ArrowUpRight, ExternalLink, Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { BASE_URL } from "@/lib/globals";
 
+// const contents = [
+//     {
+//         image: "/images/discovertech.jpg",
+//         heading: "Entrepreneurship and Startups",
+//         category: "Innovation",
+//         likes: "2.2k",
+//         share: "60",
+//         link: ""
+//     },
+//     {
+//         image: "/images/Ai.png",
+//         heading: "Giants Unveil Cutting-Edge AI Innovations",
+//         category: "Technology",
+//         likes: "2.2k",
+//         share: "60",
+//         link: ""
+//     },
+//     {
+//         image: "/images/Tech2schools-65.png",
+//         heading: "Tech to School",
+//         category: "Impact",
+//         likes: "2.2k",
+//         share: "60",
+//         link: ""
+//     },
+// ]
 
-const contents = [
-    {
-        image: "/images/discovertech.jpg",
-        heading: "Entrepreneurship and Startups",
-        category: "Innovation",
-        likes: "2.2k",
-        share: "60",
-        link: ""
-    },
-    {
-        image: "/images/Ai.png",
-        heading: "Giants Unveil Cutting-Edge AI Innovations",
-        category: "Technology",
-        likes: "2.2k",
-        share: "60",
-        link: ""
-    },
-    {
-        image: "/images/Tech2schools-65.png",
-        heading: "Tech to School",
-        category: "Impact",
-        likes: "2.2k",
-        share: "60",
-        link: ""
-    },
-]
+export const dynamic = 'force-dynamic'
 
 const LatestNews = async () => {
     let contents:NewsType[] = []
 
     try{
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
+      const response = await axios.get(`${BASE_URL}/api/news`)
       contents  = response.data
   
     }catch(error){
-      console.error("Error fetching News", error)
+      console.error("Error fetching News latestnews", error)
     }
 
   return (

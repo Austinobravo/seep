@@ -5,6 +5,8 @@ import NewsCategories from './_components/NewsCategories'
 import Discover from './_components/Discover'
 import Beneficiaries from '@/app/(seep)/seep/_components/Beneficiaries'
 import LatestNews from './_components/LatestNews'
+import axios from 'axios'
+import { BASE_URL } from '@/lib/globals'
 
 const Text= [
   {
@@ -20,13 +22,24 @@ const Text= [
       paragraph: 'Schools Improved'
   },
 ]
-const page = () => {
+export const dynamic = 'force-dynamic'
+
+const page = async () => {
+  let blogContent:NewsType[] = []
+
+    try{
+      const response = await axios.get(`${BASE_URL}/api/news`)
+      blogContent = response.data
+  
+    }catch(error){
+      console.error("Error fetching News,", error)
+    }
   return (
     <div>
         <NewsHero/>
         <Counter Text={Text}/>
         <NewsCategories/>
-        <Discover/>
+        <Discover blogContent={blogContent}/>
         <Beneficiaries/>
         <LatestNews/>
       

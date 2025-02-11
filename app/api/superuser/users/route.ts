@@ -7,7 +7,7 @@ import { hashedPassword } from "@/lib/globals";
 import path from "path";
 import fs from "fs"
 import { v4 as uuidv4 } from "uuid"; 
-
+import { BASE_URL } from "@/lib/globals";
 
 export async function PATCH(req:NextRequest, res:Response){
     
@@ -146,7 +146,7 @@ export async function POST(req:Request, res: Response) {
                 fs.writeFileSync(filePath, fileBuffer);
 
                 // Construct the public URL for accessing the image
-                 file = `${process.env.NEXT_PUBLIC_BASE_URL}/images/user/${uniqueFileName}`;
+                 file = `${BASE_URL}/images/user/${uniqueFileName}`;
 
                 }
                 

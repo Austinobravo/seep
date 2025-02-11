@@ -90,3 +90,9 @@ export const formatDateToString = (date: any) => {
     const formattedDate = formatDistanceToNow(parseISO(date), {addSuffix: true})
     return formattedDate
 }
+
+export const BASE_URL =
+  typeof window === "undefined"
+    ? process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+    : "";
+

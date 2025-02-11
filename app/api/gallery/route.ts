@@ -5,6 +5,7 @@ import { galleryCategoryFormSchema, galleryImageFormSchema } from "@/lib/formSch
 import path from "path"
 import fs from 'fs'
 import { v4 as uuidv4 } from "uuid"; 
+import { BASE_URL } from "@/lib/globals";
 
 export async function GET(req:Request) {
     const user = await getCurrentUser()
@@ -78,7 +79,7 @@ export async function POST(req:Request, res: Response) {
                         fs.writeFileSync(filePath, fileBuffer);
 
                         // Construct the public URL for accessing the image
-                        const imageUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/images/gallery/${uniqueFileName}`;
+                        const imageUrl = `${BASE_URL}/images/gallery/${uniqueFileName}`;
 
                          const newImage = await prisma.galleryImage.create({
                             data:{

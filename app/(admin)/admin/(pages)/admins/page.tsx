@@ -4,11 +4,14 @@ import AdminCard from './_components/AdminCard'
 import { LucideIcon, TrendingDown, TrendingUp } from 'lucide-react'
 import { AdminTable } from './_components/AdminTable'
 import axios from 'axios'
+import { BASE_URL } from "@/lib/globals";
+
+export const dynamic = 'force-dynamic'
 
 const AdminsPage = async () => {
   let usersData:UserType[] = []
   try{
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/users`)
+    const response = await axios.get(`${BASE_URL}/api/users`)
     usersData = response.data
 
   }catch(error){

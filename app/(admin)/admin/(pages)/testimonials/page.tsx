@@ -5,11 +5,14 @@ import AdminNav from '../_components/AdminNav'
 import axios from 'axios'
 import Image from 'next/image'
 import { CreateTestimonial } from './_components/CreateTestimonial'
+import { BASE_URL } from "@/lib/globals";
+
+export const dynamic = 'force-dynamic'
 
 const TestimonialPage = async () => {
     let Testimonials:TestimonialType[] = []
     try{
-        const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/testimonials`)
+        const response = await axios.get(`${BASE_URL}/api/testimonials`)
         Testimonials = response.data
   
   

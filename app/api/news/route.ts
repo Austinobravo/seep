@@ -5,7 +5,7 @@ import fs from 'fs'
 import { getCurrentUser } from "@/lib/serverSession"
 import { newsFormSchema } from "@/lib/formSchema"
 import { createUniqueSlug } from "@/lib/globals"
-
+import { BASE_URL } from "@/lib/globals";
 
 export async function POST (req:Request, res: Response){
     const user = await getCurrentUser()
@@ -62,7 +62,7 @@ export async function POST (req:Request, res: Response){
             fs.writeFileSync(filePath, fileBuffer)
 
             
-            const fileUrl = `${process.env.NEXT_PUBLIC_BASE_URL}/images/news/${fileName}`;
+            const fileUrl = `${BASE_URL}/images/news/${fileName}`;
 
             const news = await newPrisma.news.create({
                 data: {
@@ -216,7 +216,7 @@ export async function PATCH(req:Request, res: Response) {
                 fs.writeFileSync(filePath, fileBuffer)
         
                 
-                 file = `${process.env.NEXT_PUBLIC_BASE_URL}/images/news/${fileName}`;
+                 file = `${BASE_URL}/images/news/${fileName}`;
             }
             
     

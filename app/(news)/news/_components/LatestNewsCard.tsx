@@ -4,18 +4,10 @@ import { ArrowUpRight, ExternalLink, Eye, Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import { BASE_URL } from "@/lib/globals";
 
-const LatestNewsCard = async () => {
-    
-    let contents:NewsType[] = []
-
-    try{
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news`)
-      contents  = response.data
-  
-    }catch(error){
-      console.error("Error fetching News", error)
-    }
+const LatestNewsCard = async ({contents}: {contents:NewsType[]}) => {
+   
   return (
     <>
      {contents.length >=1 ?

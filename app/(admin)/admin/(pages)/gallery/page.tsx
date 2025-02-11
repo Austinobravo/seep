@@ -5,18 +5,21 @@ import GalleryCategoryTable from './_components/GalleryCategoryTable'
 import axios from 'axios'
 import GalleryImageForm from './_components/GalleryImageForm'
 import GalleryImageTable from './_components/GalleryImageTable'
+import { BASE_URL } from "@/lib/globals";
+
+export const dynamic = 'force-dynamic'
 
 const GalleryPage = async () => {
   let category:GalleryCategoryType[] = []
   try{
-    const categoryResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/galleryCategory`)
+    const categoryResponse = await axios.get(`${BASE_URL}/api/galleryCategory`)
     category = categoryResponse.data
 
   }catch(error){
     console.error("Error in the gallery", error)
   }
 
-  // const galleryResponse = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/gallery`)
+  // const galleryResponse = await axios.get(`${BASE_URL}/api/gallery`)
   // const gallery:GalleryImageType[] = galleryResponse.data
   return (
     <div>

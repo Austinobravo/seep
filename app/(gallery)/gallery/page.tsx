@@ -2,12 +2,15 @@ import React from 'react'
 import GalleryHero from './_components/GalleryHero'
 import Gallery from './_components/Gallery'
 import axios from 'axios'
+import { BASE_URL } from "@/lib/globals";
+
+export const dynamic = 'force-dynamic'
 
 const page = async () => {
   let galleryCategory:GalleryCategoryType[] = []
 
   try{
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/galleryCategory`)
+    const response = await axios.get(`${BASE_URL}/api/galleryCategory`)
     galleryCategory = response.data
 
   }catch(error){

@@ -3,6 +3,8 @@ import TestimonialHero from './_components/TestimonialHero'
 import TestimonialSection from './_components/TestimonialSection'
 import axios from 'axios';
 
+export const dynamic = 'force-dynamic'
+
 const Page = async () => {
   let testimonials = [];
 

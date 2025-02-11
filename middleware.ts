@@ -1,10 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
+import { BASE_URL } from "@/lib/globals";
 
 export async function middleware(req: NextRequest){
     const pathname = req.nextUrl.pathname
     if (pathname.startsWith('/api/superuser')){
 
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/auth/session`, {
+        const response = await fetch(`${BASE_URL}/api/auth/session`, {
             headers: { Cookie: req.headers.get("cookie") || "" },
         });
 

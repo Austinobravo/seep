@@ -5,37 +5,13 @@ import React from 'react'
 import RelatedNews from '../_components/RelatedNews'
 import axios from 'axios'
 import TableOfContents from '../_components/TableOfContents'
+import { BASE_URL } from "@/lib/globals";
 
-const contents = [
-    {
-        heading: "Introduction",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolorem omnis doloribus iste veritatis vitae suscipit nobis, voluptate, itaque excepturi architecto dolores, eos nam? Iure repudiandae veritatis deleniti natus sunt."
-    },
-    {
-        heading: "AI in Diagnostic Imaging",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolorem omnis doloribus iste veritatis vitae suscipit nobis, voluptate, itaque excepturi architecto dolores, eos nam? Iure repudiandae veritatis deleniti natus sunt."
-    },
-    {
-        heading: "Predictive Analyis and Disease Prevention",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolorem omnis doloribus iste veritatis vitae suscipit nobis, voluptate, itaque excepturi architecto dolores, eos nam? Iure repudiandae veritatis deleniti natus sunt."
-    },
-    {
-        heading: "Ethical Considerations",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolorem omnis doloribus iste veritatis vitae suscipit nobis, voluptate, itaque excepturi architecto dolores, eos nam? Iure repudiandae veritatis deleniti natus sunt."
-    },
-    {
-        heading: "The Future of AI in Healthcare",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolorem omnis doloribus iste veritatis vitae suscipit nobis, voluptate, itaque excepturi architecto dolores, eos nam? Iure repudiandae veritatis deleniti natus sunt."
-    },
-    {
-        heading: "Conclusion",
-        content: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis dolorem omnis doloribus iste veritatis vitae suscipit nobis, voluptate, itaque excepturi architecto dolores, eos nam? Iure repudiandae veritatis deleniti natus sunt."
-    },
+export const dynamic = 'force-dynamic'
 
-]
 const NewsDetail = async ({params}: {params: {id: string}}) => {
     const {id} = params
-    const response = await axios.get(`${process.env.NEXT_PUBLIC_BASE_URL}/api/news/${id}`)
+    const response = await axios.get(`${BASE_URL}/api/news/${id}`)
     if(response.status !== 200){
         return
     }
