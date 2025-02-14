@@ -34,16 +34,27 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const LatestNews = async () => {
-    let contents:NewsType[] = []
-
-    try{
-      const response = await axios.get(`${BASE_URL}/api/news`)
-      contents  = response.data
+async function getNews() {
+    try {
+      const res = await fetch(`${BASE_URL}/api/news`, {
+        cache: "no-store", // Ensures fresh data every request
+         
+      });
   
-    }catch(error){
-      console.error("Error fetching News latestnews", error)
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+  
+      return await res.json();
+    } catch (error) {
+      console.error("Failed to fetch testimonials:", error);
+      return []; // Return empty array to avoid crashes
     }
+  }
+
+const LatestNews = async () => {
+    const contents:NewsType[] = await getNews()
+
 
   return (
     <>
@@ -57,7 +68,7 @@ const LatestNews = async () => {
     <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
         {contents.slice(0,3).map((content) => (
             <div key={content.title} className='shadow-2xl bg-gray-100 p-4 rounded-lg text-seep-color space-y-3'>
-                <Image src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
+                <img loading='lazy' src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
                 <div>
                     <h3 className='font-bold'>{content.title}</h3>
                     <p className='opacity-70'>{content.category.name}</p>

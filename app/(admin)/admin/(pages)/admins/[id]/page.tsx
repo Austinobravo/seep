@@ -6,15 +6,28 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const AdminDetailsPage = async ({params}: {params:{id: string}}) => {
-  let userData = {} as UserType
-  try{
-    const userResponse = await axios.get(`${BASE_URL}/api/users/${params?.id}`)
-    userData = userResponse.data
 
-  }catch(error){
-    console.error("Error in the Admins page", error)
+async function getUserData(id:string) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/users/${id}`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch user content:", error);
+    return []; // Return empty array to avoid crashes
   }
+}
+
+const AdminDetailsPage = async ({params}: {params:{id: string}}) => {
+  const userData:UserType = await getUserData(params.id)
+
 
   return (
     <div>

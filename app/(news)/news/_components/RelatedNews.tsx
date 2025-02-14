@@ -9,16 +9,30 @@ export const dynamic = 'force-dynamic'
 interface newsProps{
     news: NewsType
 }
-const RelatedNews = async ({news}: newsProps) => {
-    let relatedNews:NewsType[] = []
 
-    try{
-      const response = await axios.get(`${BASE_URL}/api/news`)
-      relatedNews = response.data.filter((content: NewsType) => content.category.id === news.category.id && content.id !== news.id )
+async function getNews() {
+    try {
+      const res = await fetch(`${BASE_URL}/api/news`, {
+        cache: "no-store", // Ensures fresh data every request
+         
+      });
   
-    }catch(error){
-      console.error("Error fetching News", error)
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
+  
+      return await res.json();
+    } catch (error) {
+      console.error("Failed to fetch testimonials:", error);
+      return []; // Return empty array to avoid crashes
     }
+  }
+
+  
+const RelatedNews = async ({news}: newsProps) => {
+    const response:NewsType[] = await getNews()
+    const relatedNews = response.filter((content: NewsType) => content.category.id === news.category.id && content.id !== news.id )
+
   return (
     <>
     {relatedNews.length >= 1 &&
@@ -31,7 +45,7 @@ const RelatedNews = async ({news}: newsProps) => {
         <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
             {relatedNews.slice(0,3).map((content) => (
                 <div key={content.id} className='shadow-2xl bg-gray-100 p-4 rounded-lg text-seep-color space-y-3'>
-                    <Image src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
+                    <img loading='lazy' src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
                     <div>
                         <h3 className='font-bold'>{content.title}</h3>
                         <p className='opacity-70'>{content.category.name}</p>

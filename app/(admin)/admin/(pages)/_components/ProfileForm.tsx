@@ -40,12 +40,14 @@ import {
   } from "@/components/ui/tabs"
 import { userFormSchema } from "@/lib/formSchema"
 import { useToast } from "@/hooks/use-toast"
+import { useRouter } from "next/navigation"
 interface Props{
     countryCode?: any
     data?: UserType
     type?: string
 }
 const ProfileForm = ({countryCode, data, type}: Props) => {
+    const router = useRouter()
     const { toast } = useToast()
     const [profileImage, setProfileImage] = React.useState<string>( "")
     const form = useForm<z.infer<typeof userFormSchema>>({
@@ -93,6 +95,7 @@ const ProfileForm = ({countryCode, data, type}: Props) => {
                   })
               
                   form.reset()
+                  router.refresh()
               }
               }
               catch(error:any){

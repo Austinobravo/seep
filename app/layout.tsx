@@ -11,6 +11,7 @@ import 'react-quill/dist/quill.snow.css';
 import "react-phone-number-input/style.css"
 
 import { TooltipProvider } from "@/components/ui/tooltip";
+import InactivityMonitor from "@/components/InactivityMonitor";
 
 const satoshi = localFont({
   src:[
@@ -63,7 +64,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={satoshi.className}><GeneralProvider><SessionClientProvider><TooltipProvider><Toaster/><Navbar/><div className="mt-28">{children}</div><Footer/><ScrollButton/></TooltipProvider></SessionClientProvider></GeneralProvider></body>
+      <body className={satoshi.className}><GeneralProvider><SessionClientProvider><TooltipProvider><Toaster/><InactivityMonitor/><Navbar/><div className="mt-28">{children}</div><Footer/><ScrollButton/></TooltipProvider></SessionClientProvider></GeneralProvider></body>
     </html>
   );
 }

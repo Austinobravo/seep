@@ -58,6 +58,22 @@ export const options:NextAuthOptions = {
     },
     callbacks: {
         session: async ({session, token}) => {
+            if (token.isBlocked) {
+                return {
+                    ...session,
+                    user: {
+                        ...session.user,
+                        id: token.id as string,
+                        username: token.username as string,
+                        firstName: token.firstName as string,
+                        lastName: token.lastName as string,
+                        role: token.role as string,
+                        isBlocked: true
+                        
+                    }
+                }
+            }
+            
             return {
                 ...session,
                 user: {
@@ -67,6 +83,7 @@ export const options:NextAuthOptions = {
                     firstName: token.firstName as string,
                     lastName: token.lastName as string,
                     role: token.role as string,
+                    isBlocked: token.isBlocked as boolean,
                     
                 }
             }
@@ -90,9 +107,22 @@ export const options:NextAuthOptions = {
                                 }
                             }
                         }
+                        
                     }
                 })
-                
+
+                if (!uniqueUser || uniqueUser.isBlocked) {
+                    return {
+                        ...token,
+                        id: user.id,
+                        username: (user as any).username,
+                        firstName: (user as any).firstName,
+                        lastName: (user as any).lastName,
+                        role: uniqueUser?.roles[0]?.role?.name || null as any,
+                        isBlocked: true
+                    }
+                }
+
                 return {
                     ...token,
                     id: user.id,
@@ -100,6 +130,7 @@ export const options:NextAuthOptions = {
                     firstName: (user as any).firstName,
                     lastName: (user as any).lastName,
                     role: uniqueUser?.roles[0]?.role?.name || null as any,
+                    isBlocked: uniqueUser?.isBlocked
                 }
             }
             

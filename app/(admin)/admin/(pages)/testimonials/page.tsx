@@ -9,16 +9,26 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const TestimonialPage = async () => {
-    let Testimonials:TestimonialType[] = []
-    try{
-        const response = await axios.get(`${BASE_URL}/api/testimonials`)
-        Testimonials = response.data
+async function getTestimonialData() {
+    try {
+      const res = await fetch(`${BASE_URL}/api/testimonials`, {
+        cache: "no-store", // Ensures fresh data every request
+      });
   
+      if (!res.ok) {
+        throw new Error(`HTTP error! Status: ${res.status}`);
+      }
   
-    }catch(error){
-      console.error("Error in the gallery", error)
+      return await res.json();
+    } catch (error) {
+      console.error("Failed to fetch testimonial content:", error);
+      return []; // Return empty array to avoid crashes
     }
+  }
+  
+
+const TestimonialPage = async () => {
+    const Testimonials:TestimonialType[] = await getTestimonialData()
 
   return (
     <section>

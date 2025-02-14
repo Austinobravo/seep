@@ -28,12 +28,14 @@ import { useToast } from '@/hooks/use-toast'
 import axios from 'axios'
 import PrivacyAndTermsForm from './PrivacyAndTermsForm'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
       const [ isOpen, setIsOpen] = React.useState(false)
       const [ data, setData] = React.useState()
       const { toast } = useToast()
+      const router = useRouter()
 
       const deleteTerms = async (id: string) => {
         try{
@@ -42,6 +44,7 @@ const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
             description: response.data.message,
             variant: "success"
           })
+          router.refresh()
           
         //   const updatedCategories = category.filter((item) => item.id !== id)
         //   clearCategories();

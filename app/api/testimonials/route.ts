@@ -4,6 +4,7 @@ import prisma from "@/prisma/prisma"
 
 import { getCurrentUser } from "@/lib/serverSession";
 import { testimonialFormSchema } from "@/lib/formSchema";
+import { revalidatePath, revalidateTag } from "next/cache";
 
 
 export async function GET(req:Request) {
@@ -39,6 +40,15 @@ export async function POST(req:Request, res: Response) {
         return NextResponse.json({message: "Unauthorized"}, {status: 403})
     }
 
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+
     const data = await req.json()
     const content = data.content
     const individual_image = data.individual_image
@@ -64,6 +74,7 @@ export async function POST(req:Request, res: Response) {
             }
         })
 
+        revalidatePath("/testimonials");
         return NextResponse.json({data: newTestimonial, message: "Created"}, {status: 201})
 
     }
@@ -72,6 +83,7 @@ export async function POST(req:Request, res: Response) {
         return NextResponse.json(error)
     }
 
+
 }
 export async function PATCH(req:Request, res: Response) {
     
@@ -79,6 +91,15 @@ export async function PATCH(req:Request, res: Response) {
 
     if(!user){
         return NextResponse.json({message: "Unauthorized"}, {status: 403})
+    }
+
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
     const data = await req.json()
@@ -121,6 +142,7 @@ export async function PATCH(req:Request, res: Response) {
             }
         })
 
+        revalidatePath("/testimonials");
         return NextResponse.json({data: updatedTestimonial, message: "Updated"}, {status: 200})
         
     }

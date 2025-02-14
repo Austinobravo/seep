@@ -35,12 +35,14 @@ import { useMediaQuery } from '@/hooks/use-media-query'
 import React from 'react'
 import axios from "axios"
 import { useToast } from "@/hooks/use-toast"
+import { useRouter } from "next/navigation"
 
 const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
     const [singleTestimonial, setSingleTestimonial] = React.useState<TestimonialType | undefined>(undefined)
     const [open, setOpen] = React.useState<boolean>(false); 
     const { toast } = useToast()
+    const router = useRouter()
 
     const deleteTestimonial = async (id: string) => {
         try{
@@ -49,7 +51,7 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
             description: response.data.message,
             variant: "success"
             })
-
+            router.refresh()
         
         }catch(error:any){
             toast({

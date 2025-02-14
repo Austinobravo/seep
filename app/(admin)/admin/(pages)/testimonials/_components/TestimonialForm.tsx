@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import React from "react"
 import axios from "axios"
 import { Loader2 } from "lucide-react"
-import { modules } from "@/lib/globals"
+import { BASE_URL, modules } from "@/lib/globals"
 import ReactQuill from 'react-quill'
 import { useToast } from "@/hooks/use-toast"
 import { testimonialFormSchema } from "@/lib/formSchema"
@@ -24,6 +24,7 @@ import {
   } from "@/components/ui/form"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
+import { useRouter } from "next/navigation"
   
 interface Props{
     data?: TestimonialType | undefined
@@ -31,6 +32,7 @@ interface Props{
 }
 
 const TestimonialForm = ({data, setOpen}: Props) => {
+    const router = useRouter()
     const form = useForm<z.infer<typeof testimonialFormSchema>>({
             resolver: zodResolver(testimonialFormSchema),
             defaultValues: {
@@ -62,6 +64,7 @@ const TestimonialForm = ({data, setOpen}: Props) => {
                             description: resData.message,
                             variant: "success"
                         })
+                        router.refresh()
                     }else{
                         toast({
                             description: resData.message,
@@ -88,7 +91,7 @@ const TestimonialForm = ({data, setOpen}: Props) => {
                 }
             }else{
                 try{
-                    const res = await fetch("/api/testimonials", {
+                    const res = await fetch(`/api/testimonials`, {
                         method: "POST",
                         headers: {
                             'Content-Type': 'application/json'
@@ -97,12 +100,13 @@ const TestimonialForm = ({data, setOpen}: Props) => {
                     })
                     const data = await res.json()
                     if(res.ok){
-                       
+                        setOpen && setOpen(false)
                         form.reset()
                         toast({
                             description: data.message,
                             variant: "success"
                         })
+                        router.refresh()
                     }else{
                         toast({
                             description: data.message,

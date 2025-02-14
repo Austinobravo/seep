@@ -43,7 +43,7 @@ export function CreateTestimonial() {
            
             </DialogDescription>
           </DialogHeader>
-          <TestimonialForm/>
+          <TestimonialForm setOpen={setOpen}/>
         </DialogContent>
       </Dialog>
     )
@@ -62,7 +62,7 @@ export function CreateTestimonial() {
          
           </DrawerDescription>
         </DrawerHeader>
-        <TestimonialForm/>
+        <TestimonialForm setOpen={setOpen}/>
         <DrawerFooter className="pt-2">
         </DrawerFooter>
 

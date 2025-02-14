@@ -6,16 +6,27 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const RelatedNewsPage = async () => {
-  let categories:CategoryType[] = []
+async function getCategories() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/category`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
 
-  try{
-    const response = await axios.get(`${BASE_URL}/api/category`)
-    categories = response.data
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
 
-  }catch(error){
-    console.error("Error fetching News", error)
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetchcategory:", error);
+    return []; // Return empty array to avoid crashes
   }
+}
+
+const RelatedNewsPage = async () => {
+  const  categories = await getCategories()
+
   return (
     <div>
         <NewsHero/>

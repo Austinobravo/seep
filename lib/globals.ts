@@ -91,8 +91,14 @@ export const formatDateToString = (date: any) => {
     return formattedDate
 }
 
+// export const BASE_URL =
+//   typeof window === "undefined"
+//     ? process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
+//     : "";
+
 export const BASE_URL =
-  typeof window === "undefined"
-    ? process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000"
-    : "";
+  process.env.NODE_ENV === "development"
+    ? "http://localhost:3000"
+    : process.env.NEXT_PUBLIC_BASE_URL;
+
 

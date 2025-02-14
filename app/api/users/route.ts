@@ -62,6 +62,15 @@ export async function PATCH(req:Request, res: Response) {
         return NextResponse.json({message: "Unauthorized"}, {status: 403})
     }
 
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+
     const formData = await req.formData()
     const id = formData.get('id') as any; // Access the file from the request
     let file = formData.get('image') as any; // Access the file from the request
@@ -152,14 +161,15 @@ export async function PATCH(req:Request, res: Response) {
                     fs.mkdirSync(uploadDir, {recursive: true})
                 }
         
+                
                 // Save the image file
-                const fileName = `${file.name}`;
+                const fileName = `${file.name}`.replace(/\s+/g, '');
                 const filePath = path.join(uploadDir, fileName)
                 const fileBuffer = new Uint8Array(await file.arrayBuffer())
                 fs.writeFileSync(filePath, fileBuffer)
         
                 
-                 file = `${BASE_URL}/images/user/${fileName}`;
+                 file = `/images/user/${fileName}`;
             }
             
     

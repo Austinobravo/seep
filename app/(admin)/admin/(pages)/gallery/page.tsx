@@ -9,18 +9,28 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const GalleryPage = async () => {
-  let category:GalleryCategoryType[] = []
-  try{
-    const categoryResponse = await axios.get(`${BASE_URL}/api/galleryCategory`)
-    category = categoryResponse.data
 
-  }catch(error){
-    console.error("Error in the gallery", error)
+
+async function getGalleryCategoryData() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/galleryCategory`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch gallery content:", error);
+    return []; // Return empty array to avoid crashes
   }
+}
 
-  // const galleryResponse = await axios.get(`${BASE_URL}/api/gallery`)
-  // const gallery:GalleryImageType[] = galleryResponse.data
+const GalleryPage = async () => {
+  const category:GalleryCategoryType[] = await getGalleryCategoryData()
   return (
     <div>
          <AdminNav title='Gallery'/>

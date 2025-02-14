@@ -44,6 +44,7 @@ import {
 import { Computer, HardDrive, Plus } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { error } from 'console';
+import { useRouter } from 'next/navigation';
 
 interface Props {
   category: GalleryCategoryType[];
@@ -67,6 +68,7 @@ const GalleryImageForm = ({ category, data }: Props) => {
   const [driveImages, setDriveImages] = useState<string[]>([]);
   const [gapiLoaded, setGapiLoaded] = useState(false);
   const [authToken, setAuthToken] = useState<string | null>(null);
+  const router = useRouter()
 
   const form = useForm<z.infer<typeof galleryImageFormSchema>>({
     resolver: zodResolver(galleryImageFormSchema),
@@ -156,9 +158,10 @@ const GalleryImageForm = ({ category, data }: Props) => {
       setDriveImages([])
 
       toast({ title: data.message, variant: 'success' });
+      router.refresh()
     } catch (error) {
       console.error(error);
-      toast({ title: 'Upload failed', variant: 'destructive' });
+      toast({ title: data.message, variant: 'destructive' });
     }
   };
 

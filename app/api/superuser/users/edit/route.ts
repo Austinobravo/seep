@@ -9,6 +9,15 @@ export async function PATCH(req:NextRequest, res:Response){
     if(!user || user.role !== "superuser"){
         return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
+
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
     const id = await req.json()
     const existingUser = await prisma.user.findUnique({
         where:{

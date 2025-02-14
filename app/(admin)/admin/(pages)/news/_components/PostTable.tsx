@@ -93,9 +93,9 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                     </div>
                     <div className='flex flex-col justify-between'>
                         <div className='py-5 !pb-4 overflow-y-auto no-scrollbar'>
-                            <h4 className='font-semibold'>{post.title}</h4>
+                            <h4 className='font-semibold'>{post.title} </h4>
                             <div className='line-clamp-3'>
-                                <h5 className='font-light opacity-80'> {post.newsContent[0]?.paragraph ? post.newsContent[0]?.paragraph : <div dangerouslySetInnerHTML={{__html: post?.otherOptions}}/>}</h5>
+                                <h5 className='font-light opacity-80'> {post.newsContent[0]?.paragraph ? post.newsContent[0]?.paragraph : <div dangerouslySetInnerHTML={{__html: post?.otherOptions}}/>} </h5>
 
                             </div>
                         </div>

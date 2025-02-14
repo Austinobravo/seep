@@ -19,18 +19,47 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const PostPage = async () => {
-  let category:CategoryType[] = []
-  let posts:NewsType[] = []
-  try{
-    const response = await axios.get(`${BASE_URL}/api/category`)
-    category = response.data
-    const postResponse = await axios.get(`${BASE_URL}/api/news`)
-    posts = postResponse.data
 
-  }catch(error){
-    console.error("Error in the gallery", error)
+async function getNewsData() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/news`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch news content:", error);
+    return []; // Return empty array to avoid crashes
   }
+}
+
+
+async function getCategoryData() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/category`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch category content:", error);
+    return []; // Return empty array to avoid crashes
+  }
+}
+
+const PostPage = async () => {
+  const category:CategoryType[] = await getCategoryData()
+  const posts:NewsType[] = await getNewsData()
 
   return (
     <div>

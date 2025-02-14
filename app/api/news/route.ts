@@ -4,13 +4,22 @@ import prisma from '@/prisma/prisma'
 import fs from 'fs'
 import { getCurrentUser } from "@/lib/serverSession"
 import { newsFormSchema } from "@/lib/formSchema"
-import { createUniqueSlug } from "@/lib/globals"
+import { createUniqueSlug, validateForEmptySpaces } from "@/lib/globals"
 import { BASE_URL } from "@/lib/globals";
 
 export async function POST (req:Request, res: Response){
     const user = await getCurrentUser()
     if(!user){
         return NextResponse.json({message: "Unauthorized"}, {status: 403})
+    }
+
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
     const formData = await req.formData()
@@ -52,11 +61,12 @@ export async function POST (req:Request, res: Response){
 
     const slugged_title = await createUniqueSlug(title)
 
+
     
     try{
         const newPost = await prisma.$transaction(async (newPrisma:any) => {
             // Save the image file
-            const fileName = `${file.name}`;
+            const fileName = `${file.name}`.replace(/\s+/g, '');
             const filePath = path.join(uploadDir, fileName)
             const fileBuffer = new Uint8Array(await file.arrayBuffer())
             fs.writeFileSync(filePath, fileBuffer)
@@ -89,8 +99,10 @@ export async function POST (req:Request, res: Response){
                     }
                 }
             })
+
+            const filteredNewsContent = contents.filter((content) => validateForEmptySpaces(content.heading) || validateForEmptySpaces(content.paragraph))
             
-            await Promise.all(contents.map(async (content)=> {
+            await Promise.all(filteredNewsContent.map(async (content)=> {
                 await newPrisma.newsContent.create({
                     data: {
                         heading: content.heading,
@@ -105,7 +117,7 @@ export async function POST (req:Request, res: Response){
 
         })
 
-        return NextResponse.json({data: newPost, message: "Uploaded successfully" }, {status: 201});
+        return NextResponse.json({data: "newPost", message: "Uploaded successfully" }, {status: 201});
     }
     catch(error){
         console.error("error", error)
@@ -168,6 +180,15 @@ export async function PATCH(req:Request, res: Response) {
         return NextResponse.json({message: "Unauthorized"}, {status: 403})
     }
 
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+
     const formData = await req.formData()
     const id = formData.get('id') as any; // Access the file from the request
     let file = formData.get('image') as any; // Access the file from the request
@@ -210,13 +231,13 @@ export async function PATCH(req:Request, res: Response) {
                 }
         
                 // Save the image file
-                const fileName = `${file.name}`;
+                const fileName = `${file.name}`.replace(/\s+/g, '');
                 const filePath = path.join(uploadDir, fileName)
                 const fileBuffer = new Uint8Array(await file.arrayBuffer())
                 fs.writeFileSync(filePath, fileBuffer)
         
                 
-                 file = `${BASE_URL}/images/news/${fileName}`;
+                 file = `/images/news/${fileName}`;
             }
             
     

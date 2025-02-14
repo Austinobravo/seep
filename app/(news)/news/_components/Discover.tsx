@@ -3,8 +3,6 @@ import axios from 'axios'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { BASE_URL } from "@/lib/globals";
-
 
 const Discover = async ({blogContent}: {blogContent:NewsType[]}) => {
    
@@ -25,7 +23,7 @@ const Discover = async ({blogContent}: {blogContent:NewsType[]}) => {
                                     <span className='opacity-70 text-sm md:text-base'>{content.newsContent[0]?.paragraph ? content.newsContent[0]?.paragraph : <span dangerouslySetInnerHTML={{__html: content?.otherOptions}}/>}</span>
                                 </p>
                             </div>
-                            <Image src={content.image} width={500} height={200} alt={content.title} className='rounded-xl hover:opacity-90'/>
+                            <img loading="lazy" src={content.image} width={500} height={200} alt={content.title} className='rounded-xl hover:opacity-90'/>
                     </div>
                     </FadeInSection>
                 </div>

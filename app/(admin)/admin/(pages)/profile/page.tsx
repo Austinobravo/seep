@@ -7,17 +7,34 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const ProfilePage = async () => {
+async function getUserData(id: string) {
+  try {
+    const res = await fetch(`${BASE_URL}/api/users/${id}`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
 
-  let userData = {} as UserType
-  let data = {} as any
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch privacy content:", error);
+    return []; // Return empty array to avoid crashes
+  }
+}
+
+const ProfilePage = async () => {
   const user = await getCurrentUser()
+
+  const userData:UserType = await getUserData(user?.id)
+  let data = {} as any
   try{
     const response = await axios.get(`http://ip-api.com/json/?fields=countryCode`)
     if(response.status !== 200) return
     data = response.data.countryCode
-    const userResponse = await axios.get(`${BASE_URL}/api/users/${user?.id}`)
-    userData = userResponse.data
+
 
 
   }catch(error){

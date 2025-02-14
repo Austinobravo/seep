@@ -28,12 +28,14 @@ import { useToast } from '@/hooks/use-toast'
 import axios from 'axios'
 import PrivacyAndTermsForm from './PrivacyAndTermsForm'
 import Image from 'next/image'
+import { useRouter } from 'next/navigation'
 
 const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
       const [ isOpen, setIsOpen] = React.useState(false)
       const [ data, setData] = React.useState()
       const { toast } = useToast()
+      const router = useRouter()
       const deletePrivacy = async (id: string) => {
         try{
           const response = await axios.delete(`/api/privacy/${id}`,)
@@ -41,11 +43,9 @@ const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
             description: response.data.message,
             variant: "success"
           })
+          router.refresh()
           
-        //   const updatedCategories = category.filter((item) => item.id !== id)
-        //   clearCategories();
-        //   updatedCategories.forEach((category: CategoryType) => addCategory(category));
-      
+
         }catch(error:any){
             toast({
               description: error.response.data.message,

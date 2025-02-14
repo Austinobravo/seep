@@ -10,9 +10,11 @@ import { BASE_URL } from "@/lib/globals";
 export async function GET(req:Request) {
     const user = await getCurrentUser()
 
-    // if(!user){
-    //     return NextResponse.json({message: "Unauthorized"}, {status: 401})
-    // }
+    if(!user){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+
+    
 
 
     try{
@@ -38,6 +40,14 @@ export async function POST(req:Request, res: Response) {
     const user = await getCurrentUser()
 
     if(!user){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
         return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
@@ -70,8 +80,8 @@ export async function POST(req:Request, res: Response) {
                     
                         // Generate a unique filename using UUID
                         const fileExt = path.extname(file.name); // Get file extension
-                        const baseName = path.basename(file.name, fileExt); // Get filename without extension
-                        const uniqueFileName = `${baseName}-${uuidv4()}${fileExt}`; // Append UUID to filename
+                        const baseName = path.basename(file.name, fileExt).replace(/\s+/g, ''); // Get filename without extension
+                        const uniqueFileName = `${baseName}-${fileExt}`; // Append UUID to filename
                     
                         // Save the image file
                         const filePath = path.join(uploadDir, uniqueFileName);
@@ -79,7 +89,7 @@ export async function POST(req:Request, res: Response) {
                         fs.writeFileSync(filePath, fileBuffer);
 
                         // Construct the public URL for accessing the image
-                        const imageUrl = `${BASE_URL}/images/gallery/${uniqueFileName}`;
+                        const imageUrl = `/images/gallery/${uniqueFileName}`;
 
                          const newImage = await prisma.galleryImage.create({
                             data:{
@@ -89,7 +99,9 @@ export async function POST(req:Request, res: Response) {
                                 image: imageUrl
                             }
                          })
+                         console.log("log", newImage)
                     }
+
                     
     
                 })

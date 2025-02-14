@@ -69,15 +69,17 @@ import {
 import { useMediaQuery } from "@/hooks/use-media-query"
 import Image from "next/image"
 import { encode } from "punycode"
+import { useRouter } from "next/navigation"
 
 
 
 export default function GalleryImageTable({data}: {data: GalleryCategoryType[]}) {
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const { toast } = useToast()
-  const [singleCategory, setSingleCategory] = React.useState<GalleryCategoryType | undefined>(undefined)
+  const [singleCategory, setSingleCategory] = React.useState<GalleryCategoryType>({} as GalleryCategoryType)
   const [open, setOpen] = React.useState<boolean>(false);
   const [selectedId, setSelectedId] = React.useState<string>("");
+  const router = useRouter()
   const deleteCategoryImage = async (id: string) => {
 
     try{
@@ -86,6 +88,7 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
         description: response.data.message,
         variant: "success"
       })
+      router.refresh()
       
     }catch(error:any){
         toast({
@@ -195,41 +198,18 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
                   <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer" onSelect={(event) => event.preventDefault()} onClick={() =>  getSingleCategory(id)}><Eye/> View Images</DropdownMenuItem>
                 <DropdownMenuSeparator />
-                
-                {/* <Dialog>
-                    <DialogTrigger asChild>
-                            <DropdownMenuItem onSelect={(event) => event.preventDefault()}>Delete Category</DropdownMenuItem>
-                    </DialogTrigger>
-                    <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
-                    <DialogHeader>
-                        <DialogTitle>Delete this?</DialogTitle>
-                        <DialogDescription>
-                        This is a permanent action. Are you sure?
-                        </DialogDescription>
-                    </DialogHeader>
-                    <div className='flex gap-5 w-fit ml-auto'>
-                        <DialogClose>
-                            Cancel
-                        </DialogClose>
-                        <Button type='button' variant={'destructive'} onClick={() => deleteCategory(id)} className='border-0'>Delete</Button>
-    
-                    </div>
-                    </DialogContent>
-                    
-                </Dialog> */}
-    
-              </DropdownMenuContent>
+                </DropdownMenuContent>
             </DropdownMenu>
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                 </DialogTrigger>
                 <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
                 <DialogHeader>
-                    <DialogTitle>{singleCategory?.galleryImage.length} {singleCategory!.galleryImage!.length <= 1 ? "Image" : "Images"}</DialogTitle>
+                    <DialogTitle>{singleCategory?.galleryImage?.length} {singleCategory?.galleryImage?.length <= 1 ? "Image" : "Images"}</DialogTitle>
                     <DialogDescription>Modify the category details below.</DialogDescription>
                 </DialogHeader >
                 <div className="flex gap-5 flex-wrap">
-                    {singleCategory?.galleryImage.map((item, index) => (
+                    {singleCategory?.galleryImage?.map((item, index) => (
                         <div key={`${item.image}-${index}`} >
                           <Dialog >
                               <DialogTrigger asChild>
@@ -252,8 +232,7 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
                               </DialogContent>
                               
                           </Dialog>
-                            <Image src={`${encodeURI(item.image)}`} width={500} height={200} alt={item.description} className="size-32 object-cover"/>
-
+                            <img src={`${encodeURI(item.image)}`} loading="lazy" width={500} height={200} alt={item.description} className="size-32 object-cover"/>
                         </div>
                     ))}
 

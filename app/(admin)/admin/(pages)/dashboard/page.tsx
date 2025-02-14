@@ -22,15 +22,27 @@ import { BASE_URL } from "@/lib/globals";
  
 export const dynamic = 'force-dynamic'
 
-const DashboardPage = async() => {
-  let news:NewsType[] = []
-  try{
-    const newsResponse = await axios.get(`${BASE_URL}/api/news`)
-    news = newsResponse.data
 
-  }catch(error){
-    console.error("Error in the dashboard", error)
+async function getNewsData() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/news`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch news content:", error);
+    return []; // Return empty array to avoid crashes
   }
+}
+
+const DashboardPage = async() => {
+  const news:NewsType[] = await getNewsData()
 
   const contents = [
     {

@@ -1,10 +1,9 @@
 import { formatDateToString } from '@/lib/globals'
-import axios from 'axios'
+
 import { ArrowUpRight, ExternalLink, Eye, Heart } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
-import { BASE_URL } from "@/lib/globals";
 
 const LatestNewsCard = async ({contents}: {contents:NewsType[]}) => {
    
@@ -48,7 +47,7 @@ const LatestNewsCard = async ({contents}: {contents:NewsType[]}) => {
                         </div>
                     </div>
                     <div className=''>
-                        <Image src={`${encodeURI(content.image)}`} width={500} height={500} alt={content.title} className='rounded-2xl size-full shadow'/>
+                        <img src={`${encodeURI(content.image)}`} loading='lazy' width={500} height={500} alt={content.title} className='rounded-2xl size-full shadow'/>
                     </div>
                 </div>
 

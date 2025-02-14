@@ -5,6 +5,14 @@ import handleIdScroll from '@/hooks/handleIdScroll'
 import { ArrowLeft, ArrowRight, Dot, X, ZoomIn } from 'lucide-react'
 import Image from 'next/image'
 import React from 'react'
+import {
+    Dialog,
+    DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
+    DialogTrigger,
+  } from '@/components/ui/dialog';
 
 const ImagesOf2019 = [
     {
@@ -154,10 +162,24 @@ const Gallery = ({data}: {data:GalleryCategoryType[]}) => {
             <div className='grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-4 '>
                 {item.galleryImage.slice(currentImageIndex, currentImageEndIndex).map((member, index) => (
                     <div key={index} className='text-seep-color w-fit mx-auto'>
-                        <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
-                            <Image src={member.image ? encodeURI(member.image) : '/images/avatar.webp'} width={500} height={100} alt={member.description} className='hover:cursor-zoom-in object-cover mx-auto rounded-md h-72 shadow-md object-top ' onClick={()=> {setIsModalOpen(!isModalOpen), setCurrentImage(member.image)}}/>
-                            {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in slide-in-from-bottom duration-500 bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
-                        </div> 
+                        <Dialog>
+                            <DialogTrigger asChild>
+                                    <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
+                                        <img src={member.image ? encodeURI(member.image) : '/images/avatar.webp'} width={500} height={100} loading='lazy' alt={member.description} className='hover:cursor-zoom-in object-cover mx-auto rounded-md h-72 shadow-md object-top ' onClick={()=> { setCurrentImage(member.image)}}/>
+                                        {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in slide-in-from-bottom duration-500 bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
+                                    </div> 
+                               
+                            </DialogTrigger>
+                            <DialogContent className="max-w-3xl border-none bg-inherit !px-0 max-h-[550px] overflow-y-auto">
+                                <DialogHeader>
+                                <DialogTitle></DialogTitle>
+                                <DialogDescription></DialogDescription>
+                                </DialogHeader>
+                                <div className='flex justify-center items-center w-full'>
+                                    <img src={currentImage} width={500} height={100} loading='lazy' alt='image' className='w-fit rounded-lg flex items-center justify-center md:h-[28rem] h-full'/>
+                                </div>
+                            </DialogContent>
+                            </Dialog>
 
                     </div>
                 ))}
@@ -281,18 +303,19 @@ const Gallery = ({data}: {data:GalleryCategoryType[]}) => {
                 }
 
             </div>
-        <div>
-            {isModalOpen && 
-                <div className='bg-black/50 fixed left-0 top-0 w-full h-full z-50'>
-                    <div className='ml-auto w-fit p-4 cursor-pointer' onClick={()=> setIsModalOpen(!isModalOpen)}>
-                        <X className='text-white' size={40}/>
+            */}
+            <div>
+                {isModalOpen && 
+                    <div className='bg-black/50 fixed left-0 top-0 w-full h-full z-50'>
+                        <div className='ml-auto w-fit p-4 cursor-pointer' onClick={()=> setIsModalOpen(!isModalOpen)}>
+                            <X className='text-white' size={40}/>
+                        </div>
+                        <div className='flex justify-center items-center w-full'>
+                            <Image src={currentImage} width={500} height={100} alt='image' className='w-fit rounded-lg flex items-center justify-center md:h-[28rem] h-full'/>
+                        </div>
                     </div>
-                    <div className='flex justify-center items-center w-full'>
-                        <Image src={currentImage} width={500} height={100} alt='image' className='w-fit rounded-lg flex items-center justify-center md:h-[28rem] h-full'/>
-                    </div>
-                </div>
-            }
-        </div> */}
+                }
+            </div> 
       
     </section>
   )

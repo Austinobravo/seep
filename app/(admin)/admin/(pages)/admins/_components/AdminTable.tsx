@@ -49,6 +49,7 @@ import {
 import { useToast } from "@/hooks/use-toast"
 import axios from "axios"
 import ProfileForm from "../../_components/ProfileForm"
+import { useRouter } from "next/navigation"
 
 export function AdminTable({data}: {data: UserType[]}) {
   const [isBlockedDialogOpen, setIsBlockedDialogOpen] = React.useState<boolean>(false)
@@ -57,6 +58,8 @@ export function AdminTable({data}: {data: UserType[]}) {
   const [SuperuserDialogText, setSuperuserDialogText] = React.useState<string>("")
   const [selectedUserId, setSelectedUserId] = React.useState<string>("");
   const { toast } = useToast()
+  const router = useRouter()
+
   const handleNavigating = (text: string) => {
     setBlockedDialogText(text)
     setIsBlockedDialogOpen(!isBlockedDialogOpen)
@@ -72,7 +75,11 @@ export function AdminTable({data}: {data: UserType[]}) {
       const response = await axios.patch('/api/superuser/users/', JSON.stringify(id))
       if(response.status === 200){
         toast({description: response.data.message, variant: "success"})
+         
+        await fetch('/api/auth/session?update=true', { method: "GET" });
+        await fetch("/api/auth/signout", { method: "POST" });
         setIsBlockedDialogOpen(!isBlockedDialogOpen)
+        router.refresh()
 
       }
 
@@ -90,6 +97,7 @@ export function AdminTable({data}: {data: UserType[]}) {
       if(response.status === 200){
         toast({description: response.data.message, variant: "success"})
         setIsSuperuserDialogOpen(!isSuperuserDialogOpen)
+        router.refresh()
 
       }
 

@@ -67,6 +67,7 @@ import {
   DrawerTrigger,
 } from "@/components/ui/drawer"
 import { useMediaQuery } from "@/hooks/use-media-query"
+import { useRouter } from "next/navigation"
 
 
 
@@ -77,7 +78,9 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
   const [singleCategory, setSingleCategory] = React.useState<GalleryCategoryType | undefined>(undefined)
   const [open, setOpen] = React.useState<boolean>(false);
   const [selectedId, setSelectedId] = React.useState<string>("");
+  const router = useRouter()
 
+  
   const deleteCategory = async (id: string) => {
     try{
       const response = await axios.delete(`/api/galleryCategory/${id}`,)
@@ -85,6 +88,7 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
         description: response.data.message,
         variant: "success"
       })
+      router.refresh()
       
 
     }catch(error:any){

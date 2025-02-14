@@ -7,18 +7,47 @@ import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'
 
-const page = async () => {
-  let joinData:JoinUsType[] = []
-  let contactData:ContactUsType[] = []
-  try{
-    const joinResponse = await axios.get(`${BASE_URL}/api/join`)
-    joinData = joinResponse.data
-    const contactResponse = await axios.get(`${BASE_URL}/api/contact`)
-    contactData = contactResponse.data
 
-  }catch(error){
-    console.error("Error in the Contact page", error)
+async function getJoinData() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/join`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch join content:", error);
+    return []; // Return empty array to avoid crashes
   }
+}
+
+async function getContactData() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/contact`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch contact content:", error);
+    return []; // Return empty array to avoid crashes
+  }
+}
+
+const page = async () => {
+  const joinData = await getJoinData()
+  const contactData = await getContactData()
+
   return (
     <section>
       <AdminNav title='Contact '/>

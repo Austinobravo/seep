@@ -1,13 +1,11 @@
 import { getCurrentUser } from "@/lib/serverSession";
 import { NextRequest, NextResponse } from "next/server";
 import prisma from "@/prisma/prisma"
-import { revalidatePath } from "next/cache";
+
 import { userFormSchema } from "@/lib/formSchema";
 import { hashedPassword } from "@/lib/globals";
 import path from "path";
 import fs from "fs"
-import { v4 as uuidv4 } from "uuid"; 
-import { BASE_URL } from "@/lib/globals";
 
 export async function PATCH(req:NextRequest, res:Response){
     
@@ -27,6 +25,18 @@ export async function PATCH(req:NextRequest, res:Response){
         return NextResponse.json({message: "This user doesn't exist"}, {status: 404})
     }
 
+    if(existingUser.id === user.id){
+        return NextResponse.json({message: "User can not block/unblock themselves."}, {status: 403})
+    }
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+
     try{
         const updatedUser = await prisma.user.update({
             where:{
@@ -38,8 +48,6 @@ export async function PATCH(req:NextRequest, res:Response){
 
             }
         })
-
-            revalidatePath('/admin/admins')
 
         return NextResponse.json({data: updatedUser, message: "Updated"}, {status: 200})
 
@@ -100,6 +108,15 @@ export async function POST(req:Request, res: Response) {
 
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
+
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
     
     const existingUser = await prisma.user.findFirst({
         where:{
@@ -137,8 +154,8 @@ export async function POST(req:Request, res: Response) {
             
                 // Generate a unique filename using UUID
                 const fileExt = path.extname(file.name); // Get file extension
-                const baseName = path.basename(file.name, fileExt); // Get filename without extension
-                const uniqueFileName = `${baseName}-${uuidv4()}${fileExt}`; // Append UUID to filename
+                const baseName = path.basename(file.name, fileExt).replace(/\s+/g, ''); // Get filename without extension
+                const uniqueFileName = `${baseName}-${fileExt}`; // Append UUID to filename
             
                 // Save the image file
                 const filePath = path.join(uploadDir, uniqueFileName);
@@ -146,7 +163,7 @@ export async function POST(req:Request, res: Response) {
                 fs.writeFileSync(filePath, fileBuffer);
 
                 // Construct the public URL for accessing the image
-                 file = `${BASE_URL}/images/user/${uniqueFileName}`;
+                 file = `/images/user/${uniqueFileName}`;
 
                 }
                 

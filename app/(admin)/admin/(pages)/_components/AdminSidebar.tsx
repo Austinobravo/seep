@@ -33,6 +33,15 @@ const AdminSidebar = ({user}: {user:UserType}) => {
          router.push("/admin")
     }
 
+    const { data: session } = useSession();
+
+
+    React.useEffect(() => {
+        if (session?.user.isBlocked) {
+            logOut();
+        }
+    }, [session, router]);
+
 
 
     const setCurrent = (value:string) => {

@@ -1,8 +1,7 @@
 import FadeInSection from '@/hooks/fadeIn'
-import axios from 'axios'
+
 import Image from 'next/image'
 import React from 'react'
-import { BASE_URL } from "@/lib/globals";
 
 const Testimonials = [
     {
@@ -28,8 +27,6 @@ const Testimonials = [
     },
 ]
 const TestimonialSection = ({testimonials}: {testimonials: TestimonialType[]}) => {
-    // const response = await axios.get(`${BASE_URL}/api/testimonials`)
-    // const Testimonials:TestimonialType[] = response.data
   return (
     <section className='md:px-20 px-10 py-20'>
         <FadeInSection direction={`down`}>

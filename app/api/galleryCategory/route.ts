@@ -48,6 +48,15 @@ export async function POST(req:Request, res: Response) {
         return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+
     const data = await req.json()
     const title = data.title.toLocaleLowerCase()
     const subtitle = data.subtitle 
@@ -91,6 +100,15 @@ export async function PATCH(req:Request, res: Response) {
     const user = await getCurrentUser()
 
     if(!user){
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
+    }
+
+    const currentUser = await prisma.user.findUnique({
+        where:{
+            id: user.id
+        }
+    })
+    if(currentUser?.isBlocked){
         return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 

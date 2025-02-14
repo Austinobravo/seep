@@ -160,7 +160,7 @@ const categories = [
     },
 ]
 const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
-    const [currentCategory, setCurrentCategory] = React.useState<string>('innovation')
+    const [currentCategory, setCurrentCategory] = React.useState<string>(categories[0].name)
   return (
     <div className='space-y-7 py-10 md:px-20 px-10'>
         <span className='font-semibold bg-seep-color text-white px-4 py-2'>Related News</span>
@@ -173,8 +173,8 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
         </div>
         <div className=' '>
             {categories.map((category) => (
-                category.news.length >= 1 ? 
-                <div key={`${category.name}`} className={`category-content ${currentCategory === category.name  ? 'active' : ''} ${ category.news.length >= 1 ? 'grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 ' : 'items-center flex border justify-center'}`}>
+                category.news.length >= 1 && 
+                <div key={`${category.name}`} className={`category-content ${currentCategory === category.name  ? 'active' : ''} ${ category.news.length >= 1 ? 'grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 ' : 'items-center flex border justify-center border-green-700'}`}>
                     {currentCategory === category.name && 
                      category.news.map((cat, index) => (
                         <div key={`${category.name}-${cat.title}-${index}`} className='border p-2 rounded-lg shadow '>
@@ -188,7 +188,7 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
                             <div>
                                 <div className='py-4'>
                                     <h4 className='font-semibold'>{cat.title}</h4>
-                                    <h5 className='font-light opacity-80'>{category.name} Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa accusamus in veniam voluptatem itaque, consectetur, quam totam eligendi fugit magnam ror....</h5>
+                                    <h5 className='font-light opacity-80'>{category.name}</h5>
                                 </div>
                                 <div className='flex justify-between flex-wrap gap-y-3'>
                                     <div className='flex justify-between text-seep-color gap-3 flex-wrap '>
@@ -214,11 +214,11 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
                     ))
                     }
                 </div>
-                    :
-                <figure className='mx-auto w-fit text-center'>
-                    <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
-                    <figcaption>No news yet.</figcaption>
-                </figure>
+                //     :
+                // <figure className='mx-auto w-fit text-center border border-green-700'>
+                //     <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
+                //     <figcaption>No category news yet.</figcaption>
+                // </figure>
 
                 // <div key={`${category.name}`} className={`category-content ${currentCategory === category.name  ? 'active' : ''} ${ category.news.length >= 1 ? 'grid lg:grid-cols-3 grid-cols-1 gap-x-10 gap-y-5 ' : 'items-start flex border justify-start'}`}>
             ))}
@@ -227,7 +227,7 @@ const RelatedNewsCard = ({categories}: {categories: CategoryType[]}) => {
         :
         <figure className='mx-auto w-fit text-center'>
             <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No News Image" className='aspect-ratio'/>
-            <figcaption>No news yet.</figcaption>
+            <figcaption>No news here yet.</figcaption>
         </figure>
         }
 

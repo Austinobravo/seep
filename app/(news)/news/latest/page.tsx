@@ -2,22 +2,33 @@ import React from 'react'
 import NewsHero from '../_components/NewsHero'
 import LatestNewsCard from '../_components/LatestNewsCard'
 import RelatedNews from '../_components/RelatedNews'
-import axios from 'axios'
+
 import { BASE_URL } from '@/lib/globals'
 
 export const dynamic = 'force-dynamic'
 
+async function getBlogContent() {
+  try {
+    const res = await fetch(`${BASE_URL}/api/news`, {
+      cache: "no-store", // Ensures fresh data every request
+       
+    });
+
+    if (!res.ok) {
+      throw new Error(`HTTP error! Status: ${res.status}`);
+    }
+
+    return await res.json();
+  } catch (error) {
+    console.error("Failed to fetch blog content:", error);
+    return []; // Return empty array to avoid crashes
+  }
+}
+
 const LatestNewsPage = async () => {
    
-  let contents:NewsType[] = []
+  const contents = await getBlogContent()
 
-  try{
-    const response = await axios.get(`${BASE_URL}/api/news`)
-    contents  = response.data
-
-  }catch(error){
-    console.error("Error fetching News", error)
-  }
   return (
     <div>
         <NewsHero/>

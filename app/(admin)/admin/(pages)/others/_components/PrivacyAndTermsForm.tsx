@@ -22,6 +22,7 @@ import { modules } from "@/lib/globals"
 import ReactQuill from 'react-quill'
 import { useToast } from "@/hooks/use-toast"
 import { privacyAndTermsFormSchema } from "@/lib/formSchema"
+import { useRouter } from "next/navigation"
 
 interface Props{
     data?: PrivacyType | undefined
@@ -30,6 +31,7 @@ interface Props{
 }
 
 const PrivacyAndTermsForm = ({data, setOpen, type}: Props) => {
+    const router = useRouter()
     const form = useForm<z.infer<typeof privacyAndTermsFormSchema>>({
         resolver: zodResolver(privacyAndTermsFormSchema),
         defaultValues: {
@@ -59,6 +61,7 @@ const PrivacyAndTermsForm = ({data, setOpen, type}: Props) => {
                             description: resData.message,
                             variant: "success"
                         })
+                        router.refresh()
                     }else{
                         toast({
                             description: resData.message,
@@ -102,6 +105,7 @@ const PrivacyAndTermsForm = ({data, setOpen, type}: Props) => {
                             description: resData.message,
                             variant: "success"
                         })
+                        router.refresh()
                     }else{
                         toast({
                             description: resData.message,
@@ -148,6 +152,7 @@ const PrivacyAndTermsForm = ({data, setOpen, type}: Props) => {
                             description: data.message,
                             variant: "success"
                         })
+                        router.refresh()
                     }else{
                         toast({
                             description: data.message,
@@ -191,6 +196,7 @@ const PrivacyAndTermsForm = ({data, setOpen, type}: Props) => {
                             description: data.message,
                             variant: "success"
                         })
+                        router.refresh()
                     }else{
                         toast({
                             description: data.message,
