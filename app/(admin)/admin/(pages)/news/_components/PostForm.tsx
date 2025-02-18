@@ -46,7 +46,7 @@ const PostForm = ({category,news, setOpen}: Props) => {
   const form = useForm<z.infer<typeof newsFormSchema>>({
     resolver: zodResolver(newsFormSchema),
     defaultValues: {
-      id: news?.id || "",
+          id: news?.id || "",
           title: news?.title || "",
           category: news?.categoryId || "",
           otherOptions: news?.otherOptions ||  "",

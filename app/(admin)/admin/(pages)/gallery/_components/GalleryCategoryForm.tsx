@@ -17,22 +17,24 @@ import { Button } from '@/components/ui/button'
 import { useToast } from '@/hooks/use-toast'
 import { useAllContext } from '@/hooks/useContextHook'
 import { galleryCategoryFormSchema } from '@/lib/formSchema'
+import { useRouter } from 'next/navigation'
 
 
 interface Props{
-    data?: CategoryType | undefined
+    data?: GalleryCategoryType | undefined
     setOpen?: ((arg0: boolean) => void ) | undefined
 }
 
 const GalleryCategoryForm = ({data, setOpen}: Props) => {
     const { toast } = useToast()
-    const { addCategory, updateCategory } = useAllContext()
+    const router = useRouter()
+    
 
     const form = useForm<z.infer<typeof galleryCategoryFormSchema>>({
         resolver: zodResolver(galleryCategoryFormSchema),
         defaultValues: {
-            title: "",
-            subtitle: "",
+            title: data?.title || "",
+            subtitle: data?.subtitle || "",
         }
     })
     const isSubmitting = form.formState.isSubmitting
@@ -58,6 +60,7 @@ const GalleryCategoryForm = ({data, setOpen}: Props) => {
                         description: resData.message,
                         variant: "success"
                     })
+                    router.refresh()
                 }else{
                     toast({
                         description: resData.message,

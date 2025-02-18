@@ -72,7 +72,7 @@ export async function POST (req:Request, res: Response){
             fs.writeFileSync(filePath, fileBuffer)
 
             
-            const fileUrl = `${BASE_URL}/images/news/${fileName}`;
+            const fileUrl = `/images/news/${fileName}`;
 
             const news = await newPrisma.news.create({
                 data: {

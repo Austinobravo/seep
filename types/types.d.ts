@@ -120,6 +120,7 @@ type GalleryImageType = {
         image: string
         description: string
         userId: string
+        galleryCategoryId : string
 
         createdAt: string
 

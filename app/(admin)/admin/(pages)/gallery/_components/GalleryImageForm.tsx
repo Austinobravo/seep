@@ -47,8 +47,10 @@ import { error } from 'console';
 import { useRouter } from 'next/navigation';
 
 interface Props {
-  category: GalleryCategoryType[];
-  data?: any;
+  category?: GalleryCategoryType[];
+  data?: GalleryImageType;
+  setOpen?: any;
+  open?: boolean
 }
 
 declare global {
@@ -62,7 +64,8 @@ const API_KEY = "YOUR_GOOGLE_API_KEY";
 const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"];
 const SCOPES = "https://www.googleapis.com/auth/drive.readonly";
 
-const GalleryImageForm = ({ category, data }: Props) => {
+const GalleryImageForm = ({ category, data, setOpen, open }: Props) => {
+  console.log("data", data)
   const { toast } = useToast();
   const [files, setFiles] = useState<File[]>([]);
   const [driveImages, setDriveImages] = useState<string[]>([]);
@@ -73,8 +76,8 @@ const GalleryImageForm = ({ category, data }: Props) => {
   const form = useForm<z.infer<typeof galleryImageFormSchema>>({
     resolver: zodResolver(galleryImageFormSchema),
     defaultValues: {
-      description: '',
-      categoryId: '',
+      description: data?.description || '',
+      categoryId: data?.galleryCategoryId || '',
     },
   });
 
@@ -136,44 +139,73 @@ const GalleryImageForm = ({ category, data }: Props) => {
   };
 
   const onSubmit = async (values: z.infer<typeof galleryImageFormSchema>) => {
-    if(files.length <= 0 && driveImages.length <= 0){
-      return form.setError("images", {message: "Can not be empty"} )
-    }
-    try {
-      const formData = new FormData();
-      files.forEach((file) => formData.append('images', file));
-      driveImages.forEach((url) => formData.append('driveImages', url));
-      formData.append('description', values.description);
-      formData.append('categoryId', values.categoryId);
+    if(data){
+      try {
+        const newData = {...values, id:data.id}
 
-      const response = await fetch('/api/gallery', {
-        method: 'POST',
-        body: formData,
-      });
+        const response = await fetch('/api/gallery', {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newData)
+        });
+  
+        if (!response.ok) throw new Error('Failed to upload');
+        const resData = await response.json()
+        form.reset()
+        setFiles([])
+        setDriveImages([])
+  
+        toast({ title: resData.message, variant: 'success' });
+        setOpen(false)
+        router.refresh()
+      } catch (error:any) {
+        console.error(error);
+        toast({ title: error.message, variant: 'destructive' });
+      }
 
-      if (!response.ok) throw new Error('Failed to upload');
-      const data = await response.json()
-      form.reset()
-      setFiles([])
-      setDriveImages([])
+    }else{
+      if(files.length <= 0 && driveImages.length <= 0){
+        return form.setError("images", {message: "Can not be empty"} )
+      }
+      try {
+        const formData = new FormData();
+        files.forEach((file) => formData.append('images', file));
+        driveImages.forEach((url) => formData.append('driveImages', url));
+        formData.append('description', values.description);
+        formData.append('categoryId', values.categoryId);
+  
+        const response = await fetch('/api/gallery', {
+          method: 'POST',
+          body: formData,
+        });
+  
+        if (!response.ok) throw new Error('Failed to upload');
+        const resData = await response.json()
+        form.reset()
+        setFiles([])
+        setDriveImages([])
+  
+        toast({ title: resData.message, variant: 'success' });
+        router.refresh()
+      } catch (error:any) {
+        console.error(error);
+        toast({ title: error.message, variant: 'destructive' });
+      }
 
-      toast({ title: data.message, variant: 'success' });
-      router.refresh()
-    } catch (error) {
-      console.error(error);
-      toast({ title: data.message, variant: 'destructive' });
     }
   };
 
   return (
-    <Dialog>
+    <Dialog open={data && open } onOpenChange={data && setOpen}>
       <DialogTrigger asChild>
-        <Button type="button">Add Images</Button>
+        {!data && <Button type="button">{data ? "Edit Image" : "Add Images"} </Button>}
       </DialogTrigger>
       <DialogContent className="sm:max-w-xl max-h-[550px] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Add Images</DialogTitle>
-          <DialogDescription>Add images to your gallery here</DialogDescription>
+          <DialogTitle>{data ? "Edit Image" : "Add Images"}</DialogTitle>
+          <DialogDescription>{data ? "Edit Image" : "Add Images"} to your gallery here</DialogDescription>
         </DialogHeader>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
@@ -182,12 +214,12 @@ const GalleryImageForm = ({ category, data }: Props) => {
               name="description"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-black">Blog Image</FormLabel>
+                  <FormLabel className="text-black">Image description</FormLabel>
                   <FormControl>
                   <Input type="text" placeholder="Image description..." {...field} />
                   </FormControl>
                   <FormDescription>
-                    This is the blog image.
+                    This is the image description.
                   </FormDescription>
                   <FormMessage />
                 </FormItem>
@@ -206,7 +238,7 @@ const GalleryImageForm = ({ category, data }: Props) => {
                     </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {category.map((cat) => (
+                      {category?.map((cat) => (
                         <SelectItem key={cat.id} value={cat.id}>
                           {cat.title}
                         </SelectItem>
@@ -220,55 +252,57 @@ const GalleryImageForm = ({ category, data }: Props) => {
                 </FormItem>
               )}
             />
-             <div className='flex gap-3 items-center'>
-            <DropdownMenu>
-                <DropdownMenuTrigger asChild>
-                <Button variant="ghost" className="h-8 w-8 p-0">
-                    <span className="sr-only">Open menu</span>
-                    <Plus size={20}/>
-                </Button>
-                </DropdownMenuTrigger>
-                <DropdownMenuContent>
-                <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                    <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer">
-                        <Label htmlFor="computerImages"  className='flex items-center gap-3 cursor-pointer'>
-                            <Computer/>
-                            Upload from Computer
-                        </Label>
-                    </DropdownMenuItem>
-              <DropdownMenuSeparator />
-                    <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer" onClick={(e) => e.preventDefault()}>
-                        <Label className='flex items-center gap-3 cursor-pointer' onClick={handleGoogleAuth}>
-                            <HardDrive/>
-                            Upload from Google Drive
-                        </Label>
-                    </DropdownMenuItem>
-                </DropdownMenuContent>
-            </DropdownMenu>
-            <FormField
-              control={form.control}
-              name="images"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-black"></FormLabel>
-                  <FormControl>
-                    <Input type="file" multiple accept="image/*" name='computerImages' className='hidden' id='computerImages' onChange={handleFileChange} />
-                  </FormControl>
-                  <FormDescription>
-                   
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {files.length >= 1 &&
-            <p>{files.length} images selected</p>
-            }
-            </div>
+              {!data &&
+                <div className='flex gap-3 items-center'>
+                <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                    <Button variant="ghost" className="h-8 w-8 p-0">
+                        <span className="sr-only">Open menu</span>
+                        <Plus size={20}/>
+                    </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                    <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                        <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer">
+                            <Label htmlFor="computerImages"  className='flex items-center gap-3 cursor-pointer'>
+                                <Computer/>
+                                Upload from Computer
+                            </Label>
+                        </DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                        <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer" onClick={(e) => e.preventDefault()}>
+                            <Label className='flex items-center gap-3 cursor-pointer' onClick={handleGoogleAuth}>
+                                <HardDrive/>
+                                Upload from Google Drive
+                            </Label>
+                        </DropdownMenuItem>
+                    </DropdownMenuContent>
+                </DropdownMenu>
+                <FormField
+                  control={form.control}
+                  name="images"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-black"></FormLabel>
+                      <FormControl>
+                        <Input type="file" multiple accept="image/*" name='computerImages' className='hidden' id='computerImages' onChange={handleFileChange} />
+                      </FormControl>
+                      <FormDescription>
+                      
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                {files.length >= 1 &&
+                <p>{files.length} images selected</p>
+                }
+                </div>
+              }
 
 
             <Button type="submit" disabled={isSubmitting} className='w-full'>
-              {isSubmitting ? 'Submitting...' : data ? 'Edit Gallery' : 'Submit'}
+              {isSubmitting ? 'Submitting...' : data ? 'Edit Image' : 'Submit'}
             </Button>
             </form>
             </Form>

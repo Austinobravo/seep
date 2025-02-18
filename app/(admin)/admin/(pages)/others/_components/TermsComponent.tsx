@@ -33,12 +33,14 @@ import { useRouter } from 'next/navigation'
 const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
       const [ isOpen, setIsOpen] = React.useState(false)
+      const [ isLoading, setIsLoading] = React.useState(false)
       const [ data, setData] = React.useState()
       const { toast } = useToast()
       const router = useRouter()
 
       const deleteTerms = async (id: string) => {
         try{
+          setIsLoading(true)
           const response = await axios.delete(`/api/terms/${id}`,)
           toast({
             description: response.data.message,
@@ -55,6 +57,8 @@ const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
               description: error.response.data.message,
               variant: "destructive"
           })
+        }finally{
+          setIsLoading(false)
         }
       }
     
@@ -139,8 +143,8 @@ const TermsComponent = ({termsData}: {termsData: PrivacyType}) => {
                     <DialogClose>
                         Cancel
                     </DialogClose>
-                    <Button type='button' variant={'destructive'} onClick={() => deleteTerms(termsData.id)} className='border-0'>Delete</Button>
-
+                    
+                    <Button type='button'  variant={'destructive'} onClick={() => deleteTerms(termsData.id)} className='border-0 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Deleting..." : "Delete"}</Button>
                 </div>
                 </DialogContent>
                 

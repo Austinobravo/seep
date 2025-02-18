@@ -34,6 +34,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
     const [singleNews, setSingleNews] = React.useState<NewsType | undefined>(undefined)
     const [open, setOpen] = React.useState<boolean>(false);  
+    const [isLoading, setIsLoading] = React.useState<boolean>(false);  
     const { toast } = useToast()    
         React.useEffect(() => {
             const fetchUpdatedCategories = async () => {
@@ -48,6 +49,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
 
         const deleteNews = async (id: string) => {
             try{
+                setIsLoading(true)
                 const response = await axios.delete(`/api/news/${id}`,)
                 toast({
                 description: response.data.message,
@@ -63,6 +65,8 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                     description: error.response.data.message,
                     variant: "destructive"
                 })
+            }finally{
+                setIsLoading(false)
             }
         }
 
@@ -87,7 +91,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                     <div style={{'backgroundImage': `url(${encodeURI(post.image)}`}} className='bg-center bg-cover h-40 w-full bg-no-repeat  items-end flex '>
                         <div className='gap-2 text-white text-sm items-end flex bg-gradient-to-b from-transparent via-[#0097FF] to-[#0097FF] w-full p-2'>
                             <Image src={`/images/avatar.webp`} width={500} height={500} alt='detail' className='rounded-2xl w-10 h-10 shadow'/>
-                            <h3 className='font-semibold'>{post.user.firstName} {post.user.lastName}</h3>
+                            <h3 className='font-semibold'>{post.user?.firstName} {post.user?.lastName}</h3>
                             <span className='text-xs'>{formatDateToString(post.createdAt)}</span> 
                         </div>
                     </div>
@@ -128,7 +132,8 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                                         <DialogClose>
                                             Cancel
                                         </DialogClose>
-                                        <Button type='button' variant={'destructive'} onClick={()=>deleteNews(post.slug)}  className='border-0'>Delete</Button>
+                                        
+                                        <Button type='button'variant={'destructive'} onClick={() => deleteNews(post.slug)} className='border-0 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Deleting..." : "Delete"}</Button>
 
                                     </div>
                                     </DialogContent>
@@ -138,7 +143,7 @@ const PostTable = ({category}: {category:CategoryType[]}) => {
                                     <Dialog open={open} onOpenChange={setOpen}>
                                     <DialogTrigger asChild>
                                     </DialogTrigger>
-                                    <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
+                                    <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
                                     <DialogHeader>
                                         <DialogTitle>Edit News</DialogTitle>
                                         <DialogDescription>Modify the news details below.</DialogDescription>

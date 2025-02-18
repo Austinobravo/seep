@@ -6,7 +6,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 
-const INACTIVITY_TIME = 120 * 1000; // 2 min
+const INACTIVITY_TIME = 600 * 1000; // 10 min
 const COUNTDOWN_TIME = 30; // 30 seconds
 
 const InactivityMonitor = () => {

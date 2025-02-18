@@ -33,10 +33,12 @@ import { useRouter } from 'next/navigation'
 const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
       const [ isOpen, setIsOpen] = React.useState(false)
+      const [ isLoading, setIsLoading] = React.useState(false)
       const [ data, setData] = React.useState()
       const { toast } = useToast()
       const router = useRouter()
       const deletePrivacy = async (id: string) => {
+        setIsLoading(true)
         try{
           const response = await axios.delete(`/api/privacy/${id}`,)
           toast({
@@ -51,6 +53,9 @@ const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
               description: error.response.data.message,
               variant: "destructive"
           })
+        }
+        finally{
+          setIsLoading(false)
         }
       }
     
@@ -135,8 +140,8 @@ const PrivacyComponent = ({privacyData}: {privacyData: PrivacyType}) => {
                                 <DialogClose>
                                     Cancel
                                 </DialogClose>
-                                <Button type='button' variant={'destructive'} onClick={() => deletePrivacy(privacyData.id)} className='border-0'>Delete</Button>
-
+                                
+                                <Button type='button'  variant={'destructive'} onClick={() => deletePrivacy(privacyData.id)} className='border-0 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Deleting..." : "Delete"}</Button>
                             </div>
                             </DialogContent>
                             

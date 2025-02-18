@@ -68,21 +68,24 @@ import {
 } from "@/components/ui/drawer"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import { useRouter } from "next/navigation"
+import GalleryCategoryForm from "./GalleryCategoryForm"
 
 
 
 export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[]}) {
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const { toast } = useToast()
-  const { addCategory, category, clearCategories } = useAllContext()
+
   const [singleCategory, setSingleCategory] = React.useState<GalleryCategoryType | undefined>(undefined)
   const [open, setOpen] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const [selectedId, setSelectedId] = React.useState<string>("");
   const router = useRouter()
 
   
   const deleteCategory = async (id: string) => {
     try{
+      setIsLoading(true)
       const response = await axios.delete(`/api/galleryCategory/${id}`,)
       toast({
         description: response.data.message,
@@ -96,23 +99,24 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
           description: error.response.data.message,
           variant: "destructive"
       })
+    }finally{
+      setIsLoading(false)
     }
   }
 
-//   const getSingleCategory = async (id: string) => {
-//     try{
-//       const response = await axios.get(`/api/category/${id}`,)
-//       console.log("cat", response.data)
-//       setSingleCategory(response.data)
-//       setOpen(true); 
+  const getSingleCategory = async (id: string) => {
+    try{
+      const response = await axios.get(`/api/galleryCategory/${id}`,)
+      setSingleCategory(response.data)
+      setOpen(true); 
       
-//     }catch(error:any){
-//         toast({
-//           description: error.response.data.message,
-//           variant: "destructive"
-//       })
-//     }
-//   }
+    }catch(error:any){
+        toast({
+          description: error.response.data.message,
+          variant: "destructive"
+      })
+    }
+  }
   
    const columns: ColumnDef<GalleryCategoryType>[] = [
       {
@@ -198,13 +202,13 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
-                  {/* <DropdownMenuItem onSelect={(event) => event.preventDefault()} onClick={() =>  getSingleCategory(id)}>Edit Category</DropdownMenuItem> */}
+                  <DropdownMenuItem className="hover:!bg-blue-500 hover:!text-white cursor-pointer" onSelect={(event) => event.preventDefault()} onClick={() =>  getSingleCategory(id)}>Edit Category</DropdownMenuItem>
                 
                 
                 <DropdownMenuSeparator />
                 <Dialog>
                     <DialogTrigger asChild>
-                            <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer" onSelect={(event) => {event.preventDefault(), setSelectedId(id)}}>Delete Category</DropdownMenuItem>
+                            <DropdownMenuItem className="flex gap-2  hover:!bg-blue-500 hover:!text-white p-1 cursor-pointer" onSelect={(event) => {event.preventDefault(), setSelectedId(id)}}>Delete Category</DropdownMenuItem>
                     </DialogTrigger>
                     <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto">
                     <DialogHeader>
@@ -217,25 +221,46 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type='button' variant={'destructive'} onClick={() => deleteCategory(selectedId)} className='border-0'>Delete</Button>
+                        
+                        <Button type='button' variant={'destructive'} onClick={() => deleteCategory(selectedId)} className='border-0 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Deleting..." : "Delete"}</Button>
+                        
     
                     </div>
                     </DialogContent>
                     
                 </Dialog>
+                <DropdownMenuSeparator />
+                {/* <Dialog open={isOpen} onOpenChange={setIsOpen}>
+                    <DialogTrigger asChild>
+                            <DropdownMenuItem className="flex gap-2  hover:!bg-blue-500 hover:!text-white p-1 cursor-pointer" onSelect={(event) => event.preventDefault()} onClick={() =>  getSingleCategory(id)}>Edit Category</DropdownMenuItem>
+                    </DialogTrigger>
+                    <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto">
+                    <DialogHeader>
+                        <DialogTitle>Edit Category</DialogTitle>
+                        <DialogDescription>
+                        Modify the gallery category 
+                        </DialogDescription>
+                    </DialogHeader>
+                    <div className=''>
+                        <GalleryCategoryForm data={singleCategory}/>
+    
+                    </div>
+                    </DialogContent>
+                    
+                </Dialog> */}
     
               </DropdownMenuContent>
             </DropdownMenu>
-            {/* {isDesktop ?
+            {isDesktop ?
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
+              <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
               <DialogHeader>
                 <DialogTitle>Edit Category</DialogTitle>
                 <DialogDescription>Modify the category details below.</DialogDescription>
               </DialogHeader>
-                <CategoryForm data={singleCategory} setOpen={setOpen}/>
+                <GalleryCategoryForm data={singleCategory} setOpen={setOpen}/>
               </DialogContent>
               
           </Dialog>
@@ -252,14 +277,14 @@ export default function GalleryCategoryTable({data}: {data: GalleryCategoryType[
                   Modify the category details below.
                   </DrawerDescription>
                 </DrawerHeader>
-                <CategoryForm data={singleCategory} setOpen={setOpen}/>
+                <GalleryCategoryForm data={singleCategory} setOpen={setOpen}/>
                 <DrawerFooter className="pt-2">
                 </DrawerFooter>
 
                 </div>
               </DrawerContent>
             </Drawer>
-            } */}
+            }
             </>
           )
         },

@@ -13,7 +13,7 @@ const imagesAndText = [
         name: 'Innovation'
     },
     {
-        image: '/images/naira.png',
+        image: '/images/naira.svg',
         name: 'Empowerment'
     },
     {

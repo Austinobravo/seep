@@ -41,11 +41,13 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
     const isDesktop = useMediaQuery("(min-width: 768px)")
     const [singleTestimonial, setSingleTestimonial] = React.useState<TestimonialType | undefined>(undefined)
     const [open, setOpen] = React.useState<boolean>(false); 
+    const [isLoading, setIsLoading] = React.useState<boolean>(false); 
     const { toast } = useToast()
     const router = useRouter()
 
     const deleteTestimonial = async (id: string) => {
         try{
+            setIsLoading(true)
             const response = await axios.delete(`/api/testimonials/${id}`,)
             toast({
             description: response.data.message,
@@ -58,6 +60,8 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
                 description: error.response.data.message,
                 variant: "destructive"
             })
+        }finally{
+            setIsLoading(false)
         }
     }
 
@@ -118,7 +122,8 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
                                 <DialogClose>
                                     Cancel
                                 </DialogClose>
-                                <Button type='button' variant={'destructive'} onClick={()=> deleteTestimonial(testimonial.id)}  className='border-0'>Delete</Button>
+                                
+                                <Button type='button'  variant={'destructive'} onClick={() => deleteTestimonial(testimonial.id)} className='border-0 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Deleting..." : "Delete"}</Button>
 
                             </div>
                             </DialogContent>
@@ -128,7 +133,7 @@ const TestimonialCard = ({testimonial}: {testimonial:TestimonialType}) => {
                             <Dialog open={open} onOpenChange={setOpen}>
                             <DialogTrigger asChild>
                             </DialogTrigger>
-                            <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
+                            <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
                             <DialogHeader>
                                 <DialogTitle>Edit Testimonial</DialogTitle>
                                 <DialogDescription>Modify the testimonial details below.</DialogDescription>

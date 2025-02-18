@@ -76,8 +76,10 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
   const { addCategory, category, clearCategories } = useAllContext()
   const [singleCategory, setSingleCategory] = React.useState<CategoryType | undefined>(undefined)
   const [open, setOpen] = React.useState<boolean>(false);
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const deleteCategory = async (id: string) => {
     try{
+      setIsLoading(true)
       const response = await axios.delete(`/api/category/${id}`,)
       toast({
         description: response.data.message,
@@ -93,6 +95,8 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
           description: error.response.data.message,
           variant: "destructive"
       })
+    }finally{
+      setIsLoading(false)
     }
   }
 
@@ -214,8 +218,7 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
                         <DialogClose>
                             Cancel
                         </DialogClose>
-                        <Button type='button' variant={'destructive'} onClick={() => deleteCategory(id)} className='border-0'>Delete</Button>
-    
+                      <Button type='button'  variant={'destructive'} onClick={() => deleteCategory(id)} className='border-0 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Deleting..." : "Delete"}</Button>
                     </div>
                     </DialogContent>
                     
@@ -227,7 +230,7 @@ export default function CategoryTable({data}: {data: CategoryType[]}) {
             <Dialog open={open} onOpenChange={setOpen}>
               <DialogTrigger asChild>
               </DialogTrigger>
-              <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
+              <DialogContent className="sm:max-w-2xl max-h-[550px] overflow-y-auto no-scrollbar">
               <DialogHeader>
                 <DialogTitle>Edit Category</DialogTitle>
                 <DialogDescription>Modify the category details below.</DialogDescription>

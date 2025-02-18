@@ -51,7 +51,7 @@ export async function DELETE(req:NextRequest, {params}: {params: {id: string}}){
     const {id} = params
     
     if(!user){
-        return NextResponse.json({message: "Invalid user"}, {status: 401})
+        return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
     const currentUser = await prisma.user.findUnique({

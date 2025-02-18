@@ -13,7 +13,7 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, Eye, MoreHorizontal, X } from "lucide-react"
+import { ArrowUpDown, Edit, Eye, MoreHorizontal, X } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -68,8 +68,9 @@ import {
 } from "@/components/ui/drawer"
 import { useMediaQuery } from "@/hooks/use-media-query"
 import Image from "next/image"
-import { encode } from "punycode"
+
 import { useRouter } from "next/navigation"
+import GalleryImageForm from "./GalleryImageForm"
 
 
 
@@ -77,17 +78,24 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
   const isDesktop = useMediaQuery("(min-width: 768px)")
   const { toast } = useToast()
   const [singleCategory, setSingleCategory] = React.useState<GalleryCategoryType>({} as GalleryCategoryType)
+  const [singleImage, setSingleImage] = React.useState<GalleryImageType>({} as GalleryImageType)
   const [open, setOpen] = React.useState<boolean>(false);
+  const [isImageOpen, setIsImageOpen] = React.useState<boolean>(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = React.useState<boolean>(false);
   const [selectedId, setSelectedId] = React.useState<string>("");
+  const [isLoading, setIsLoading] = React.useState<boolean>(false);
   const router = useRouter()
   const deleteCategoryImage = async (id: string) => {
 
     try{
+      setIsLoading(true)
       const response = await axios.delete(`/api/gallery/${id}`,)
       toast({
         description: response.data.message,
         variant: "success"
       })
+      setOpen(false)
+      setIsDeleteModalOpen(false)
       router.refresh()
       
     }catch(error:any){
@@ -95,11 +103,14 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
           description: error.response.data.message,
           variant: "destructive"
       })
+    }finally{
+      setIsLoading(false)
     }
   }
 
   const getSingleCategory = async (id: string) => {
     try{
+      
       const response = await axios.get(`/api/galleryCategory/${id}`,)
       setSingleCategory(response.data)
       setOpen(true); 
@@ -109,6 +120,26 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
           description: error.response.data.message,
           variant: "destructive"
       })
+    }finally{
+     
+    }
+  }
+  const getSingleImage = async (id: string) => {
+    try{
+      
+      const response = await axios.get(`/api/gallery/${id}`)
+
+      setSingleImage(response.data)
+      // setOpen(false)
+      setIsImageOpen(true); 
+      
+    }catch(error:any){
+        toast({
+          description: error.response.data.message,
+          variant: "destructive"
+      })
+    }finally{
+     
     }
   }
   
@@ -196,10 +227,14 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
               </DropdownMenuTrigger>
               <DropdownMenuContent align="end">
                 <DropdownMenuLabel>Actions</DropdownMenuLabel>
+                  {/* <DropdownMenuItem className="hover:!bg-blue-500 hover:!text-white cursor-pointer" onSelect={(event) => event.preventDefault()} onClick={() =>  getSingleCategory(id)}>Edit Category</DropdownMenuItem>
+                
+                <DropdownMenuSeparator /> */}
                   <DropdownMenuItem className="flex gap-2 bg-seep-color hover:!bg-blue-500 p-1 !text-white cursor-pointer" onSelect={(event) => event.preventDefault()} onClick={() =>  getSingleCategory(id)}><Eye/> View Images</DropdownMenuItem>
                 <DropdownMenuSeparator />
                 </DropdownMenuContent>
             </DropdownMenu>
+
             <Dialog open={open} onOpenChange={setOpen}>
                 <DialogTrigger asChild>
                 </DialogTrigger>
@@ -210,29 +245,27 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
                 </DialogHeader >
                 <div className="flex gap-5 flex-wrap">
                     {singleCategory?.galleryImage?.map((item, index) => (
-                        <div key={`${item.image}-${index}`} >
-                          <Dialog >
-                              <DialogTrigger asChild>
-                                  <X className="w-fit ml-auto cursor-pointer border text-red-500 p-1 rounded-md hover:bg-slate-200" onClick={()=> setSelectedId(item.id)}/>
-                              </DialogTrigger>
-                              <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
-                              <DialogHeader>
-                                <DialogTitle>Delete this?</DialogTitle>
-                                <DialogDescription>
-                                This is a permanent action. Are you sure?
-                                </DialogDescription>
-                                </DialogHeader>
-                                <div className='flex gap-5 w-fit ml-auto'>
-                                    <DialogClose>
-                                        Cancel
-                                    </DialogClose>
-                                    <Button type='button' variant={'destructive'} onClick={() => deleteCategoryImage(selectedId)} className='border-0'>Delete</Button>
-                
-                                </div>
-                              </DialogContent>
-                              
-                          </Dialog>
-                            <img src={`${encodeURI(item.image)}`} loading="lazy" width={500} height={200} alt={item.description} className="size-32 object-cover"/>
+                        <div key={`${item.image}-${index}`}  className="relative">
+                          <div className="justify-between py-1 items-end flex gap-5">
+                            <Button type="button" variant="outline" className=" bg-seep-color size-8 text-white" onClick={()=> {getSingleImage(item.id)}}>
+                                <Edit/>
+                            </Button>
+                            <Button type="button" variant="destructive" className="size-8 " onClick={() => {setSelectedId(item.id), setIsDeleteModalOpen(true)}} >
+                              <X/>
+                            </Button>
+                            
+
+                          </div>
+                          <Tooltip delayDuration={0}>
+                            <TooltipTrigger>
+                              <img src={`${encodeURI(item.image)}`} loading="lazy" width={500} height={200} alt={item.description} className="size-32 object-cover"/>
+                            </TooltipTrigger>
+                          {item.description && 
+                            <TooltipContent>
+                              {item.description}
+                            </TooltipContent>
+                            }
+                          </Tooltip>
                         </div>
                     ))}
 
@@ -240,33 +273,61 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
                 </DialogContent>
                 
             </Dialog>
+
+            <Dialog open={isDeleteModalOpen} onOpenChange={setIsDeleteModalOpen}>
+                <DialogTrigger asChild>
+                </DialogTrigger>
+                <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
+                <DialogHeader>
+                  <DialogTitle>Delete this?</DialogTitle>
+                  <DialogDescription>
+                  This is a permanent action. Are you sure?
+                  </DialogDescription>
+                  </DialogHeader>
+                  <div className='flex gap-5 w-fit ml-auto'>
+                      <DialogClose>
+                          Cancel
+                      </DialogClose>
+                      <Button type='button' variant={'destructive'} onClick={() => deleteCategoryImage(selectedId)} className='border-0 disabled:cursor-not-allowed' disabled={isLoading}>{isLoading ? "Deleting..." : "Delete"}</Button>
+
+                  </div>
+                </DialogContent>
+                
+            </Dialog>
+
+            <GalleryImageForm data={singleImage} category={data} setOpen={setIsImageOpen} open={isImageOpen}/>
             {/* {isDesktop ?
-            <Dialog open={open} onOpenChange={setOpen}>
+            <Dialog open={isImageOpen} onOpenChange={setIsImageOpen}>
               <DialogTrigger asChild>
               </DialogTrigger>
               <DialogContent className="sm:max-w-sm max-h-[550px] overflow-y-auto no-scrollbar">
               <DialogHeader>
-                <DialogTitle>Edit Category</DialogTitle>
-                <DialogDescription>Modify the category details below.</DialogDescription>
+                <DialogTitle>Edit Image</DialogTitle>
+                <DialogDescription>Modify the image details below.
+                <Button variant={'destructive'}>
+
+                </Button>
+                </DialogDescription>
               </DialogHeader>
-                <CategoryForm data={singleCategory} setOpen={setOpen}/>
+
               </DialogContent>
               
           </Dialog>
             :
-            <Drawer open={open} onOpenChange={setOpen}>
+            <Drawer open={isImageOpen} onOpenChange={setIsImageOpen} >
               <DrawerTrigger asChild>
                 
               </DrawerTrigger>
               <DrawerContent className="p-3 overflow-y-auto no-scrollbar max-h-[400px] ">
                 <div className="z-[51]">
                 <DrawerHeader className="!text-center">
-                <DrawerTitle>Edit Category</DrawerTitle>
+                <DrawerTitle>Edit Image</DrawerTitle>
                   <DrawerDescription>
-                  Modify the category details below.
+                  Modify the image details below.
                   </DrawerDescription>
                 </DrawerHeader>
-                <CategoryForm data={singleCategory} setOpen={setOpen}/>
+                <X className="w-fit ml-auto cursor-pointer border text-red-500 p-1 rounded-md hover:bg-slate-200" />
+                <GalleryImageForm data={singleImage} category={data} setOpen={setIsImageOpen} open={isImageOpen}/>
                 <DrawerFooter className="pt-2">
                 </DrawerFooter>
 

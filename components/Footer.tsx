@@ -19,6 +19,10 @@ const footerLinks = [
             name: 'Support Us',
             link: '/join'
         },
+        {
+            name: 'Privacy Policy',
+            link: '/privacy-policy'
+        },
         
     ],
     [
@@ -33,6 +37,10 @@ const footerLinks = [
         {
             name: 'Testimonials',
             link: '/testimonials'
+        },
+        {
+            name: 'Terms & Conditions',
+            link: '/terms'
         },
         
     ],
@@ -70,7 +78,8 @@ const socialLinks = [
 const Footer = () => {
     const pathname = usePathname()
   return (
-    <section className={`bg-seep-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6 ${pathname.includes('/admin') && 'hidden'}`}>
+    <div className={`${pathname.includes('/admin') && 'hidden'}`}>
+    <section className={`bg-seep-color flex md:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6 `}>
         <div className='space-y-2'>
             <Link href={`/`}>
                 <Image src={`/images/logo-white.png`} width={100} height={100} alt='logo'/> 
@@ -108,6 +117,10 @@ const Footer = () => {
 
         </div>
     </section>
+    <div className='text-gray-600 text-sm text-center bg-white py-3'>
+        Copyright &copy; {new Date().getFullYear() === 2024 ? new Date().getFullYear() : `2024 - ${new Date().getFullYear() } ` }. All Right Reserved.
+    </div>
+    </div>
   )
 }
 

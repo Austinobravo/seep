@@ -51,19 +51,19 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
         </FadeInSection> 
         <h3 className='text-center text-seep-color md:text-3xl text-2xl font-semibold'>{news.title}</h3>
         <div className='flex gap-10 py-10 md:flex-row flex-col-reverse'>
-                {news.newsContent.length >= 1 ?
+               
                     <section className='basis-3/4'>
-                        {news.newsContent.map((content) => (
-                            <div key={content.heading} id={content.heading} className='text-seep-color space-y-3 pb-5'>
-                                <h3 className='md:text-3xl text-2xl'>{content.heading}</h3>
+                        {news.newsContent.length >= 1 && news.newsContent.map((content) => (
+                            <div key={content.heading} id={content.heading} className=' space-y-3 pb-5'>
+                                <h3 className='md:text-3xl text-2xl text-seep-color'>{content.heading}</h3>
                                 <p className='opacity-70 md:text-base text-sm'>{content.paragraph}</p>
                             </div>
                         ))}
-
+                        {news.otherOptions && 
+                             <div className="whitespace-pre-wrap "  dangerouslySetInnerHTML={{__html: news.otherOptions}}/>
+                        }
                     </section>
-                :
-                <section className="whitespace-pre-wrap"  dangerouslySetInnerHTML={{__html: news.otherOptions}}/>
-                }
+                
             <aside className='basis-1/4 space-y-7 md:sticky top-24 h-fit'>
                 <div className='flex justify-between text-seep-color gap-3'>
                     <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
@@ -79,7 +79,7 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
                         <span>206</span>
                     </div>
                 </div>
-                <div className='grid grid-cols-2 text-seep-color gap-y-4 '>
+                <div className='grid grid-cols-2 text-seep-color gap-4 '>
                     <div>
                         <h3 className='font-bold'>Publication Date</h3>
                         <p className='opacity-70 pt-1'>{new Date(news.createdAt).toLocaleDateString("en-US", {month: "long", day: "numeric", year: "numeric"} )}</p>
@@ -94,10 +94,10 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
                     </div>
                     <div>
                         <h3 className='font-bold'>Author Name</h3>
-                        <p className='opacity-70 pt-1'>{news.user.firstName} {news.user.lastName}</p>
+                        <p className='opacity-70 pt-1'>{news.user?.firstName} {news.user?.lastName}</p>
                     </div>
                 </div>
-                {news.newsContent[0].heading &&
+                {news.newsContent[0]?.heading &&
                     <TableOfContents news={news}/>
                 }
 

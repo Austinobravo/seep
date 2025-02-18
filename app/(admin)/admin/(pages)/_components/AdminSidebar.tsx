@@ -55,7 +55,10 @@ const AdminSidebar = ({user}: {user:UserType}) => {
             description: "We'll miss you. Come back shortly",
             variant: "default"
         })
-        if(SignOut.url) return router.push("/admin")
+        if(SignOut.url){
+            window.location.reload()
+            return router.push("/admin")
+        }
     }
   return (
     <div className='flex'>
