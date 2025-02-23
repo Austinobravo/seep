@@ -9,7 +9,7 @@ type Props = ComponentProps<'a'> &{
 }
 const LinkButton = ({title,icon:Icon,path, ...otherTags}:Props) => {
   return (
-    <Link href={path} {...otherTags} className='bg-[#FFA807] py-2 px-4 text-white space-x-3 w-fit items-center flex rounded-full'>
+    <Link href={path} {...otherTags} className='bg-[#FFA807] hover:bg-[#FFA807]/80 transition-all duration-700 py-2 px-4 text-white space-x-3 w-fit items-center flex rounded-full'>
         <span>{title}</span>
         <Icon/> 
     </Link>

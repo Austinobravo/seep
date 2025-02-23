@@ -65,7 +65,6 @@ const DISCOVERY_DOCS = ["https://www.googleapis.com/discovery/v1/apis/drive/v3/r
 const SCOPES = "https://www.googleapis.com/auth/drive.readonly";
 
 const GalleryImageForm = ({ category, data, setOpen, open }: Props) => {
-  console.log("data", data)
   const { toast } = useToast();
   const [files, setFiles] = useState<File[]>([]);
   const [driveImages, setDriveImages] = useState<string[]>([]);
@@ -141,15 +140,19 @@ const GalleryImageForm = ({ category, data, setOpen, open }: Props) => {
   const onSubmit = async (values: z.infer<typeof galleryImageFormSchema>) => {
     if(data){
       try {
-        const newData = {...values, id:data.id}
-
+        const formData = new FormData();
+        files.forEach((file) => formData.append('image', file));
+        driveImages.forEach((url) => formData.append('driveImages', url));
+        formData.append('description', values.description);
+        formData.append('categoryId', values.categoryId);
+        formData.append('id', data.id);
+        
+  
         const response = await fetch('/api/gallery', {
           method: 'PATCH',
-          headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newData)
+          body: formData,
         });
+       
   
         if (!response.ok) throw new Error('Failed to upload');
         const resData = await response.json()
@@ -252,7 +255,7 @@ const GalleryImageForm = ({ category, data, setOpen, open }: Props) => {
                 </FormItem>
               )}
             />
-              {!data &&
+             
                 <div className='flex gap-3 items-center'>
                 <DropdownMenu>
                     <DropdownMenuTrigger asChild>
@@ -285,7 +288,7 @@ const GalleryImageForm = ({ category, data, setOpen, open }: Props) => {
                     <FormItem>
                       <FormLabel className="text-black"></FormLabel>
                       <FormControl>
-                        <Input type="file" multiple accept="image/*" name='computerImages' className='hidden' id='computerImages' onChange={handleFileChange} />
+                        <Input type="file" multiple={data ? false : true} accept="image/*" name='computerImages' className='hidden' id='computerImages' onChange={handleFileChange} />
                       </FormControl>
                       <FormDescription>
                       
@@ -298,7 +301,6 @@ const GalleryImageForm = ({ category, data, setOpen, open }: Props) => {
                 <p>{files.length} images selected</p>
                 }
                 </div>
-              }
 
 
             <Button type="submit" disabled={isSubmitting} className='w-full'>

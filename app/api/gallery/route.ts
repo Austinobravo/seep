@@ -22,6 +22,7 @@ export async function GET(req:Request) {
                 createdAt: "desc"
             }
         })
+        console.log("all images", galleryImages)
 
 
         return NextResponse.json(galleryImages, {status: 200})
@@ -98,7 +99,7 @@ export async function POST(req:Request, res: Response) {
                                 image: imageUrl
                             }
                          })
-                         console.log("log", newImage)
+                         
                     }
 
                     
@@ -152,36 +153,70 @@ export async function PATCH(req:Request, res: Response) {
         return NextResponse.json({message: "Unauthorized"}, {status: 401})
     }
 
-    const data = await req.json()
-    const description = data.description
-    const galleryCategoryId = data.galleryCategoryId
-    const id = data.id
+    const formData = await req.formData()
+    const file = formData.get('image') as File
+    const categoryId = formData.get('categoryId') as string
+    const description = formData.get('description') as string
+    const driveImages = formData.getAll('driveImages') as string[]
+    const id = formData.get('id') as string
+
+    const data ={
+        images: file,
+        categoryId: categoryId,
+        description: description
+    }
 
     const parsedForm = await galleryImageFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
         return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
     }
 
-    const image = await prisma.galleryImage.findUnique({
+    const existingImage = await prisma.galleryImage.findUnique({
         where:{
             id
         }
     })
 
-    if(!image){
+    if(!existingImage){
         return NextResponse.json({message: "Image doesn't exist."}, {status: 404}) 
     }
 
     try{
-        const updatedImage = await prisma.galleryImage.update({
-            where:{
-                id
-            },
-            data:{
-                description,
-                galleryCategoryId,
-                userId: user.username
-            }
+        const updatedImage = await prisma.$transaction(async(newPrisma) => {
+            let imageUrl = existingImage.image
+                if(file instanceof File){
+                    const uploadDir = path.join(process.cwd(), 'public/images/gallery')
+                    if (!fs.existsSync(uploadDir)) {
+                        fs.mkdirSync(uploadDir, { recursive: true });
+                    }
+                
+                    // Generate a unique filename using UUID
+                    const fileExt = path.extname(file.name); // Get file extension
+                    const baseName = path.basename(file.name, fileExt).replace(/\s+/g, ''); // Get filename without extension
+                    const uniqueFileName = `${baseName}-${fileExt}`; // Append UUID to filename
+                
+                    // Save the image file
+                    const filePath = path.join(uploadDir, uniqueFileName);
+                    const fileBuffer = new Uint8Array(await file.arrayBuffer());
+                    fs.writeFileSync(filePath, fileBuffer);
+    
+                    // Construct the public URL for accessing the image
+                     imageUrl = `/images/gallery/${uniqueFileName}`;
+    
+                }
+            const updatedImage = await prisma.galleryImage.update({
+                where:{
+                    id
+                },
+                data:{
+                    image: imageUrl,
+                    description,
+                    galleryCategoryId: categoryId,
+                    userId: user.username
+                }
+            })
+
+            return updatedImage
         })
 
         return NextResponse.json({data: updatedImage, message: "Updated"}, {status: 200})

@@ -9,7 +9,9 @@ import SessionClientProvider from "@/lib/clientSession";
 import { GeneralProvider } from "@/hooks/useContextHook";
 import 'react-quill/dist/quill.snow.css';
 import "react-phone-number-input/style.css"
-
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
 import { TooltipProvider } from "@/components/ui/tooltip";
 import InactivityMonitor from "@/components/InactivityMonitor";
 

@@ -20,7 +20,7 @@ const Discover = async ({blogContent}: {blogContent:NewsType[]}) => {
                                     <h3 className='md:text-2xl text-lg font-semibold'>{content.title}</h3> 
                                 </Link>
                                 <p className='line-clamp-2'>
-                                    <span className='opacity-70 text-sm md:text-base'>{content.newsContent[0]?.paragraph ? content.newsContent[0]?.paragraph : <span dangerouslySetInnerHTML={{__html: content?.otherOptions}}/>}</span>
+                                    <span className='opacity-70 text-sm md:text-base'>{content.newsContent[0]?.paragraph ? content.newsContent[0]?.paragraph : typeof window !== "undefined" && <span dangerouslySetInnerHTML={{__html: content?.otherOptions}}/>}</span>
                                 </p>
                             </div>
                             <img loading="lazy" src={content.image} width={500} height={200} alt={content.title} className='rounded-xl hover:opacity-90'/>

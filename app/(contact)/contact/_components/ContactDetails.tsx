@@ -21,9 +21,9 @@ const ContactDetails = () => {
             <Phone className='w-5 h-5'/>
             <div>
                 <h3 className='font-bold'>Phone</h3>
-                <p className='text-seep-color'><Link href={`tel:+234 806 375 0853`}><span className='font-bold'>WhatsApp:</span>+234 806 375 0853</Link></p>
-                <p className='text-seep-color'><Link href={`tel:+234 916 208 5151,`}><span className='font-bold'>WhatsApp:</span>+234 916 208 5151,</Link></p>
-                <p className='text-seep-color'><Link href={`tel:+234 916 208 5151,`}><span className='font-bold'>Calls:</span>+234 916 208 5151</Link></p>
+                <p className='text-seep-color'><Link href={`https://api.whatsapp.com/send/?phone=23480637508537&text=Hi+Seep&type=phone_number&app_absent=0`}><span className='font-bold'>WhatsApp:</span>+234 806 375 0853</Link></p>
+                <p className='text-seep-color'><Link href={`https://api.whatsapp.com/send/?phone=2349162085151&text=Hi+Seep&type=phone_number&app_absent=0`}><span className='font-bold'>WhatsApp:</span>+234 916 208 5151</Link></p>
+                <p className='text-seep-color'><Link href={`tel:+234 916 208 5151`}><span className='font-bold'>Calls:</span>+234 916 208 5151</Link></p>
             </div>
         </div>
         <div className='flex items-start gap-x-3'>

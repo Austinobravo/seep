@@ -31,6 +31,8 @@ const Mission = () => {
                 {missionAndVision.slice(0,2).map((item, index) => (
                     <div key={index} className='text-seep-color space-y-4'>
                         <h3 className=' text-3xl'>{item.title}</h3>
+                        <hr className='w-20 border-2 border-amber-400'/>
+
                         <p className='leading-relaxed pb-5 text-lg'>{item.paragraph}</p>
 
                     </div>
