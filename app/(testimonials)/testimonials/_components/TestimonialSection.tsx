@@ -2,6 +2,19 @@ import FadeInSection from '@/hooks/fadeIn'
 
 import Image from 'next/image'
 import React from 'react'
+import {
+    Card,
+    CardContent,
+    CardHeader,
+    CardTitle,
+  } from '@/components/ui/card';
+  import {
+    Tooltip,
+    TooltipContent,
+    TooltipTrigger,
+  } from "@/components/ui/tooltip"
+import Link from 'next/link';
+import { Building, Handshake, Heart } from 'lucide-react';
 
 const Testimonials = [
     {
@@ -41,35 +54,77 @@ const TestimonialSection = ({testimonials}: {testimonials: TestimonialType[]}) =
 
         </FadeInSection>
         <FadeInSection direction={`up`}>
-            {testimonials.length >= 1 ?
-            <div className='text-[#33ACFF] space-y-10'>
+           {testimonials.length >= 1 ?
+            <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5'>
                 {testimonials.map((testimonial, index) => (
-                    <div key={`${testimonial.individual_name}-${index}`} className='rounded-lg border space-y-5 border-[#0097FF] py-7 px-10'>
-                        <Image src={`/images/comma.png`} width={100} height={100} alt='comma' />
-                        <p>{testimonial.content}</p>
-                        <div className='flex gap-x-2 '>
-                            <div className='bg-[#B4E0FF] rounded-full p-6 w-fit h-fit'>
-                                <Image src={`/images/avatar.webp`} width={50} height={50} alt='avatar'/>
+                <Card key={`${index}-testimonial`} className="relative pt-10 pb-5  bg-gray-100 hover:scale-105 overflow-y-visible transition-all duration-700" >
+                            <CardHeader className='p-1'>
+                            <CardTitle className="">
+                            <div className='bg-amber-500 absolute -top-2 left-6 text-6xl text-white size-10 pt-10 flex justify-center items-center '>
+                                    “
                             </div>
-                            <div>
-                                <h2 className='text-seep-color text-2xl font-bold'>{testimonial.individual_name}</h2>
-                                <p className='md:text-base text-sm mb-1'>{testimonial.school}</p>
-                                <p className='md:text-base text-sm'>{testimonial.program}</p>
+                            </CardTitle>
+                            </CardHeader>
+                            <CardContent className="flex gap-1 justify-between items-center flex-col p-1 space-y-7">
+                            <div className='bg-[#B4E0FF] rounded-full p-3 w-fit h-fit'>
+                                <Image
+                                        src={`/images/avatar.webp`}
+                                        width={200}
+                                        height={200}
+                                        alt={testimonial.individual_name}
+                                        className="size-10 rounded-full object-cover"
+                                    />
+                                    
                             </div>
-                        </div>
 
-                    </div>
+                                <div className=''>
+                                    <p className=''><em>" {testimonial.content} "</em></p>
+                                </div>
+                                <div className='text-center space-y-2 '>
+                                    <h4 className='font-semibold'>{testimonial.individual_name}</h4>
+                                    <div className='flex items-center gap-4'>
+                                        <Tooltip delayDuration={0}>
+                                            <TooltipTrigger>
+                                            <div className='flex items-center text-xs gap-1'>
+                                            <Building size={20} className='text-seep-color'/>
+                                            <span>{testimonial.school}</span>
+                                        </div>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                School
+                                            </TooltipContent>
+                                            </Tooltip>
+                                        <Tooltip delayDuration={0}>
+                                            <TooltipTrigger>
+                                            <div className='flex items-center text-xs gap-1'>
+                                            <Handshake size={20} className='text-seep-color'/>
+                                            <span>{testimonial.program}</span>
+                                        </div>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                Program
+                                            </TooltipContent>
+                                            </Tooltip>
+                                    
+                                        
+
+                                    </div>
+                                </div>
+                        
+                        </CardContent>
+                        </Card>
 
                 ))}
-
-            </div>  
-            :
-             <figure className='mx-auto w-fit text-center'>
-                <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No Testimonial Image" className='aspect-ratio'/>
-                <figcaption>No Testimonials yet.</figcaption>
-            </figure>
-            }
+                    
+                </div> 
+                    :
+                    <figure className='mx-auto w-fit text-center'>
+                        <Image src={`/images/nothing.jpg`} width={500} height={200} alt="No Testimonial Image" className='aspect-ratio'/>
+                        <figcaption>No Testimonials yet.</figcaption>
+                    </figure>
+                    } 
         </FadeInSection>
+       
 
       
     </section>

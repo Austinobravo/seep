@@ -21,12 +21,12 @@ const Testimonials = () => {
                 </div> */}
             </div>
         </FadeInSection>
-        <div className='relative bg-seep-color px-5 py-10 rounded-md pt-20'>
+        <div className='relative bg-seep-color/10 px-5 py-10 rounded-md pt-20'>
             <div className='bg-amber-500 absolute -top-10 left-6 text-9xl text-white size-24 pt-16 rounded-full flex justify-center items-center '>
                     “
             </div>
             <div className='flex items-center gap-10 flex-wrap lg:flex-nowrap'>
-                <div className='text-white space-y-5'>
+                <div className='text-seep-color space-y-5'>
                     <blockquote className='opacity-90 md:text-4xl text-3xl font-bold'>“A flow of student entrepreneurs into the Nigerian economy”</blockquote>
                     <div className='flex items-center text-'>
                         <Dot/>

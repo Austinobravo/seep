@@ -5,11 +5,13 @@ import { signOut, useSession } from "next-auth/react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useToast } from "@/hooks/use-toast";
 
 const INACTIVITY_TIME = 600 * 1000; // 10 min
 const COUNTDOWN_TIME = 30; // 30 seconds
 
 const InactivityMonitor = () => {
+  const { toast }  = useToast()
   const { data: session } = useSession(); // Get session data
   const [isInactive, setIsInactive] = useState(false);
   const [countdown, setCountdown] = useState(COUNTDOWN_TIME);
@@ -45,7 +47,7 @@ const InactivityMonitor = () => {
       if (timeLeft <= 1) {
         clearInterval(countdownInterval);
         setIsInactive(false); // Hide modal
-        signOut(); // Logout user
+        logOut(); // Logout user
         router.refresh()
       }
       setCountdown(timeLeft - 1);
@@ -69,6 +71,18 @@ const InactivityMonitor = () => {
       clearInterval(countdownInterval);
     };
   }, [session]); // Only run when session changes
+
+   const logOut = async () => {
+          const SignOut = await signOut({redirect:false})
+          toast({
+              description: "We'll miss you. Come back shortly",
+              variant: "default"
+          })
+          if(SignOut.url){
+              window.location.reload()
+              return router.push("/admin")
+          }
+      }
 
   if (!session) return null; // Do not render if user is not logged in
 

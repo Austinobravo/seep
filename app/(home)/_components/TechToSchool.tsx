@@ -19,7 +19,7 @@ const TechToSchool = () => {
                 </div> */}
             </div>  
         </FadeInSection>
-        <div className='relative bg-seep-color px-5 py-10 rounded-md pt-20'>
+        <div className='relative bg-seep-color/10 px-5 py-10 rounded-md pt-20'>
             <div className='bg-amber-500 absolute -top-10 right-6 text-9xl text-white size-24 pt-16 rounded-full flex justify-center items-center '>
                     “
             </div>
@@ -38,7 +38,7 @@ const TechToSchool = () => {
                 </FadeInSection>
 
                 </div>
-                <div className='text-white space-y-5'>
+                <div className='text-seep-color space-y-5'>
                     <blockquote className='opacity-90 text-3xl font-bold'>“Taking Tech to School”</blockquote>
                     <div className='flex lg:justify-end  items-center text-lg'>
                         <Dot/>

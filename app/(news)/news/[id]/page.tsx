@@ -1,11 +1,12 @@
 import FadeInSection from '@/hooks/fadeIn'
-import { ExternalLink, Eye, Heart } from 'lucide-react'
+
 import Image from 'next/image'
 import React from 'react'
 import RelatedNews from '../_components/RelatedNews'
-import axios from 'axios'
+
 import TableOfContents from '../_components/TableOfContents'
 import { BASE_URL } from "@/lib/globals";
+import Interaction from './_components/Interaction'
 
 export const dynamic = 'force-dynamic'
 
@@ -65,20 +66,7 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
                     </section>
                 
             <aside className='basis-1/4 space-y-7 md:sticky top-24 h-fit'>
-                <div className='flex justify-between text-seep-color gap-3'>
-                    <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
-                        <Heart/>
-                        <span>24.5k</span>
-                    </div>
-                    <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
-                        <Eye/>
-                        <span>50k</span>
-                    </div>
-                    <div className='flex gap-1 bg-blue-200 rounded-full w-fit h-9 px-1 items-center'>
-                        <ExternalLink/>
-                        <span>206</span>
-                    </div>
-                </div>
+                <Interaction/>
                 <div className='grid grid-cols-2 text-seep-color gap-4 '>
                     <div>
                         <h3 className='font-bold'>Publication Date</h3>

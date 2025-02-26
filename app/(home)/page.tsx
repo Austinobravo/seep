@@ -4,6 +4,7 @@ import Drivers from './_components/Drivers'
 import Mission from './_components/Mission'
 import Testimonials from './_components/Testimonials'
 import TechToSchool from './_components/TechToSchool'
+import LatestNews from '../(news)/news/_components/LatestNews'
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
     <Mission/>
     <Testimonials/>
     <TechToSchool/>
+    <LatestNews/>
     </>
   )
 }
