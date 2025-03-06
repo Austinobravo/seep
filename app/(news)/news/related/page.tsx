@@ -1,7 +1,6 @@
 import React from 'react'
 import NewsHero from '../_components/NewsHero'
 import RelatedNewsCard from '../_components/RelatedNewsCard'
-import axios from 'axios'
 import { BASE_URL } from "@/lib/globals";
 
 export const dynamic = 'force-dynamic'

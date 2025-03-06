@@ -22,7 +22,6 @@ export async function GET(req:Request) {
                 createdAt: "desc"
             }
         })
-        console.log("all images", galleryImages)
 
 
         return NextResponse.json(galleryImages, {status: 200})
@@ -64,7 +63,8 @@ export async function POST(req:Request, res: Response) {
 
     const parsedForm = await galleryImageFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+        const errorMessage = parsedForm.error.errors.map((error) => `${error.path.join(".")} - ${error.message}`).join(", ")
+        return NextResponse.json({message: errorMessage}, {status: 400})
     }
 
     
@@ -168,7 +168,8 @@ export async function PATCH(req:Request, res: Response) {
 
     const parsedForm = await galleryImageFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+        const errorMessage = parsedForm.error.errors.map((error) => `${error.path.join(".")} - ${error.message}`).join(", ")
+        return NextResponse.json({message: errorMessage}, {status: 400})
     }
 
     const existingImage = await prisma.galleryImage.findUnique({

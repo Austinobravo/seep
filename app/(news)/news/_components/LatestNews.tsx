@@ -57,45 +57,10 @@ async function getNews() {
   
       return await res.json();
     } catch (error) {
-      console.error("Failed to fetch testimonials:", error);
+      console.error("Failed to fetch latest news:", error);
       return []; // Return empty array to avoid crashes
     }
   }
-
-  const blogPosts = [
-    {
-        image: '/images/hero.png',
-        title: 'Why we developed this solution for owerri',
-        description: 'why we developed this solution for owerri the real question is what are the problems commuters are facing and how do we solve those problems for them',
-        author: 'ADEYEMI CLIFFORD',
-        authorImage: '/images/Emma.jpg',
-        createdDate: 'Jan 10'
-    },
-    {
-        image: '/images/hero.png',
-        title: 'New vehicles for obinze route',
-        description: 'why we developed this solution for owerri the real question is what are the problems commuters are facing and how do we solve those problems for them',
-        author: 'ADEYEMI CLIFFORD',
-        authorImage: '/images/Emma.jpg',
-        createdDate: 'Jan 10'
-    },
-    {
-        image: '/images/hero.png',
-        title: 'New vehicles for obinze route',
-        description: 'why we developed this solution for owerri the real question is what are the problems commuters are facing and how do we solve those problems for them',
-        author: 'ADEYEMI CLIFFORD',
-        authorImage: '/images/Emma.jpg',
-        createdDate: 'Jan 10'
-    },
-    {
-        image: '/images/hero.png',
-        title: 'New vehicles for obinze route',
-        description: 'why we developed this solution for owerri the real question is what are the problems commuters are facing and how do we solve those problems for them',
-        author: 'ADEYEMI CLIFFORD',
-        authorImage: '/images/Emma.jpg',
-        createdDate: 'Jan 10'
-    },
-    ]
 
 const LatestNews = async () => {
     const contents:NewsType[] = await getNews()
@@ -113,7 +78,7 @@ const LatestNews = async () => {
     <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
         {contents.slice(0,3).map((content) => (
             <div key={content.title} className='shadow-2xl bg-gray-100 p-4 rounded-lg text-seep-color space-y-3'>
-                <img loading='lazy' src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
+                 <Image loading='lazy' src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
                 <div>
                     <h3 className='font-bold'>{content.title}</h3>
                     <p className='opacity-70'>{content.category.name}</p>
@@ -159,14 +124,15 @@ const LatestNews = async () => {
                                       width={500}
                                       height={500}
                                       alt={post.title}
-                                      className="object-cover h-40 w-full"
+                                      className="object-cover h-40 w-full rounded-md"
+                                      unoptimized
                                   />
                             </Link>
                           </CardTitle>
                           </CardHeader>
                           <CardContent className="flex gap-1 flex-col p-1">
-                              <Link href={`/news/${post.slug}`} className=""><h3 className='font-bold text-xl capitalize hover:text-seep-color/70 text-seep-color transition-all duration-500'>{post.title}</h3></Link>
-                              <p className='opacity-70'>{post.category.name}</p>
+                              <Link href={`/news/${post.slug}`} className="w-fit"><h3 className='font-bold text-xl capitalize hover:text-seep-color/70 text-seep-color transition-all duration-500'>{post.title}</h3></Link>
+                              <p className=' bg-amber-500 w-fit px-2 text-xs text-white py-1 capitalize'>{post.category.name}</p>
                               <p>{post.newsContent[0]?.paragraph ? post.newsContent[0]?.paragraph : typeof window !== "undefined" && <span className='whitespace-pre-wrap' dangerouslySetInnerHTML={{__html: post?.otherOptions.slice(0,100) }}></span> }</p>
                               
                               <div className='flex justify-between items-center'>
@@ -180,6 +146,7 @@ const LatestNews = async () => {
                                               height={200}
                                               alt={post.userId}
                                               className="size-10 rounded-full object-cover"
+                                              unoptimized
                                           />
                                         ) : (
                                           <Image
@@ -188,6 +155,7 @@ const LatestNews = async () => {
                                           height={200}
                                           alt={post.userId}
                                           className="size-10 rounded-full object-cover"
+                                          unoptimized
                                       />
                                         )}
                                     </div>

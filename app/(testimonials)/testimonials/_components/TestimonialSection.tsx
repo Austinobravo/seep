@@ -73,6 +73,7 @@ const TestimonialSection = ({testimonials}: {testimonials: TestimonialType[]}) =
                                         height={200}
                                         alt={testimonial.individual_name}
                                         className="size-10 rounded-full object-cover"
+                                        unoptimized
                                     />
                                     
                             </div>
@@ -80,12 +81,12 @@ const TestimonialSection = ({testimonials}: {testimonials: TestimonialType[]}) =
                                 <div className=''>
                                     <p className=''><em>" {testimonial.content} "</em></p>
                                 </div>
-                                <div className='text-center space-y-2 '>
-                                    <h4 className='font-semibold'>{testimonial.individual_name}</h4>
+                                <div className='space-y-2 '>
+                                    <h4 className='font-semibold text-center'>{testimonial.individual_name}</h4>
                                     <div className='flex items-center gap-4'>
                                         <Tooltip delayDuration={0}>
                                             <TooltipTrigger>
-                                            <div className='flex items-center text-xs gap-1'>
+                                            <div className='flex items-start text-xs gap-1'>
                                             <Building size={20} className='text-seep-color'/>
                                             <span>{testimonial.school}</span>
                                         </div>

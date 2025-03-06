@@ -54,7 +54,8 @@ export async function POST(req:Request, res: Response) {
 
     const parsedForm = await privacyAndTermsFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+        const errorMessage = parsedForm.error.errors.map((error) => `${error.path.join(".")} - ${error.message}`).join(", ")
+        return NextResponse.json({message: errorMessage}, {status: 400})
     }
 
     const totalPolicy = await prisma.privacyPolicy.findMany({
@@ -111,7 +112,8 @@ export async function PATCH(req:Request, res: Response) {
 
     const parsedForm = await privacyAndTermsFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+        const errorMessage = parsedForm.error.errors.map((error) => `${error.path.join(".")} - ${error.message}`).join(", ")
+        return NextResponse.json({message: errorMessage}, {status: 400})
     }
 
     const existingPolicy = await prisma.privacyPolicy.findUnique({

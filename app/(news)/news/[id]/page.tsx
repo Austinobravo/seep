@@ -48,7 +48,7 @@ const NewsDetail = async ({params}: {params: {id: string}}) => {
             </div>    
         </FadeInSection> */}
         <FadeInSection direction={`up`}>  
-            <img loading='lazy' src={`${encodeURI(news.image)}`} width={500} height={500} alt='detail' className='rounded-2xl w-full h-[450px] object-cover opacity-80'/>
+             <Image loading='lazy' src={`${encodeURI(news.image)}`} width={500} height={500} alt='detail' className='rounded-2xl w-full h-[450px] object-cover opacity-80' unoptimized/>
         </FadeInSection> 
         <h3 className='text-center text-seep-color md:text-3xl text-2xl font-semibold'>{news.title}</h3>
         <div className='flex gap-10 py-10 md:flex-row flex-col-reverse'>

@@ -64,7 +64,7 @@ const AdminSidebar = ({user}: {user:UserType}) => {
     <div className='flex'>
         <section className={`sm:block ${isSidebarToggled ? '' : "hidden"} space-y-3 py-4 bg-blue-100 !h-screen pt-10 relative`}>
             <div className='flex flex-col items-center justify-center pb-7 text-center'>
-                <Image src={`${user.image ? encodeURI(user.image) : "/images/avatar.webp"}`} width={500} height={500} alt='avatar' className='size-20 rounded-full ob'/>
+                <Image src={`${user.image ? encodeURI(user.image) : "/images/avatar.webp"}`} width={500} height={500} alt='avatar' className='size-20 rounded-full' unoptimized/>
                 <h3 className='pt-2 pb-1 font-semibold'>{user?.firstName} {user?.lastName} </h3>
                 <h4 className='text-sm'>Administrator</h4>
             </div>

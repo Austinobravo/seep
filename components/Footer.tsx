@@ -80,8 +80,8 @@ const Footer = () => {
   return (
     <div className={`${pathname.includes('/admin') && 'hidden'}`}>
     <section className={`bg-seep-color flex lg:flex-nowrap flex-wrap text-white py-20 gap-x-20 px-10 items-center space-y-6 `}>
-        <div className='space-y-2'>
-            <Link href={`/`}>
+        <div className='space-y-2 hover:scale-110 transition-all duration-500'>
+            <Link href={`/`} >
                 <Image src={`/images/logo-white.png`} width={100} height={100} alt='logo'/> 
             </Link>
             <p>SEE Support Centre</p>
@@ -90,16 +90,16 @@ const Footer = () => {
             {footerLinks.map((footerlink, index) => (
                 <ul key={index} className='space-y-4 pb-7'>
                     {footerlink.map((eachLink, index) => (
-                        <li key={index} className='hover:text-blue-800 transition-all duration-700 hover:font-bold'>
+                        <li key={index} className='hover:translate-x-2 transition-all duration-700 hover:font-bold'>
                             {/* <Link href={eachLink.link} onClick={(event)=> {eachLink.link === '/news' && event.preventDefault()}} className={`${eachLink.link === '/news' && 'opacity-70'}`}>{eachLink.name}</Link> */}
-                            <Link href={eachLink.link}>{eachLink.name}</Link>
+                            <Link href={eachLink.link} className={`${pathname === eachLink.link && 'text-gray-600 font-bold'}`}>{eachLink.name}</Link>
                         </li>
                     ))}
                 </ul>
             ))}
 
         </div>
-        <Link href={`/seep`}>
+        <Link href={`/seep`} className='hover:scale-110 transition-all duration-500'>
             <Image src={`/images/seep_logo.png`} width={100} height={100} alt='seep_logo'/>
         </Link>
         <div>

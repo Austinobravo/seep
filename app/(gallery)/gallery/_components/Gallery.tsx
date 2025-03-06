@@ -76,7 +76,7 @@ const Gallery = ({data}: {data:GalleryCategoryType[]}) => {
     <section className='md:px-20 px-10 space-y-7'>
         {data.length >= 1 ?
         data.map((item, dataIndex) => (
-        <section key={item.title} id='gallery' className='md:px-20 px-10 py-10'>
+        <section key={item.title} id='gallery' className='py-10'>
         <FadeInSection direction={`up`}>
         <div className='text-seep-color text-center space-y-2 py-8' id={item.title}>
                 <blockquote className='opacity-90 md:text-3xl text-2xl font-bold capitalize'>{item.title}</blockquote>
@@ -95,7 +95,7 @@ const Gallery = ({data}: {data:GalleryCategoryType[]}) => {
                         <Dialog>
                             <DialogTrigger asChild>
                                     <div className='w-full relative' onMouseEnter={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onMouseLeave={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}} onClick={()=>{setIsHovered(!isHovered), setCurrentTeamMemberIndex(index)}}>
-                                        <img src={member.image ? encodeURI(member.image) : '/images/avatar.webp'} width={500} height={100} loading='lazy' alt={member.description} className='hover:cursor-zoom-in object-cover mx-auto rounded-md h-72 shadow-md object-top ' onClick={()=> { setCurrentImage(member.image)}}/>
+                                         <Image src={member.image ? encodeURI(member.image) : '/images/avatar.webp'} width={500} height={100} loading='lazy' alt={member.description} className='hover:cursor-zoom-in object-cover mx-auto rounded-md h-72 shadow-md object-top ' onClick={()=> { setCurrentImage(member.image)}} unoptimized/>
                                         {isHovered && index === currentTeamMemberIndex && <span className='absolute text-center animate-in slide-in-from-bottom duration-500 bg-white p-2 text-amber-400 text-xs bottom-0 w-full h-20 overflow-auto no-scrollbar'>{member.description}</span>}
                                     </div> 
                                
@@ -106,7 +106,7 @@ const Gallery = ({data}: {data:GalleryCategoryType[]}) => {
                                 <DialogDescription></DialogDescription>
                                 </DialogHeader>
                                 <div className='flex justify-center items-center w-full'>
-                                    <img src={currentImage} width={500} height={100} loading='lazy' alt='image' className='w-fit rounded-lg flex items-center justify-center md:h-[28rem] h-full'/>
+                                     <Image src={currentImage} width={500} height={100} loading='lazy' alt='image' className='w-fit rounded-lg flex items-center justify-center md:h-[28rem] h-full' unoptimized/>
                                 </div>
                             </DialogContent>
                             </Dialog>

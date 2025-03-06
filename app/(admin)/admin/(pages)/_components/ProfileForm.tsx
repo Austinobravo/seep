@@ -173,7 +173,7 @@ const ProfileForm = ({countryCode, data, type}: Props) => {
                         <div className='flex gap-3 items-center'>
                             <div className='relative w-fit'>
                                 {profileImage ?
-                                    <Image src={ profileImage } width={500} height={500} alt={`profile-image`} className='object-cover rounded-full size-40  mx-auto'/>
+                                    <Image src={ profileImage } width={500} height={500} alt={`profile-image`} className='object-cover rounded-full size-40  mx-auto' unoptimized/>
                                     :
                                     <Image src={`/images/avatar.webp`} width={500} height={500} alt='profile_image' className='size-40'/> 
                                     }

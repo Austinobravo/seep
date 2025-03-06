@@ -6,6 +6,8 @@ import Testimonials from './_components/Testimonials'
 import TechToSchool from './_components/TechToSchool'
 import LatestNews from '../(news)/news/_components/LatestNews'
 
+export const dynamic = 'force-dynamic'
+
 const Home = () => {
   return (
     <>

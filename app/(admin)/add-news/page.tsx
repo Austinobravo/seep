@@ -127,7 +127,7 @@ const AddNewsPage = () => {
         <h1 className='text-center text-3xl font-medium my-4'>Add News Page</h1>
          {blogImage &&
          <>
-          <Image src={URL.createObjectURL(blogImage)} width={500} height={500} alt={`content.heading`} className='object-cover h-40 mx-auto'/>
+          <Image src={URL.createObjectURL(blogImage)} width={500} height={500} alt={`content.heading`} className='object-cover h-40 mx-auto' unoptimized/>
          </>
          }
          <Form {...form}>

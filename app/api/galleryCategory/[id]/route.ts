@@ -24,7 +24,7 @@ export async function GET(req:NextRequest, {params}: {params: {id: string}}){
         if(!category){
             return NextResponse.json({message: "This category doesn't exist."}, {status: 400})
         }
-        console.log("cat", category)
+       
         return NextResponse.json(category, {status: 200})
 
     }catch(error){

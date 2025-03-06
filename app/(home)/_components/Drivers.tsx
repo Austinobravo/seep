@@ -72,7 +72,8 @@ const Drivers = () => {
                     <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2 relative' title={item.name} onMouseEnter={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}} onMouseLeave={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}}>
                         <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
                         <span className='text-2xl text-seep-color font-bold' >{item.name}</span>
-                        {isHovered && item.name === isCurrentHovered &&
+                        <div className={`${isHovered && item.name === isCurrentHovered ? "opacity-100 -translate-x-28": "opacity-0 -translate-x-20"} transition-all duration-500`}>
+                        {/* {isHovered && item.name === isCurrentHovered && */}
                             <div className='absolute w-80 shadow-md rounded-md bg-white p-4 !-mt-40 space-y-5'>
                                 <div className='flex items-center gap-5'>
                                     <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
@@ -80,7 +81,9 @@ const Drivers = () => {
                                 </div>
                                 <p className='text-gray-700 text-sm'>{item.description}</p>
                             </div>
-                        }
+                        {/* } */}
+
+                        </div>
                     </div>
                 ))}
 
@@ -90,7 +93,8 @@ const Drivers = () => {
                     <div key={index} className='flex flex-col items-center justify-center space-y-3 p-2' title={item.name} onMouseEnter={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}} onMouseLeave={()=>{setIsCurrentHovered(item.name), setIsHovered(!isHovered)}}>
                         <Image src={`${item.image}`} width={50} height={100} alt={item.name}/>
                         <span className='text-2xl text-seep-color font-bold'>{item.name}</span>
-                        {isHovered && item.name === isCurrentHovered &&
+                        <div className={`${isHovered && item.name === isCurrentHovered ? "opacity-100 -translate-x-28": "opacity-0 -translate-x-20"} transition-all duration-500`}>
+
                             <div className='absolute w-80 shadow-md rounded-md bg-white p-4 !-mt-40 space-y-5'>
                                 <div className='flex items-center gap-5'>
                                     <Image src={`${item.image}`} width={40} height={100} alt={item.name}/>
@@ -98,7 +102,7 @@ const Drivers = () => {
                                 </div>
                                 <p className='text-gray-700 text-sm'>{item.description}</p>
                             </div>
-                        }
+                        </div>
                     </div>
                 ))}
 
@@ -117,11 +121,11 @@ const Drivers = () => {
                     ))}
 
                 </Swiper>
-                <button onClick={previous} className="swiper-button-prev absolute left-20 rounded-full border !size-16 font-semibold bg-seep-color !text-[#ddd]">
-                    {/* <ChevronLeft size={40} /> */}
+                <button onClick={previous} className="swiper-button-prev after:!content-[''] absolute left-20 rounded-full border !size-10 font-semibold bg-seep-color !text-[#ddd]">
+                    <ChevronLeft size={40} />
                 </button>
-                <button onClick={next} className=" swiper-button-next absolute right-20 rounded-full border !size-16 bg-seep-color font-semibold !text-[#ddd]">
-                    {/* <ChevronRight size={40} /> */}
+                <button onClick={next} className=" swiper-button-next after:!content-[''] absolute right-20 rounded-full border !size-10 bg-seep-color font-semibold !text-[#ddd]">
+                    <ChevronRight size={40} />
                 </button>
             </div>
         </FadeInSection>

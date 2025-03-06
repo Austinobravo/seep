@@ -95,7 +95,7 @@ const DashboardPage = async() => {
                     news.slice(0,3).map((item) => (
                       <TableRow key={item.title}>
                         <TableCell className="font-medium flex gap-4 md:flex-nowrap flex-wrap">
-                          <Image src={item.image} width={300} height={400} alt={item.title} className='size-16 object-cover rounded-md'/>
+                          <Image src={item.image} width={300} height={400} alt={item.title} className='size-16 object-cover rounded-md' unoptimized/>
                           <span className='text-seep-color'>{item.title}</span>
                         </TableCell>
                         <TableCell>{formatDateToString(item.createdAt)}</TableCell>

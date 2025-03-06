@@ -15,10 +15,13 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip"
+
+
 export const dynamic = 'force-dynamic'
 interface newsProps{
     news: NewsType
 }
+
 
 async function getNews() {
     try {
@@ -33,7 +36,7 @@ async function getNews() {
   
       return await res.json();
     } catch (error) {
-      console.error("Failed to fetch testimonials:", error);
+      console.error("Failed to fetch related news:", error);
       return []; // Return empty array to avoid crashes
     }
   }
@@ -55,7 +58,7 @@ const RelatedNews = async ({news}: newsProps) => {
         <div className='grid md:grid-cols-3 grid-cols-1 gap-7 '>
             {relatedNews.slice(0,3).map((content) => (
                 <div key={content.id} className='shadow-2xl bg-gray-100 p-4 rounded-lg text-seep-color space-y-3'>
-                    <img loading='lazy' src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
+                     <Image loading='lazy' src={encodeURI(content.image)} width={500} height={500} alt={content.title} className='object-cover h-40'/>
                     <div>
                         <h3 className='font-bold'>{content.title}</h3>
                         <p className='opacity-70'>{content.category.name}</p>
@@ -93,7 +96,7 @@ const RelatedNews = async ({news}: newsProps) => {
       <div className='grid lg:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-5'>
           {relatedNews.slice(0,3).map((post, index) => (
               <div key={`${post}-${index}`}>
-                  <Card className=" flex flex-col justify-between h-80 no-scrollbar overflow-auto" >
+                  <Card className=" flex flex-col justify-between h-80 pb-5 no-scrollbar overflow-auto" >
                       <CardHeader className='p-1'>
                       <CardTitle className="">
                         <Link  href={`/news/${post.slug}`} >
@@ -102,15 +105,19 @@ const RelatedNews = async ({news}: newsProps) => {
                                   width={500}
                                   height={500}
                                   alt={post.title}
-                                  className="object-cover h-40 w-full"
+                                  className="object-cover h-40 w-full rounded-md"
+                                  unoptimized
                               />
                         </Link>
                       </CardTitle>
                       </CardHeader>
-                      <CardContent className="flex gap-1 flex-col p-1">
-                          <Link href={`/news/${post.slug}`} className=""><h3 className='font-bold text-xl capitalize hover:text-seep-color/70 text-seep-color transition-all duration-500'>{post.title}</h3></Link>
-                          <p className='opacity-70'>{post.category.name}</p>
-                          <p>{post.newsContent.length ? post.newsContent[0]?.paragraph : typeof window !== "undefined" && <span className='whitespace-pre-wrap' dangerouslySetInnerHTML={{__html: `${post?.otherOptions.slice(0,100)}` }}></span> }</p>
+                      <CardContent className="flex flex-col p-1 space-y-3 ">
+                          <Link href={`/news/${post.slug}`} className="w-fit"><h3 className='font-bold text-xl capitalize hover:text-seep-color/70 text-seep-color transition-all duration-500'>{post.title}</h3></Link>
+                          <p className=' bg-amber-500 w-fit px-2 text-xs text-white py-1 capitalize'>{post.category.name}</p>
+                          <div className='line-clamp-3'>
+                            <p>{post.newsContent[0]?.paragraph  ? post.newsContent[0]?.paragraph : typeof window !== "undefined" &&  <span className='whitespace-pre-wrap' dangerouslySetInnerHTML={{__html: post?.otherOptions }}></span> }</p>
+
+                          </div>
                           
                           <div className='flex justify-between items-center'>
                             <div className='flex gap-3'>
@@ -123,6 +130,7 @@ const RelatedNews = async ({news}: newsProps) => {
                                           height={200}
                                           alt={post.userId}
                                           className="size-10 rounded-full object-cover"
+                                          unoptimized
                                       />
                                     ) : (
                                       <Image
@@ -131,6 +139,7 @@ const RelatedNews = async ({news}: newsProps) => {
                                       height={200}
                                       alt={post.userId}
                                       className="size-10 rounded-full object-cover"
+                                      unoptimized
                                   />
                                     )}
                                 </div>

@@ -47,7 +47,7 @@ const LatestNewsCard = async ({contents}: {contents:NewsType[]}) => {
                         </div>
                     </div>
                     <div className=''>
-                        <img src={`${encodeURI(content.image)}`} loading='lazy' width={500} height={500} alt={content.title} className='rounded-2xl size-full shadow'/>
+                         <Image src={`${encodeURI(content.image)}`} loading='lazy' width={500} height={500} alt={content.title} className='rounded-2xl size-full shadow' unoptimized/>
                     </div>
                 </div>
 

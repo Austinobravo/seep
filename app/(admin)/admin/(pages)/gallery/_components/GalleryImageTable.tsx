@@ -258,7 +258,7 @@ export default function GalleryImageTable({data}: {data: GalleryCategoryType[]})
                           </div>
                           <Tooltip delayDuration={0}>
                             <TooltipTrigger>
-                              <img src={`${encodeURI(item.image)}`} loading="lazy" width={500} height={200} alt={item.description} className="size-32 object-cover"/>
+                               <Image src={`${encodeURI(item.image)}`} loading="lazy" width={500} height={200} alt={item.description} className="size-32 object-cover" unoptimized/>
                             </TooltipTrigger>
                           {item.description && 
                             <TooltipContent>

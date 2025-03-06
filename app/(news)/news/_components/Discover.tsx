@@ -23,7 +23,7 @@ const Discover = async ({blogContent}: {blogContent:NewsType[]}) => {
                                     <span className='opacity-70 text-sm md:text-base'>{content.newsContent[0]?.paragraph ? content.newsContent[0]?.paragraph : typeof window !== "undefined" && <span dangerouslySetInnerHTML={{__html: content?.otherOptions}}/>}</span>
                                 </p>
                             </div>
-                            <img loading="lazy" src={content.image} width={500} height={200} alt={content.title} className='rounded-xl hover:opacity-90'/>
+                             <Image loading="lazy" src={content.image} width={500} height={200} alt={content.title} className='rounded-xl hover:opacity-90' unoptimized/>
                     </div>
                     </FadeInSection>
                 </div>

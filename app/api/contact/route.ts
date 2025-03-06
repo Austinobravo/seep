@@ -49,7 +49,8 @@ export async function POST(req:Request, res: Response) {
 
     const parsedForm = await contactFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+        const errorMessage = parsedForm.error.errors.map((error) => `${error.path.join(".")} - ${error.message}`).join(", ")
+        return NextResponse.json({message: errorMessage}, {status: 400})
     }
 
     try{

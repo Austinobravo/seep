@@ -58,7 +58,8 @@ export async function POST(req:Request, res: Response) {
 
     const parsedForm = await testimonialFormSchema.safeParseAsync(data)
     if(!parsedForm.success){
-        return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
+        const errorMessage = parsedForm.error.errors.map((error) => `${error.path.join(".")} - ${error.message}`).join(", ")
+        return NextResponse.json({message: errorMessage}, {status: 400})
     }
 
 
@@ -112,9 +113,10 @@ export async function PATCH(req:Request, res: Response) {
 
 
     const parsedForm = await testimonialFormSchema.safeParseAsync(data)
-        if(!parsedForm.success){
-            return NextResponse.json({data: parsedForm, message: parsedForm.error}, {status: 400})
-        }
+    if(!parsedForm.success){
+        const errorMessage = parsedForm.error.errors.map((error) => `${error.path.join(".")} - ${error.message}`).join(", ")
+        return NextResponse.json({message: errorMessage}, {status: 400})
+    }
 
     const existingTestimonial = await prisma.testimonials.findUnique({
         where:{
